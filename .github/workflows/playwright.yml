@@ -1,0 +1,210 @@
+name: Speak-Ukrainian CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: allure-gh-pages
+  cancel-in-progress: false
+
+env:
+  BASE_URL: ${{ secrets.BASE_URL }}
+  API_URL: ${{ secrets.API_URL }}
+  USER_EMAIL: ${{ secrets.TEST_EMAIL }}
+  USER_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+  HEADLESS: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  lint-and-format:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Code Formatting Check
+        run: npx prettier --check .
+
+      - name: Run Linter
+        run: npm run lint
+
+  run-tests:
+    needs: lint-and-format
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [api, chromium, firefox, webkit]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Cache Playwright browsers
+        if: ${{ matrix.browser != 'api' }}
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ matrix.browser }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-${{ matrix.browser }}-
+
+      - name: Install Playwright browser & deps
+        if: ${{ matrix.browser != 'api' }}
+        run: npx playwright install --with-deps ${{ matrix.browser }}
+
+      - name: Run Playwright tests
+        run: npx playwright test --project=${{ matrix.browser }}
+        continue-on-error: true
+
+      - name: Upload Allure Results
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results-${{ matrix.browser }}
+          path: allure-results
+          retention-days: 1
+
+  generate-report:
+    needs: run-tests
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download Allure history
+        continue-on-error: true
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Create Combined Results Directory
+        run: rm -rf combined-results && mkdir combined-results
+
+      - name: Download API Results
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: allure-results-api
+          path: combined-results
+
+      - name: Download Chromium Results
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: allure-results-chromium
+          path: combined-results
+
+      - name: Download Firefox Results
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: allure-results-firefox
+          path: combined-results
+
+      - name: Download Webkit Results
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: allure-results-webkit
+          path: combined-results
+
+      - name: Generate Combined Allure Report
+        uses: simple-elf/allure-report-action@master
+        with:
+          allure_results: combined-results
+          gh_pages: gh-pages
+          allure_report: allure-report
+          allure_history: allure-history
+          subfolder: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.number) || 'main' }}
+
+      - name: Fix permissions
+        run: sudo chmod -R 777 allure-history
+
+      - name: Clean heavy attachments from history
+        if: ${{ always() }}
+        run: |
+          echo "🧹 Cleaning up heavy attachments from allure-history..."
+          find allure-history -type f -name "*attachments*" -size +1M -exec rm -fv {} +
+          find allure-history -type f \( -name "*.zip" -o -name "*.tar.gz" -o -name "*.mp4" \) -exec rm -fv {} +
+          echo "✅ Heavy assets removed successfully."
+
+      - name: Deploy Allure Report
+        if: ${{ !cancelled() }}
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history
+          keep_files: true
+          force_orphan: false
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Comment PR with report link
+        if: ${{ !cancelled() && github.event_name == 'pull_request' }}
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          comment_tag: allure-report-link
+          message: |
+            📊 **Allure Report for PR-${{ github.event.number }} (All Tests & Browsers)**
+
+            🔗 https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.number) || 'main' }}/
+
+      - name: Validate test results
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            SUMMARY_FILE="allure-history/pr-${{ github.event.number }}/widgets/summary.json"
+          else
+            SUMMARY_FILE="allure-history/main/widgets/summary.json"
+          fi
+
+          if [ ! -f "$SUMMARY_FILE" ]; then
+            echo "⚠️ Summary file not found. Skipping validation."
+            exit 0
+          fi
+
+          FAILED=$(jq '.statistic.failed' "$SUMMARY_FILE")
+          BROKEN=$(jq '.statistic.broken' "$SUMMARY_FILE")
+
+          echo "Total Failed: $FAILED"
+          echo "Total Broken: $BROKEN"
+
+          if [ "$FAILED" -gt 0 ] || [ "$BROKEN" -gt 0 ]; then
+            echo "❌ Tests failed in one or more projects"
+            exit 1
+          fi
+
+          echo "✅ All tests passed across all environments!"

@@ -1,0 +1,7 @@
+node_module
+allure-report
+allure-results
+playwright-report
+playwright-results
+test-results
+dist
