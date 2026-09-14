@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "playwright test",
+    "test": "playwright test --project=chromium",
+    "test:all": "playwright test",
     "report": "npx allure generate allure-results -o allure-report && npx allure open allure-report",
     "report:pw": "playwright show-report",
     "lint": "eslint . --ext .ts",
