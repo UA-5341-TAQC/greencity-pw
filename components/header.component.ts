@@ -4,7 +4,6 @@ import { BaseComponent } from './base-component';
 export type MenuItem = 'Eco news' | 'Events' | 'Places' | 'About us' | 'My space';
 
 export class HeaderComponent extends BaseComponent {
-  
   // Navigation
   readonly logo: Locator;
   readonly ecoNewsLink: Locator;
@@ -12,11 +11,11 @@ export class HeaderComponent extends BaseComponent {
   readonly placesLink: Locator;
   readonly aboutUsLink: Locator;
   readonly mySpaceLink: Locator;
-  
+
   // Utilities
   readonly searchIcon: Locator;
   readonly languageSwitcher: Locator;
-  
+
   // Auth & Profile
   readonly signInButton: Locator;
   readonly signUpButton: Locator;
@@ -25,7 +24,7 @@ export class HeaderComponent extends BaseComponent {
 
   constructor(page: Page) {
     super(page.locator('header').first(), page);
-    
+
     // Navigation Locators
     this.logo = this.root.locator('a.header_logo');
     this.ecoNewsLink = this.root.getByRole('link', { name: /(Eco news|Еко новини)/i });
@@ -33,11 +32,11 @@ export class HeaderComponent extends BaseComponent {
     this.placesLink = this.root.getByRole('link', { name: /(Places|Карта)/i });
     this.aboutUsLink = this.root.getByRole('link', { name: /(About us|Про нас)/i });
     this.mySpaceLink = this.root.getByRole('link', { name: /(My space|Мій простір)/i });
-    
+
     // Utilities Locators
     this.searchIcon = this.root.locator('.search-icon, img[alt="search"]');
     this.languageSwitcher = this.root.locator('.header_lang-switcher-wrp, .language-switcher');
-    
+
     // Auth & Profile Locators
     this.signInButton = this.root.getByRole('link', { name: /(Sign in|Увійти)/i });
     this.signUpButton = this.root.getByRole('link', { name: /(Sign up|Зареєструватись)/i });
@@ -64,7 +63,7 @@ export class HeaderComponent extends BaseComponent {
 
   async switchLanguage(language: 'En' | 'Uk'): Promise<void> {
     await test.step(`Switch language to ${language}`, async () => {
-      if (await this.getCurrentLanguage() !== language) {
+      if ((await this.getCurrentLanguage()) !== language) {
         await this.languageSwitcher.click();
         await this.root.getByText(language, { exact: true }).click();
       }
@@ -90,7 +89,7 @@ export class HeaderComponent extends BaseComponent {
       await this.signUpButton.click();
     });
   }
-  
+
   async openUserMenu(): Promise<void> {
     await test.step('Open User Menu dropdown', async () => {
       await this.userMenuDropdown.click();
@@ -115,11 +114,21 @@ export class HeaderComponent extends BaseComponent {
   async navigateTo(item: MenuItem): Promise<void> {
     await test.step(`Navigate to ${item} via Header`, async () => {
       switch (item) {
-        case 'Eco news': await this.ecoNewsLink.click(); break;
-        case 'Events': await this.eventsLink.click(); break;
-        case 'Places': await this.placesLink.click(); break;
-        case 'About us': await this.aboutUsLink.click(); break;
-        case 'My space': await this.mySpaceLink.click(); break;
+        case 'Eco news':
+          await this.ecoNewsLink.click();
+          break;
+        case 'Events':
+          await this.eventsLink.click();
+          break;
+        case 'Places':
+          await this.placesLink.click();
+          break;
+        case 'About us':
+          await this.aboutUsLink.click();
+          break;
+        case 'My space':
+          await this.mySpaceLink.click();
+          break;
       }
     });
   }
