@@ -34,8 +34,8 @@ USER_PASSWORD=your-password
 Run the full Playwright suite:
 
 ```bash
-npm run test
-npm run test:all
+npm run test # runs all tests in the default browser (Chromium)
+npm run test:all # runs all tests in all browsers
 ```
 
 Run a specific test file or browser project:
@@ -79,5 +79,8 @@ npm run format:check
 ```text
 config/     Environment configuration
 pages/      Page object models
+components/ UI components
+modals/     Modal components
+fixtures/   Test fixtures
 tests/      Playwright test specifications
 ```
