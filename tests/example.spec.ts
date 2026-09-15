@@ -7,3 +7,19 @@ test('has title', async ({ homePage }) => {
   // Expect a title "to contain" a substring.
   expect(title).toEqual('GreenCity — Build Eco-Friendly Habits Today');
 });
+
+test('clicks the start forming button', async ({ homePage, signInModal }) => {
+  await homePage.navigateToHomePage();
+  await homePage.waitForHomePage();
+
+  await homePage.clickStartFormingButton();
+
+  await signInModal.waitForVisible();
+
+  await expect(signInModal.isSignInButtonEnabled()).resolves.toBe(false);
+
+  await signInModal.fillEmail('user@example.com');
+  await signInModal.fillPassword('password123');
+
+  await expect(signInModal.isSignInButtonEnabled()).resolves.toBe(true);
+});

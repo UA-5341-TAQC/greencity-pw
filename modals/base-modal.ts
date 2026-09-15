@@ -1,33 +1,35 @@
-import type { Page, Locator } from '@playwright/test';
+import type { Locator, Page } from '@playwright/test';
 
-export abstract class BaseComponent {
-  protected page: Page;
-  protected root: Locator;
+export abstract class BaseModal {
+  protected readonly page: Page;
+  protected readonly root: Locator;
 
-  constructor(page: Page) {
+  constructor(page: Page, root: Locator) {
     this.page = page;
-    this.root = this.getRootLocator() as unknown as Locator;
+    this.root = root;
   }
-
-  abstract getRootLocator(): Promise<Locator>;
 
   async isVisible(): Promise<boolean> {
-    return await this.root.isVisible();
+    return this.root.isVisible();
   }
+
   async isHidden(): Promise<boolean> {
-    return await this.root.isHidden();
+    return this.root.isHidden();
   }
+
   async isEnabled(): Promise<boolean> {
-    return await this.root.isEnabled();
+    return this.root.isEnabled();
   }
+
   async isDisabled(): Promise<boolean> {
-    return !(await this.root.isEnabled());
+    return this.root.isDisabled();
   }
-  async waitForVisible(timeout: number = 5000): Promise<void> {
+
+  async waitForVisible(timeout = 5000): Promise<void> {
     await this.root.waitFor({ state: 'visible', timeout });
   }
 
-  async waitForHidden(timeout: number = 5000): Promise<void> {
+  async waitForHidden(timeout = 5000): Promise<void> {
     await this.root.waitFor({ state: 'hidden', timeout });
   }
 
