@@ -3,6 +3,10 @@ import { BaseComponent } from './base-component';
 
 export type MenuItem = 'Eco news' | 'Events' | 'Places' | 'About us' | 'My space';
 
+/**
+ * Component representing the global header.
+ * Contains navigation links, language switcher, auth buttons, and user menu.
+ */
 export class HeaderComponent extends BaseComponent {
   // Navigation
   readonly logo: Locator;
@@ -46,6 +50,10 @@ export class HeaderComponent extends BaseComponent {
 
   // --- State Methods ---
 
+  /**
+   * Checks if the user is currently logged in by looking for the user menu dropdown.
+   * @returns true if the user menu is visible, false otherwise.
+   */
   async isLoggedIn(): Promise<boolean> {
     return await test.step('Check if user is logged in', async () => {
       return await this.userMenuDropdown.isVisible();
@@ -78,6 +86,9 @@ export class HeaderComponent extends BaseComponent {
 
   // --- Auth & Profile Methods ---
 
+  /**
+   * Clicks the "Sign in" button in the header.
+   */
   async clickSignIn(): Promise<void> {
     await test.step('Click Sign In button', async () => {
       await this.signInButton.click();
@@ -111,6 +122,11 @@ export class HeaderComponent extends BaseComponent {
     });
   }
 
+  /**
+   * Navigates to a specific section via the header navigation menu.
+   * Automatically handles multilingual matching.
+   * @param item - The menu item to navigate to (e.g., "Eco news", "Events").
+   */
   async navigateTo(item: MenuItem): Promise<void> {
     await test.step(`Navigate to ${item} via Header`, async () => {
       switch (item) {
