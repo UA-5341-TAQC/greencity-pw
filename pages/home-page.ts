@@ -6,10 +6,6 @@ export class HomePage extends BasePage {
   protected readonly buttons: Locator;
   protected readonly subscribeButton: Locator;
 
-  //sections
-  protected readonly firstBlock: Locator;
-  protected readonly secondBlock: Locator;
-
   // text elements
   protected readonly header: Locator;
   protected readonly mainText: Locator;
@@ -30,16 +26,14 @@ export class HomePage extends BasePage {
   protected readonly qrIcon: Locator;
 
   //click -> to next
-  protected readonly locationLinkText: Locator;
+  protected readonly placesLinkText: Locator;
+  protected readonly newsLinkText: Locator;
 
   // input field for Subscribe
   protected readonly emailInputField: Locator;
 
   constructor(page: Page) {
     super(page);
-    //sections
-    this.firstBlock = page.locator('header');
-    this.secondBlock = page.locator('stats');
 
     // headers and subheaders
     this.header = page.getByRole('heading', { level: 1 });
@@ -56,7 +50,7 @@ export class HomePage extends BasePage {
 
     //buttons
     this.buttons = page.locator('button:has-text("Start forming")');
-    this.subscribeButton = page.locator('button').nth(3);
+    this.subscribeButton = page.getByRole('button', {name: /(Subscribe!| Підписатися!)/i });
 
     //images
     this.guyImage = page.getByAltText('guy-texture');
@@ -70,8 +64,9 @@ export class HomePage extends BasePage {
     this.secondLocationIcon = page.getByAltText('location-image').nth(1);
     this.qrIcon = page.locator('[src*="assets/img/qr-code.png"]');
 
-    //click -> to next page
-    this.locationLinkText = page.locator('#location-row');
+    //click -> to other page
+    this.placesLinkText = page.locator('.location-row a[href*="places"]');
+    this.newsLinkText = page.locator('.eco-events a[href*="/greenCity/news"]');
 
     // input field for Subscribe
     this.emailInputField = page.locator('input[type="email"]');
@@ -273,5 +268,21 @@ export class HomePage extends BasePage {
       throw new Error('There is an error! Email field is not visible!');
     }
     await this.emailInputField.fill(email_input);
+  }
+
+  // Linked text - click
+
+  /**
+   * Click linked text -> page Placespage
+   */
+  async clickPlacesLinkedText(): Promise<void> {
+    await this.placesLinkText.click();
+  }
+
+  /**
+   * Click linked text -> page Eco News page
+   */
+  async clickEcoNewsLinkedText(): Promise<void> {
+    await this.newsLinkText.click();
   }
 }

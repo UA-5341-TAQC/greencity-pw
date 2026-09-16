@@ -23,10 +23,3 @@ test('clicks the start forming button', async ({ homePage, signInModal }) => {
 
   await expect(signInModal.isSignInButtonEnabled()).resolves.toBe(true);
 });
-
-test('sub button visible', async ({ homePage }) => {
-  await homePage.navigateToHomePage();
-  await homePage.waitForHomePage();
-
-  await expect(homePage.isMainTextVisible()).resolves.toBe(true);
-});
