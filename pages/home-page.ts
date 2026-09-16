@@ -50,7 +50,7 @@ export class HomePage extends BasePage {
 
     //buttons
     this.buttons = page.locator('button:has-text("Start forming")');
-    this.subscribeButton = page.getByRole('button', {name: /(Subscribe!| Підписатися!)/i });
+    this.subscribeButton = page.getByRole('button', { name: /(Subscribe!| Підписатися!)/i });
 
     //images
     this.guyImage = page.getByAltText('guy-texture');
