@@ -49,7 +49,9 @@ export class HomePage extends BasePage {
     this.cupQuestion = this.cupsHeading.locator('p');
 
     //buttons
-    this.buttons = page.locator('button:has-text("Start forming")');
+    this.buttons = page.getByRole('button', {
+      name: /(Start forming a habit!| Почати формувати звичку!)/i,
+    });
     this.subscribeButton = page.getByRole('button', { name: /(Subscribe!| Підписатися!)/i });
 
     //images
