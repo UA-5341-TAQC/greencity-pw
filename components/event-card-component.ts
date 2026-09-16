@@ -1,7 +1,7 @@
 import type { Page, Locator } from '@playwright/test';
 import { BaseComponent } from '@/components/base-component';
 
-export class EventCard extends BaseComponent {
+export class EventCardComponent extends BaseComponent {
   protected readonly bookmarkButtonContainer: Locator;
   protected readonly participantsContainer: Locator;
   protected readonly image: Locator;

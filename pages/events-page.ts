@@ -1,6 +1,6 @@
 import type { Page, Locator } from '@playwright/test';
 import BasePage from '@/pages/base-page';
-import { EventCard } from '@/components/event-card-component';
+import { EventCardComponent } from '@/components/event-card-component';
 
 export class EventsPage extends BasePage {
   protected readonly pageTitle: Locator;
@@ -234,21 +234,21 @@ export class EventsPage extends BasePage {
   }
 
   /** Returns an EventCard component for the card at the given position */
-  getEventCardByIndex(index: number): EventCard {
-    return new EventCard(this.eventCardRoots.nth(index), this.page);
+  getEventCardByIndex(index: number): EventCardComponent {
+    return new EventCardComponent(this.eventCardRoots.nth(index), this.page);
   }
 
   /** Returns an EventCard component for the first card whose title matches the given text */
-  getEventCardByTitle(title: string): EventCard {
+  getEventCardByTitle(title: string): EventCardComponent {
     const root = this.eventCardRoots.filter({ hasText: title }).first();
 
-    return new EventCard(root, this.page);
+    return new EventCardComponent(root, this.page);
   }
 
   /** Returns EventCard components for every card on the page */
-  async getAllEventCards(): Promise<EventCard[]> {
+  async getAllEventCards(): Promise<EventCardComponent[]> {
     const count = await this.getEventCardsCount();
-    const cards: EventCard[] = [];
+    const cards: EventCardComponent[] = [];
     for (let i = 0; i < count; i++) {
       cards.push(this.getEventCardByIndex(i));
     }
