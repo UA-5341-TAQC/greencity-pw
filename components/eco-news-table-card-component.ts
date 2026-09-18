@@ -1,7 +1,7 @@
 import type { Locator, Page } from '@playwright/test';
 import { BaseComponent } from '@/components/base-component';
 
-export class EcoNewsListCardComponent extends BaseComponent {
+export class EcoNewsTableCardComponent extends BaseComponent {
   protected readonly link: Locator;
   protected readonly image: Locator;
   protected readonly tags: Locator;
