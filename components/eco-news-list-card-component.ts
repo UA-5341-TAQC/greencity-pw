@@ -17,9 +17,7 @@ export class EcoNewsListCardComponent extends BaseComponent {
 
     this.link = this.root.locator('a.link');
     this.image = this.root.locator('img.eco-news_list-img');
-    this.tags = this.root.locator(
-      '.filter-tag .eco-news_list-tag span:not(.tag-divider)'
-    );
+    this.tags = this.root.locator('.filter-tag .eco-news_list-tag span:not(.tag-divider)');
     this.title = this.root.locator('.eco-news_list-content-title h3');
     this.description = this.root.locator('.eco-news_list-content-text');
     this.moreButton = this.root.locator('.button-news-card button');
