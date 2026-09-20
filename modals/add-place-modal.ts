@@ -37,7 +37,7 @@ export class AddPlaceModal extends BaseModal {
   async selectCategory(category: string): Promise<void> {
     await this.categorySelect.selectOption({ value: category });
   }
-  
+
   async fillName(name: string): Promise<void> {
     await this.nameInput.fill(name);
   }
