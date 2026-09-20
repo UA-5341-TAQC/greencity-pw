@@ -10,7 +10,7 @@ export class NewsPagination extends BaseComponent {
     super(rootLocator, page);
 
     this.loadMoreButton = this.root.locator(
-      'button:has-text("Show more"), button:has-text("Load more")',
+      'button:has-text("Show more"), button:has-text("Load more")'
     );
     this.pageButtons = this.root.locator('[class*="page-number"], li[class*="page"]');
     this.activePage = this.root.locator('[class*="active"]');
