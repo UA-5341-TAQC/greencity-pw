@@ -1,10 +1,12 @@
-import { HomePage } from '@/pages';
+import { HomePage, EcoNewsPage, EcoNewsDetailsPage } from '@/pages';
 import { SignInModal } from '@/modals';
 import { test as baseTest, expect as baseExpect } from './base-fixture';
 
 type PageFixtures = {
   homePage: HomePage;
   signInModal: SignInModal;
+  ecoNewsPage: EcoNewsPage;
+  ecoNewsDetailsPage: EcoNewsDetailsPage;
 };
 
 export const test = baseTest.extend<PageFixtures>({
@@ -13,6 +15,12 @@ export const test = baseTest.extend<PageFixtures>({
   },
   signInModal: async ({ page }, use): Promise<void> => {
     await use(new SignInModal(page));
+  },
+  ecoNewsPage: async ({ page }, use): Promise<void> => {
+    await use(new EcoNewsPage(page));
+  },
+  ecoNewsDetailsPage: async ({ page }, use): Promise<void> => {
+    await use(new EcoNewsDetailsPage(page));
   },
 });
 
