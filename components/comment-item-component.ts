@@ -20,35 +20,59 @@ export class CommentItemComponent extends BaseComponent {
   protected readonly replyToCommentButton: Locator;
   protected readonly viewCommentRepliesButton: Locator;
 
+  protected readonly editCommentInput: Locator;
+  protected readonly editCommentImageUploadButton: Locator;
+  protected readonly editCommentEmojiButton: Locator;
+  protected readonly editCommentDropdownButton: Locator;
+  protected readonly saveCommentChangesButton: Locator;
+  protected readonly cancelCommentEditButton: Locator;
+
   protected readonly replyContainer: Locator;
   protected readonly replyInput: Locator;
   protected readonly replyImageUploadButton: Locator;
   protected readonly replyEmojiButton: Locator;
+  protected readonly replyDropdownButton: Locator;
   protected readonly submitReplyButton: Locator;
   protected readonly replyItems: Locator;
 
   constructor(root: Locator, page: Page) {
     super(root, page);
 
-    this.commentAvatar = this.root.locator(':scope > .comment-avatar .profile-avatar');
+    this.commentAvatar = this.root.locator(
+      ':scope > .comment-avatar .profile-avatar'
+    );
 
-    this.commentAuthorName = this.root.locator(':scope > .comment-details .author-name');
+    this.commentAuthorName = this.root.locator(
+      ':scope > .comment-details .author-name'
+    );
 
-    this.commentDate = this.root.locator(':scope > .comment-details .comment-date-month');
+    this.commentDate = this.root.locator(
+      ':scope > .comment-details .comment-date-month'
+    );
 
-    this.commentLikeCount = this.root.locator(':scope > .comment-details .like-amount');
+    this.commentText = this.root.locator(
+      ':scope > .comment-main-text > .comment-text'
+    );
+
+    this.commentLikeCount = this.root.locator(
+      ':scope > .comment-details .like-amount'
+    );
 
     this.commentLikeIcon = this.root.locator(
       ':scope > .comment-details .comment-likes img[alt="like"]'
     );
 
-    this.commentDislikeIcon = this.root.locator(':scope > .comment-details .dislike-img');
+    this.commentDislikeIcon = this.root.locator(
+      ':scope > .comment-details .dislike-img'
+    );
 
-    this.commentText = this.root.locator(':scope > .comment-main-text > .comment-text');
+    const commentActions = this.root.locator(
+      ':scope > .comments-elements'
+    );
 
-    const commentActions = this.root.locator(':scope > .comments-elements');
-
-    this.likeCommentButton = commentActions.locator(':scope > app-like-comment button.like');
+    this.likeCommentButton = commentActions.locator(
+      ':scope > app-like-comment button.like'
+    );
 
     this.editCommentButton = commentActions.locator(
       ':scope > .btn-wrapper app-edit-comment button.edit'
@@ -58,21 +82,65 @@ export class CommentItemComponent extends BaseComponent {
       ':scope > .btn-wrapper app-delete-comment button.delete'
     );
 
-    this.replyToCommentButton = commentActions.locator(':scope > app-reply-comment button.reply');
+    this.replyToCommentButton = commentActions.locator(
+      ':scope > app-reply-comment button.reply'
+    );
 
     this.viewCommentRepliesButton = commentActions.locator(
       ':scope > .btn-replies app-view-replies button.view'
     );
 
-    this.replyContainer = this.root.locator(':scope > app-comments-container[datatype="reply"]');
+    const editCommentForm = this.root.locator(
+      ':scope > .comment-main-text .comment-edit-text'
+    );
 
-    const addReplyForm = this.replyContainer.locator(':scope > app-add-comment');
+    this.editCommentInput = editCommentForm.locator(
+      '.comment-textarea[contenteditable="true"]'
+    );
 
-    this.replyInput = addReplyForm.locator('.comment-textarea[contenteditable="true"]');
+    this.editCommentImageUploadButton = editCommentForm.locator(
+      '.image-upload-btn'
+    );
 
-    this.replyImageUploadButton = addReplyForm.locator('.image-upload-btn');
+    this.editCommentEmojiButton = editCommentForm.locator(
+      '.emoji-picker-btn'
+    );
 
-    this.replyEmojiButton = addReplyForm.locator('.emoji-picker-btn');
+    this.editCommentDropdownButton = editCommentForm.locator(
+      '.dropdown-trigger'
+    );
+
+    this.saveCommentChangesButton = commentActions.locator(
+      '.save-edit'
+    );
+
+    this.cancelCommentEditButton = commentActions.locator(
+      '.cancel-edit'
+    );
+
+    this.replyContainer = this.root.locator(
+      ':scope > app-comments-container[datatype="reply"]'
+    );
+
+    const addReplyForm = this.replyContainer.locator(
+      ':scope > app-add-comment'
+    );
+
+    this.replyInput = addReplyForm.locator(
+      '.comment-textarea[contenteditable="true"]'
+    );
+
+    this.replyImageUploadButton = addReplyForm.locator(
+      '.image-upload-btn'
+    );
+
+    this.replyEmojiButton = addReplyForm.locator(
+      '.emoji-picker-btn'
+    );
+
+    this.replyDropdownButton = addReplyForm.locator(
+      '.dropdown-trigger'
+    );
 
     this.submitReplyButton = addReplyForm.getByRole('button', {
       name: 'Reply',
@@ -110,15 +178,14 @@ export class CommentItemComponent extends BaseComponent {
 
   /** Returns the comment like count. */
   async getCommentLikeCount(): Promise<number> {
-    const text = (await this.commentLikeCount.textContent())?.trim() ?? '';
+    const text =
+      (await this.commentLikeCount.textContent())?.trim() ?? '';
 
-    const count = Number(text);
-
-    if (Number.isNaN(count)) {
+    if (!text || !/^\d+$/.test(text)) {
       throw new Error(`Invalid comment like count: '${text}'`);
     }
 
-    return count;
+    return Number(text);
   }
 
   /** Checks whether the comment like icon is visible. */
@@ -133,14 +200,17 @@ export class CommentItemComponent extends BaseComponent {
 
   /** Checks whether the comment is currently liked. */
   async isCommentLiked(): Promise<boolean> {
-    const src = await this.commentLikeIcon.getAttribute('src');
+    if (!(await this.likeCommentButton.isVisible())) {
+      return false;
+    }
 
-    return src?.includes('liked.png') ?? false;
+    return (await this.getLikeCommentButtonText()) === 'Liked';
   }
 
-  /** Checks whether the comment is currently disliked. */
+  /** Checks whether the comment is currently displayed as disliked. */
   async isCommentDisliked(): Promise<boolean> {
-    const src = await this.commentDislikeIcon.getAttribute('src');
+    const src =
+      await this.commentDislikeIcon.getAttribute('src');
 
     return src?.includes('disliked.png') ?? false;
   }
@@ -150,9 +220,11 @@ export class CommentItemComponent extends BaseComponent {
     return await this.likeCommentButton.isVisible();
   }
 
-  /** Returns the Like comment button text. */
+  /** Returns the Like/Liked comment button text. */
   async getLikeCommentButtonText(): Promise<string> {
-    return (await this.likeCommentButton.textContent())?.trim() ?? '';
+    return (
+      (await this.likeCommentButton.textContent())?.trim() ?? ''
+    );
   }
 
   /** Clicks the Like/Liked comment button. */
@@ -168,6 +240,85 @@ export class CommentItemComponent extends BaseComponent {
   /** Clicks the Edit comment button. */
   async clickEditComment(): Promise<void> {
     await this.editCommentButton.click();
+  }
+
+  /** Checks whether the comment edit input is visible. */
+  async isEditCommentInputVisible(): Promise<boolean> {
+    return await this.editCommentInput.isVisible();
+  }
+
+  /** Returns the current text in the comment edit input. */
+  async getEditCommentInputText(): Promise<string> {
+    return (
+      (await this.editCommentInput.textContent())?.trim() ?? ''
+    );
+  }
+
+  /** Replaces the current text in the comment edit input. */
+  async fillEditComment(commentText: string): Promise<void> {
+    await this.editCommentInput.click();
+    await this.editCommentInput.press('Control+A');
+    await this.editCommentInput.press('Backspace');
+    await this.editCommentInput.pressSequentially(commentText);
+  }
+
+  /** Checks whether the edit image upload button is visible. */
+  async isEditCommentImageUploadButtonVisible(): Promise<boolean> {
+    return await this.editCommentImageUploadButton.isVisible();
+  }
+
+  /** Clicks the edit image upload button. */
+  async clickEditCommentImageUploadButton(): Promise<void> {
+    await this.editCommentImageUploadButton.click();
+  }
+
+  /** Checks whether the edit emoji button is visible. */
+  async isEditCommentEmojiButtonVisible(): Promise<boolean> {
+    return await this.editCommentEmojiButton.isVisible();
+  }
+
+  /** Clicks the edit emoji button. */
+  async clickEditCommentEmojiButton(): Promise<void> {
+    await this.editCommentEmojiButton.click();
+  }
+
+  /** Checks whether the edit dropdown button is visible. */
+  async isEditCommentDropdownButtonVisible(): Promise<boolean> {
+    return await this.editCommentDropdownButton.isVisible();
+  }
+
+  /** Checks whether the edit dropdown is expanded. */
+  async isEditCommentDropdownExpanded(): Promise<boolean> {
+    return (
+      (await this.editCommentDropdownButton.getAttribute(
+        'aria-expanded'
+      )) === 'true'
+    );
+  }
+
+  /** Clicks the edit dropdown button. */
+  async clickEditCommentDropdownButton(): Promise<void> {
+    await this.editCommentDropdownButton.click();
+  }
+
+  /** Checks whether the Save changes button is visible. */
+  async isSaveCommentChangesButtonVisible(): Promise<boolean> {
+    return await this.saveCommentChangesButton.isVisible();
+  }
+
+  /** Clicks the Save changes button. */
+  async clickSaveCommentChanges(): Promise<void> {
+    await this.saveCommentChangesButton.click();
+  }
+
+  /** Checks whether the Cancel edit button is visible. */
+  async isCancelCommentEditButtonVisible(): Promise<boolean> {
+    return await this.cancelCommentEditButton.isVisible();
+  }
+
+  /** Clicks the Cancel edit button. */
+  async clickCancelCommentEdit(): Promise<void> {
+    await this.cancelCommentEditButton.click();
   }
 
   /** Checks whether the Delete comment button is visible. */
@@ -190,17 +341,20 @@ export class CommentItemComponent extends BaseComponent {
     await this.replyToCommentButton.click();
   }
 
-  /** Checks whether the View/Hide comment replies button is visible. */
+  /** Checks whether the View/Hide replies button is visible. */
   async isViewCommentRepliesButtonVisible(): Promise<boolean> {
     return await this.viewCommentRepliesButton.isVisible();
   }
 
-  /** Returns the View/Hide comment replies button text. */
+  /** Returns the View/Hide replies button text. */
   async getViewCommentRepliesButtonText(): Promise<string> {
-    return (await this.viewCommentRepliesButton.textContent())?.trim() ?? '';
+    return (
+      (await this.viewCommentRepliesButton.textContent())?.trim() ??
+      ''
+    );
   }
 
-  /** Clicks the View/Hide comment replies button. */
+  /** Clicks the View/Hide replies button. */
   async clickViewCommentReplies(): Promise<void> {
     await this.viewCommentRepliesButton.click();
   }
@@ -241,6 +395,25 @@ export class CommentItemComponent extends BaseComponent {
     await this.replyEmojiButton.click();
   }
 
+  /** Checks whether the reply dropdown button is visible. */
+  async isReplyDropdownButtonVisible(): Promise<boolean> {
+    return await this.replyDropdownButton.isVisible();
+  }
+
+  /** Checks whether the reply dropdown is expanded. */
+  async isReplyDropdownExpanded(): Promise<boolean> {
+    return (
+      (await this.replyDropdownButton.getAttribute(
+        'aria-expanded'
+      )) === 'true'
+    );
+  }
+
+  /** Clicks the reply dropdown button. */
+  async clickReplyDropdownButton(): Promise<void> {
+    await this.replyDropdownButton.click();
+  }
+
   /** Checks whether the Reply submit button is enabled. */
   async isSubmitReplyButtonEnabled(): Promise<boolean> {
     return await this.submitReplyButton.isEnabled();
@@ -264,5 +437,13 @@ export class CommentItemComponent extends BaseComponent {
   /** Returns the number of currently displayed replies. */
   async getDisplayedRepliesCount(): Promise<number> {
     return await this.replyItems.count();
+  }
+
+  /** Returns a reply by its zero-based index. */
+  getReply(index: number): CommentItemComponent {
+    return new CommentItemComponent(
+      this.replyItems.nth(index),
+      this.page
+    );
   }
 }
