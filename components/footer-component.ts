@@ -27,55 +27,33 @@ export class FooterComponent extends BaseComponent {
   constructor(page: Page) {
     super(page.locator('footer'), page);
 
-    this.logo = this.root.getByRole('link', {
-      name: 'GreenCity home',
-    });
+    this.logo = this.root.locator('a[href="#/greenCity"]');
 
-    this.ecoNewsLink = this.root.getByRole('link', {
-      name: 'Eco news',
-    });
+    this.ecoNewsLink = this.root.locator('a[href="#/greenCity/news"]');
 
-    this.eventsLink = this.root.getByRole('link', {
-      name: 'Events',
-    });
+    this.eventsLink = this.root.locator('a[href="#/greenCity/events"]');
 
-    this.placesLink = this.root.getByRole('link', {
-      name: 'Places',
-    });
+    this.placesLink = this.root.locator('a[href="#/greenCity/places"]');
 
-    this.aboutUsLink = this.root.getByRole('link', {
-      name: 'About Us',
-    });
+    this.aboutUsLink = this.root.locator('a[href="#/greenCity/about"]');
 
-    this.mySpaceLink = this.root.getByRole('link', {
-      name: 'My Space',
-    });
+    this.mySpaceLink = this.root.locator('a[href^="#/greenCity/profile/"]');
 
-    this.ubsCourierLink = this.root.getByRole('link', {
-      name: 'UBS Courier',
-    });
+    this.ubsCourierLink = this.root.locator('a[href="#/ubs"]');
 
-    this.followUsText = this.root.getByText('Follow us');
+    this.followUsText = this.root.locator('.footer_follow-us');
 
-    this.twitterLink = this.root.getByRole('link', {
-      name: 'Twitter link',
-    });
+    this.twitterLink = this.root.locator('.footer_social-link:has(img[src$="twitter-icon.svg"])');
 
-    this.linkedInLink = this.root.getByRole('link', {
-      name: 'LinkedIn link',
-    });
+    this.linkedInLink = this.root.locator('.footer_social-link:has(img[src$="linkedin-icon.svg"])');
 
-    this.facebookLink = this.root.getByRole('link', {
-      name: 'Facebook link',
-    });
+    this.facebookLink = this.root.locator('.footer_social-link:has(img[src$="facebook-icon.svg"])');
 
-    this.instagramLink = this.root.getByRole('link', {
-      name: 'Instagram link',
-    });
+    this.instagramLink = this.root.locator(
+      '.footer_social-link:has(img[src$="instagram-icon.svg"])'
+    );
 
-    this.youtubeLink = this.root.getByRole('link', {
-      name: 'YouTube link',
-    });
+    this.youtubeLink = this.root.locator('.footer_social-link:has(img[src$="youtube-icon.svg"])');
 
     this.copyrightLabel = this.root.locator('#copyright-label');
   }
