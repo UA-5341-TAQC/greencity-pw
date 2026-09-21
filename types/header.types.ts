@@ -1,3 +1,12 @@
-export type MenuItem = 'Eco news' | 'Events' | 'Places' | 'About us' | 'My space';
+export enum MenuItem {
+  EcoNews = 'Eco news',
+  Events = 'Events',
+  Places = 'Places',
+  AboutUs = 'About us',
+  MySpace = 'My space',
+}
 
-export type Language = 'En' | 'Uk';
+export enum Language {
+  En = 'En',
+  Uk = 'Uk',
+}

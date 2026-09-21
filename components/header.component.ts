@@ -1,6 +1,6 @@
 import { Locator, Page, test } from '@playwright/test';
 import { BaseComponent } from './base-component';
-import type { Language, MenuItem } from '../types/header.types';
+import { Language, MenuItem } from '../types/header.types';
 import env from '../config/env';
 
 /**
@@ -30,11 +30,11 @@ export class HeaderComponent extends BaseComponent {
     // Navigation Locators
     this.logo = this.root.locator('a.header_logo');
     this.navLinks = {
-      'Eco news': this.root.getByRole('link', { name: /(Eco news|Еко новини)/i }),
-      Events: this.root.getByRole('link', { name: /(Events|Події)/i }),
-      Places: this.root.getByRole('link', { name: /(Places|Карта)/i }),
-      'About us': this.root.getByRole('link', { name: /(About us|Про нас)/i }),
-      'My space': this.root.getByRole('link', { name: /(My space|Мій простір)/i }),
+      [MenuItem.EcoNews]: this.root.getByRole('link', { name: /(Eco news|Еко новини)/i }),
+      [MenuItem.Events]: this.root.getByRole('link', { name: /(Events|Події)/i }),
+      [MenuItem.Places]: this.root.getByRole('link', { name: /(Places|Карта)/i }),
+      [MenuItem.AboutUs]: this.root.getByRole('link', { name: /(About us|Про нас)/i }),
+      [MenuItem.MySpace]: this.root.getByRole('link', { name: /(My space|Мій простір)/i }),
     };
 
     // Utilities Locators
@@ -84,7 +84,7 @@ export class HeaderComponent extends BaseComponent {
     await test.step(`Switch language to ${language}`, async () => {
       if ((await this.getCurrentLanguage()) !== language) {
         await this.languageSwitcher.click();
-        if (language === 'En') {
+        if (language === Language.En) {
           await this.langEnglishOption.click();
         } else {
           await this.langUkrainianOption.click();
