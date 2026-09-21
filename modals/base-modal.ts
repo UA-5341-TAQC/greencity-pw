@@ -1,13 +1,14 @@
 import { test, type Locator, type Page } from '@playwright/test';
+import { BaseComponent } from '@/components/base-component';
 
 /**
  * Shared base for GreenCity modal / overlay COMs.
  * Common chrome (title, close) lives here; subclasses add form-specific locators.
+ * Extends BaseComponent so visibility/enabled/click semantics stay in one place.
+ * A single root is enough: `app-auth-modal` mounts one sub-form at a time, and that
+ * sub-form holds the only `<h1>` (verified live for sign-in / sign-up / restore).
  */
-export abstract class BaseModal {
-  protected readonly page: Page;
-  protected readonly root: Locator;
-
+export abstract class BaseModal extends BaseComponent {
   /** Primary heading inside the modal. */
   readonly title: Locator;
   /** Secondary heading under the title, when present. */
@@ -16,39 +17,11 @@ export abstract class BaseModal {
   readonly closeButton: Locator;
 
   constructor(page: Page, root: Locator) {
-    this.page = page;
-    this.root = root;
+    super(root, page);
+
     this.title = this.root.locator('h1').first();
     this.subtitle = this.root.locator('h2').first();
     this.closeButton = this.root.locator('a.close-modal-window, .close-modal-window').first();
-  }
-
-  async isVisible(): Promise<boolean> {
-    return this.root.isVisible();
-  }
-
-  async isHidden(): Promise<boolean> {
-    return this.root.isHidden();
-  }
-
-  async isEnabled(): Promise<boolean> {
-    return this.root.isEnabled();
-  }
-
-  async isDisabled(): Promise<boolean> {
-    return this.root.isDisabled();
-  }
-
-  async waitForVisible(timeout = 5000): Promise<void> {
-    await this.root.waitFor({ state: 'visible', timeout });
-  }
-
-  async waitForHidden(timeout = 5000): Promise<void> {
-    await this.root.waitFor({ state: 'hidden', timeout });
-  }
-
-  async click(): Promise<void> {
-    await this.root.click();
   }
 
   /** Reads the modal title text. */

@@ -44,8 +44,12 @@ export class HeaderComponent extends BaseComponent {
     // Auth & Profile Locators
     this.signInButton = this.root.getByRole('link', { name: /(Sign in|Увійти)/i });
     this.signUpButton = this.root.getByRole('link', { name: /(Sign up|Зареєструватись)/i });
-    this.userMenuDropdown = this.root.locator('#header-user-menu, .user-menu-dropdown');
-    this.signOutButton = this.root.getByRole('link', { name: /(Sign out|Вийти)/i });
+    // Live build: the menu wrapper is `#header_user-wrp` (a <ul role="menu">); the previous
+    // `#header-user-menu, .user-menu-dropdown` pair matched nothing, so isLoggedIn() was always false.
+    this.userMenuDropdown = this.root.locator('#header_user-wrp');
+    // Live build: sign-out is an <a> inside `li[role="button"]`, i.e. NOT a link role — that is why
+    // the getByRole('link') form resolved to zero nodes.
+    this.signOutButton = this.root.locator('#header_user-wrp li[role="button"]');
   }
 
   // --- State Methods ---
