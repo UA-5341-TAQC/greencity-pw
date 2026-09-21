@@ -1,7 +1,13 @@
 import type { Locator } from '@playwright/test';
 import { BaseComponent } from '@/components/base-component';
 
-export type PlaceFilter = 'Shops' | 'Restaurants' | 'Recycling points' | 'Events' | 'Saved places';
+export enum PlaceFilter {
+  Shops = 'Shops',
+  Restaurants = 'Restaurants',
+  RecyclingPoints = 'Recycling points',
+  Events = 'Events',
+  SavedPlaces = 'Saved places',
+}
 
 export class PlacesFilterComponent extends BaseComponent {
   constructor(root: Locator) {
