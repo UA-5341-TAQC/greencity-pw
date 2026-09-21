@@ -9,12 +9,16 @@ import { BaseComponent } from '@/components/base-component';
  * sub-form holds the only `<h1>` (verified live for sign-in / sign-up / restore).
  */
 export abstract class BaseModal extends BaseComponent {
-  /** Primary heading inside the modal. */
-  readonly title: Locator;
+  /**
+   * Primary heading inside the modal.
+   * `protected` so subclasses may narrow the locator (e.g. `CityFilterModal` uses an `h2`);
+   * TypeScript rejects a `protected` override of a `public` member (TS2415).
+   */
+  protected readonly title: Locator;
   /** Secondary heading under the title, when present. */
-  readonly subtitle: Locator;
+  protected readonly subtitle: Locator;
   /** Close control (`.close-modal-window` / cross button). */
-  readonly closeButton: Locator;
+  protected readonly closeButton: Locator;
 
   constructor(page: Page, root: Locator) {
     super(root, page);
