@@ -1,4 +1,4 @@
-import { Locator, Page, test } from '@playwright/test';
+import { Locator, Page } from '@playwright/test';
 import { BaseComponent } from './base-component';
 
 export class ChatPopUpComponent extends BaseComponent {
@@ -10,22 +10,21 @@ export class ChatPopUpComponent extends BaseComponent {
     this.chatButton = page.locator('button.chat-pop-up:has(img[alt="chat"])');
   }
 
-    /**
-   * @returns   Return boolean whether chat icon is visible.
+  /**
+   * @returns Return boolean whether chat icon is visible.
    */
-   async isChatButtonVisible(): Promise<boolean> {
+  async isChatButtonVisible(): Promise<boolean> {
     return await this.chatButton.isVisible();
   }
 
   /**
-   * Click on chat icon and waiting for new tab to open 
+   * Click on chat icon and waiting for new tab to open
    * @returns {Promise<Page>} Chat bot page
    */
   async openChatWindow(): Promise<Page> {
-    const [newPage] = await Promise.all([
-      this.page.waitForEvent('popup'),
-      this.chatButton.click()
-    ]);
+    const pagePromise = this.page.context().waitForEvent('page');
+    await this.chatButton.click();
+    const newPage = await pagePromise;
 
     await newPage.waitForLoadState();
     return newPage;
