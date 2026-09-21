@@ -11,3 +11,5 @@ export * from './achievements-widget.component';
 export * from './friends-widget.component';
 export * from './pagination.component';
 export * from './chat-telegram-component';
+export * from './comment-item-component';
+export * from './comments-component';
