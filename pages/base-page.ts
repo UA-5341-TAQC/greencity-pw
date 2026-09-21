@@ -1,5 +1,5 @@
 import type { Page, BrowserContext, Locator } from '@playwright/test';
-import { HeaderComponent } from '../components/header.component';
+import { HeaderComponent } from '../components/header-component';
 
 /**
  * Base page class containing common elements like header, footer, and toasts.
