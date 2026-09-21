@@ -15,16 +15,12 @@ export class LocalStorageManager {
 
   async get(key: string): Promise<string | null> {
     return test.step(`LocalStorage: get "${key}"`, async () =>
-      this.page.evaluate((k) => localStorage.getItem(k), key)
-    );
+      this.page.evaluate((k) => localStorage.getItem(k), key));
   }
 
   async set(key: string, value: string): Promise<void> {
     await test.step(`LocalStorage: set "${key}"`, async () => {
-      await this.page.evaluate(
-        ({ k, v }) => localStorage.setItem(k, v),
-        { k: key, v: value }
-      );
+      await this.page.evaluate(({ k, v }) => localStorage.setItem(k, v), { k: key, v: value });
     });
   }
 
