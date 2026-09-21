@@ -149,5 +149,4 @@ export abstract class BaseEventCardComponent extends BaseComponent {
   }
   /** Checks whether this card's root element matches the expected view mode */
   abstract isCorrectViewMode(): Promise<boolean>;
-
 }
