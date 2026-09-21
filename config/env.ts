@@ -14,10 +14,17 @@ const HEADLESS: boolean = process.env.HEADLESS !== 'false';
 const USER_EMAIL: string = process.env.USER_EMAIL || '';
 const USER_PASSWORD: string = process.env.USER_PASSWORD || 'password';
 
+const SHORT_TIMEOUT: number = Number(process.env.SHORT_TIMEOUT) || 5000;
+const MEDIUM_TIMEOUT: number = Number(process.env.MEDIUM_TIMEOUT) || 10000;
+const LONG_TIMEOUT: number = Number(process.env.LONG_TIMEOUT) || 30000;
+
 export default {
   BASE_URL,
   API_URL,
   HEADLESS,
   USER_EMAIL,
   USER_PASSWORD,
+  SHORT_TIMEOUT,
+  MEDIUM_TIMEOUT,
+  LONG_TIMEOUT,
 };

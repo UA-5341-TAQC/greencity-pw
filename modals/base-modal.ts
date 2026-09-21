@@ -1,4 +1,5 @@
 import type { Locator, Page } from '@playwright/test';
+import env from '../config/env';
 
 export abstract class BaseModal {
   protected readonly page: Page;
@@ -25,11 +26,11 @@ export abstract class BaseModal {
     return this.root.isDisabled();
   }
 
-  async waitForVisible(timeout = 5000): Promise<void> {
+  async waitForVisible(timeout = env.SHORT_TIMEOUT): Promise<void> {
     await this.root.waitFor({ state: 'visible', timeout });
   }
 
-  async waitForHidden(timeout = 5000): Promise<void> {
+  async waitForHidden(timeout = env.SHORT_TIMEOUT): Promise<void> {
     await this.root.waitFor({ state: 'hidden', timeout });
   }
 
