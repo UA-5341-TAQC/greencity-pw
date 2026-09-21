@@ -15,3 +15,16 @@ export enum PlaceFilter {
   Events = 'Events',
   SavedPlaces = 'Saved places',
 }
+
+export enum PlaceCategory {
+  VeganProducts = 'Vegan products',
+  ChargingStation = 'Charging station',
+  BikeParking = 'Bike parking',
+  CyclingRoutes = 'Cycling routes',
+  Hotels = 'Hotels',
+  Shops = 'Shops',
+  Restaurants = 'Restaurants',
+  RecyclingPoints = 'Recycling points',
+  Events = 'Events',
+  BikeRentals = 'Bike rentals',
+}

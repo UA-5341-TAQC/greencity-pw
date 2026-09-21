@@ -1,6 +1,7 @@
 import type { Page, Locator } from '@playwright/test';
 import { BaseModal } from '@/modals/base-modal';
 import { PlacesScheduleComponent } from '@/components';
+import { PlaceCategory } from '@/types/places.types';
 
 export class AddPlaceModal extends BaseModal {
   private readonly categorySelect: Locator;
@@ -34,7 +35,7 @@ export class AddPlaceModal extends BaseModal {
     this.schedule = new PlacesScheduleComponent(this.root.locator('app-time-picker-pop-up'));
   }
 
-  async selectCategory(category: string): Promise<void> {
+  async selectCategory(category: PlaceCategory): Promise<void> {
     await this.categorySelect.selectOption({ value: category });
   }
 
