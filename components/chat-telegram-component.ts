@@ -21,7 +21,7 @@ export class ChatPopUpComponent extends BaseComponent {
    * Click on chat icon and waiting for new tab to open
    * @returns {Promise<Page>} Chat bot page
    */
-  async openChatWindow(): Promise<Page> {
+  async openChat(): Promise<Page> {
     const pagePromise = this.page.context().waitForEvent('page');
     await this.chatButton.click();
     const newPage = await pagePromise;
