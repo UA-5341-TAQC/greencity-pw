@@ -1,4 +1,5 @@
 import type { Page, Locator } from '@playwright/test';
+import env from '../config/env';
 
 export abstract class BaseComponent {
   protected page: Page;
@@ -21,11 +22,11 @@ export abstract class BaseComponent {
   async isDisabled(): Promise<boolean> {
     return !(await this.root.isEnabled());
   }
-  async waitForVisible(timeout: number = 5000): Promise<void> {
+  async waitForVisible(timeout: number = env.SHORT_TIMEOUT): Promise<void> {
     await this.root.waitFor({ state: 'visible', timeout });
   }
 
-  async waitForHidden(timeout: number = 5000): Promise<void> {
+  async waitForHidden(timeout: number = env.SHORT_TIMEOUT): Promise<void> {
     await this.root.waitFor({ state: 'hidden', timeout });
   }
 

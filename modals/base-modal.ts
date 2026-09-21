@@ -1,5 +1,6 @@
 import { test, type Locator, type Page } from '@playwright/test';
 import { BaseComponent } from '@/components/base-component';
+import env from '../config/env';
 
 /**
  * Shared base for GreenCity modal / overlay COMs.
@@ -48,5 +49,13 @@ export abstract class BaseModal extends BaseComponent {
     await test.step('Modal: close', async () => {
       await this.closeButton.click();
     });
+  }
+
+  async waitForVisible(timeout: number = env.SHORT_TIMEOUT): Promise<void> {
+    await super.waitForVisible(timeout);
+  }
+
+  async waitForHidden(timeout: number = env.SHORT_TIMEOUT): Promise<void> {
+    await super.waitForHidden(timeout);
   }
 }
