@@ -1,5 +1,5 @@
 import { Locator, Page, test } from '@playwright/test';
-import { BaseComponent } from './base-component';
+import { BaseComponent } from '@/components/base-component';
 
 /**
  * COM for a single news card on the profile dashboard news tab.
@@ -10,7 +10,7 @@ import { BaseComponent } from './base-component';
  *   .news-content > .title h3 / .tag-btn (1-2 per card)
  *   .user-info-date p / .user-info-icon p
  */
-export class NewsItemComponent extends BaseComponent {
+export class NewsTabItem extends BaseComponent {
   readonly card: Locator;
   readonly image: Locator;
   readonly title: Locator;
@@ -30,15 +30,15 @@ export class NewsItemComponent extends BaseComponent {
   }
 
   async getTitle(): Promise<string> {
-    return test.step('NewsItem: title', async () => (await this.title.innerText()).trim());
+    return test.step('NewsTabItem: title', async () => (await this.title.innerText()).trim());
   }
 
   async getDate(): Promise<string> {
-    return test.step('NewsItem: date', async () => (await this.dateText.innerText()).trim());
+    return test.step('NewsTabItem: date', async () => (await this.dateText.innerText()).trim());
   }
 
   async getAuthor(): Promise<string> {
-    return test.step('NewsItem: author', async () => (await this.authorText.innerText()).trim());
+    return test.step('NewsTabItem: author', async () => (await this.authorText.innerText()).trim());
   }
 
   async getTagCount(): Promise<number> {
@@ -47,7 +47,7 @@ export class NewsItemComponent extends BaseComponent {
 
   /** Opens the news detail (card / li is focusable on live build). */
   async open(): Promise<void> {
-    await test.step('NewsItem: open', async () => {
+    await test.step('NewsTabItem: open', async () => {
       await this.root.click();
     });
   }

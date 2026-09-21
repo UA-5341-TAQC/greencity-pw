@@ -1,6 +1,6 @@
 import type { Page, Locator } from '@playwright/test';
 import BasePage from '@/pages/base-page';
-import { EventCardComponent } from '@/components/event-card-component';
+import { EventCardComponent } from '@/components';
 
 export class EventsPage extends BasePage {
   protected readonly pageTitle: Locator;

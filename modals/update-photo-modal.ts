@@ -1,5 +1,5 @@
 import type { Locator, Page } from '@playwright/test';
-import { BaseModal } from './base-modal';
+import { BaseModal } from '@/modals/base-modal';
 
 export class UpdatePhotoModal extends BaseModal {
   private static readonly ROOT_LOCATOR = 'app-edit-photo-pop-up';
@@ -7,7 +7,6 @@ export class UpdatePhotoModal extends BaseModal {
   private readonly cancelButton: Locator;
   private readonly deletePhotoButton: Locator;
   private readonly uploadPhotoButton: Locator;
-  private readonly closeButton: Locator;
   private readonly profileAvatar: Locator;
   private readonly questionText: Locator;
 

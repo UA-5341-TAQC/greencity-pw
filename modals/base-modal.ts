@@ -1,6 +1,6 @@
 import { test, type Locator, type Page } from '@playwright/test';
-import { BaseComponent } from '@/components/base-component';
-import env from '../config/env';
+import { BaseComponent } from '@/components';
+import env from '@/config/env';
 
 /**
  * Shared base for GreenCity modal / overlay COMs.
@@ -19,7 +19,7 @@ export abstract class BaseModal extends BaseComponent {
   /** Secondary heading under the title, when present. */
   protected readonly subtitle: Locator;
   /** Close control (`.close-modal-window` / cross button). */
-  protected readonly closeButton: Locator;
+  protected closeButton: Locator;
 
   constructor(page: Page, root: Locator) {
     super(root, page);

@@ -1,6 +1,6 @@
 import { HomePage, ProfilePage, EditProfilePage, FriendsPage } from '@/pages';
 import { SignInModal } from '@/modals';
-import { test as baseTest, expect as baseExpect } from './base-fixture';
+import { test as baseTest, expect as baseExpect } from '@/fixtures/base-fixture';
 
 type PageFixtures = {
   homePage: HomePage;

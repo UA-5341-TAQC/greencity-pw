@@ -1,6 +1,6 @@
 import { Locator, Page, test } from '@playwright/test';
 import env from '@/config/env';
-import { BaseComponent } from './base-component';
+import { BaseComponent } from '@/components/base-component';
 
 export type FriendsTabKey = 'myFriends' | 'findFriend' | 'requests';
 

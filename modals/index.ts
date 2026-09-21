@@ -1,7 +1,7 @@
-export * from './base-modal';
-export * from './sign-in-modal';
-export * from './sign-up-modal';
-export * from './forgot-password-modal';
-export * from './reset-password-modal';
-export * from './update-photo-modal';
-export { CommentEditWarningModal } from './comment-edit-warning-modal';
+export * from '@/modals/base-modal';
+export * from '@/modals/sign-in-modal';
+export * from '@/modals/sign-up-modal';
+export * from '@/modals/forgot-password-modal';
+export * from '@/modals/reset-password-modal';
+export * from '@/modals/update-photo-modal';
+export { CommentEditWarningModal } from '@/modals/comment-edit-warning-modal';

@@ -1,6 +1,6 @@
 import { Locator, Page, test } from '@playwright/test';
-import { BaseComponent } from '../base-component';
-import { NewsItemComponent } from '../news-item.component';
+import { BaseComponent } from '@/components/base-component';
+import { NewsTabItem } from '@/components/profile/news-tab-item.component';
 
 /**
  * COM for the news tab of the profile dashboard.
@@ -27,19 +27,19 @@ export class ProfileNewsTabComponent extends BaseComponent {
   }
 
   /** All news COMs currently rendered in this tab. */
-  async getItems(): Promise<NewsItemComponent[]> {
+  async getItems(): Promise<NewsTabItem[]> {
     return test.step('NewsTab: news items[]', async () => {
       const count = await this.itemHosts.count();
       return Array.from(
         { length: count },
-        (_, i) => new NewsItemComponent(this.itemHosts.nth(i), this.page)
+        (_, i) => new NewsTabItem(this.itemHosts.nth(i), this.page)
       );
     });
   }
 
   /** Single news COM by 0-based index (selection helper). */
-  getItem(index: number): NewsItemComponent {
-    return new NewsItemComponent(this.itemHosts.nth(index), this.page);
+  getItem(index: number): NewsTabItem {
+    return new NewsTabItem(this.itemHosts.nth(index), this.page);
   }
 
   async getCount(): Promise<number> {

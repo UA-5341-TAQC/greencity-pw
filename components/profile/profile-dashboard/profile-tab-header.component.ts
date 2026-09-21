@@ -1,5 +1,6 @@
 import { Locator, Page, test } from '@playwright/test';
-import { BaseComponent } from '../base-component';
+import env from '@/config/env';
+import { BaseComponent } from '@/components/base-component';
 
 export type ProfileDashboardTabKey = 'habits' | 'news' | 'events';
 
@@ -40,7 +41,7 @@ export class ProfileTabHeaderComponent extends BaseComponent {
     return { habits: this.habitsTab, news: this.newsTab, events: this.eventsTab }[key];
   }
 
-  async waitForVisible(timeout = 15000): Promise<void> {
+  async waitForVisible(timeout = env.LONG_TIMEOUT): Promise<void> {
     await test.step('ProfileTabHeader: wait visible', async () => {
       await this.tabList.waitFor({ state: 'visible', timeout });
     });

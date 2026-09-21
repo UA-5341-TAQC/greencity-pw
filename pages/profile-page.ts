@@ -68,8 +68,8 @@ export class ProfilePage extends BasePage {
   async waitForProfile(): Promise<void> {
     await test.step('Profile: wait for page load', async () => {
       await this.waitForPageLoad();
-      await this.profileHeader.waitForVisible(env.LONG_TIMEOUT);
-      await this.tabHeader.waitForVisible(env.LONG_TIMEOUT);
+      await this.profileHeader.waitForVisible();
+      await this.tabHeader.waitForVisible();
     });
   }
 

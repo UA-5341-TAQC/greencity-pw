@@ -1,5 +1,5 @@
 import { Locator, Page } from '@playwright/test';
-import { BaseModal } from './base-modal';
+import { BaseModal } from '@/modals/base-modal';
 
 /**
  * Modal for confirming cancellation of comment editing.

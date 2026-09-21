@@ -1,5 +1,6 @@
 import { Locator, Page, test } from '@playwright/test';
-import { BaseComponent } from './base-component';
+import env from '@/config/env';
+import { BaseComponent } from '@/components/base-component';
 
 /**
  * COM for the My Space profile header widget (app-profile-header).
@@ -28,7 +29,7 @@ export class ProfileHeaderWidgetComponent extends BaseComponent {
     this.progressChains = this.root.locator('app-profile-progress .chain');
   }
 
-  async waitForVisible(timeout = 15000): Promise<void> {
+  async waitForVisible(timeout = env.LONG_TIMEOUT): Promise<void> {
     await test.step('ProfileHeaderWidget: wait visible', async () => {
       await this.root.waitFor({ state: 'visible', timeout });
       await this.name.waitFor({ state: 'visible', timeout });

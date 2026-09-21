@@ -1,4 +1,4 @@
-import { test, expect } from '@/fixtures/page-fixture';
+import { test, expect } from '@/fixtures';
 
 test('has title', async ({ homePage }) => {
   await homePage.navigateToHomePage();

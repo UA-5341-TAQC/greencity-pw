@@ -1,6 +1,6 @@
 import { Locator, Page, test } from '@playwright/test';
-import { BaseComponent } from '../base-component';
-import { HabitItemComponent } from '../habit-item.component';
+import { BaseComponent } from '@/components/base-component';
+import { HabitItemComponent } from '@/components/habit-item.component';
 
 /**
  * COM for the habits tab of the profile dashboard.

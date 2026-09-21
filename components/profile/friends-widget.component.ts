@@ -1,5 +1,5 @@
 import { Locator, Page, test } from '@playwright/test';
-import { BaseComponent } from './base-component';
+import { BaseComponent } from '@/components/base-component';
 
 /**
  * COM for the friends strip on My Space (app-users-friends).

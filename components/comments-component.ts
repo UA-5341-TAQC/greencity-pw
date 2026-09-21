@@ -1,6 +1,6 @@
 import { Locator, Page } from '@playwright/test';
-import { BaseComponent } from './base-component';
-import { CommentItemComponent } from './comment-item-component';
+import { BaseComponent } from '@/components/base-component';
+import { CommentItemComponent } from '@/components/comment-item-component';
 
 /**
  * Component representing the comments section.

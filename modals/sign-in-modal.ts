@@ -1,5 +1,5 @@
 import { test, type Locator, type Page } from '@playwright/test';
-import { BaseModal } from './base-modal';
+import { BaseModal } from '@/modals/base-modal';
 
 /**
  * Sign-in modal (app-auth-modal > app-sign-in).

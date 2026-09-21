@@ -1,6 +1,6 @@
 import { Locator, Page, test } from '@playwright/test';
-import { BaseComponent } from '../base-component';
-import { EventItemComponent } from '../event-item.component';
+import { BaseComponent } from '@/components/base-component';
+import { EventItemComponent } from '@/components/event-item.component';
 
 /**
  * COM for the events tab of the profile dashboard.
