@@ -1,4 +1,5 @@
 import { Locator, Page, test } from '@playwright/test';
+import env from '@/config/env';
 import { BaseComponent } from './base-component';
 
 export type FriendsTabKey = 'myFriends' | 'findFriend' | 'requests';
@@ -39,7 +40,7 @@ export class FriendsTabsComponent extends BaseComponent {
     return map[key];
   }
 
-  async waitForVisible(timeout = 15000): Promise<void> {
+  async waitForVisible(timeout = env.LONG_TIMEOUT): Promise<void> {
     await test.step('FriendsTabs: wait visible', async () => {
       await this.root.waitFor({ state: 'visible', timeout });
       await this.myFriendsTab.waitFor({ state: 'visible', timeout });

@@ -1,4 +1,5 @@
 import { test, type Locator, type Page } from '@playwright/test';
+import env from '@/config/env';
 import BasePage from '@/pages/base-page';
 import { resolveUserId } from '@/helpers';
 
@@ -72,9 +73,9 @@ export class EditProfilePage extends BasePage {
   async waitForEditProfile(): Promise<void> {
     await test.step('Edit profile: wait for form', async () => {
       await this.waitForPageLoad();
-      await this.root.waitFor({ state: 'visible', timeout: 20000 });
-      await this.nameInput.waitFor({ state: 'visible', timeout: 15000 });
-      await this.form.waitFor({ state: 'visible', timeout: 10000 });
+      await this.root.waitFor({ state: 'visible', timeout: env.LONG_TIMEOUT });
+      await this.nameInput.waitFor({ state: 'visible', timeout: env.LONG_TIMEOUT });
+      await this.form.waitFor({ state: 'visible', timeout: env.MEDIUM_TIMEOUT });
     });
   }
 

@@ -1,4 +1,5 @@
 import type { Page, Locator } from '@playwright/test';
+import env from '@/config/env';
 import BasePage from '@/pages/base-page';
 
 export class HomePage extends BasePage {
@@ -255,7 +256,7 @@ export class HomePage extends BasePage {
   /** Checks whether the email input field  is visible. */
   async isEmailInputFieldVisible(): Promise<boolean> {
     try {
-      await this.emailInputField.waitFor({ state: 'visible', timeout: 3000 });
+      await this.emailInputField.waitFor({ state: 'visible', timeout: env.SHORT_TIMEOUT });
       return true;
     } catch {
       return false;

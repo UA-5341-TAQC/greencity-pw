@@ -1,4 +1,5 @@
 import { test, type Locator, type Page } from '@playwright/test';
+import env from '@/config/env';
 import BasePage from '@/pages/base-page';
 import { resolveUserId } from '@/helpers';
 import { FriendsTabsComponent, type FriendsTabKey } from '@/components';
@@ -53,9 +54,9 @@ export class FriendsPage extends BasePage {
   async waitForFriends(): Promise<void> {
     await test.step('Friends: wait for page load', async () => {
       await this.waitForPageLoad();
-      await this.root.waitFor({ state: 'visible', timeout: 20000 });
-      await this.heading.waitFor({ state: 'visible', timeout: 15000 });
-      await this.tabs.waitForVisible(15000);
+      await this.root.waitFor({ state: 'visible', timeout: env.LONG_TIMEOUT });
+      await this.heading.waitFor({ state: 'visible', timeout: env.LONG_TIMEOUT });
+      await this.tabs.waitForVisible();
     });
   }
 

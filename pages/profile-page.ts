@@ -1,4 +1,5 @@
 import { test, type Locator, type Page } from '@playwright/test';
+import env from '@/config/env';
 import BasePage from '@/pages/base-page';
 import { resolveUserId } from '@/helpers';
 import {
@@ -67,8 +68,8 @@ export class ProfilePage extends BasePage {
   async waitForProfile(): Promise<void> {
     await test.step('Profile: wait for page load', async () => {
       await this.waitForPageLoad();
-      await this.profileHeader.waitForVisible(20000);
-      await this.tabHeader.waitForVisible(15000);
+      await this.profileHeader.waitForVisible(env.LONG_TIMEOUT);
+      await this.tabHeader.waitForVisible(env.LONG_TIMEOUT);
     });
   }
 
@@ -88,7 +89,7 @@ export class ProfilePage extends BasePage {
       await this.tabHeader.open(tab);
       // Fail loudly if the tab body never attaches — a swallowed error here
       // hides a broken dashboard behind a green test.
-      await this.tabBody(tab).waitFor({ state: 'attached', timeout: 10000 });
+      await this.tabBody(tab).waitFor({ state: 'attached', timeout: env.MEDIUM_TIMEOUT });
     });
   }
 }
