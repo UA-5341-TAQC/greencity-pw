@@ -12,7 +12,7 @@ test('clicks the start forming button', async ({ homePage, signInModal }) => {
   await homePage.navigateToHomePage();
   await homePage.waitForHomePage();
 
-  await homePage.clickStartFormingButton();
+  await homePage.clickStartFormingButton(0);
 
   await signInModal.waitForVisible();
 
