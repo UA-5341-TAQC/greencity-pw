@@ -18,17 +18,11 @@ export class UserMenuComponent extends BaseComponent {
 
     this.dropdownMenu = this.root.locator('.dropdown-list');
 
-    this.notificationsItem = this.root.locator(
-      'li[aria-label="notifications"]'
-    );
+    this.notificationsItem = this.root.locator('li[aria-label="notifications"]');
 
-    this.personalAccountLink = this.root.locator(
-      'a[href="#/ubs/user/orders"]'
-    );
+    this.personalAccountLink = this.root.locator('a[href="#/ubs/user/orders"]');
 
-    this.signOutButton = this.root.locator(
-      'li[aria-label="sign-out"]'
-    );
+    this.signOutButton = this.root.locator('li[aria-label="sign-out"]');
   }
 
   /** Opens the user menu. */
