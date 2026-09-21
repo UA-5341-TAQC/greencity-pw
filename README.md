@@ -19,15 +19,26 @@ npx playwright install
 
 Create a `.env` file in the project root when the default settings are not suitable:
 
+```bash
+cp .env.example .env
+```
+
+Then update the values as needed:
+
 ```env
 BASE_URL=http://localhost:3000
 API_URL=http://localhost:8080
 HEADLESS=true
 USER_EMAIL=your-email@example.com
 USER_PASSWORD=your-password
+SHORT_TIMEOUT=5000
+MEDIUM_TIMEOUT=10000
+LONG_TIMEOUT=30000
 ```
 
-`BASE_URL` defaults to `http://localhost:3000`. `HEADLESS` is enabled by default; set it to `false` to run tests with a visible browser.
+`BASE_URL` defaults to `http://localhost:3000`, and `API_URL` defaults to `http://localhost:8080`.
+`HEADLESS` is enabled by default; set it to `false` to run tests with a visible browser.
+Timeouts are configured in milliseconds: `SHORT_TIMEOUT` is used for short waits, `MEDIUM_TIMEOUT` for actions and assertions, and `LONG_TIMEOUT` for test and navigation limits.
 
 ## Running Tests
 
@@ -78,6 +89,7 @@ npm run format:check
 
 ```text
 config/     Environment configuration
+types/      Shared enums and types
 pages/      Page object models
 components/ UI components
 modals/     Modal components

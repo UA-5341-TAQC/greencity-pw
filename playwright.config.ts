@@ -29,9 +29,15 @@ export default defineConfig({
     trace: 'on-first-retry',
     baseURL: env.BASE_URL,
     headless: env.HEADLESS,
+    actionTimeout: env.MEDIUM_TIMEOUT,
+    navigationTimeout: env.LONG_TIMEOUT,
     ignoreHTTPSErrors: true,
     video: 'off',
     screenshot: 'only-on-failure',
+  },
+  timeout: env.LONG_TIMEOUT,
+  expect: {
+    timeout: env.MEDIUM_TIMEOUT,
   },
 
   /* Configure projects for major browsers */
