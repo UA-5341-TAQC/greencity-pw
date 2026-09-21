@@ -1,11 +1,11 @@
 import type { Page, Locator } from '@playwright/test';
 import { BaseComponent } from '@/components/base-component';
 
-export class EventCardComponent extends BaseComponent {
-  protected readonly bookmarkButtonContainer: Locator;
-  protected readonly participantsContainer: Locator;
+export abstract class BaseEventCardComponent extends BaseComponent {
+  protected readonly bookmarkButton: Locator;
   protected readonly image: Locator;
   protected readonly typeTag: Locator;
+  protected readonly participantsCountText: Locator;
   protected readonly eventDate: Locator;
   protected readonly eventTime: Locator;
   protected readonly eventLocation: Locator;
@@ -24,10 +24,10 @@ export class EventCardComponent extends BaseComponent {
   constructor(root: Locator, page?: Page) {
     super(root, page);
 
-    this.bookmarkButtonContainer = this.root.locator('div.event-flags.favourite-button');
-    this.participantsContainer = this.root.locator('div.event-participants');
+    this.bookmarkButton = this.root.locator('div.event-flags.favourite-button');
     this.image = this.root.locator('img.event-image');
     this.typeTag = this.root.locator('ul.ul-eco-buttons a.tag');
+    this.participantsCountText = this.root.locator('span.event-participants-count');
 
     this.eventDate = this.root.locator('div.date-container div.date');
     this.eventTime = this.root.locator('div.date-container div.time');
@@ -50,10 +50,9 @@ export class EventCardComponent extends BaseComponent {
       .getByRole('button', { name: 'Dislike this event' });
     this.dislikeCount = this.dislikeButton.locator('span');
   }
-
   /** Clicks the bookmark button on the card */
   async clickBookmarkButton(): Promise<void> {
-    await this.bookmarkButtonContainer.click();
+    await this.bookmarkButton.click();
   }
 
   /** Checks whether the event image is visible */
@@ -88,7 +87,7 @@ export class EventCardComponent extends BaseComponent {
 
   /** Returns the event title text */
   async getTitle(): Promise<string> {
-    return (await this.eventTitle.textContent()) ?? '';
+    return (await this.eventTitle.innerText()).trim();
   }
 
   /** Clicks the "More" button */
@@ -143,4 +142,12 @@ export class EventCardComponent extends BaseComponent {
     const text = (await this.dislikeCount.textContent()) ?? '0';
     return Number(text.trim());
   }
+
+  /** Returns the extra-participants count text (e.g. "1") */
+  async getParticipantsCountText(): Promise<string> {
+    return (await this.participantsCountText.textContent()) ?? '';
+  }
+  /** Checks whether this card's root element matches the expected view mode */
+  abstract isCorrectViewMode(): Promise<boolean>;
+
 }
