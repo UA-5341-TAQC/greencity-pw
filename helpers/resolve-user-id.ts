@@ -1,4 +1,5 @@
 import { test, type Page } from '@playwright/test';
+import { LocalStorageManager } from '@/helpers/local-storage-manager';
 
 /**
  * Resolves the userId used by profile-scoped routes.
@@ -19,6 +20,8 @@ export async function resolveUserId(
   if (userId !== undefined && userId !== null && String(userId).length > 0) {
     return String(userId);
   }
-  return test.step(`${label}: read userId from localStorage`, async () =>
-    page.evaluate(() => localStorage.getItem('userId') ?? ''));
+  return test.step(`${label}: read userId from localStorage`, async () => {
+    const storage = new LocalStorageManager(page);
+    return (await storage.get('userId')) ?? '';
+  });
 }
