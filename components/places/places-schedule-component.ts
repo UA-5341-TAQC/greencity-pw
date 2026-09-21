@@ -1,15 +1,6 @@
 import type { Locator } from '@playwright/test';
 import { BaseComponent } from '@/components/base-component';
-
-export enum WeekDay {
-  Monday = 'Monday',
-  Tuesday = 'Tuesday',
-  Wednesday = 'Wednesday',
-  Thursday = 'Thursday',
-  Friday = 'Friday',
-  Saturday = 'Saturday',
-  Sunday = 'Sunday',
-}
+import { WeekDay } from '@/types/places.types';
 
 export class PlacesScheduleComponent extends BaseComponent {
   constructor(root: Locator) {
