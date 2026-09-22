@@ -100,7 +100,7 @@ export class HeaderComponent extends BaseComponent {
           await this.langUkrainianOption.click();
         }
         // Verify that the language has been switched
-        await expect(this.signInButton).toHaveText(HEADER_I18N[language].signIn,);
+        await expect(this.signInButton).toHaveText(HEADER_I18N[language].signIn);
       }
     });
   }
