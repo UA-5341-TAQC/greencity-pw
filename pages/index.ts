@@ -1,4 +1,10 @@
+export { default as BasePage } from './base-page';
 export * from './home-page';
+export * from './profile-page';
+export * from './edit-profile-page';
+export * from './friends-page';
+export * from './events-page';
+export * from './create-news-preview';
 export * from './habit/habit-form-page';
 export * from './habit/create-habit-page';
 export * from './habit/edit-habit-page';

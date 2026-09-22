@@ -1,8 +1,10 @@
 import { Locator, Page, test } from '@playwright/test';
-import { BaseComponent } from './base-component';
-import { Language, MenuItem } from '../types/header.types';
-import { HEADER_I18N, type HeaderI18n } from '../types/header.i18n';
-import env from '../config/env';
+import { BaseComponent } from '@/components/base-component';
+import { Language, MenuItem } from '@/types/header.types';
+import { HEADER_I18N, type HeaderI18n } from '@/types/header.i18n';
+import env from '@/config/env';
+
+export type { Language, MenuItem };
 
 /**
  * Component representing the global header.

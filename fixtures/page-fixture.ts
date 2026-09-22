@@ -1,10 +1,21 @@
-import { HomePage, PlacesPage, EcoNewsPage, EcoNewsDetailsPage } from '@/pages';
+import {
+  HomePage,
+  ProfilePage,
+  EditProfilePage,
+  FriendsPage,
+  EcoNewsPage,
+  EcoNewsDetailsPage,
+  PlacesPage,
+} from '@/pages';
 import { AddPlaceModal, SignInModal } from '@/modals';
 import { test as baseTest, expect as baseExpect } from './base-fixture';
 
 type PageFixtures = {
   homePage: HomePage;
   signInModal: SignInModal;
+  profilePage: ProfilePage;
+  editProfilePage: EditProfilePage;
+  friendsPage: FriendsPage;
   placesPage: PlacesPage;
   addPlaceModal: AddPlaceModal;
   ecoNewsPage: EcoNewsPage;
@@ -18,6 +29,15 @@ export const test = baseTest.extend<PageFixtures>({
 
   signInModal: async ({ page }, use): Promise<void> => {
     await use(new SignInModal(page));
+  },
+  profilePage: async ({ page }, use): Promise<void> => {
+    await use(new ProfilePage(page));
+  },
+  editProfilePage: async ({ page }, use): Promise<void> => {
+    await use(new EditProfilePage(page));
+  },
+  friendsPage: async ({ page }, use): Promise<void> => {
+    await use(new FriendsPage(page));
   },
 
   placesPage: async ({ page }, use): Promise<void> => {

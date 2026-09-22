@@ -1,4 +1,5 @@
 import type { Page, Locator } from '@playwright/test';
+import env from '@/config/env';
 import BasePage from '@/pages/base-page';
 
 export class HomePage extends BasePage {
@@ -7,7 +8,9 @@ export class HomePage extends BasePage {
   protected readonly subscribeButton: Locator;
 
   // text elements
-  protected readonly home_header: Locator;
+  // NOTE: renamed from `header` — `BasePage` already exposes `header: HeaderComponent`,
+  // so a same-named `Locator` here is an incompatible override (TS2416).
+  protected readonly mainHeading: Locator;
   protected readonly mainText: Locator;
   protected readonly subHeader: Locator;
   protected readonly bagsHeading: Locator;
@@ -36,7 +39,7 @@ export class HomePage extends BasePage {
     super(page);
 
     // headers and subheaders
-    this.home_header = page.getByRole('heading', { level: 1 });
+    this.mainHeading = page.getByRole('heading', { level: 1 });
     this.subHeader = page.getByRole('heading', { level: 2 });
     this.bagsHeading = page.getByRole('heading', { level: 3 }).first();
     this.cupsHeading = page.getByRole('heading', { level: 3 }).nth(1);
@@ -129,14 +132,14 @@ export class HomePage extends BasePage {
    * @returns bool whether header text element is visible.
    */
   async isHeaderVisible(): Promise<boolean> {
-    return await this.home_header.isVisible();
+    return await this.mainHeading.isVisible();
   }
 
   /**
    * @returns header text or empty line.
    */
   async getHeaderText(): Promise<string> {
-    return (await this.home_header.textContent()) ?? '';
+    return (await this.mainHeading.textContent()) ?? '';
   }
 
   /**
@@ -253,7 +256,7 @@ export class HomePage extends BasePage {
   /** Checks whether the email input field  is visible. */
   async isEmailInputFieldVisible(): Promise<boolean> {
     try {
-      await this.emailInputField.waitFor({ state: 'visible', timeout: 3000 });
+      await this.emailInputField.waitFor({ state: 'visible', timeout: env.SHORT_TIMEOUT });
       return true;
     } catch {
       return false;

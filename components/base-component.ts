@@ -1,5 +1,5 @@
 import type { Page, Locator } from '@playwright/test';
-import env from '../config/env';
+import env from '@/config/env';
 
 export abstract class BaseComponent {
   protected page: Page;

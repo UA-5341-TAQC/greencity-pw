@@ -1,5 +1,5 @@
 import type { Locator, Page } from '@playwright/test';
-import { BaseComponent } from './base-component';
+import { BaseComponent } from '@/components/base-component';
 
 export class NewsPagination extends BaseComponent {
   private readonly loadMoreButton: Locator;

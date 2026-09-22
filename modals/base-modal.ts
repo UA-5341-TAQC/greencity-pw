@@ -1,40 +1,61 @@
-import type { Locator, Page } from '@playwright/test';
-import env from '../config/env';
+import { test, type Locator, type Page } from '@playwright/test';
+import { BaseComponent } from '@/components';
+import env from '@/config/env';
 
-export abstract class BaseModal {
-  protected readonly page: Page;
-  protected readonly root: Locator;
+/**
+ * Shared base for GreenCity modal / overlay COMs.
+ * Common chrome (title, close) lives here; subclasses add form-specific locators.
+ * Extends BaseComponent so visibility/enabled/click semantics stay in one place.
+ * A single root is enough: `app-auth-modal` mounts one sub-form at a time, and that
+ * sub-form holds the only `<h1>` (verified live for sign-in / sign-up / restore).
+ */
+export abstract class BaseModal extends BaseComponent {
+  /**
+   * Primary heading inside the modal.
+   * `protected` so subclasses may narrow the locator (e.g. `CityFilterModal` uses an `h2`);
+   * TypeScript rejects a `protected` override of a `public` member (TS2415).
+   */
+  protected readonly title: Locator;
+  /** Secondary heading under the title, when present. */
+  protected readonly subtitle: Locator;
+  /** Close control (`.close-modal-window` / cross button). */
+  protected closeButton: Locator;
 
   constructor(page: Page, root: Locator) {
-    this.page = page;
-    this.root = root;
+    super(root, page);
+
+    this.title = this.root.locator('h1').first();
+    this.subtitle = this.root.locator('h2').first();
+    this.closeButton = this.root.locator('a.close-modal-window, .close-modal-window').first();
   }
 
-  async isVisible(): Promise<boolean> {
-    return this.root.isVisible();
+  /** Reads the modal title text. */
+  async getTitle(): Promise<string> {
+    return await test.step('Modal: read title', async () => (await this.title.innerText()).trim());
   }
 
-  async isHidden(): Promise<boolean> {
-    return this.root.isHidden();
+  /** Reads the modal subtitle text, or empty string when absent. */
+  async getSubtitle(): Promise<string> {
+    return await test.step('Modal: read subtitle', async () => {
+      if ((await this.subtitle.count()) === 0) {
+        return '';
+      }
+      return (await this.subtitle.innerText()).trim();
+    });
   }
 
-  async isEnabled(): Promise<boolean> {
-    return this.root.isEnabled();
+  /** Closes the modal via the close control. */
+  async close(): Promise<void> {
+    await test.step('Modal: close', async () => {
+      await this.closeButton.click();
+    });
   }
 
-  async isDisabled(): Promise<boolean> {
-    return this.root.isDisabled();
+  async waitForVisible(timeout: number = env.SHORT_TIMEOUT): Promise<void> {
+    await super.waitForVisible(timeout);
   }
 
-  async waitForVisible(timeout = env.SHORT_TIMEOUT): Promise<void> {
-    await this.root.waitFor({ state: 'visible', timeout });
-  }
-
-  async waitForHidden(timeout = env.SHORT_TIMEOUT): Promise<void> {
-    await this.root.waitFor({ state: 'hidden', timeout });
-  }
-
-  async click(): Promise<void> {
-    await this.root.click();
+  async waitForHidden(timeout: number = env.SHORT_TIMEOUT): Promise<void> {
+    await super.waitForHidden(timeout);
   }
 }
