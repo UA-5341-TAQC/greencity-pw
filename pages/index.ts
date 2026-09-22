@@ -5,3 +5,5 @@ export * from '@/pages/edit-profile-page';
 export * from '@/pages/friends-page';
 export * from '@/pages/events-page';
 export * from '@/pages/create-news-preview';
+export * from '@/pages/eco-news.page';
+export * from '@/pages/eco-news-details.page';
