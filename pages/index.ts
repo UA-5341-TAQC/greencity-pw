@@ -1,9 +1,9 @@
-export { default as BasePage } from '@/pages/base-page';
-export * from '@/pages/home-page';
-export * from '@/pages/profile-page';
-export * from '@/pages/edit-profile-page';
-export * from '@/pages/friends-page';
-export * from '@/pages/events-page';
-export * from '@/pages/create-news-preview';
-export * from '@/pages/eco-news.page';
-export * from '@/pages/eco-news-details.page';
+export { default as BasePage } from './base-page';
+export * from './home-page';
+export * from './profile-page';
+export * from './edit-profile-page';
+export * from './friends-page';
+export * from './events-page';
+export * from './create-news-preview';
+export * from './eco-news.page';
+export * from './eco-news-details.page';
