@@ -1,5 +1,5 @@
 import { test, type Locator, type Page } from '@playwright/test';
-import { BaseComponent } from '@/components';
+import { BaseComponent } from '@/components/base-component';
 import env from '@/config/env';
 
 /**

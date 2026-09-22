@@ -8,6 +8,7 @@ import {
   PlacesPage,
 } from '@/pages';
 import { AddPlaceModal, SignInModal } from '@/modals';
+import env from '@/config/env';
 import { test as baseTest, expect as baseExpect } from './base-fixture';
 
 type PageFixtures = {
@@ -20,6 +21,7 @@ type PageFixtures = {
   addPlaceModal: AddPlaceModal;
   ecoNewsPage: EcoNewsPage;
   ecoNewsDetailsPage: EcoNewsDetailsPage;
+  authenticatedUser: void;
 };
 
 export const test = baseTest.extend<PageFixtures>({
@@ -54,6 +56,22 @@ export const test = baseTest.extend<PageFixtures>({
 
   ecoNewsDetailsPage: async ({ page }, use): Promise<void> => {
     await use(new EcoNewsDetailsPage(page));
+  },
+
+  authenticatedUser: async ({ homePage, signInModal }, use): Promise<void> => {
+    await homePage.navigateToHomePage();
+    await homePage.waitForHomePage();
+
+    await homePage.header.clickSignIn();
+    await signInModal.waitForVisible();
+
+    await signInModal.fillEmail(env.USER_EMAIL);
+    await signInModal.fillPassword(env.USER_PASSWORD);
+    await signInModal.clickSignIn();
+
+    await signInModal.waitForHidden();
+
+    await use();
   },
 });
 
