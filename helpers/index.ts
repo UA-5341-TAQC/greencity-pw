@@ -1,2 +1,2 @@
-export { resolveUserId } from './resolve-user-id';
-export { LocalStorageManager } from './local-storage-manager';
+export * from './resolve-user-id';
+export * from './local-storage-manager';

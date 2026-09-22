@@ -1,5 +1,5 @@
 import type { Locator, Page } from '@playwright/test';
-import { EcoNewsCardComponent } from '@/components/eco-news-card-component';
+import { EcoNewsCardComponent } from './eco-news-card-component';
 
 export class EcoNewsListCardComponent extends EcoNewsCardComponent {
   protected readonly link: Locator;

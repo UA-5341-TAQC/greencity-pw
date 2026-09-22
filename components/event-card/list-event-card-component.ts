@@ -1,4 +1,4 @@
-import { BaseEventCardComponent } from '@/components/base-event-card-component';
+import { BaseEventCardComponent } from './base-event-card-component';
 
 export class ListEventCardComponent extends BaseEventCardComponent {
   /** Checks whether this card's root element is actually rendered in list mode */
