@@ -7,7 +7,7 @@ export class HomePage extends BasePage {
   protected readonly subscribeButton: Locator;
 
   // text elements
-  protected readonly header: Locator;
+  protected readonly home_header: Locator;
   protected readonly mainText: Locator;
   protected readonly subHeader: Locator;
   protected readonly bagsHeading: Locator;
@@ -36,7 +36,7 @@ export class HomePage extends BasePage {
     super(page);
 
     // headers and subheaders
-    this.header = page.getByRole('heading', { level: 1 });
+    this.home_header = page.getByRole('heading', { level: 1 });
     this.subHeader = page.getByRole('heading', { level: 2 });
     this.bagsHeading = page.getByRole('heading', { level: 3 }).first();
     this.cupsHeading = page.getByRole('heading', { level: 3 }).nth(1);
@@ -129,14 +129,14 @@ export class HomePage extends BasePage {
    * @returns bool whether header text element is visible.
    */
   async isHeaderVisible(): Promise<boolean> {
-    return await this.header.isVisible();
+    return await this.home_header.isVisible();
   }
 
   /**
    * @returns header text or empty line.
    */
   async getHeaderText(): Promise<string> {
-    return (await this.header.textContent()) ?? '';
+    return (await this.home_header.textContent()) ?? '';
   }
 
   /**
