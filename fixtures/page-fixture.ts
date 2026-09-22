@@ -26,9 +26,12 @@ export const test = baseTest.extend<PageFixtures>({
 
   addPlaceModal: async ({ page }, use): Promise<void> => {
     await use(new AddPlaceModal(page));
+  },
+
   ecoNewsPage: async ({ page }, use): Promise<void> => {
     await use(new EcoNewsPage(page));
   },
+
   ecoNewsDetailsPage: async ({ page }, use): Promise<void> => {
     await use(new EcoNewsDetailsPage(page));
   },
