@@ -1,6 +1,7 @@
 import type { Page, Locator } from '@playwright/test';
 import BasePage from '@/pages/base-page';
-import { EventCardComponent } from '@/components';
+import { GridEventCardComponent } from '@/components/grid-event-card-component';
+import { ListEventCardComponent } from '@/components/list-event-card-component';
 
 export class EventsPage extends BasePage {
   protected readonly pageTitle: Locator;
@@ -32,7 +33,8 @@ export class EventsPage extends BasePage {
   protected readonly calendarDayButtons: Locator;
 
   // Event cards
-  protected readonly eventCardRoots: Locator;
+  protected readonly gridEventCardRoots: Locator;
+  protected readonly listEventCardRoots: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -86,7 +88,10 @@ export class EventsPage extends BasePage {
     });
     this.calendarTable = page.locator('table.mat-calendar-table');
     this.calendarDayButtons = this.calendarTable.locator('button.mat-calendar-body-cell');
-    this.eventCardRoots = page.locator('mat-card.event-list-item');
+    this.gridEventCardRoots = page.locator(
+      'div.event-list:not(.list-view) mat-card.event-list-item'
+    );
+    this.listEventCardRoots = page.locator('div.event-list.list-view mat-card.event-list-item');
   }
   /** Navigates to the Events page directly by URL */
   async navigateToEventsPage(): Promise<void> {
@@ -228,29 +233,55 @@ export class EventsPage extends BasePage {
     return await this.calendarTable.isVisible();
   }
 
-  /** Returns the number of event cards */
-  async getEventCardsCount(): Promise<number> {
-    return await this.eventCardRoots.count();
+  /** Returns the number of event cards currently rendered in grid mode */
+  async getGridEventCardsCount(): Promise<number> {
+    return await this.gridEventCardRoots.count();
   }
 
-  /** Returns an EventCard component for the card at the given position */
-  getEventCardByIndex(index: number): EventCardComponent {
-    return new EventCardComponent(this.eventCardRoots.nth(index), this.page);
+  /** Returns the number of event cards currently rendered in list mode */
+  async getListEventCardsCount(): Promise<number> {
+    return await this.listEventCardRoots.count();
   }
 
-  /** Returns an EventCard component for the first card whose title matches the given text */
-  getEventCardByTitle(title: string): EventCardComponent {
-    const root = this.eventCardRoots.filter({ hasText: title }).first();
-
-    return new EventCardComponent(root, this.page);
+  /** Returns a GridEventCardComponent for the card at the given position */
+  getGridEventCardByIndex(index: number): GridEventCardComponent {
+    return new GridEventCardComponent(this.gridEventCardRoots.nth(index), this.page);
+  }
+  /** Returns a ListEventCardComponent for the card at the given position */
+  getListEventCardByIndex(index: number): ListEventCardComponent {
+    return new ListEventCardComponent(this.listEventCardRoots.nth(index), this.page);
   }
 
-  /** Returns EventCard components for every card on the page */
-  async getAllEventCards(): Promise<EventCardComponent[]> {
-    const count = await this.getEventCardsCount();
-    const cards: EventCardComponent[] = [];
+  /** Returns a GridEventCard component for the first card whose title matches the given text */
+  getGridEventCardByTitle(title: string): GridEventCardComponent {
+    const root = this.gridEventCardRoots.filter({ hasText: title }).first();
+
+    return new GridEventCardComponent(root, this.page);
+  }
+
+  /** Returns a ListEventCard component for the first card whose title matches the given text */
+  getListEventCardByTitle(title: string): ListEventCardComponent {
+    const root = this.listEventCardRoots.filter({ hasText: title }).first();
+
+    return new ListEventCardComponent(root, this.page);
+  }
+
+  /** Returns GridEventCard components for every card on the page */
+  async getAllGridEventCards(): Promise<GridEventCardComponent[]> {
+    const count = await this.getGridEventCardsCount();
+    const cards: GridEventCardComponent[] = [];
     for (let i = 0; i < count; i++) {
-      cards.push(this.getEventCardByIndex(i));
+      cards.push(this.getGridEventCardByIndex(i));
+    }
+    return cards;
+  }
+
+  /** Returns ListEventCard components for every card on the page */
+  async getAllListEventCards(): Promise<ListEventCardComponent[]> {
+    const count = await this.getListEventCardsCount();
+    const cards: ListEventCardComponent[] = [];
+    for (let i = 0; i < count; i++) {
+      cards.push(this.getListEventCardByIndex(i));
     }
     return cards;
   }
