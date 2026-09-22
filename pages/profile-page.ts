@@ -10,8 +10,8 @@ import {
   ProfileHeaderWidgetComponent,
   AchievementsWidgetComponent,
   FriendsWidgetComponent,
-  type ProfileDashboardTabKey,
 } from '@/components';
+import { ProfileDashboardTabKey } from '@/types/profile-dashboard.types';
 
 /**
  * User profile / My Space page.

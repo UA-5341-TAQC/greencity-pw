@@ -1,10 +1,7 @@
 import { Locator, Page, test } from '@playwright/test';
 import env from '@/config/env';
 import { BaseComponent } from '@/components/base-component';
-
-export type ProfileDashboardTabKey = 'habits' | 'news' | 'events';
-
-const TAB_POSITION: Record<ProfileDashboardTabKey, number> = { habits: 1, news: 2, events: 3 };
+import { ProfileDashboardTabKey, TAB_POSITION } from '@/types/profile-dashboard.types';
 
 /**
  * COM for the profile dashboard tab strip (`app-profile-dashboard > mat-tab-header`).
