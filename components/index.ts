@@ -2,7 +2,7 @@ export * from '@/components/base-component';
 export * from '@/components/header.component';
 export * from '@/components/habit-item.component';
 export * from '@/components/event-item.component';
-export * from '@/components/event-card-component';
+export * from '@/components/grid-event-card-component';
 export * from '@/components/profile';
 export * from '@/components/friends-tabs.component';
 export * from '@/components/pagination.component';

@@ -27,6 +27,7 @@ export const test = baseTest.extend<PageFixtures>({
   },
   friendsPage: async ({ page }, use): Promise<void> => {
     await use(new FriendsPage(page));
+  },
   ecoNewsPage: async ({ page }, use): Promise<void> => {
     await use(new EcoNewsPage(page));
   },
