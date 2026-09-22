@@ -3,6 +3,7 @@ export * from './create-news-preview';
 export * from './eco-news-details.page';
 export * from './eco-news.page';
 export * from './edit-profile-page';
+export * from './event-details-page';
 export * from './events-page';
 export * from './friends-page';
 export * from './home-page';
