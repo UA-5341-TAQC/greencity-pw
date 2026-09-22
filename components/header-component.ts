@@ -1,6 +1,7 @@
 import { Locator, Page, test } from '@playwright/test';
 import { BaseComponent } from './base-component';
 import { Language, MenuItem } from '../types/header.types';
+import { HEADER_I18N, type HeaderI18n } from '../types/header.i18n';
 import env from '../config/env';
 
 /**
@@ -30,11 +31,11 @@ export class HeaderComponent extends BaseComponent {
     // Navigation Locators
     this.logo = this.root.locator('a.header_logo');
     this.navLinks = {
-      [MenuItem.EcoNews]: this.root.getByRole('link', { name: /(Eco news|Еко новини)/i }),
-      [MenuItem.Events]: this.root.getByRole('link', { name: /(Events|Події)/i }),
-      [MenuItem.Places]: this.root.getByRole('link', { name: /(Places|Карта)/i }),
-      [MenuItem.AboutUs]: this.root.getByRole('link', { name: /(About us|Про нас)/i }),
-      [MenuItem.MySpace]: this.root.getByRole('link', { name: /(My space|Мій простір)/i }),
+      [MenuItem.EcoNews]: this.localizedLink((i18n) => i18n.navigation[MenuItem.EcoNews]),
+      [MenuItem.Events]: this.localizedLink((i18n) => i18n.navigation[MenuItem.Events]),
+      [MenuItem.Places]: this.localizedLink((i18n) => i18n.navigation[MenuItem.Places]),
+      [MenuItem.AboutUs]: this.localizedLink((i18n) => i18n.navigation[MenuItem.AboutUs]),
+      [MenuItem.MySpace]: this.localizedLink((i18n) => i18n.navigation[MenuItem.MySpace]),
     };
 
     // Utilities Locators
@@ -44,10 +45,17 @@ export class HeaderComponent extends BaseComponent {
     this.langUkrainianOption = this.root.getByLabel('Uk');
 
     // Auth & Profile Locators
-    this.signInButton = this.root.getByRole('link', { name: /(Sign in|Увійти)/i });
-    this.signUpButton = this.root.getByRole('link', { name: /(Sign up|Зареєструватись)/i });
+    this.signInButton = this.localizedLink((i18n) => i18n.signIn);
+    this.signUpButton = this.localizedLink((i18n) => i18n.signUp);
     this.userMenuDropdown = this.root.locator('#header_user-wrp');
-    this.signOutButton = this.root.getByRole('link', { name: /(Sign out|Вийти)/i });
+    this.signOutButton = this.localizedLink((i18n) => i18n.signOut);
+  }
+
+  private localizedLink(getText: (i18n: HeaderI18n) => string): Locator {
+    const names = Object.values(HEADER_I18N).map((i18n) =>
+      getText(i18n).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    );
+    return this.root.getByRole('link', { name: new RegExp(`^(?:${names.join('|')})$`, 'i') });
   }
 
   // --- State Methods ---
