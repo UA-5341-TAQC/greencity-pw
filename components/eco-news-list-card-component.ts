@@ -18,19 +18,13 @@ export class EcoNewsListCardComponent extends EcoNewsCardComponent {
 
     this.link = this.root.locator('a.link');
     this.image = this.root.locator('img.eco-news_list-img');
-    this.tags = this.root.locator(
-      '.filter-tag .eco-news_list-tag span:not(.tag-divider)'
-    );
+    this.tags = this.root.locator('.filter-tag .eco-news_list-tag span:not(.tag-divider)');
     this.title = this.root.locator('.eco-news_list-content-title h3');
-    this.description = this.root.locator(
-      '.eco-news_list-content-text'
-    );
+    this.description = this.root.locator('.eco-news_list-content-text');
     this.favouriteButton = this.root.locator('.favourite-button');
 
     this.moreButton = this.root.locator('.button-news-card button');
-    this.creationDate = this.root.locator(
-      '.eco-news_data-text-date .text'
-    );
+    this.creationDate = this.root.locator('.eco-news_data-text-date .text');
     this.author = this.root.locator('.eco-news_person');
   }
 
