@@ -5,6 +5,8 @@ import {
   FriendsPage,
   EcoNewsPage,
   EcoNewsDetailsPage,
+  CreateNewsPage,
+  CreateNewsPreviewPage,
   PlacesPage,
 } from '@/pages';
 import { AddPlaceModal, SignInModal } from '@/modals';
@@ -20,6 +22,8 @@ type PageFixtures = {
   addPlaceModal: AddPlaceModal;
   ecoNewsPage: EcoNewsPage;
   ecoNewsDetailsPage: EcoNewsDetailsPage;
+  createNewsPage: CreateNewsPage;
+  createNewsPreviewPage: CreateNewsPreviewPage;
 };
 
 export const test = baseTest.extend<PageFixtures>({
@@ -54,6 +58,14 @@ export const test = baseTest.extend<PageFixtures>({
 
   ecoNewsDetailsPage: async ({ page }, use): Promise<void> => {
     await use(new EcoNewsDetailsPage(page));
+  },
+
+  createNewsPage: async ({ page }, use): Promise<void> => {
+    await use(new CreateNewsPage(page));
+  },
+
+  createNewsPreviewPage: async ({ page }, use): Promise<void> => {
+    await use(new CreateNewsPreviewPage(page));
   },
 });
 
