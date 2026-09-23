@@ -29,7 +29,9 @@ export class CreateEventPage extends BasePage {
     this.socialTag = page.getByRole('option', { name: 'Social' });
     this.environmentalTag = page.getByRole('option', { name: 'Environmental' });
     this.eventTypeSelect = page.locator('.event-type-wrapper mat-select[formcontrolname="open"]');
-    this.inviteSelect = page.locator('.event-type-wrapper mat-form-field:has(mat-label)').locator('mat-select');
+    this.inviteSelect = page
+      .locator('.event-type-wrapper mat-form-field:has(mat-label)')
+      .locator('mat-select');
     this.description = page.locator('.ql-editor');
     this.dayInput = page.locator('input[formcontrolname="day"]');
     this.startTimeInput = page.locator('input[formcontrolname="startTime"]');
