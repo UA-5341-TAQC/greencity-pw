@@ -2,7 +2,10 @@ import { test, expect } from '@/fixtures';
 import { allureId, epic, feature, story, owner } from 'allure-js-commons';
 
 test.describe('Eco News Details Page', () => {
-  test('TC-44: Verify Eco News details page content displays correctly', async ({ ecoNewsPage, ecoNewsDetailsPage }) => {
+  test('TC-44: Verify Eco News details page content displays correctly', async ({
+    ecoNewsPage,
+    ecoNewsDetailsPage,
+  }) => {
     allureId('TC-44');
     epic('Eco News');
     feature('Eco News details');
@@ -11,7 +14,7 @@ test.describe('Eco News Details Page', () => {
 
     await ecoNewsPage.navigateToEcoNewsPage();
     await ecoNewsPage.waitForEcoNewsPage();
-    
+
     const newsCardsCount = await ecoNewsPage.getNewsCardsCount();
     expect(newsCardsCount).toBeGreaterThan(0);
 

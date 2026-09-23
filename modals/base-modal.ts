@@ -31,24 +31,34 @@ export abstract class BaseModal extends BaseComponent {
 
   /** Reads the modal title text. */
   async getTitle(): Promise<string> {
-    return await test.step('Modal: read title', async () => (await this.title.innerText()).trim(), { box: true });
+    return await test.step('Modal: read title', async () => (await this.title.innerText()).trim(), {
+      box: true,
+    });
   }
 
   /** Reads the modal subtitle text, or empty string when absent. */
   async getSubtitle(): Promise<string> {
-    return await test.step('Modal: read subtitle', async () => {
-      if ((await this.subtitle.count()) === 0) {
-        return '';
-      }
-      return (await this.subtitle.innerText()).trim();
-    }, { box: true });
+    return await test.step(
+      'Modal: read subtitle',
+      async () => {
+        if ((await this.subtitle.count()) === 0) {
+          return '';
+        }
+        return (await this.subtitle.innerText()).trim();
+      },
+      { box: true }
+    );
   }
 
   /** Closes the modal via the close control. */
   async close(): Promise<void> {
-    await test.step('Modal: close', async () => {
-      await this.closeButton.click();
-    }, { box: true });
+    await test.step(
+      'Modal: close',
+      async () => {
+        await this.closeButton.click();
+      },
+      { box: true }
+    );
   }
 
   async waitForVisible(timeout: number = env.SHORT_TIMEOUT): Promise<void> {
