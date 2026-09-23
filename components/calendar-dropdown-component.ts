@@ -1,7 +1,7 @@
 import type { Page, Locator } from '@playwright/test';
 import { BaseComponent } from '@/components/base-component';
 
-export abstract class CalendarComponent extends BaseComponent {
+export abstract class CalendarDropdownComponent extends BaseComponent {
   protected readonly calendarRoot: Locator;
   protected readonly periodButton: Locator;
   protected readonly previousMonthButton: Locator;
