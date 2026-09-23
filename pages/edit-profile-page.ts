@@ -27,6 +27,9 @@ export class EditProfilePage extends BasePage {
   readonly emailPeriodicitySelects: Locator;
   readonly cancelButton: Locator;
   readonly saveButton: Locator;
+  readonly personalPhoto: Locator;
+  readonly avatarImage: Locator;
+  readonly editPhotoButton: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -35,6 +38,10 @@ export class EditProfilePage extends BasePage {
     this.root = page.locator('app-edit-profile .edit_prof-container').first();
     this.title = this.root.locator('h2').first();
     this.form = this.root.locator('form').first();
+
+    this.personalPhoto = this.root.locator('app-personal-photo').first();
+    this.avatarImage = this.personalPhoto.locator('app-user-profile-image').first();
+    this.editPhotoButton = this.personalPhoto.locator('.details-img button').first();
 
     this.nameInput = this.form.locator('#name').first();
     this.cityInput = this.form.locator('app-input-google-autocomplete input').first();
@@ -159,5 +166,15 @@ export class EditProfilePage extends BasePage {
 
   async getEmailPreferenceCheckboxCount(): Promise<number> {
     return this.emailPreferenceCheckboxes.count();
+  }
+
+  async clickEditPhoto(): Promise<void> {
+    await test.step('Edit profile: click edit photo button', async () => {
+      await this.editPhotoButton.click();
+    });
+  }
+
+  async isEditPhotoButtonVisible(): Promise<boolean> {
+    return this.editPhotoButton.isVisible();
   }
 }
