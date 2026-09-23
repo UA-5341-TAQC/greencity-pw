@@ -55,7 +55,12 @@ export class EcoNewsDetailsPage extends BasePage {
 
   async isCoverImageVisible(): Promise<boolean> {
     return await test.step('Check if cover image is visible', async () => {
-      return this.coverImage.isVisible();
+      try {
+        await this.coverImage.waitFor({ state: 'visible', timeout: 5000 });
+        return true;
+      } catch {
+        return false;
+      }
     });
   }
 
