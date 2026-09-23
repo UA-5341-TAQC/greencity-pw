@@ -67,14 +67,18 @@ export class HeaderComponent extends BaseComponent {
    * @returns true if the user menu is visible, false otherwise.
    */
   async isLoggedIn(): Promise<boolean> {
-    return await test.step('Check if user is logged in', async () => {
-      try {
-        await this.userMenuDropdown.waitFor({ state: 'visible', timeout: env.SHORT_TIMEOUT });
-        return true;
-      } catch {
-        return false;
-      }
-    });
+    return await test.step(
+      'Check if user is logged in',
+      async () => {
+        try {
+          await this.userMenuDropdown.waitFor({ state: 'visible', timeout: env.SHORT_TIMEOUT });
+          return true;
+        } catch {
+          return false;
+        }
+      },
+      { box: true }
+    );
   }
 
   /**
@@ -82,31 +86,43 @@ export class HeaderComponent extends BaseComponent {
    * @returns 'En' if the current language is English, 'Uk' if it's Ukrainian.
    */
   async getCurrentLanguage(): Promise<Language> {
-    return await test.step('Get current language from header', async () => {
-      const text = await this.languageSwitcher.innerText();
-      return text.trim() as Language;
-    });
+    return await test.step(
+      'Get current language from header',
+      async () => {
+        const text = await this.languageSwitcher.innerText();
+        return text.trim() as Language;
+      },
+      { box: true }
+    );
   }
 
   // --- Utilities Methods ---
 
   async switchLanguage(language: Language): Promise<void> {
-    await test.step(`Switch language to ${language}`, async () => {
-      if ((await this.getCurrentLanguage()) !== language) {
-        await this.languageSwitcher.click();
-        if (language === Language.En) {
-          await this.langEnglishOption.click();
-        } else {
-          await this.langUkrainianOption.click();
+    await test.step(
+      `Switch language to ${language}`,
+      async () => {
+        if ((await this.getCurrentLanguage()) !== language) {
+          await this.languageSwitcher.click();
+          if (language === Language.En) {
+            await this.langEnglishOption.click();
+          } else {
+            await this.langUkrainianOption.click();
+          }
         }
-      }
-    });
+      },
+      { box: true }
+    );
   }
 
   async openSearch(): Promise<void> {
-    await test.step('Open search', async () => {
-      await this.searchIcon.click();
-    });
+    await test.step(
+      'Open search',
+      async () => {
+        await this.searchIcon.click();
+      },
+      { box: true }
+    );
   }
 
   // --- Auth & Profile Methods ---
@@ -115,36 +131,56 @@ export class HeaderComponent extends BaseComponent {
    * Clicks the "Sign in" button in the header.
    */
   async clickSignIn(): Promise<void> {
-    await test.step('Click Sign In button', async () => {
-      await this.signInButton.click();
-    });
+    await test.step(
+      'Click Sign In button',
+      async () => {
+        await this.signInButton.click();
+      },
+      { box: true }
+    );
   }
 
   async clickSignUp(): Promise<void> {
-    await test.step('Click Sign Up button', async () => {
-      await this.signUpButton.click();
-    });
+    await test.step(
+      'Click Sign Up button',
+      async () => {
+        await this.signUpButton.click();
+      },
+      { box: true }
+    );
   }
 
   async openUserMenu(): Promise<void> {
-    await test.step('Open User Menu dropdown', async () => {
-      await this.userMenuDropdown.click();
-    });
+    await test.step(
+      'Open User Menu dropdown',
+      async () => {
+        await this.userMenuDropdown.click();
+      },
+      { box: true }
+    );
   }
 
   async clickSignOut(): Promise<void> {
-    await test.step('Click Sign Out', async () => {
-      await this.openUserMenu();
-      await this.signOutButton.click();
-    });
+    await test.step(
+      'Click Sign Out',
+      async () => {
+        await this.openUserMenu();
+        await this.signOutButton.click();
+      },
+      { box: true }
+    );
   }
 
   // --- Navigation Methods ---
 
   async clickLogo(): Promise<void> {
-    await test.step('Click on Logo', async () => {
-      await this.logo.click();
-    });
+    await test.step(
+      'Click on Logo',
+      async () => {
+        await this.logo.click();
+      },
+      { box: true }
+    );
   }
 
   /**
@@ -153,8 +189,12 @@ export class HeaderComponent extends BaseComponent {
    * @param item - The menu item to navigate to (e.g., "Eco news", "Events").
    */
   async navigateTo(item: MenuItem): Promise<void> {
-    await test.step(`Navigate to ${item} via Header`, async () => {
-      await this.navLinks[item].click();
-    });
+    await test.step(
+      `Navigate to ${item} via Header`,
+      async () => {
+        await this.navLinks[item].click();
+      },
+      { box: true }
+    );
   }
 }

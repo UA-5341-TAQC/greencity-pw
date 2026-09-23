@@ -1,4 +1,4 @@
-import type { Locator, Page } from '@playwright/test';
+import { test, type Locator, type Page } from '@playwright/test';
 import { HabitFormPage } from '@/pages/habit/habit-form-page';
 import { Language } from '@/types/header.types';
 
@@ -19,20 +19,44 @@ export class EditHabitPage extends HabitFormPage {
   }
 
   async navigateToEditHabit(profileId: number, habitId: number): Promise<void> {
-    await this.navigateTo(
-      `/#/greenCity/profile/${profileId}/allhabits/addhabit/${habitId}/edit-habit`
+    await test.step(
+      'Navigate To Edit Habit',
+      async () => {
+        await this.navigateTo(
+          `/#/greenCity/profile/${profileId}/allhabits/addhabit/${habitId}/edit-habit`
+        );
+      },
+      { box: true }
     );
   }
 
   async isSaveChangesEnabled(): Promise<boolean> {
-    return this.saveChangesButton.isEnabled();
+    return await test.step(
+      'Is Save Changes Enabled',
+      async () => {
+        return this.saveChangesButton.isEnabled();
+      },
+      { box: true }
+    );
   }
 
   async saveChanges(): Promise<void> {
-    await this.saveChangesButton.click();
+    await test.step(
+      'Save Changes',
+      async () => {
+        await this.saveChangesButton.click();
+      },
+      { box: true }
+    );
   }
 
   async deleteHabit(): Promise<void> {
-    await this.deleteHabitButton.click();
+    await test.step(
+      'Delete Habit',
+      async () => {
+        await this.deleteHabitButton.click();
+      },
+      { box: true }
+    );
   }
 }

@@ -1,4 +1,4 @@
-import type { Locator, Page } from '@playwright/test';
+import { test, type Locator, type Page } from '@playwright/test';
 import { BaseComponent } from './base-component';
 import { HabitTodoItemComponent } from './habit-todo-item-component';
 import { HABIT_FORM_I18N } from '@/types/habit-form.i18n';
@@ -29,7 +29,13 @@ export class HabitTodoListComponent extends BaseComponent {
   }
 
   async openEditor(): Promise<void> {
-    await this.editTodoListLink.click();
+    await test.step(
+      'Open Editor',
+      async () => {
+        await this.editTodoListLink.click();
+      },
+      { box: true }
+    );
   }
 
   getTodoItemByIndex(index: number): HabitTodoItemComponent {
@@ -41,19 +47,43 @@ export class HabitTodoListComponent extends BaseComponent {
   }
 
   async addTodoItem(text: string): Promise<void> {
-    await this.todoItemInput.fill(text);
-    await this.todoAddItemButton.click();
+    await test.step(
+      'Add Todo Item',
+      async () => {
+        await this.todoItemInput.fill(text);
+        await this.todoAddItemButton.click();
+      },
+      { box: true }
+    );
   }
 
   async save(): Promise<void> {
-    await this.todoSaveButton.click();
+    await test.step(
+      'Save',
+      async () => {
+        await this.todoSaveButton.click();
+      },
+      { box: true }
+    );
   }
 
   async cancelEditing(): Promise<void> {
-    await this.todoCancelButton.click();
+    await test.step(
+      'Cancel Editing',
+      async () => {
+        await this.todoCancelButton.click();
+      },
+      { box: true }
+    );
   }
 
   async getItemsCount(): Promise<number> {
-    return this.todoItems.count();
+    return await test.step(
+      'Get Items Count',
+      async () => {
+        return this.todoItems.count();
+      },
+      { box: true }
+    );
   }
 }
