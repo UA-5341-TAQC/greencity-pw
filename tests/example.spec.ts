@@ -16,10 +16,10 @@ test('clicks the start forming button', async ({ homePage, signInModal }) => {
 
   await signInModal.waitForVisible();
 
-  await expect(signInModal.isSignInButtonEnabled()).resolves.toBe(false);
+  await expect(signInModal.isSignUpButtonEnabled()).resolves.toBe(false);
 
   await signInModal.fillEmail('user@example.com');
   await signInModal.fillPassword('password123');
 
-  await expect(signInModal.isSignInButtonEnabled()).resolves.toBe(true);
+  await expect(signInModal.isSignUpButtonEnabled()).resolves.toBe(true);
 });
