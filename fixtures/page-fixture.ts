@@ -31,7 +31,7 @@ export const test = baseTest.extend<PageFixtures>({
   signInModal: async ({ page }, use): Promise<void> => {
     await use(new SignInModal(page));
   },
-  
+
   signUpModal: async ({ page }, use): Promise<void> => {
     await use(new SignUpModal(page));
   },
@@ -43,7 +43,7 @@ export const test = baseTest.extend<PageFixtures>({
   editProfilePage: async ({ page }, use): Promise<void> => {
     await use(new EditProfilePage(page));
   },
-  
+
   friendsPage: async ({ page }, use): Promise<void> => {
     await use(new FriendsPage(page));
   },
