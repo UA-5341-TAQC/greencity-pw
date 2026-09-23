@@ -1,4 +1,4 @@
-import type { Page, Locator } from '@playwright/test';
+import { test, type Page, type Locator } from '@playwright/test';
 import BasePage from '@/pages/base-page';
 
 export class EcoNewsPage extends BasePage {
@@ -10,16 +10,22 @@ export class EcoNewsPage extends BasePage {
   }
 
   async navigateToEcoNewsPage(): Promise<void> {
-    await this.navigateTo('/#/greenCity/news');
+    await test.step('Navigate to Eco News Page', async () => {
+      await this.navigateTo('/#/greenCity/news');
+    });
   }
 
   async waitForEcoNewsPage(): Promise<void> {
-    await this.waitForPageLoad();
-    await this.newsCards.first().waitFor({ state: 'visible' });
+    await test.step('Wait for Eco News Page to load', async () => {
+      await this.waitForPageLoad();
+      await this.newsCards.first().waitFor({ state: 'visible' });
+    });
   }
 
   async getNewsCardsCount(): Promise<number> {
-    return this.newsCards.count();
+    return await test.step('Get news cards count', async () => {
+      return this.newsCards.count();
+    });
   }
 
   getNewsCardLocator(index: number): Locator {
