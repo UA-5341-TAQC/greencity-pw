@@ -63,9 +63,15 @@ export class EditEventPage extends BasePage {
     this.onlineLinkInput = page.locator('input[formcontrolname="onlineLink"]');
     this.applyToAllDaysCheckbox = page.locator('mat-checkbox.apply-location-checkbox');
 
-    this.previewButton = page.locator('.submit-container button.secondary-global-button', { hasText: 'Preview' });
-    this.saveEventButton = page.locator('.submit-container button.primary-global-button', { hasText: 'Save event' });
-    this.cancelButton = page.locator('.submit-container button.tertiary-global-button', { hasText: 'Cancel' });
+    this.previewButton = page.locator('.submit-container button.secondary-global-button', {
+      hasText: 'Preview',
+    });
+    this.saveEventButton = page.locator('.submit-container button.primary-global-button', {
+      hasText: 'Save event',
+    });
+    this.cancelButton = page.locator('.submit-container button.tertiary-global-button', {
+      hasText: 'Cancel',
+    });
   }
 
   async enterTitle(title: string) {
