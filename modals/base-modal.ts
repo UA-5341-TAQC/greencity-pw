@@ -1,5 +1,5 @@
 import { test, type Locator, type Page } from '@playwright/test';
-import { BaseComponent } from '@/components';
+import { BaseComponent } from '@/components/base-component';
 import env from '@/config/env';
 
 /**
@@ -31,7 +31,7 @@ export abstract class BaseModal extends BaseComponent {
 
   /** Reads the modal title text. */
   async getTitle(): Promise<string> {
-    return await test.step('Modal: read title', async () => (await this.title.innerText()).trim());
+    return await test.step('Modal: read title', async () => (await this.title.innerText()).trim(), { box: true });
   }
 
   /** Reads the modal subtitle text, or empty string when absent. */
@@ -41,14 +41,14 @@ export abstract class BaseModal extends BaseComponent {
         return '';
       }
       return (await this.subtitle.innerText()).trim();
-    });
+    }, { box: true });
   }
 
   /** Closes the modal via the close control. */
   async close(): Promise<void> {
     await test.step('Modal: close', async () => {
       await this.closeButton.click();
-    });
+    }, { box: true });
   }
 
   async waitForVisible(timeout: number = env.SHORT_TIMEOUT): Promise<void> {
