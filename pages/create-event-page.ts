@@ -16,6 +16,8 @@ export class CreateEventPage extends BasePage {
   private readonly allDayCheckbox: Locator;
   private readonly placeCheckbox: Locator;
   private readonly onlineCheckbox: Locator;
+  private readonly placeInput: Locator;
+  private readonly onlineLinkInput: Locator;
   private readonly previewButton: Locator;
   private readonly publishButton: Locator;
   private readonly cancelButton: Locator;
@@ -39,6 +41,8 @@ export class CreateEventPage extends BasePage {
     this.allDayCheckbox = page.locator('mat-checkbox[formcontrolname="allDay"]');
     this.placeCheckbox = page.locator('mat-checkbox', { hasText: 'Place' });
     this.onlineCheckbox = page.locator('mat-checkbox', { hasText: 'Online' });
+    this.placeInput = page.locator('input[formcontrolname="place"]');
+    this.onlineLinkInput = page.locator('input[formcontrolname="onlineLink"]');
     const submitContainer = page.locator('.submit-container');
     this.previewButton = submitContainer.getByRole('button', { name: 'Preview' });
     this.publishButton = submitContainer.getByRole('button', { name: 'Publish' });
@@ -134,6 +138,14 @@ export class CreateEventPage extends BasePage {
 
   async toggleOnline(check: boolean = true): Promise<void> {
     await this.onlineCheckbox.setChecked(check);
+  }
+
+  async fillPlace(location: string): Promise<void> {
+    await this.placeInput.fill(location);
+  }
+
+  async fillOnlineLink(link: string): Promise<void> {
+    await this.onlineLinkInput.fill(link);
   }
 
   async clickPreview(): Promise<void> {
