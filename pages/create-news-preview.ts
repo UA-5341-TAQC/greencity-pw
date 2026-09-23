@@ -1,4 +1,4 @@
-import type { Page, Locator } from '@playwright/test';
+import { test, type Page, type Locator } from '@playwright/test';
 import BasePage from '@/pages/base-page';
 
 /**
@@ -57,107 +57,148 @@ export class CreateNewsPreviewPage extends BasePage {
     this.newsLinkLinkedin = page.locator("img[alt='linkedin']");
     this.newsLinkFacebook = page.locator("img[alt='facebook']");
 
-    this.backButton = page.locator('div.button-content');
-    this.publishButton = page.locator('button.primary-global-button');
+    this.backButton = page.locator('a.button-link, a[href*="create-news"]').first();
+    this.publishButton = page.getByRole('button', { name: 'Publish' });
   }
 
   /** Waits until the Create News Preview page is loaded. */
   async waitForPreviewPage(): Promise<void> {
-    await this.waitForPageLoad();
+    await test.step('CreateNewsPreview: wait for preview page to load', async () => {
+      await this.waitForPageLoad();
+      await this.newsTitle.waitFor({ state: 'visible' });
+    });
   }
 
   /** Returns the preview page title. */
   async getPageTitle(): Promise<string> {
-    return (await this.pageTitle.textContent()) ?? '';
+    return await test.step('CreateNewsPreview: get page title', async () => {
+      return (await this.pageTitle.textContent()) ?? '';
+    });
   }
 
   /** Checks whether the tags section is visible. */
   async isTagsBoxVisible(): Promise<boolean> {
-    return await this.tagsBox.isVisible();
+    return await test.step('CreateNewsPreview: check if tags box is visible', async () => {
+      return await this.tagsBox.isVisible();
+    });
   }
 
   /** Checks whether the News tag is visible. */
   async isNewsTagVisible(): Promise<boolean> {
-    return await this.newsTag.isVisible();
+    return await test.step('CreateNewsPreview: check if News tag is visible', async () => {
+      return await this.newsTag.isVisible();
+    });
   }
 
   /** Checks whether the Event tag is visible. */
   async isEventTagVisible(): Promise<boolean> {
-    return await this.eventTag.isVisible();
+    return await test.step('CreateNewsPreview: check if Event tag is visible', async () => {
+      return await this.eventTag.isVisible();
+    });
   }
 
   /** Checks whether the Education tag is visible. */
   async isEducationTagVisible(): Promise<boolean> {
-    return await this.educationTag.isVisible();
+    return await test.step('CreateNewsPreview: check if Education tag is visible', async () => {
+      return await this.educationTag.isVisible();
+    });
   }
 
   /** Checks whether the Initiatives tag is visible. */
   async isInitiativesTagVisible(): Promise<boolean> {
-    return await this.initiativesTag.isVisible();
+    return await test.step('CreateNewsPreview: check if Initiatives tag is visible', async () => {
+      return await this.initiativesTag.isVisible();
+    });
   }
 
   /** Checks whether the Ads tag is visible. */
   async isAdsTagVisible(): Promise<boolean> {
-    return await this.adsTag.isVisible();
+    return await test.step('CreateNewsPreview: check if Ads tag is visible', async () => {
+      return await this.adsTag.isVisible();
+    });
   }
 
   /** Returns the news title. */
   async getNewsTitle(): Promise<string> {
-    return (await this.newsTitle.textContent()) ?? '';
+    return await test.step('CreateNewsPreview: get news title', async () => {
+      return (await this.newsTitle.textContent())?.trim() ?? '';
+    });
   }
 
   /** Returns the news date. */
   async getDate(): Promise<string> {
-    return (await this.date.textContent()) ?? '';
+    return await test.step('CreateNewsPreview: get date', async () => {
+      return (await this.date.textContent())?.trim() ?? '';
+    });
   }
 
   /** Returns the news author. */
   async getAuthor(): Promise<string> {
-    return (await this.author.textContent()) ?? '';
+    return await test.step('CreateNewsPreview: get author', async () => {
+      return (await this.author.textContent())?.trim() ?? '';
+    });
   }
 
   /** Checks whether the news picture is visible. */
   async isNewsPictureVisible(): Promise<boolean> {
-    return await this.newsPicture.isVisible();
+    return await test.step('CreateNewsPreview: check if picture is visible', async () => {
+      return await this.newsPicture.isVisible();
+    });
   }
 
   /** Returns the news content. */
   async getNewsContent(): Promise<string> {
-    return (await this.newsContent.textContent()) ?? '';
+    return await test.step('CreateNewsPreview: get news content', async () => {
+      return (await this.newsContent.textContent())?.trim() ?? '';
+    });
   }
 
   /** Returns the news source link text. */
   async getNewsSourceLink(): Promise<string> {
-    return (await this.newsSourceLink.textContent()) ?? '';
+    return await test.step('CreateNewsPreview: get news source link', async () => {
+      return (await this.newsSourceLink.textContent())?.trim() ?? '';
+    });
   }
 
   /** Checks whether social media links are visible. */
   async areNewsLinkImagesVisible(): Promise<boolean> {
-    return await this.newsLinkImages.isVisible();
+    return await test.step('CreateNewsPreview: check if social links are visible', async () => {
+      return await this.newsLinkImages.isVisible();
+    });
   }
 
   /** Checks whether the Twitter link is visible. */
   async isTwitterLinkVisible(): Promise<boolean> {
-    return await this.newsLinkTwitter.isVisible();
+    return await test.step('CreateNewsPreview: check if Twitter link is visible', async () => {
+      return await this.newsLinkTwitter.isVisible();
+    });
   }
 
   /** Checks whether the LinkedIn link is visible. */
   async isLinkedinLinkVisible(): Promise<boolean> {
-    return await this.newsLinkLinkedin.isVisible();
+    return await test.step('CreateNewsPreview: check if LinkedIn link is visible', async () => {
+      return await this.newsLinkLinkedin.isVisible();
+    });
   }
 
   /** Checks whether the Facebook link is visible. */
   async isFacebookLinkVisible(): Promise<boolean> {
-    return await this.newsLinkFacebook.isVisible();
+    return await test.step('CreateNewsPreview: check if Facebook link is visible', async () => {
+      return await this.newsLinkFacebook.isVisible();
+    });
   }
 
   /** Navigates back from the preview page. */
   async goBack(): Promise<void> {
-    await this.backButton.click();
+    await test.step('CreateNewsPreview: go back to editing', async () => {
+      await this.backButton.click();
+    });
   }
 
   /** Publishes the news article. */
   async publish(): Promise<void> {
-    await this.publishButton.click();
+    await test.step('CreateNewsPreview: publish news', async () => {
+      await this.publishButton.click();
+    });
   }
 }
