@@ -1,11 +1,9 @@
 import { test, expect } from '@/fixtures';
-import env from '@/config/env';
 import { TEST_IMAGE_PATH } from '@/assets';
 
 test.describe('TC-24 Create News', () => {
   test('Verify successful creation and publication of news with all required and optional fields filled', async ({
-    homePage,
-    signInModal,
+    authenticatedPage,
     ecoNewsPage,
     createNewsPage,
     createNewsPreviewPage,
@@ -18,13 +16,10 @@ test.describe('TC-24 Create News', () => {
       'Today we launched a new environmental initiative aimed at reducing plastic waste in our community. Let us work together for a cleaner and greener environment.';
 
     // Preconditions:
-    // 1. User is registered and logged into the GreenCity platform
-    await homePage.navigateToHomePage();
-    await homePage.waitForHomePage();
-    await homePage.header.clickSignIn();
-    await signInModal.waitForVisible();
-    await signInModal.signIn(env.USER_EMAIL, env.USER_PASSWORD);
-    await expect(homePage.header.userMenuDropdown).toBeVisible({ timeout: env.MEDIUM_TIMEOUT });
+    // 1. User is registered and logged into the GreenCity platform (authenticated via API & LocalStorageManager)
+    await authenticatedPage.waitForLoadState('domcontentloaded');
+    await expect(ecoNewsPage.header.userMenuDropdown).toBeVisible();
+    await expect(authenticatedPage).toHaveURL(/.*greenCity.*/);
 
     // 2. User has navigated to the "Eco News" section
     await ecoNewsPage.navigateToEcoNewsPage();
