@@ -1,10 +1,9 @@
-import type { Locator, Page } from '@playwright/test';
+import { test, type Locator, type Page } from '@playwright/test';
 import BasePage from '@/pages/base-page';
 import { Language } from '@/types/header.types';
 import { HabitDifficulty } from '@/types/habit.types';
 import { HABIT_FORM_I18N } from '@/types/habit-form.i18n';
 import { HabitTodoListComponent } from '@/components/habit-todo-list-component';
-import env from '@/config/env';
 
 export { HabitDifficulty };
 
@@ -122,93 +121,213 @@ export abstract class HabitFormPage extends BasePage {
   }
 
   async waitForHabitForm(): Promise<void> {
-    await this.form.waitFor({ state: 'visible', timeout: env.LONG_TIMEOUT });
+    await test.step(
+      'Wait For Habit Form',
+      async () => {
+        await this.form.waitFor({ state: 'visible' });
+      },
+      { box: true }
+    );
   }
 
   async fillHabitTitle(title: string): Promise<void> {
-    await this.habitTitleInput.fill(title);
+    await test.step(
+      'Fill Habit Title',
+      async () => {
+        await this.habitTitleInput.fill(title);
+      },
+      { box: true }
+    );
   }
 
   async getHabitTitle(): Promise<string> {
-    return this.habitTitleInput.inputValue();
+    return await test.step(
+      'Get Habit Title',
+      async () => {
+        return this.habitTitleInput.inputValue();
+      },
+      { box: true }
+    );
   }
 
   async getTitleCounterText(): Promise<string> {
-    return ((await this.habitTitleCounter.textContent()) ?? '').trim();
+    return await test.step(
+      'Get Title Counter Text',
+      async () => {
+        return ((await this.habitTitleCounter.textContent()) ?? '').trim();
+      },
+      { box: true }
+    );
   }
 
   async selectDifficulty(difficulty: HabitDifficulty): Promise<void> {
-    await this.difficultyButtons.nth(difficulty - 1).click();
+    await test.step(
+      'Select Difficulty',
+      async () => {
+        await this.difficultyButtons.nth(difficulty - 1).click();
+      },
+      { box: true }
+    );
   }
 
   async selectTag(tagName: string): Promise<void> {
-    await this.tagsSelect.getByRole('button', { name: tagName, exact: true }).click();
+    await test.step(
+      'Select Tag',
+      async () => {
+        await this.tagsSelect.getByRole('button', { name: tagName, exact: true }).click();
+      },
+      { box: true }
+    );
   }
 
   async fillHabitDescription(description: string): Promise<void> {
-    await this.habitDescriptionEditor.fill(description);
+    await test.step(
+      'Fill Habit Description',
+      async () => {
+        await this.habitDescriptionEditor.fill(description);
+      },
+      { box: true }
+    );
   }
 
   async getHabitDescription(): Promise<string> {
-    return ((await this.habitDescriptionEditor.textContent()) ?? '').trim();
+    return await test.step(
+      'Get Habit Description',
+      async () => {
+        return ((await this.habitDescriptionEditor.textContent()) ?? '').trim();
+      },
+      { box: true }
+    );
   }
 
   async getHabitDescriptionValidationError(): Promise<string> {
-    return ((await this.habitDescriptionValidationError.textContent()) ?? '').trim();
+    return await test.step(
+      'Get Habit Description Validation Error',
+      async () => {
+        return ((await this.habitDescriptionValidationError.textContent()) ?? '').trim();
+      },
+      { box: true }
+    );
   }
 
   async uploadImage(filePath: string): Promise<void> {
-    await this.imageUploadFileInput.setInputFiles(filePath);
+    await test.step(
+      'Upload Image',
+      async () => {
+        await this.imageUploadFileInput.setInputFiles(filePath);
+      },
+      { box: true }
+    );
   }
 
   async dragSuggestedImageToDropzone(index: number): Promise<void> {
-    await this.suggestedImages.nth(index).dragTo(this.imageDropzone);
+    await test.step(
+      'Drag Suggested Image To Dropzone',
+      async () => {
+        await this.suggestedImages.nth(index).dragTo(this.imageDropzone);
+      },
+      { box: true }
+    );
   }
 
   async submitImage(): Promise<void> {
-    await this.imageSubmitButton.click();
+    await test.step(
+      'Submit Image',
+      async () => {
+        await this.imageSubmitButton.click();
+      },
+      { box: true }
+    );
   }
 
   async cancelImageCrop(): Promise<void> {
-    await this.imageCancelButton.click();
+    await test.step(
+      'Cancel Image Crop',
+      async () => {
+        await this.imageCancelButton.click();
+      },
+      { box: true }
+    );
   }
 
   async setDuration(days: number): Promise<void> {
-    const min = Number(await this.durationSlider.getAttribute('min'));
-    const max = Number(await this.durationSlider.getAttribute('max'));
+    await test.step(
+      'Set Duration',
+      async () => {
+        const min = Number(await this.durationSlider.getAttribute('min'));
+        const max = Number(await this.durationSlider.getAttribute('max'));
 
-    if (!Number.isInteger(days) || days < min || days > max) {
-      throw new RangeError(`Duration must be an integer between ${min} and ${max}.`);
-    }
+        if (!Number.isInteger(days) || days < min || days > max) {
+          throw new RangeError(`Duration must be an integer between ${min} and ${max}.`);
+        }
 
-    await this.durationSlider.press('Home');
+        await this.durationSlider.press('Home');
 
-    for (let day = min; day < days; day += 1) {
-      await this.durationSlider.press('ArrowRight');
-    }
+        for (let day = min; day < days; day += 1) {
+          await this.durationSlider.press('ArrowRight');
+        }
+      },
+      { box: true }
+    );
   }
 
   async getDisplayedMonth(): Promise<string> {
-    return (await this.monthAndYearButton.innerText()).trim();
+    return await test.step(
+      'Get Displayed Month',
+      async () => {
+        return (await this.monthAndYearButton.innerText()).trim();
+      },
+      { box: true }
+    );
   }
 
   async goToPreviousMonth(): Promise<void> {
-    await this.previousMonthButton.click();
+    await test.step(
+      'Go To Previous Month',
+      async () => {
+        await this.previousMonthButton.click();
+      },
+      { box: true }
+    );
   }
 
   async goToNextMonth(): Promise<void> {
-    await this.nextMonthButton.click();
+    await test.step(
+      'Go To Next Month',
+      async () => {
+        await this.nextMonthButton.click();
+      },
+      { box: true }
+    );
   }
 
   async selectCalendarDay(day: number): Promise<void> {
-    await this.calendarDays.getByText(String(day), { exact: true }).click();
+    await test.step(
+      'Select Calendar Day',
+      async () => {
+        await this.calendarDays.getByText(String(day), { exact: true }).click();
+      },
+      { box: true }
+    );
   }
 
   async clickInviteFriends(): Promise<void> {
-    await this.inviteFriendsButton.click();
+    await test.step(
+      'Click Invite Friends',
+      async () => {
+        await this.inviteFriendsButton.click();
+      },
+      { box: true }
+    );
   }
 
   async cancel(): Promise<void> {
-    await this.cancelButton.click();
+    await test.step(
+      'Cancel',
+      async () => {
+        await this.cancelButton.click();
+      },
+      { box: true }
+    );
   }
 }

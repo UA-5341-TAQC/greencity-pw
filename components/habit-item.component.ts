@@ -60,6 +60,12 @@ export class HabitItemComponent extends BaseComponent {
   }
 
   async isMarkDoneEnabled(): Promise<boolean> {
-    return this.markDoneButton.isEnabled();
+    return await test.step(
+      'Is Mark Done Enabled',
+      async () => {
+        return this.markDoneButton.isEnabled();
+      },
+      { box: true }
+    );
   }
 }

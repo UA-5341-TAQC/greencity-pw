@@ -1,4 +1,4 @@
-import type { Locator, Page } from '@playwright/test';
+import { test, type Locator, type Page } from '@playwright/test';
 import { BaseComponent } from './base-component';
 
 export class HabitTodoItemComponent extends BaseComponent {
@@ -15,14 +15,32 @@ export class HabitTodoItemComponent extends BaseComponent {
   }
 
   async toggle(): Promise<void> {
-    await this.checkButton.click();
+    await test.step(
+      'Toggle',
+      async () => {
+        await this.checkButton.click();
+      },
+      { box: true }
+    );
   }
 
   async delete(): Promise<void> {
-    await this.deleteButton.click();
+    await test.step(
+      'Delete',
+      async () => {
+        await this.deleteButton.click();
+      },
+      { box: true }
+    );
   }
 
   async getText(): Promise<string> {
-    return ((await this.text.textContent()) ?? '').trim();
+    return await test.step(
+      'Get Text',
+      async () => {
+        return ((await this.text.textContent()) ?? '').trim();
+      },
+      { box: true }
+    );
   }
 }
