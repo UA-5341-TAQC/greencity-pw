@@ -2,6 +2,7 @@ export * from './habit';
 export * from './create-news-preview';
 export * from './eco-news-details.page';
 export * from './eco-news.page';
+export * from './edit-event-page';
 export * from './edit-profile-page';
 export * from './events-page';
 export * from './friends-page';
