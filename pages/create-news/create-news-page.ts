@@ -95,13 +95,13 @@ export class CreateNewsPage extends BasePage {
   }
 
   /**
- * Selects the specified news tag.
- *
- * @param tag - Tag to select.
- */
-async selectTag(tag: NewsType): Promise<void> {
-  await this.tagSelector.selectTag(tag);
-}
+   * Selects the specified news tag.
+   *
+   * @param tag - Tag to select.
+   */
+  async selectTag(tag: NewsType): Promise<void> {
+    await this.tagSelector.selectTag(tag);
+  }
 
   /** Checks whether the picture box is visible. */
   async isPictureBoxVisible(): Promise<boolean> {

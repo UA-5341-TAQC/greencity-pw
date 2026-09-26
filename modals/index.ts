@@ -6,4 +6,4 @@ export * from './reset-password-modal';
 export * from './sign-in-modal';
 export * from './sign-up-modal';
 export * from './update-photo-modal';
-export * from './cancel-warning-modal'
+export * from './cancel-warning-modal';
