@@ -1,5 +1,4 @@
 import { test, expect } from '@/fixtures';
-import env from '@/config/env';
 import { Language, MenuItem } from '@/types/header.types';
 import { loginUser } from '@/helpers/login-user';
 
