@@ -1,5 +1,6 @@
 export * from './habit';
-export * from './create-news-preview';
+export * from './create-news/create-news-preview-page';
+export * from './create-news/create-news-page';
 export * from './eco-news-details.page';
 export * from './eco-news.page';
 export * from './edit-profile-page';
