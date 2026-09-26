@@ -1,8 +1,9 @@
 import type { Page, Locator } from '@playwright/test';
 import BasePage from '@/pages/base-page';
 import { Language } from '@/types/header.types';
-import { NewsType } from '@/types/news.types';
 import { NEWS_I18N } from '@/types/news.i18n';
+import { NewsType } from '@/types';
+import { TagSelectorComponent } from '@/components/tag-selector-component';
 
 /**
  * Create News page.
@@ -12,12 +13,7 @@ export class CreateNewsPage extends BasePage {
   protected readonly titleInput: Locator;
   protected readonly titleInfo: Locator;
 
-  protected readonly tagsBox: Locator;
-  protected readonly newsTag: Locator;
-  protected readonly eventTag: Locator;
-  protected readonly educationTag: Locator;
-  protected readonly initiativesTag: Locator;
-  protected readonly adsTag: Locator;
+  protected readonly tagSelector: TagSelectorComponent;
 
   protected readonly pictureBox: Locator;
   protected readonly pictureInput: Locator;
@@ -38,27 +34,13 @@ export class CreateNewsPage extends BasePage {
 
   constructor(page: Page, language: Language = Language.En) {
     super(page);
-    const newsI18n = NEWS_I18N[language];
+
+    const info = NEWS_I18N[language];
 
     this.titleInput = page.locator('textarea[formcontrolname="title"]');
     this.titleInfo = page.locator('div.title-block span.field-info');
 
-    this.tagsBox = page.locator('div.tags-box');
-    this.newsTag = page.locator(
-      `div.tags-box button.tag-button:has-text('${newsI18n.types[NewsType.News]}')`
-    );
-    this.eventTag = page.locator(
-      `div.tags-box button.tag-button:has-text('${newsI18n.types[NewsType.Event]}')`
-    );
-    this.educationTag = page.locator(
-      `div.tags-box button.tag-button:has-text('${newsI18n.types[NewsType.Education]}')`
-    );
-    this.initiativesTag = page.locator(
-      `div.tags-box button.tag-button:has-text('${newsI18n.types[NewsType.Initiatives]}')`
-    );
-    this.adsTag = page.locator(
-      `div.tags-box button.tag-button:has-text('${newsI18n.types[NewsType.Ads]}')`
-    );
+    this.tagSelector = new TagSelectorComponent(page.locator('div.tags-box'), page, language);
 
     this.pictureBox = page.locator('div.dropzone');
     this.pictureInput = page.locator("div.dropzone input[type='file']");
@@ -70,14 +52,10 @@ export class CreateNewsPage extends BasePage {
     this.contentEditor = page.locator("div.ql-editor[contenteditable='true']");
     this.contentEditorCounter = page.locator('p.quill-counter.warning');
 
-    this.date = page
-      .locator('div.date p')
-      .filter({ hasText: newsI18n.date })
-      .locator('span')
-      .nth(1);
+    this.date = page.locator('div.date p').filter({ hasText: info.date }).locator('span').nth(1);
     this.author = page
       .locator('div.date p')
-      .filter({ hasText: newsI18n.author })
+      .filter({ hasText: info.author })
       .locator('span')
       .nth(1);
 
@@ -111,35 +89,19 @@ export class CreateNewsPage extends BasePage {
     return (await this.titleInfo.textContent()) ?? '';
   }
 
-  /** Checks whether the tags box is visible. */
+  /** Checks whether the tags selector is visible. */
   async isTagsBoxVisible(): Promise<boolean> {
-    return await this.tagsBox.isVisible();
+    return await this.tagSelector.isVisible();
   }
 
-  /** Selects the News tag. */
-  async selectNewsTag(): Promise<void> {
-    await this.newsTag.click();
-  }
-
-  /** Selects the Event tag. */
-  async selectEventTag(): Promise<void> {
-    await this.eventTag.click();
-  }
-
-  /** Selects the Education tag. */
-  async selectEducationTag(): Promise<void> {
-    await this.educationTag.click();
-  }
-
-  /** Selects the Initiatives tag. */
-  async selectInitiativesTag(): Promise<void> {
-    await this.initiativesTag.click();
-  }
-
-  /** Selects the Ads tag. */
-  async selectAdsTag(): Promise<void> {
-    await this.adsTag.click();
-  }
+  /**
+ * Selects the specified news tag.
+ *
+ * @param tag - Tag to select.
+ */
+async selectTag(tag: NewsType): Promise<void> {
+  await this.tagSelector.selectTag(tag);
+}
 
   /** Checks whether the picture box is visible. */
   async isPictureBoxVisible(): Promise<boolean> {
