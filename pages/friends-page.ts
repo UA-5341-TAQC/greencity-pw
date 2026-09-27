@@ -129,14 +129,14 @@ export class FriendsPage extends BasePage {
 
   async getFirstAddableCard(): Promise<FriendItemComponent> {
     return await test.step('Friends: find first card with "Add friend" action', async () => {
-      const count = await this.friendCards.count();
-      for (let i = 0; i < count; i++) {
-        const text = (await this.friendCards.nth(i).getByRole('button').innerText()).trim();
-        if (/add friend|додати/i.test(text)) {
-          return new FriendItemComponent(this.friendCards.nth(i), this.page);
-        }
-      }
-      return new FriendItemComponent(this.friendCards.first(), this.page);
+      const candidate = this.friendCards
+        .filter({ has: this.page.getByRole('button', { name: /add friend|додати/i }) })
+        .first();
+      const userName = (await candidate.locator('.friend-name').innerText()).trim();
+      return new FriendItemComponent(
+        this.friendCards.filter({ hasText: userName }).first(),
+        this.page
+      );
     });
   }
 }
