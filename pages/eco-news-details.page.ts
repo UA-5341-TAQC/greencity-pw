@@ -112,4 +112,8 @@ export class EcoNewsDetailsPage extends BasePage {
       await this.relatedNewsItems.nth(index).click();
     });
   }
+
+  async isTagsVisible(): Promise<boolean> {
+    return this.tags.isVisible();
+  }
 }
