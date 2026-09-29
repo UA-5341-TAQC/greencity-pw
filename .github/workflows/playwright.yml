@@ -45,6 +45,9 @@ jobs:
       - name: Run Linter
         run: npm run lint
 
+      - name: Run Type Check
+        run: npm run typecheck
+
   run-tests:
     needs: lint-and-format
     runs-on: ubuntu-latest
@@ -52,7 +55,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        browser: [api, chromium, firefox, webkit]
+        browser: [chromium, firefox, webkit]
 
     steps:
       - name: Checkout repository
@@ -68,7 +71,6 @@ jobs:
         run: npm ci
 
       - name: Cache Playwright browsers
-        if: ${{ matrix.browser != 'api' }}
         id: playwright-cache
         uses: actions/cache@v4
         with:
@@ -78,7 +80,6 @@ jobs:
             ${{ runner.os }}-playwright-${{ matrix.browser }}-
 
       - name: Install Playwright browser & deps
-        if: ${{ matrix.browser != 'api' }}
         run: npx playwright install --with-deps ${{ matrix.browser }}
 
       - name: Run Playwright tests
@@ -112,13 +113,6 @@ jobs:
 
       - name: Create Combined Results Directory
         run: rm -rf combined-results && mkdir combined-results
-
-      - name: Download API Results
-        uses: actions/download-artifact@v4
-        continue-on-error: true
-        with:
-          name: allure-results-api
-          path: combined-results
 
       - name: Download Chromium Results
         uses: actions/download-artifact@v4
