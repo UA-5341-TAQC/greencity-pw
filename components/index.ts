@@ -1,3 +1,4 @@
+export * from './base-component';
 export * from './eco-news-card';
 export * from './event-card';
 export * from './places';
