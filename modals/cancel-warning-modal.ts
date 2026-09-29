@@ -1,4 +1,4 @@
-import type { Page, Locator } from '@playwright/test';
+import { test, type Page, type Locator } from '@playwright/test';
 import { BaseModal } from '@/modals/base-modal';
 
 export class CancelWarningModal extends BaseModal {
@@ -18,21 +18,30 @@ export class CancelWarningModal extends BaseModal {
 
   /** Returns the warning text displayed in the modal. */
   async getWarningText(): Promise<string> {
-    return (await this.warningText.innerText()).trim();
+    return await test.step('CancelWarningModal: get warning text', async () => {
+      return (await this.warningText.innerText()).trim();
+    });
   }
 
-  /** * Continues editing the news. */
+  /** Continues editing the news. */
   async continueEditing(): Promise<void> {
-    await this.continueEditingButton.click();
+    await test.step('CancelWarningModal: click continue editing', async () => {
+      await this.continueEditingButton.click();
+    });
   }
 
-  /** * Confirms cancelling news creation. */
+  /** Confirms cancelling news creation. */
   async cancelEditing(): Promise<void> {
-    await this.cancelEditingButton.click();
+    await test.step('CancelWarningModal: click cancel editing', async () => {
+      await this.cancelEditingButton.click();
+    });
   }
 
-  /** * Closes the warning modal using the close button. */
+  /** Closes the warning modal using the close button. */
   async close(): Promise<void> {
-    await this.closeButton.click();
+    await test.step('CancelWarningModal: close modal', async () => {
+      await this.closeButton.click();
+    });
   }
 }
+export default CancelWarningModal;

@@ -10,6 +10,7 @@ dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
 const BASE_URL: string = process.env.BASE_URL || 'http://localhost:3000';
 const API_URL: string = process.env.API_URL || 'http://localhost:8080';
+const USER_API_URL: string = process.env.USER_API_URL || 'https://greencity-user.greencity.cx.ua';
 const HEADLESS: boolean = process.env.HEADLESS !== 'false';
 const USER_EMAIL: string = process.env.USER_EMAIL || '';
 const USER_PASSWORD: string = process.env.USER_PASSWORD || 'password';
@@ -21,6 +22,7 @@ const LONG_TIMEOUT: number = Number(process.env.LONG_TIMEOUT) || 30000;
 export default {
   BASE_URL,
   API_URL,
+  USER_API_URL,
   HEADLESS,
   USER_EMAIL,
   USER_PASSWORD,

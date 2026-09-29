@@ -2,7 +2,7 @@ import { test, type Locator, type Page } from '@playwright/test';
 import env from '@/config/env';
 import BasePage from '@/pages/base-page';
 import { resolveUserId } from '@/helpers';
-import { FriendsTabsComponent, type FriendsTabKey } from '@/components';
+import { FriendsTabsComponent, type FriendsTabKey, FriendItemComponent } from '@/components';
 
 export type FriendsTab = FriendsTabKey;
 
@@ -114,6 +114,29 @@ export class FriendsPage extends BasePage {
   async clickBackToProfile(): Promise<void> {
     await test.step('Friends: back to profile', async () => {
       await this.backToProfileLink.click();
+    });
+  }
+
+  async waitForCardsLoaded(): Promise<void> {
+    await test.step('Friends: wait for friend cards to load', async () => {
+      await this.friendCards.first().waitFor({ state: 'visible', timeout: env.MEDIUM_TIMEOUT });
+    });
+  }
+
+  getFriendCardAt(index = 0): FriendItemComponent {
+    return new FriendItemComponent(this.friendCards.nth(index), this.page);
+  }
+
+  async getFirstAddableCard(): Promise<FriendItemComponent> {
+    return await test.step('Friends: find first card with "Add friend" action', async () => {
+      const candidate = this.friendCards
+        .filter({ has: this.page.getByRole('button', { name: /add friend|додати/i }) })
+        .first();
+      const userName = (await candidate.locator('.friend-name').innerText()).trim();
+      return new FriendItemComponent(
+        this.friendCards.filter({ hasText: userName }).first(),
+        this.page
+      );
     });
   }
 }
