@@ -6,6 +6,8 @@ import {
   EcoNewsPage,
   EcoNewsDetailsPage,
   PlacesPage,
+  CreateNewsPage,
+  CreateNewsPreviewPage,
 } from '@/pages';
 import { AddPlaceModal, SignInModal } from '@/modals';
 import { test as baseTest, expect as baseExpect } from './base-fixture';
@@ -20,6 +22,8 @@ type PageFixtures = {
   addPlaceModal: AddPlaceModal;
   ecoNewsPage: EcoNewsPage;
   ecoNewsDetailsPage: EcoNewsDetailsPage;
+  ecoNewsCreatePage: CreateNewsPage;
+  ecoNewsCreatePreviewPage: CreateNewsPreviewPage;
 };
 
 export const test = baseTest.extend<PageFixtures>({
@@ -54,6 +58,14 @@ export const test = baseTest.extend<PageFixtures>({
 
   ecoNewsDetailsPage: async ({ page }, use): Promise<void> => {
     await use(new EcoNewsDetailsPage(page));
+  },
+
+  ecoNewsCreatePage: async ({ page }, use): Promise<void> => {
+    await use(new CreateNewsPage(page));
+  },
+
+  ecoNewsCreatePreviewPage: async ({ page }, use): Promise<void> => {
+    await use(new CreateNewsPreviewPage(page));
   },
 });
 
