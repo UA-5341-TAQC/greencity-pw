@@ -102,6 +102,11 @@ export abstract class BaseEventCardComponent extends BaseComponent {
     await this.editEventButton.click();
   }
 
+  /** Checks whether the "Edit event" button is visible */
+  async isEditEventButtonVisible(): Promise<boolean> {
+    return await this.editEventButton.isVisible();
+  }
+
   /** Clicks the "Join event" button */
   async clickJoinEvent(): Promise<void> {
     await this.joinEventButton.click();
