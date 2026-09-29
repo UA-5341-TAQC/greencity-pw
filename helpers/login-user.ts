@@ -1,5 +1,5 @@
 import env from '@/config/env';
-import { expect } from '@/fixtures/page-fixture';
+import { expect } from '@playwright/test';
 import { SignInModal } from '@/modals/sign-in-modal';
 import { HomePage } from '@/pages';
 
