@@ -163,7 +163,7 @@ export class HeaderComponent extends BaseComponent {
    */
   async verifyAllNavLinksAreVisible(): Promise<void> {
     for (const [menuItem, locator] of Object.entries(this.navLinks)) {
-      await expect(locator, `Елемент меню ${menuItem} має бути видимим`).toBeVisible();
+      await expect(locator, `Header menu option ${menuItem} should be visible!`).toBeVisible();
     }
   }
 }
