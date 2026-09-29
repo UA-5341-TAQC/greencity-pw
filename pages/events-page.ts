@@ -97,9 +97,9 @@ export class EventsPage extends BasePage {
     await this.navigateTo('/#/greenCity/events');
   }
 
-  /** Waits for the page to fully load */
+  /** Waits for the page heading to be visible */
   async waitForEventsPage(): Promise<void> {
-    await this.waitForPageLoad();
+    await this.pageTitle.first().waitFor({ state: 'visible' });
   }
 
   /** Returns the browser tab title */

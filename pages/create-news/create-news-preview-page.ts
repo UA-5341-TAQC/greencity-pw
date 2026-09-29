@@ -12,7 +12,7 @@ export class CreateNewsPreviewPage extends BasePage {
   protected readonly pageTitle: Locator;
 
   protected readonly tagsBox: Locator;
-  protected readonly newsTag: Locator;
+  readonly newsTag: Locator;
   protected readonly eventTag: Locator;
   protected readonly educationTag: Locator;
   protected readonly initiativesTag: Locator;
@@ -32,8 +32,8 @@ export class CreateNewsPreviewPage extends BasePage {
   protected readonly newsLinkLinkedin: Locator;
   protected readonly newsLinkFacebook: Locator;
 
-  protected readonly backButton: Locator;
-  protected readonly publishButton: Locator;
+  readonly backButton: Locator;
+  readonly publishButton: Locator;
 
   constructor(page: Page, language: Language = Language.En) {
     super(page);
@@ -79,7 +79,6 @@ export class CreateNewsPreviewPage extends BasePage {
   /** Waits until the Create News Preview page is loaded. */
   async waitForPreviewPage(): Promise<void> {
     await test.step('CreateNewsPreview: wait for preview page to load', async () => {
-      await this.waitForPageLoad();
       await this.newsTitle.waitFor({ state: 'visible' });
     });
   }
@@ -95,13 +94,6 @@ export class CreateNewsPreviewPage extends BasePage {
   async isTagsBoxVisible(): Promise<boolean> {
     return await test.step('CreateNewsPreview: check if tags box is visible', async () => {
       return await this.tagsBox.isVisible();
-    });
-  }
-
-  /** Checks whether the News tag is visible. */
-  async isNewsTagVisible(): Promise<boolean> {
-    return await test.step('CreateNewsPreview: check if News tag is visible', async () => {
-      return await this.newsTag.first().isVisible();
     });
   }
 
@@ -209,34 +201,6 @@ export class CreateNewsPreviewPage extends BasePage {
   async isFacebookLinkVisible(): Promise<boolean> {
     return await test.step('CreateNewsPreview: check if Facebook link is visible', async () => {
       return await this.newsLinkFacebook.isVisible();
-    });
-  }
-
-  /** Checks whether the Back to editing button is visible. */
-  async isBackButtonVisible(): Promise<boolean> {
-    return await test.step('CreateNewsPreview: check if back button is visible', async () => {
-      return await this.backButton.first().isVisible();
-    });
-  }
-
-  /** Checks whether the Back to editing button is enabled. */
-  async isBackButtonEnabled(): Promise<boolean> {
-    return await test.step('CreateNewsPreview: check if back button is enabled', async () => {
-      return await this.backButton.first().isEnabled();
-    });
-  }
-
-  /** Checks whether the Publish button is visible. */
-  async isPublishButtonVisible(): Promise<boolean> {
-    return await test.step('CreateNewsPreview: check if publish button is visible', async () => {
-      return await this.publishButton.first().isVisible();
-    });
-  }
-
-  /** Checks whether the Publish button is enabled. */
-  async isPublishButtonEnabled(): Promise<boolean> {
-    return await test.step('CreateNewsPreview: check if publish button is enabled', async () => {
-      return await this.publishButton.first().isEnabled();
     });
   }
 

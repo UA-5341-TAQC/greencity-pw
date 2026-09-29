@@ -79,7 +79,6 @@ export class EditProfilePage extends BasePage {
 
   async waitForEditProfile(): Promise<void> {
     await test.step('Edit profile: wait for form', async () => {
-      await this.waitForPageLoad();
       await this.root.waitFor({ state: 'visible', timeout: env.LONG_TIMEOUT });
       await this.nameInput.waitFor({ state: 'visible', timeout: env.LONG_TIMEOUT });
       await this.form.waitFor({ state: 'visible', timeout: env.MEDIUM_TIMEOUT });

@@ -82,7 +82,7 @@ export class HomePage extends BasePage {
   }
 
   async waitForHomePage(): Promise<void> {
-    await this.waitForPageLoad();
+    await this.mainHeading.first().waitFor({ state: 'visible' });
   }
 
   async getTitle(): Promise<string> {

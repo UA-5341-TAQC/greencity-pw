@@ -31,7 +31,6 @@ test.describe('User Authentication', () => {
       await signInModal.clickSignIn();
 
       await signInModal.waitForHidden();
-      expect(await homePage.header.isLoggedIn()).toBe(true);
       await expect(homePage.header.signInButton).toBeHidden();
       await expect(homePage.header.userMenuDropdown).toBeVisible();
     });

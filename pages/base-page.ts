@@ -36,12 +36,4 @@ export default class BasePage {
   async navigateTo(url: string): Promise<void> {
     await this.page.goto(url);
   }
-
-  /**
-   * Waits for the page load state to be "networkidle".
-   * This ensures all background network requests are finished.
-   */
-  async waitForPageLoad(): Promise<void> {
-    await this.page.waitForLoadState('networkidle');
-  }
 }
