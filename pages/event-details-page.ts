@@ -7,6 +7,7 @@ export class EventDetailsPage extends BasePage {
   private readonly dateAuthor: Locator;
   private readonly descriptionBlockTitle: Locator;
   private readonly description: Locator;
+  private readonly eventTag: Locator;
   private readonly eventInfoBlock: Locator;
   private readonly saveEventButton: Locator;
   private readonly joinEventButton: Locator;
@@ -19,6 +20,7 @@ export class EventDetailsPage extends BasePage {
     this.dateAuthor = page.locator('.date-author');
     this.descriptionBlockTitle = page.locator('.description-block-title');
     this.description = page.locator('.ql-editor');
+    this.eventTag = page.locator('.event-tag');
     this.eventInfoBlock = page.locator('.event-info-block');
     this.saveEventButton = page.locator('.save-join-event-block .secondary-global-button');
     this.joinEventButton = page.locator('.save-join-event-block .primary-global-button');
@@ -29,7 +31,6 @@ export class EventDetailsPage extends BasePage {
   }
 
   async waitForDetailsPage(): Promise<void> {
-    await this.waitForPageLoad();
     await this.eventTitle.waitFor({ state: 'visible' });
   }
 
@@ -47,6 +48,10 @@ export class EventDetailsPage extends BasePage {
 
   async getDescription(): Promise<string> {
     return (await this.description.innerText()).trim();
+  }
+
+  async getEventTag(): Promise<string> {
+    return (await this.eventTag.innerText()).trim();
   }
 
   async getEventInfo(): Promise<string> {
