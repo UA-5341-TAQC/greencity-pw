@@ -57,8 +57,12 @@ export class CreateNewsPreviewPage extends BasePage {
     this.newsLinkLinkedin = page.locator("img[alt='linkedin']");
     this.newsLinkFacebook = page.locator("img[alt='facebook']");
 
-    this.backButton = page.locator('a.button-link, a[href*="create-news"]').first();
-    this.publishButton = page.getByRole('button', { name: 'Publish' });
+    this.backButton = page.locator(
+      'a.button-link:has-text("Back to editing"), a.button-link, div.button-content'
+    );
+    this.publishButton = page.locator(
+      'button.primary-global-button, button:has-text("Publish"), button:has-text("Опублікувати")'
+    );
   }
 
   /** Waits until the Create News Preview page is loaded. */
@@ -86,7 +90,14 @@ export class CreateNewsPreviewPage extends BasePage {
   /** Checks whether the News tag is visible. */
   async isNewsTagVisible(): Promise<boolean> {
     return await test.step('CreateNewsPreview: check if News tag is visible', async () => {
-      return await this.newsTag.isVisible();
+      return await this.newsTag.first().isVisible();
+    });
+  }
+
+  /** Returns all displayed preview tag texts. */
+  async getTags(): Promise<string[]> {
+    return await test.step('CreateNewsPreview: get all tag names', async () => {
+      return (await this.tagsBox.locator('div.tags-item').allInnerTexts()).map((t) => t.trim());
     });
   }
 
@@ -128,14 +139,16 @@ export class CreateNewsPreviewPage extends BasePage {
   /** Returns the news date. */
   async getDate(): Promise<string> {
     return await test.step('CreateNewsPreview: get date', async () => {
-      return (await this.date.textContent())?.trim() ?? '';
+      const text = (await this.date.textContent())?.trim() ?? '';
+      return text.replace(/^(Date:|Дата:)\s*/i, '').trim();
     });
   }
 
   /** Returns the news author. */
   async getAuthor(): Promise<string> {
     return await test.step('CreateNewsPreview: get author', async () => {
-      return (await this.author.textContent())?.trim() ?? '';
+      const text = (await this.author.textContent())?.trim() ?? '';
+      return text.replace(/^(Author:|Автор:)\s*/i, '').trim();
     });
   }
 
@@ -188,17 +201,45 @@ export class CreateNewsPreviewPage extends BasePage {
     });
   }
 
-  /** Navigates back from the preview page. */
+  /** Checks whether the Back to editing button is visible. */
+  async isBackButtonVisible(): Promise<boolean> {
+    return await test.step('CreateNewsPreview: check if back button is visible', async () => {
+      return await this.backButton.first().isVisible();
+    });
+  }
+
+  /** Checks whether the Back to editing button is enabled. */
+  async isBackButtonEnabled(): Promise<boolean> {
+    return await test.step('CreateNewsPreview: check if back button is enabled', async () => {
+      return await this.backButton.first().isEnabled();
+    });
+  }
+
+  /** Checks whether the Publish button is visible. */
+  async isPublishButtonVisible(): Promise<boolean> {
+    return await test.step('CreateNewsPreview: check if publish button is visible', async () => {
+      return await this.publishButton.first().isVisible();
+    });
+  }
+
+  /** Checks whether the Publish button is enabled. */
+  async isPublishButtonEnabled(): Promise<boolean> {
+    return await test.step('CreateNewsPreview: check if publish button is enabled', async () => {
+      return await this.publishButton.first().isEnabled();
+    });
+  }
+
+  /** Navigates back from the preview page to edit mode. */
   async goBack(): Promise<void> {
     await test.step('CreateNewsPreview: go back to editing', async () => {
-      await this.backButton.click();
+      await this.backButton.first().click();
     });
   }
 
   /** Publishes the news article. */
   async publish(): Promise<void> {
     await test.step('CreateNewsPreview: publish news', async () => {
-      await this.publishButton.click();
+      await this.publishButton.first().click();
     });
   }
 }

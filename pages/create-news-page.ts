@@ -66,10 +66,12 @@ export class CreateNewsPage extends BasePage {
     );
 
     this.contentEditor = page.locator('div.ql-editor');
-    this.contentEditorCounter = page.locator('p.quill-counter.warning, p.quill-counter');
+    this.contentEditorCounter = page.locator(
+      'p.quill-counter.warning, p.quill-counter, p:has-text("Number of characters:"), p:has-text("Кількість знаків:")'
+    );
 
-    this.date = page.locator('div.date p').filter({ hasText: 'Date:' }).locator('span').nth(1);
-    this.author = page.locator('div.date p').filter({ hasText: 'Author:' }).locator('span').nth(1);
+    this.date = page.locator('div.date p').filter({ hasText: /Date:|Дата:/i });
+    this.author = page.locator('div.date p').filter({ hasText: /Author:|Автор:/i });
 
     this.cancelButton = page.locator(
       'div.submit-buttons button.tertiary-global-button, button:has-text("Cancel")'
@@ -108,6 +110,13 @@ export class CreateNewsPage extends BasePage {
   async enterTitle(title: string): Promise<void> {
     await test.step(`CreateNews: enter title "${title}"`, async () => {
       await this.titleInput.fill(title);
+    });
+  }
+
+  /** Returns the current value of the title field. */
+  async getTitleValue(): Promise<string> {
+    return await test.step('CreateNews: get title input value', async () => {
+      return await this.titleInput.inputValue();
     });
   }
 
@@ -189,6 +198,14 @@ export class CreateNewsPage extends BasePage {
     });
   }
 
+  /** Checks whether the specified tag is selected. */
+  async isTagSelected(tagName: string): Promise<boolean> {
+    return await test.step(`CreateNews: check if tag "${tagName}" is selected`, async () => {
+      const selected = await this.getSelectedTags();
+      return selected.some((t) => t.toLowerCase() === tagName.toLowerCase());
+    });
+  }
+
   /** Checks whether the picture dropzone or uploaded picture preview is visible. */
   async isPictureBoxVisible(): Promise<boolean> {
     return await test.step('CreateNews: check if picture box or preview is visible', async () => {
@@ -260,6 +277,13 @@ export class CreateNewsPage extends BasePage {
     });
   }
 
+  /** Checks whether the content editor is visible. */
+  async isContentEditorVisible(): Promise<boolean> {
+    return await test.step('CreateNews: check if content editor is visible', async () => {
+      return await this.contentEditor.isVisible();
+    });
+  }
+
   /** Returns the content editor character counter value. */
   async getContentEditorCounter(): Promise<string> {
     return await test.step('CreateNews: get content editor counter', async () => {
@@ -270,14 +294,16 @@ export class CreateNewsPage extends BasePage {
   /** Returns the pre-filled date of the news article. */
   async getDate(): Promise<string> {
     return await test.step('CreateNews: get date', async () => {
-      return (await this.date.textContent())?.trim() ?? '';
+      const text = (await this.date.first().textContent())?.trim() ?? '';
+      return text.replace(/^(Date:|Дата:)\s*/i, '').trim();
     });
   }
 
   /** Returns the pre-filled author of the news article. */
   async getAuthor(): Promise<string> {
     return await test.step('CreateNews: get author', async () => {
-      return (await this.author.textContent())?.trim() ?? '';
+      const text = (await this.author.first().textContent())?.trim() ?? '';
+      return text.replace(/^(Author:|Автор:)\s*/i, '').trim();
     });
   }
 
