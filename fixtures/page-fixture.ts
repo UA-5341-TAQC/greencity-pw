@@ -9,12 +9,13 @@ import {
   CreateNewsPage,
   CreateNewsPreviewPage,
 } from '@/pages';
-import { AddPlaceModal, SignInModal, SignUpModal } from '@/modals';
+import { AddPlaceModal, SignInModal, UpdatePhotoModal, SignUpModal } from '@/modals';
 import { test as baseTest, expect as baseExpect } from './base-fixture';
 
 type PageFixtures = {
   homePage: HomePage;
   signInModal: SignInModal;
+  updatePhotoModal: UpdatePhotoModal;
   signUpModal: SignUpModal;
   profilePage: ProfilePage;
   editProfilePage: EditProfilePage;
@@ -36,6 +37,10 @@ export const test = baseTest.extend<PageFixtures>({
     await use(new SignInModal(page));
   },
 
+  updatePhotoModal: async ({ page }, use): Promise<void> => {
+    await use(new UpdatePhotoModal(page));
+  },
+  
   signUpModal: async ({ page }, use): Promise<void> => {
     await use(new SignUpModal(page));
   },
