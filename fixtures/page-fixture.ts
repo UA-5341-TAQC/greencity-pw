@@ -40,7 +40,7 @@ export const test = baseTest.extend<PageFixtures>({
   updatePhotoModal: async ({ page }, use): Promise<void> => {
     await use(new UpdatePhotoModal(page));
   },
-  
+
   signUpModal: async ({ page }, use): Promise<void> => {
     await use(new SignUpModal(page));
   },
