@@ -12,6 +12,7 @@ export class ProfileNewsTabComponent extends BaseComponent {
   readonly itemHosts: Locator;
   readonly createLink: Locator;
   readonly tagFilters: Locator;
+  readonly tabHeader: Locator;
 
   constructor(page: Page) {
     super(page.locator('app-profile-dashboard').first(), page);
@@ -24,6 +25,7 @@ export class ProfileNewsTabComponent extends BaseComponent {
     this.tagFilters = this.root.locator(
       'app-tag-filter button.tag-button, app-tag-filter a.custom-chip'
     );
+    this.tabHeader = this.root.getByRole('tab').nth(1);
   }
 
   /** All news COMs currently rendered in this tab. */
