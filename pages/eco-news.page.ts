@@ -45,7 +45,9 @@ export class EcoNewsPage extends BasePage {
   }
 
   async getNewsCardsCount(): Promise<number> {
-    return this.newsCards.count();
+    return await test.step('Get news cards count', async () => {
+      return this.newsCards.count();
+    });
   }
 
   getNewsCardLocator(index: number): Locator {
