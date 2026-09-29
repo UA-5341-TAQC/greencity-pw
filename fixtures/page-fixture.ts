@@ -9,12 +9,13 @@ import {
   CreateNewsPreviewPage,
   PlacesPage,
 } from '@/pages';
-import { AddPlaceModal, SignInModal } from '@/modals';
+import { AddPlaceModal, SignInModal, CancelWarningModal } from '@/modals';
 import { test as baseTest, expect as baseExpect } from '@/fixtures/base-fixture';
 
 type PageFixtures = {
   homePage: HomePage;
   signInModal: SignInModal;
+  cancelWarningModal: CancelWarningModal;
   profilePage: ProfilePage;
   editProfilePage: EditProfilePage;
   friendsPage: FriendsPage;
@@ -22,8 +23,8 @@ type PageFixtures = {
   addPlaceModal: AddPlaceModal;
   ecoNewsPage: EcoNewsPage;
   ecoNewsDetailsPage: EcoNewsDetailsPage;
-  createNewsPage: CreateNewsPage;
-  createNewsPreviewPage: CreateNewsPreviewPage;
+  ecoNewsCreatePage: CreateNewsPage;
+  ecoNewsCreatePreviewPage: CreateNewsPreviewPage;
 };
 
 export const test = baseTest.extend<PageFixtures>({
@@ -34,12 +35,19 @@ export const test = baseTest.extend<PageFixtures>({
   signInModal: async ({ page }, use): Promise<void> => {
     await use(new SignInModal(page));
   },
+
+  cancelWarningModal: async ({ page }, use): Promise<void> => {
+    await use(new CancelWarningModal(page));
+  },
+
   profilePage: async ({ page }, use): Promise<void> => {
     await use(new ProfilePage(page));
   },
+
   editProfilePage: async ({ page }, use): Promise<void> => {
     await use(new EditProfilePage(page));
   },
+
   friendsPage: async ({ page }, use): Promise<void> => {
     await use(new FriendsPage(page));
   },
@@ -60,11 +68,11 @@ export const test = baseTest.extend<PageFixtures>({
     await use(new EcoNewsDetailsPage(page));
   },
 
-  createNewsPage: async ({ page }, use): Promise<void> => {
+  ecoNewsCreatePage: async ({ page }, use): Promise<void> => {
     await use(new CreateNewsPage(page));
   },
 
-  createNewsPreviewPage: async ({ page }, use): Promise<void> => {
+  ecoNewsCreatePreviewPage: async ({ page }, use): Promise<void> => {
     await use(new CreateNewsPreviewPage(page));
   },
 });

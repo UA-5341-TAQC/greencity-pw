@@ -1,27 +1,25 @@
 import { test, type Page, type Locator } from '@playwright/test';
 import BasePage from '@/pages/base-page';
+import { Language } from '@/types/header.types';
+import { NEWS_I18N } from '@/types/news.i18n';
+import { NewsType } from '@/types/news.types';
+import { TagSelectorComponent } from '@/components/tag-selector-component';
 
 /**
- * Create News page POM.
+ * Create News page.
  * Contains fields and controls for creating a new news article.
  */
 export class CreateNewsPage extends BasePage {
   protected readonly titleInput: Locator;
   protected readonly titleInfo: Locator;
 
-  protected readonly tagsBox: Locator;
-  protected readonly tagButtons: Locator;
-  protected readonly newsTag: Locator;
-  protected readonly eventTag: Locator;
-  protected readonly educationTag: Locator;
-  protected readonly initiativesTag: Locator;
-  protected readonly adsTag: Locator;
+  readonly tagSelector: TagSelectorComponent;
 
   protected readonly pictureBox: Locator;
   protected readonly pictureInput: Locator;
+  protected readonly picturePreview: Locator;
   protected readonly pictureInputCancel: Locator;
   protected readonly pictureInputSubmit: Locator;
-  protected readonly picturePreview: Locator;
 
   protected readonly sourceInput: Locator;
 
@@ -35,43 +33,42 @@ export class CreateNewsPage extends BasePage {
   protected readonly previewButton: Locator;
   protected readonly submitButton: Locator;
 
-  constructor(page: Page) {
+  constructor(page: Page, language: Language = Language.En) {
     super(page);
 
+    const info = NEWS_I18N[language];
+
     this.titleInput = page.locator('textarea[formcontrolname="title"]');
-    this.titleInfo = page.locator(
-      'div.title-wrapper span.field-info, div.title-block span.field-info'
-    );
+    this.titleInfo = page.locator('div.title-block span.field-info');
 
-    this.tagsBox = page.locator('div.tags-box, app-tag-filter');
-    this.tagButtons = page.locator('button.tag-button');
-    this.newsTag = page.locator("button.tag-button:has-text('News')");
-    this.eventTag = page.locator(
-      "button.tag-button:has-text('Events'), button.tag-button:has-text('Event')"
-    );
-    this.educationTag = page.locator("button.tag-button:has-text('Education')");
-    this.initiativesTag = page.locator("button.tag-button:has-text('Initiatives')");
-    this.adsTag = page.locator("button.tag-button:has-text('Ads')");
+    this.tagSelector = new TagSelectorComponent(page.locator('div.tags-box'), page, language);
 
-    this.pictureBox = page.locator('div.dropzone');
-    this.pictureInput = page.locator("input#upload, input[type='file']");
-    this.pictureInputCancel = page.getByRole('button', { name: 'Cancel' });
-    this.pictureInputSubmit = page.getByRole('button', { name: 'Submit' });
-    this.picturePreview = page.locator(
-      'div.image-preview, img.preview-image, [class*="picture"] img, app-drag-and-drop img'
+    this.pictureBox = page.locator('div.dropzone, div.picture-block, .image-preview');
+    this.pictureInput = page.locator('div.dropzone input[type="file"], input[type="file"]');
+    this.picturePreview = page.locator('div.dropzone img, .image-preview img, .picture-preview');
+    this.pictureInputCancel = page.locator(
+      'app-crop-image button.secondary-global-button, button:has-text("Cancel")'
+    );
+    this.pictureInputSubmit = page.locator(
+      'app-crop-image button.primary-global-button, button:has-text("Submit"), button:has-text("Save")'
     );
 
     this.sourceInput = page.locator(
-      "input[formcontrolname='source'], div.source-block input[type='text'], input[placeholder*='Link to external source' i]"
+      "div.source-block input[type='text'], input[formcontrolname='source']"
     );
 
-    this.contentEditor = page.locator('div.ql-editor');
+    this.contentEditor = page.locator("div.ql-editor[contenteditable='true'], div.ql-editor");
     this.contentEditorCounter = page.locator(
-      'p.quill-counter.warning, p.quill-counter, p:has-text("Number of characters:"), p:has-text("Кількість знаків:")'
+      'p.quill-counter.warning, p.quill-counter, div.content-counter, p:has-text("Number of characters:"), p:has-text("Кількість знаків:")'
     );
 
-    this.date = page.locator('div.date p').filter({ hasText: /Date:|Дата:/i });
-    this.author = page.locator('div.date p').filter({ hasText: /Author:|Автор:/i });
+    this.date = page
+      .locator('div.date p')
+      .filter({ hasText: new RegExp(`${info?.date ?? 'Date:'}|Date:|Дата:`, 'i') });
+    this.author = page
+      .locator('div.date p')
+      .filter({ hasText: new RegExp(`${info?.author ?? 'Author:'}|Author:|Автор:`, 'i') });
+
 
     this.cancelButton = page.locator(
       'div.submit-buttons button.tertiary-global-button, button:has-text("Cancel")'
@@ -89,6 +86,11 @@ export class CreateNewsPage extends BasePage {
     await test.step('CreateNews: navigate to create news page', async () => {
       await this.navigateTo('/#/greenCity/news/create-news');
     });
+  }
+
+  /** Compatibility alias for navigateToCreateNewsPage */
+  async navigateToHomePage(): Promise<void> {
+    await this.navigateToCreateNewsPage();
   }
 
   /** Waits until the Create News page is loaded. */
@@ -127,74 +129,63 @@ export class CreateNewsPage extends BasePage {
     });
   }
 
-  /** Checks whether the tags box is visible. */
+  /** Checks whether the tags selector is visible. */
   async isTagsBoxVisible(): Promise<boolean> {
     return await test.step('CreateNews: check if tags box is visible', async () => {
-      return await this.tagsBox.isVisible();
+      return await this.tagSelector.isVisible();
     });
   }
 
-  /** Selects a tag by its displayed text name. */
-  async selectTag(tagName: string): Promise<void> {
-    await test.step(`CreateNews: select tag "${tagName}"`, async () => {
-      await this.tagButtons.filter({ hasText: tagName }).first().click();
+  /**
+   * Selects the specified news tag.
+   *
+   * @param tag - Tag to select (NewsType enum value or string name).
+   */
+  async selectTag(tag: NewsType | string): Promise<void> {
+    await test.step(`CreateNews: select tag "${tag}"`, async () => {
+      await this.tagSelector.selectTag(tag);
     });
   }
 
   /** Selects the News tag. */
   async selectNewsTag(): Promise<void> {
     await test.step('CreateNews: select News tag', async () => {
-      await this.newsTag.click();
+      await this.tagSelector.selectNewsTag();
     });
   }
 
   /** Selects the Event tag. */
   async selectEventTag(): Promise<void> {
     await test.step('CreateNews: select Event tag', async () => {
-      await this.eventTag.click();
+      await this.tagSelector.selectEventTag();
     });
   }
 
   /** Selects the Education tag. */
   async selectEducationTag(): Promise<void> {
     await test.step('CreateNews: select Education tag', async () => {
-      await this.educationTag.click();
+      await this.tagSelector.selectEducationTag();
     });
   }
 
   /** Selects the Initiatives tag. */
   async selectInitiativesTag(): Promise<void> {
     await test.step('CreateNews: select Initiatives tag', async () => {
-      await this.initiativesTag.click();
+      await this.tagSelector.selectInitiativesTag();
     });
   }
 
   /** Selects the Ads tag. */
   async selectAdsTag(): Promise<void> {
     await test.step('CreateNews: select Ads tag', async () => {
-      await this.adsTag.click();
+      await this.tagSelector.selectAdsTag();
     });
   }
 
   /** Returns all active / selected tag names. */
   async getSelectedTags(): Promise<string[]> {
     return await test.step('CreateNews: get selected tags', async () => {
-      const selectedButtons = this.tagButtons.filter({
-        has: this.page.locator('.global-tag-clicked, [class*="clicked"], [class*="active"]'),
-      });
-      if ((await selectedButtons.count()) > 0) {
-        return (await selectedButtons.allInnerTexts()).map((t) => t.trim());
-      }
-      // If styled on the button itself:
-      const allBtns = await this.tagButtons.all();
-      const tags: string[] = [];
-      for (const btn of allBtns) {
-        const cls = (await btn.getAttribute('class')) ?? '';
-        if (cls.includes('clicked') || cls.includes('active') || cls.includes('selected')) {
-          tags.push((await btn.innerText()).trim());
-        }
-      }
-      return tags;
+      return await this.tagSelector.getSelectedTags();
     });
   }
 
@@ -206,7 +197,7 @@ export class CreateNewsPage extends BasePage {
     });
   }
 
-  /** Checks whether the picture dropzone or uploaded picture preview is visible. */
+  /** Checks whether the picture box or preview is visible. */
   async isPictureBoxVisible(): Promise<boolean> {
     return await test.step('CreateNews: check if picture box or preview is visible', async () => {
       const dropzoneVisible = await this.pictureBox.isVisible();
@@ -265,12 +256,12 @@ export class CreateNewsPage extends BasePage {
 
   /** Enters the content for the news article. */
   async enterContent(content: string): Promise<void> {
-    await test.step(`CreateNews: enter content`, async () => {
+    await test.step('CreateNews: enter content', async () => {
       await this.contentEditor.fill(content);
     });
   }
 
-  /** Returns the content text for the news article. */
+  /** Returns the content value for the news article. */
   async getContent(): Promise<string> {
     return await test.step('CreateNews: get content text', async () => {
       return (await this.contentEditor.textContent()) ?? '';
@@ -291,7 +282,7 @@ export class CreateNewsPage extends BasePage {
     });
   }
 
-  /** Returns the pre-filled date of the news article. */
+  /** Returns the date of the news article. */
   async getDate(): Promise<string> {
     return await test.step('CreateNews: get date', async () => {
       const text = (await this.date.first().textContent())?.trim() ?? '';
@@ -299,7 +290,7 @@ export class CreateNewsPage extends BasePage {
     });
   }
 
-  /** Returns the pre-filled author of the news article. */
+  /** Returns the author of the news article. */
   async getAuthor(): Promise<string> {
     return await test.step('CreateNews: get author', async () => {
       const text = (await this.author.first().textContent())?.trim() ?? '';
@@ -307,23 +298,23 @@ export class CreateNewsPage extends BasePage {
     });
   }
 
-  /** Clicks the Cancel button. */
+  /** Clicks the Cancel button to cancel the news creation. */
   async cancel(): Promise<void> {
     await test.step('CreateNews: click cancel', async () => {
       await this.cancelButton.click();
     });
   }
 
-  /** Clicks the Preview button. */
+  /** Clicks the Preview button to preview the news article. */
   async preview(): Promise<void> {
     await test.step('CreateNews: click preview', async () => {
       await this.previewButton.click();
     });
   }
 
-  /** Clicks the Submit/Publish button. */
+  /** Clicks the Submit button to submit the news article. */
   async submit(): Promise<void> {
-    await test.step('CreateNews: click publish', async () => {
+    await test.step('CreateNews: click submit', async () => {
       await this.submitButton.click();
     });
   }
