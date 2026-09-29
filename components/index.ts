@@ -16,3 +16,4 @@ export * from './header-component';
 export * from './image-upload-component';
 export * from './pagination.component';
 export * from './user-menu-component';
+export * from './tag-selector-component';
