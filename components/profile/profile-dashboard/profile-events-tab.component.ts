@@ -15,6 +15,7 @@ export class ProfileEventsTabComponent extends BaseComponent {
   readonly itemHosts: Locator;
   readonly createLink: Locator;
   readonly typeFilters: Locator;
+  readonly tabHeader: Locator;
 
   constructor(page: Page) {
     super(page.locator('app-profile-dashboard').first(), page);
@@ -28,6 +29,7 @@ export class ProfileEventsTabComponent extends BaseComponent {
       .locator('a[href*="create-update-event"], #create-button-event')
       .first();
     this.typeFilters = this.root.locator('.events-types mat-checkbox');
+    this.tabHeader = this.root.getByRole('tab').nth(2);
   }
 
   /** All event COMs currently rendered in this tab (may be empty). */
