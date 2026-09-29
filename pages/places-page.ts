@@ -25,7 +25,7 @@ export class PlacesPage extends BasePage {
   }
 
   async waitForPlacesPage(): Promise<void> {
-    await this.waitForPageLoad();
+    await this.addPlaceButton.waitFor({ state: 'visible' });
   }
 
   async clickAddPlaceButton(): Promise<void> {

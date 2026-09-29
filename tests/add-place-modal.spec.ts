@@ -2,8 +2,8 @@ import { test, expect } from '@/fixtures';
 import { Language } from '@/types/header.types';
 
 test.describe('Places', () => {
-  test.beforeEach(async ({ authenticatedUser }) => {
-    void authenticatedUser;
+  test.beforeEach(async ({ authenticatedPage }) => {
+    await expect(authenticatedPage).toHaveURL(/greenCity/);
   });
 
   test('TC-52 Verify opening the Add Place modal', async ({ placesPage, addPlaceModal }) => {
@@ -22,17 +22,17 @@ test.describe('Places', () => {
     });
 
     await test.step('Verify the Category control is displayed', async () => {
-      expect(await addPlaceModal.isCategoryVisible()).toBe(true);
+      await expect(addPlaceModal.categorySelect).toBeVisible();
     });
 
     await test.step('Verify the Name and Address fields are displayed', async () => {
-      expect(await addPlaceModal.isNameInputVisible()).toBe(true);
-      expect(await addPlaceModal.isAddressInputVisible()).toBe(true);
+      await expect(addPlaceModal.nameInput).toBeVisible();
+      await expect(addPlaceModal.addressInput).toBeVisible();
     });
 
     await test.step("Verify the 'Cancel' and 'Add' buttons are displayed", async () => {
-      expect(await addPlaceModal.isCancelButtonVisible()).toBe(true);
-      expect(await addPlaceModal.isAddButtonVisible()).toBe(true);
+      await expect(addPlaceModal.cancelButton).toBeVisible();
+      await expect(addPlaceModal.addButton).toBeVisible();
     });
   });
 });

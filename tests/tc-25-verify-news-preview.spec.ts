@@ -75,15 +75,15 @@ test.describe('TC-25 Verify news preview content', () => {
     expect(previewAuthor).toContain(formAuthor);
 
     // Step 12: Verify selected tags are displayed in preview
-    expect(await ecoNewsCreatePreviewPage.isNewsTagVisible()).toBe(true);
+    await expect(ecoNewsCreatePreviewPage.newsTag.first()).toBeVisible();
 
     // Step 13: Locate and verify "Back to editing" button/link is available
-    expect(await ecoNewsCreatePreviewPage.isBackButtonVisible()).toBe(true);
-    expect(await ecoNewsCreatePreviewPage.isBackButtonEnabled()).toBe(true);
+    await expect(ecoNewsCreatePreviewPage.backButton).toBeVisible();
+    await expect(ecoNewsCreatePreviewPage.backButton).toBeEnabled();
 
     // Step 14: Locate and verify "Publish" button is available
-    expect(await ecoNewsCreatePreviewPage.isPublishButtonVisible()).toBe(true);
-    expect(await ecoNewsCreatePreviewPage.isPublishButtonEnabled()).toBe(true);
+    await expect(ecoNewsCreatePreviewPage.publishButton).toBeVisible();
+    await expect(ecoNewsCreatePreviewPage.publishButton).toBeEnabled();
 
     // Postconditions: Return to eco news page
     await ecoNewsPage.navigateToEcoNewsPage();

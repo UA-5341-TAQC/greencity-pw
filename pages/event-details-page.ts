@@ -29,7 +29,6 @@ export class EventDetailsPage extends BasePage {
   }
 
   async waitForDetailsPage(): Promise<void> {
-    await this.waitForPageLoad();
     await this.eventTitle.waitFor({ state: 'visible' });
   }
 

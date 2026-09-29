@@ -28,6 +28,7 @@ Then update the values as needed:
 ```env
 BASE_URL=http://localhost:3000
 API_URL=http://localhost:8080
+USER_API_URL=https://greencity-user.greencity.cx.ua
 HEADLESS=true
 USER_EMAIL=your-email@example.com
 USER_PASSWORD=your-password
@@ -36,6 +37,8 @@ MEDIUM_TIMEOUT=10000
 LONG_TIMEOUT=30000
 ```
 
+`USER_EMAIL` and `USER_PASSWORD` have no defaults: tests that use the `authenticatedPage` fixture fail fast with a descriptive error when they are missing. Never commit `.env`.
+`WORKERS` overrides the Playwright worker count (CI defaults to 1 because tests share one account).
 `BASE_URL` defaults to `http://localhost:3000`, and `API_URL` defaults to `http://localhost:8080`.
 `HEADLESS` is enabled by default; set it to `false` to run tests with a visible browser.
 Timeouts are configured in milliseconds: `SHORT_TIMEOUT` is used for short waits, `MEDIUM_TIMEOUT` for actions and assertions, and `LONG_TIMEOUT` for test and navigation limits.
@@ -80,10 +83,15 @@ npm run report
 
 ```bash
 npm run lint
+npm run typecheck
 npm run format:check
 ```
 
-`npm run pc` formats the project, applies ESLint fixes, runs linting, and verifies formatting.
+Authentication in tests: use the API-backed `authenticatedPage` fixture (worker-scoped token + `localStorage` injection).
+Drive the sign-in UI only in tests that verify the sign-in flow itself. Do not use `page.waitForTimeout()` or
+`networkidle`; wait on locators / web-first assertions instead (enforced by ESLint).
+
+`npm run pc` formats the project, applies ESLint fixes, runs linting and type checking, and verifies formatting.
 
 ## Project Structure
 
@@ -95,4 +103,6 @@ components/ UI components
 modals/     Modal components
 fixtures/   Test fixtures
 tests/      Playwright test specifications
+helpers/    API auth, localStorage and other non-UI helpers
+docs/       Architecture audit and engineering notes
 ```

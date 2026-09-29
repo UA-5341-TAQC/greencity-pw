@@ -26,6 +26,8 @@ export default tseslint.config(
     rules: {
       ...playwright.configs['flat/recommended'].rules,
       'playwright/no-focused-test': 'error',
+      'playwright/no-wait-for-timeout': 'error',
+      'playwright/no-networkidle': 'error',
     },
   },
 
@@ -57,6 +59,37 @@ export default tseslint.config(
     rules: {
       'no-console': 'warn',
       '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/ban-ts-comment': 'error',
+    },
+  },
+
+  // Type-aware rule: an un-awaited promise in a test/POM silently skips its action or assertion.
+  {
+    files: ['**/*.ts'],
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+    rules: {
+      '@typescript-eslint/no-floating-promises': 'error',
+    },
+  },
+
+  // Synchronization guardrails for framework code (tests/ already get these from the recommended set).
+  {
+    files: [
+      'pages/**/*.ts',
+      'components/**/*.ts',
+      'modals/**/*.ts',
+      'helpers/**/*.ts',
+      'fixtures/**/*.ts',
+    ],
+    plugins: { playwright },
+    rules: {
+      'playwright/no-wait-for-timeout': 'error',
+      'playwright/no-networkidle': 'error',
     },
   },
 

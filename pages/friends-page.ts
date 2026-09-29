@@ -53,7 +53,6 @@ export class FriendsPage extends BasePage {
 
   async waitForFriends(): Promise<void> {
     await test.step('Friends: wait for page load', async () => {
-      await this.waitForPageLoad();
       await this.root.waitFor({ state: 'visible', timeout: env.LONG_TIMEOUT });
       await this.heading.waitFor({ state: 'visible', timeout: env.LONG_TIMEOUT });
       await this.tabs.waitForVisible();

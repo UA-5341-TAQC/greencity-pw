@@ -13,11 +13,24 @@ const API_URL: string = process.env.API_URL || 'http://localhost:8080';
 const USER_API_URL: string = process.env.USER_API_URL || 'https://greencity-user.greencity.cx.ua';
 const HEADLESS: boolean = process.env.HEADLESS !== 'false';
 const USER_EMAIL: string = process.env.USER_EMAIL || '';
-const USER_PASSWORD: string = process.env.USER_PASSWORD || 'password';
+const USER_PASSWORD: string = process.env.USER_PASSWORD || '';
 
 const SHORT_TIMEOUT: number = Number(process.env.SHORT_TIMEOUT) || 5000;
 const MEDIUM_TIMEOUT: number = Number(process.env.MEDIUM_TIMEOUT) || 10000;
 const LONG_TIMEOUT: number = Number(process.env.LONG_TIMEOUT) || 30000;
+
+/**
+ * Returns the configured test-user credentials or throws a descriptive error.
+ * Fails fast instead of sending empty/placeholder credentials to the sign-in API.
+ */
+export function requireUserCredentials(): { email: string; password: string } {
+  if (!USER_EMAIL || !USER_PASSWORD) {
+    throw new Error(
+      'USER_EMAIL and USER_PASSWORD must be set (in .env locally or as CI secrets) to run authenticated tests.'
+    );
+  }
+  return { email: USER_EMAIL, password: USER_PASSWORD };
+}
 
 export default {
   BASE_URL,

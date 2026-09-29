@@ -1,5 +1,5 @@
 import { test, type APIRequestContext } from '@playwright/test';
-import env from '@/config/env';
+import env, { requireUserCredentials } from '@/config/env';
 
 export interface AuthSessionData {
   userId: number;
@@ -23,8 +23,9 @@ export async function signInViaApi(
   credentials?: SignInCredentials
 ): Promise<AuthSessionData> {
   return await test.step('API: Sign in via user service', async () => {
-    const email = credentials?.email || env.USER_EMAIL;
-    const password = credentials?.password || env.USER_PASSWORD;
+    const fallback = credentials?.email && credentials?.password ? null : requireUserCredentials();
+    const email = credentials?.email || fallback?.email;
+    const password = credentials?.password || fallback?.password;
 
     const response = await request.post(`${env.USER_API_URL}/ownSecurity/signIn`, {
       data: {

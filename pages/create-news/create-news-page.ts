@@ -1,5 +1,6 @@
 import { test, type Page, type Locator } from '@playwright/test';
 import BasePage from '@/pages/base-page';
+import env from '@/config/env';
 import { Language } from '@/types/header.types';
 import { NEWS_I18N } from '@/types/news.i18n';
 import { NewsType } from '@/types/news.types';
@@ -95,7 +96,6 @@ export class CreateNewsPage extends BasePage {
   /** Waits until the Create News page is loaded. */
   async waitForCreateNewsPage(): Promise<void> {
     await test.step('CreateNews: wait for create news page to load', async () => {
-      await this.waitForPageLoad();
       await this.titleInput.waitFor({ state: 'visible' });
     });
   }
@@ -229,12 +229,15 @@ export class CreateNewsPage extends BasePage {
   /** Submits the picture cropping. */
   async submitPictureInput(): Promise<void> {
     await test.step('CreateNews: submit picture cropping', async () => {
-      try {
-        await this.pictureInputSubmit.waitFor({ state: 'visible', timeout: 5000 });
-        await this.page.waitForTimeout(1000);
+      // The crop dialog may be skipped by the app, so a missing submit button is not an error.
+      const cropDialogShown = await this.pictureInputSubmit
+        .waitFor({ state: 'visible', timeout: env.SHORT_TIMEOUT })
+        .then(
+          () => true,
+          () => false
+        );
+      if (cropDialogShown) {
         await this.pictureInputSubmit.click();
-      } catch {
-        // Modal might not require submit or was auto-applied
       }
     });
   }
