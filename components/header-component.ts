@@ -159,4 +159,13 @@ export class HeaderComponent extends BaseComponent {
       await this.navLinks[item].click();
     });
   }
+
+  /**
+   * Helper for veryfing all navigation links are visible
+   */
+  async verifyAllNavLinksAreVisible(): Promise<void> {
+    for (const [menuItem, locator] of Object.entries(this.navLinks)) {
+      await expect(locator, `Header menu option ${menuItem} should be visible!`).toBeVisible();
+    }
+  }
 }

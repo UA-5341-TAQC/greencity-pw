@@ -131,14 +131,14 @@ export class HomePage extends BasePage {
   /**
    * @returns bool whether header text element is visible.
    */
-  async isHeaderVisible(): Promise<boolean> {
+  async isMainHeadingVisible(): Promise<boolean> {
     return await this.mainHeading.isVisible();
   }
 
   /**
    * @returns header text or empty line.
    */
-  async getHeaderText(): Promise<string> {
+  async getMainHeadingText(): Promise<string> {
     return (await this.mainHeading.textContent()) ?? '';
   }
 
