@@ -6,14 +6,18 @@ import {
   EcoNewsPage,
   EcoNewsDetailsPage,
   PlacesPage,
+  CreateNewsPage,
+  CreateNewsPreviewPage,
 } from '@/pages';
-import { AddPlaceModal, SignInModal } from '@/modals';
+import { AddPlaceModal, SignInModal, UpdatePhotoModal, SignUpModal } from '@/modals';
 import env from '@/config/env';
 import { test as baseTest, expect as baseExpect } from './base-fixture';
 
 type PageFixtures = {
   homePage: HomePage;
   signInModal: SignInModal;
+  updatePhotoModal: UpdatePhotoModal;
+  signUpModal: SignUpModal;
   profilePage: ProfilePage;
   editProfilePage: EditProfilePage;
   friendsPage: FriendsPage;
@@ -21,7 +25,9 @@ type PageFixtures = {
   addPlaceModal: AddPlaceModal;
   ecoNewsPage: EcoNewsPage;
   ecoNewsDetailsPage: EcoNewsDetailsPage;
-  authenticatedUser: void;
+  authenticatedUser: ProfilePage;
+  ecoNewsCreatePage: CreateNewsPage;
+  ecoNewsCreatePreviewPage: CreateNewsPreviewPage;
 };
 
 export const test = baseTest.extend<PageFixtures>({
@@ -32,12 +38,23 @@ export const test = baseTest.extend<PageFixtures>({
   signInModal: async ({ page }, use): Promise<void> => {
     await use(new SignInModal(page));
   },
+
+  updatePhotoModal: async ({ page }, use): Promise<void> => {
+    await use(new UpdatePhotoModal(page));
+  },
+
+  signUpModal: async ({ page }, use): Promise<void> => {
+    await use(new SignUpModal(page));
+  },
+
   profilePage: async ({ page }, use): Promise<void> => {
     await use(new ProfilePage(page));
   },
+
   editProfilePage: async ({ page }, use): Promise<void> => {
     await use(new EditProfilePage(page));
   },
+
   friendsPage: async ({ page }, use): Promise<void> => {
     await use(new FriendsPage(page));
   },
@@ -58,7 +75,7 @@ export const test = baseTest.extend<PageFixtures>({
     await use(new EcoNewsDetailsPage(page));
   },
 
-  authenticatedUser: async ({ homePage, signInModal }, use): Promise<void> => {
+  authenticatedUser: async ({ page, homePage, signInModal }, use): Promise<void> => {
     await homePage.navigateToHomePage();
     await homePage.waitForHomePage();
 
@@ -71,7 +88,15 @@ export const test = baseTest.extend<PageFixtures>({
 
     await signInModal.waitForHidden();
 
-    await use();
+    await use(new ProfilePage(page));
+  },
+
+  ecoNewsCreatePage: async ({ page }, use): Promise<void> => {
+    await use(new CreateNewsPage(page));
+  },
+
+  ecoNewsCreatePreviewPage: async ({ page }, use): Promise<void> => {
+    await use(new CreateNewsPreviewPage(page));
   },
 });
 
