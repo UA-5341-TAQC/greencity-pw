@@ -11,7 +11,7 @@ import {
   AchievementsWidgetComponent,
   FriendsWidgetComponent,
   EcoPlacesWidgetComponent,
-  FactOfTheFayComponent,
+  FactOfTheDayComponent,
   ProfileToDoListCardComponent,
 } from '@/components';
 import { ProfileDashboardTabKey } from '@/types/profile-dashboard.types';
@@ -38,7 +38,7 @@ export class ProfilePage extends BasePage {
   readonly calendar: Locator;
   readonly viewMoreButton: Locator;
   readonly activeTabBody: Locator;
-  readonly factOfTheDay: FactOfTheFayComponent;
+  readonly factOfTheDay: FactOfTheDayComponent;
   readonly myToDoList: ProfileToDoListCardComponent;
 
   constructor(page: Page) {
@@ -55,7 +55,7 @@ export class ProfilePage extends BasePage {
     this.achievements = new AchievementsWidgetComponent(page);
     this.friendsWidget = new FriendsWidgetComponent(page);
     this.myEcoPlacesWidget = new EcoPlacesWidgetComponent(page);
-    this.factOfTheDay = new FactOfTheFayComponent(page);
+    this.factOfTheDay = new FactOfTheDayComponent(page);
     this.myToDoList = new ProfileToDoListCardComponent(page);
 
     // Verified on the live build: app-calendar renders inside .profile-container.

@@ -1,7 +1,7 @@
 import { Locator, Page } from '@playwright/test';
 import { BaseComponent } from '@/components/base-component';
 
-export class FactOfTheFayComponent extends BaseComponent {
+export class FactOfTheDayComponent extends BaseComponent {
   readonly title: Locator;
   readonly description: Locator;
 
