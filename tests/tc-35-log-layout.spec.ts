@@ -21,7 +21,7 @@ test.describe('Page layout and key sections', () => {
     await test.step('2.Click "Мій Кабінет" (My Cabinet) in the header', async () => {
       await homePage.header.navigateTo(MenuItem.MySpace);
       await profilePage.waitForProfile();
-      expect(page).toHaveURL(/\/greenCity\/profile(?:\/\d+)?$/);
+      await expect(page).toHaveURL(/\/greenCity\/profile(?:\/\d+)?$/);
     });
 
     await test.step('3. Observe the left profile card', async () => {
@@ -42,13 +42,11 @@ test.describe('Page layout and key sections', () => {
       await expect(profilePage.profileHeader.habitsInProgress).toBeVisible();
       await expect(profilePage.profileHeader.eventsCount).toBeVisible();
 
-
-      const actualLables =  await profilePage.profileHeader.getProgressLabels();
+      const actualLables = await profilePage.profileHeader.getProgressLabels();
       expect(actualLables.acquiredHabits).toBe('acquired habits');
       expect(actualLables.habitsInProgress).toBe('habits in progress');
       expect(actualLables.publishedNews).toBe('published news');
       expect(actualLables.events).toBe('organized and attended events');
-
 
       const stats = await profilePage.profileHeader.getProgressStats();
       expect(stats.acquiredHabits).toBeGreaterThanOrEqual(0);
@@ -73,6 +71,14 @@ test.describe('Page layout and key sections', () => {
 
     await test.step('7.Observe right sidebar.', async () => {
       await expect(profilePage.calendar).toBeVisible();
+      await expect(profilePage.factOfTheDay.title).toBeVisible();
+      await expect(profilePage.factOfTheDay.description).toBeVisible();
+
+      const factText = await profilePage.factOfTheDay.getFactText();
+      expect(factText.length).toBeGreaterThan(0);
+
+      await expect(profilePage.myToDoList.header).toBeVisible();
+      await expect(profilePage.myToDoList.itemsCount).toBeVisible();
     });
   });
 });
