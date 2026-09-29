@@ -9,6 +9,9 @@ import {
   CreateNewsPreviewPage,
   PlacesPage,
 } from '@/pages';
+
+import env from '@/config/env';
+import { test as baseTest, expect as baseExpect } from './base-fixture';
 import {
   AddPlaceModal,
   SignInModal,
@@ -16,7 +19,6 @@ import {
   UpdatePhotoModal,
   CancelWarningModal,
 } from '@/modals';
-import { test as baseTest, expect as baseExpect } from '@/fixtures/base-fixture';
 
 type PageFixtures = {
   homePage: HomePage;
@@ -31,6 +33,7 @@ type PageFixtures = {
   addPlaceModal: AddPlaceModal;
   ecoNewsPage: EcoNewsPage;
   ecoNewsDetailsPage: EcoNewsDetailsPage;
+  authenticatedUser: ProfilePage;
   ecoNewsCreatePage: CreateNewsPage;
   ecoNewsCreatePreviewPage: CreateNewsPreviewPage;
 };
@@ -82,6 +85,22 @@ export const test = baseTest.extend<PageFixtures>({
 
   ecoNewsDetailsPage: async ({ page }, use): Promise<void> => {
     await use(new EcoNewsDetailsPage(page));
+  },
+
+  authenticatedUser: async ({ page, homePage, signInModal }, use): Promise<void> => {
+    await homePage.navigateToHomePage();
+    await homePage.waitForHomePage();
+
+    await homePage.header.clickSignIn();
+    await signInModal.waitForVisible();
+
+    await signInModal.fillEmail(env.USER_EMAIL);
+    await signInModal.fillPassword(env.USER_PASSWORD);
+    await signInModal.clickSignIn();
+
+    await signInModal.waitForHidden();
+
+    await use(new ProfilePage(page));
   },
 
   ecoNewsCreatePage: async ({ page }, use): Promise<void> => {
