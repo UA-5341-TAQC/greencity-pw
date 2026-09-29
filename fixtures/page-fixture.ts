@@ -23,8 +23,6 @@ type PageFixtures = {
   addPlaceModal: AddPlaceModal;
   ecoNewsPage: EcoNewsPage;
   ecoNewsDetailsPage: EcoNewsDetailsPage;
-  createNewsPage: CreateNewsPage;
-  createNewsPreviewPage: CreateNewsPreviewPage;
   ecoNewsCreatePage: CreateNewsPage;
   ecoNewsCreatePreviewPage: CreateNewsPreviewPage;
 };
@@ -70,16 +68,8 @@ export const test = baseTest.extend<PageFixtures>({
     await use(new EcoNewsDetailsPage(page));
   },
 
-  createNewsPage: async ({ page }, use): Promise<void> => {
-    await use(new CreateNewsPage(page));
-  },
-
   ecoNewsCreatePage: async ({ page }, use): Promise<void> => {
     await use(new CreateNewsPage(page));
-  },
-
-  createNewsPreviewPage: async ({ page }, use): Promise<void> => {
-    await use(new CreateNewsPreviewPage(page));
   },
 
   ecoNewsCreatePreviewPage: async ({ page }, use): Promise<void> => {
