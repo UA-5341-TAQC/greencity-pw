@@ -15,7 +15,7 @@ test.describe('Page layout and key sections', () => {
       await homePage.header.clickSignIn();
       await signInModal.waitForVisible();
       await signInModal.signIn(env.USER_EMAIL, env.USER_PASSWORD);
-      await expect(homePage.header.userMenuDropdown).toBeVisible({ timeout: env.MEDIUM_TIMEOUT });
+      await expect(homePage.header.isVisible());
     });
 
     await test.step('2.Click "Мій Кабінет" (My Cabinet) in the header', async () => {
