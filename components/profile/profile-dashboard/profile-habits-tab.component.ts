@@ -15,10 +15,11 @@ export class ProfileHabitsTabComponent extends BaseComponent {
   /** Item hosts — use the item accessors below to get COMs. */
   readonly itemHosts: Locator;
   readonly createLink: Locator;
+  readonly tabHeader: Locator;
 
   constructor(page: Page) {
     super(page.locator('app-profile-dashboard').first(), page);
-
+    this.tabHeader = this.root.getByRole('tab').nth(0);
     this.body = this.root
       .locator('mat-tab-body:has(app-one-habit), mat-tab-body.mat-mdc-tab-body-active')
       .first();
