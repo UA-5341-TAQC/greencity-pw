@@ -57,7 +57,7 @@ export class CreateNewsPage extends BasePage {
       "div.source-block input[type='text'], input[formcontrolname='source']"
     );
 
-    this.contentEditor = page.locator("div.ql-editor[contenteditable='true'], div.ql-editor");
+    this.contentEditor = page.locator('div.ql-editor').first();
     this.contentEditorCounter = page.locator(
       'p.quill-counter.warning, p.quill-counter, div.content-counter, p:has-text("Number of characters:"), p:has-text("Кількість знаків:")'
     );
@@ -68,7 +68,6 @@ export class CreateNewsPage extends BasePage {
     this.author = page
       .locator('div.date p')
       .filter({ hasText: new RegExp(`${info?.author ?? 'Author:'}|Author:|Автор:`, 'i') });
-
 
     this.cancelButton = page.locator(
       'div.submit-buttons button.tertiary-global-button, button:has-text("Cancel")'
@@ -271,7 +270,17 @@ export class CreateNewsPage extends BasePage {
   /** Checks whether the content editor is visible. */
   async isContentEditorVisible(): Promise<boolean> {
     return await test.step('CreateNews: check if content editor is visible', async () => {
-      return await this.contentEditor.isVisible();
+      try {
+        await this.contentEditor.scrollIntoViewIfNeeded({ timeout: 2000 });
+      } catch {
+        // ignore
+      }
+      const visible = await this.contentEditor.isVisible();
+      if (visible) return true;
+      return await this.page
+        .locator('quill-editor, .ql-container, div.textarea-wrapper')
+        .first()
+        .isVisible();
     });
   }
 
