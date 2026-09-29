@@ -1,6 +1,5 @@
-export * from './habit';
-export * from './create-news/create-news-preview-page';
 export * from './create-news/create-news-page';
+export * from './create-news/create-news-preview-page';
 export * from './eco-news-details.page';
 export * from './eco-news.page';
 export * from './edit-event-page';
@@ -8,6 +7,7 @@ export * from './edit-profile-page';
 export * from './event-details-page';
 export * from './events-page';
 export * from './friends-page';
+export * from './habit';
 export * from './home-page';
 export * from './places-page';
 export * from './profile-page';

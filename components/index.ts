@@ -8,6 +8,7 @@ export * from './comment-item-component';
 export * from './comments-component';
 export * from './event-item.component';
 export * from './footer-component';
+export * from './friend-item.component';
 export * from './friends-tabs.component';
 export * from './habit-item.component';
 export * from './habit-todo-item-component';
