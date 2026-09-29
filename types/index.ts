@@ -4,3 +4,5 @@ export * from './header.i18n';
 export * from './header.types';
 export * from './places.types';
 export * from './profile-dashboard.types';
+export * from './news.types';
+export * from './news.i18n';

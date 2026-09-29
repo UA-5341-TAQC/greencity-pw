@@ -1,5 +1,8 @@
 import { test, type Page, type Locator } from '@playwright/test';
 import BasePage from '@/pages/base-page';
+import { Language } from '@/types/header.types';
+import { NewsType } from '@/types/news.types';
+import { NEWS_I18N } from '@/types/news.i18n';
 
 /**
  * Create News Preview page.
@@ -32,16 +35,20 @@ export class CreateNewsPreviewPage extends BasePage {
   protected readonly backButton: Locator;
   protected readonly publishButton: Locator;
 
-  constructor(page: Page) {
+  constructor(page: Page, language: Language = Language.En) {
     super(page);
+    const newsTypes = NEWS_I18N[language].types;
 
     this.pageTitle = page.locator('div.create-news-text');
+
     this.tagsBox = page.locator('div.tags');
-    this.newsTag = page.locator("div.tags-item:has-text('News')");
-    this.eventTag = page.locator("div.tags-item:has-text('Event')");
-    this.educationTag = page.locator("div.tags-item:has-text('Education')");
-    this.initiativesTag = page.locator("div.tags-item:has-text('Initiatives')");
-    this.adsTag = page.locator("div.tags-item:has-text('Ads')");
+    this.newsTag = page.locator(`div.tags-item:has-text('${newsTypes[NewsType.News]}')`);
+    this.eventTag = page.locator(`div.tags-item:has-text('${newsTypes[NewsType.Event]}')`);
+    this.educationTag = page.locator(`div.tags-item:has-text('${newsTypes[NewsType.Education]}')`);
+    this.initiativesTag = page.locator(
+      `div.tags-item:has-text('${newsTypes[NewsType.Initiatives]}')`
+    );
+    this.adsTag = page.locator(`div.tags-item:has-text('${newsTypes[NewsType.Ads]}')`);
 
     this.newsTitle = page.locator('div.news-title');
     this.date = page.locator('div.news-info-date');
@@ -57,8 +64,14 @@ export class CreateNewsPreviewPage extends BasePage {
     this.newsLinkLinkedin = page.locator("img[alt='linkedin']");
     this.newsLinkFacebook = page.locator("img[alt='facebook']");
 
-    this.backButton = page.locator('a.button-link, a[href*="create-news"]').first();
-    this.publishButton = page.getByRole('button', { name: 'Publish' });
+    this.backButton = page
+      .locator('a.button-link, a[href*="create-news"], div.button-content')
+      .first();
+    this.publishButton = page
+      .locator(
+        'button.primary-global-button, button:has-text("Publish"), button:has-text("Опублікувати")'
+      )
+      .first();
   }
 
   /** Waits until the Create News Preview page is loaded. */
@@ -202,3 +215,4 @@ export class CreateNewsPreviewPage extends BasePage {
     });
   }
 }
+export default CreateNewsPreviewPage;
