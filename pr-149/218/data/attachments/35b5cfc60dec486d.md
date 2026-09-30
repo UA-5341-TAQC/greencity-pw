@@ -1,0 +1,68 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: tc-6-7-succesful-editing-news.spec.ts >> TC-007 Verify successful editing of Eco News content and tags >> updates content and tags on an existing Eco News item
+- Location: tests/tc-6-7-succesful-editing-news.spec.ts:65:3
+
+# Error details
+
+```
+Error: API sign in failed with status 400: [{"name":"email","message":"{greenCity.validation.invalid.email}"},{"name":"email","message":"must not be blank"}]
+```
+
+# Test source
+
+```ts
+  1  | import { test, type APIRequestContext } from '@playwright/test';
+  2  | import env from '@/config/env';
+  3  | 
+  4  | export interface AuthSessionData {
+  5  |   userId: number;
+  6  |   accessToken: string;
+  7  |   refreshToken: string;
+  8  |   name: string;
+  9  |   ownRegistrations?: boolean;
+  10 | }
+  11 | 
+  12 | export interface SignInCredentials {
+  13 |   email?: string;
+  14 |   password?: string;
+  15 | }
+  16 | 
+  17 | /**
+  18 |  * Performs authentication via the GreenCity User REST API.
+  19 |  * Returns auth tokens and user information without UI interaction.
+  20 |  */
+  21 | export async function signInViaApi(
+  22 |   request: APIRequestContext,
+  23 |   credentials?: SignInCredentials
+  24 | ): Promise<AuthSessionData> {
+  25 |   return await test.step('API: Sign in via user service', async () => {
+  26 |     const email = credentials?.email || env.USER_EMAIL;
+  27 |     const password = credentials?.password || env.USER_PASSWORD;
+  28 | 
+  29 |     const response = await request.post(`${env.API_USER_BASE_URL}/ownSecurity/signIn`, {
+  30 |       data: {
+  31 |         email,
+  32 |         password,
+  33 |         projectName: 'GREENCITY',
+  34 |       },
+  35 |     });
+  36 | 
+  37 |     if (!response.ok()) {
+> 38 |       throw new Error(
+     |             ^ Error: API sign in failed with status 400: [{"name":"email","message":"{greenCity.validation.invalid.email}"},{"name":"email","message":"must not be blank"}]
+  39 |         `API sign in failed with status ${response.status()}: ${await response.text()}`
+  40 |       );
+  41 |     }
+  42 | 
+  43 |     return (await response.json()) as AuthSessionData;
+  44 |   });
+  45 | }
+  46 | 
+```
