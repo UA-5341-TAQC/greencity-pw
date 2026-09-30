@@ -2,6 +2,10 @@
 
 End-to-end tests for the GreenCity web application, written with Playwright and TypeScript.
 
+<a href="https://ua-5341-taqc.github.io/greencity-pw/main/" target="_blank">
+   <img src="https://img.shields.io/badge/Allure%20Report-main-blue" alt="Allure Report">
+</a>
+
 ## Prerequisites
 
 - Node.js 24 or later
@@ -26,11 +30,14 @@ cp .env.example .env
 Then update the values as needed:
 
 ```env
-BASE_URL=http://localhost:3000
-API_URL=http://localhost:8080
-HEADLESS=true
-USER_EMAIL=your-email@example.com
-USER_PASSWORD=your-password
+BASE_URL=https://www.greencity.cx.ua
+API_USER_BASE_URL=https://greencity-user.greencity.cx.ua
+API_GREENCITY_BASE_URL=https://greencity.greencity.cx.ua
+HEADLESS=false
+USER_EMAIL=test@test.com
+USER_PASSWORD=password123!
+USER_ID=999
+USER_NAME=TestUser
 SHORT_TIMEOUT=5000
 MEDIUM_TIMEOUT=10000
 LONG_TIMEOUT=30000

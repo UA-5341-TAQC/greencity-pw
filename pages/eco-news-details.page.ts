@@ -11,22 +11,33 @@ export class EcoNewsDetailsPage extends BasePage {
   private readonly publicationDate: Locator;
   private readonly tags: Locator;
   private readonly backButton: Locator;
+  private readonly relatedNewsHeading: Locator;
   private readonly relatedNewsItems: Locator;
+  private readonly likeButton: Locator;
+  private readonly likesCount: Locator;
+  private readonly commentInput: Locator;
+  private readonly submitCommentButton: Locator;
+  private readonly commentsCounter: Locator;
 
   constructor(page: Page) {
     super(page);
 
-    this.title = page.locator('h1, [class*="title"]').first();
-    this.content = page.locator('[class*="content"], [class*="text"]').first();
+    // verified via DevTools against the live site
+    this.title = page.locator('.news-title');
+    this.content = page.locator('.news-text .ql-editor');
     this.coverImage = page.locator('.news-image-img').first();
     this.authorName = page.locator('.news-info-author').first();
     this.authorAvatar = page.locator('[class*="author"] img');
     this.publicationDate = page.locator('.news-info-date').first();
     this.tags = page.locator('.tags div.tags-item');
     this.backButton = page.getByRole('link', { name: 'Back to News' });
-    this.relatedNewsItems = page.locator(
-      '[class*="related"] [class*="news-item"], [class*="related"] [class*="news-card"]'
-    );
+    this.relatedNewsHeading = page.locator('app-eco-news-widget p');
+    this.relatedNewsItems = page.locator('app-eco-news-widget .gallery-view-active li');
+    this.likeButton = page.locator('img.news_like');
+    this.likesCount = page.locator('.numerosity_likes');
+    this.commentInput = page.locator('app-comment-textarea');
+    this.submitCommentButton = page.locator('button.primary-global-button');
+    this.commentsCounter = page.locator('app-comments-container .counter');
   }
 
   async navigateToNewsDetails(newsId: string | number): Promise<void> {
@@ -67,7 +78,8 @@ export class EcoNewsDetailsPage extends BasePage {
 
   async getAuthorName(): Promise<string> {
     return await test.step('Get author name', async () => {
-      return (await this.authorName.innerText()).trim();
+      const text = (await this.authorName.innerText()).trim();
+      return text.replace(/^автор\s*/i, '');
     });
   }
 
@@ -101,6 +113,10 @@ export class EcoNewsDetailsPage extends BasePage {
     });
   }
 
+  async isRelatedNewsWidgetVisible(): Promise<boolean> {
+    return this.relatedNewsHeading.isVisible();
+  }
+
   async getRelatedNewsCount(): Promise<number> {
     return await test.step('Get related news count', async () => {
       return this.relatedNewsItems.count();
@@ -111,6 +127,28 @@ export class EcoNewsDetailsPage extends BasePage {
     await test.step(`Open related news item at index ${index}`, async () => {
       await this.relatedNewsItems.nth(index).click();
     });
+  }
+
+  async clickLike(): Promise<void> {
+    await this.likeButton.click();
+  }
+
+  async getLikesCount(): Promise<number> {
+    const text = (await this.likesCount.innerText()).trim();
+    return Number(text) || 0;
+  }
+
+  async typeComment(text: string): Promise<void> {
+    await this.commentInput.click();
+    await this.commentInput.fill(text);
+  }
+
+  async submitComment(): Promise<void> {
+    await this.submitCommentButton.click();
+  }
+
+  async getCommentsCountText(): Promise<string> {
+    return (await this.commentsCounter.innerText()).trim();
   }
 
   async isBackButtonVisible(): Promise<boolean> {
