@@ -21,7 +21,7 @@ test.describe('Events - Edit Event', () => {
       await eventsPage.waitForEventsPage();
     });
 
-    await test.step("Click the 'Edit event' button for the created event", async () => {
+    await test.step("Click the 'Edit event' button for the updated event", async () => {
       const eventCard = eventsPage.getGridEventCardByTitle(EXISTING_EVENT_TITLE);
 
       await eventCard.clickEditEvent();

@@ -18,21 +18,17 @@ test.describe('Events - Edit Event', () => {
       await eventsPage.waitForEventsPage();
     });
 
-    await test.step('Locate the event created by another user', async () => {
-      const eventCard = eventsPage.getGridEventCardByTitle(EVENT_TITLE);
+    const eventCard = eventsPage.getGridEventCardByTitle(EVENT_TITLE);
 
+    await test.step('Locate the event created by another user', async () => {
       expect(await eventCard.getTitle()).toBe(EVENT_TITLE);
     });
 
     await test.step("Verify the 'Edit event' button is not displayed on the event card", async () => {
-      const eventCard = eventsPage.getGridEventCardByTitle(EVENT_TITLE);
-
       expect(await eventCard.isEditEventButtonVisible()).toBe(false);
     });
 
     await test.step("Click the 'More' button", async () => {
-      const eventCard = eventsPage.getGridEventCardByTitle(EVENT_TITLE);
-
       await eventCard.clickMore();
       await eventDetailsPage.waitForDetailsPage();
     });
