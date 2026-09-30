@@ -246,6 +246,17 @@ export class EventsPage extends BasePage {
   getGridEventCardByIndex(index: number): GridEventCardComponent {
     return new GridEventCardComponent(this.gridEventCardRoots.nth(index), this.page);
   }
+
+  /** Returns the first event card that is available for joining. */
+  getFirstJoinableGridEventCard(): GridEventCardComponent {
+    const root = this.gridEventCardRoots
+      .filter({
+        has: this.page.getByRole('button', { name: 'Join event', exact: true }),
+      })
+      .first();
+
+    return new GridEventCardComponent(root, this.page);
+  }
   /** Returns a ListEventCardComponent for the card at the given position */
   getListEventCardByIndex(index: number): ListEventCardComponent {
     return new ListEventCardComponent(this.listEventCardRoots.nth(index), this.page);

@@ -10,6 +10,9 @@ export class EventDetailsPage extends BasePage {
   private readonly eventInfoBlock: Locator;
   private readonly saveEventButton: Locator;
   private readonly joinEventButton: Locator;
+  private readonly cancelRequestButton: Locator;
+  private readonly participantsCount: Locator;
+  private readonly participantAvatars: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -21,7 +24,13 @@ export class EventDetailsPage extends BasePage {
     this.description = page.locator('.ql-editor');
     this.eventInfoBlock = page.locator('.event-info-block');
     this.saveEventButton = page.locator('.save-join-event-block .secondary-global-button');
-    this.joinEventButton = page.locator('.save-join-event-block .primary-global-button');
+    this.joinEventButton = page.getByRole('button', { name: 'Join event', exact: true });
+    this.cancelRequestButton = page.getByRole('button', {
+      name: 'Cancel Request',
+      exact: true,
+    });
+    this.participantsCount = page.locator('.event-participants-count');
+    this.participantAvatars = page.locator('.event-participants-avatar');
   }
 
   async navigateToEventDetails(eventId: string | number): Promise<void> {
@@ -71,5 +80,17 @@ export class EventDetailsPage extends BasePage {
 
   async isJoinEventButtonVisible(): Promise<boolean> {
     return await this.joinEventButton.isVisible();
+  }
+
+  async isCancelRequestButtonVisible(): Promise<boolean> {
+    return await this.cancelRequestButton.isVisible();
+  }
+
+  async getParticipantsCountText(): Promise<string> {
+    return (await this.participantsCount.innerText()).trim();
+  }
+
+  async getParticipantAvatarsCount(): Promise<number> {
+    return await this.participantAvatars.count();
   }
 }
