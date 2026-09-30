@@ -12,7 +12,7 @@ test.describe('Tags on news details', () => {
       await ecoNewsDetailsPage.waitForDetailsPage();
     });
 
-    await test.step('1:Inspect the tags section under/near the article title..', async () => {
+    await test.step('1:Inspect the tags section under/near the article title.', async () => {
       await ecoNewsDetailsPage.checkAllTagsVisible();
       const expCount = 3;
       const actCount = await ecoNewsDetailsPage.tagsCount();
@@ -24,12 +24,18 @@ test.describe('Tags on news details', () => {
 
       const tagsList = await ecoNewsDetailsPage.getTagTexts();
       const currentUrl = page.url();
+      const expTags = ['News', 'Education', 'Initiatives'];
 
-      expect(tagsList).toEqual(['News', 'Education', 'Initiatives']);
+      expect(tagsList).toEqual(expTags);
+      expect(await ecoNewsDetailsPage.isTagVisible('News')).toBe(true);
       await ecoNewsDetailsPage.clickTag('News');
       expect(page.url()).toBe(currentUrl);
+
+      expect(await ecoNewsDetailsPage.isTagVisible('Education')).toBe(true);
       await ecoNewsDetailsPage.clickTag('Education');
       expect(page.url()).toBe(currentUrl);
+
+      expect(await ecoNewsDetailsPage.isTagVisible('Initiatives')).toBe(true);
       await ecoNewsDetailsPage.clickTag('Initiatives');
       expect(page.url()).toBe(currentUrl);
     });

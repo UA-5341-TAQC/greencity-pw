@@ -114,6 +114,12 @@ export class EcoNewsDetailsPage extends BasePage {
     });
   }
 
+  async isTagVisible(tagName: string): Promise<boolean> {
+    return await test.step(`Check if the specific tag is visible: ${tagName}`, async () => {
+      return await this.tags.filter({ hasText: tagName }).first().isVisible();
+    });
+  }
+
   async checkAllTagsVisible(): Promise<void> {
     await test.step('Check that all tags are visible', async () => {
       const count = await this.tags.count();
