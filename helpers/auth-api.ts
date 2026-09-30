@@ -26,7 +26,7 @@ export async function signInViaApi(
     const email = credentials?.email || env.USER_EMAIL;
     const password = credentials?.password || env.USER_PASSWORD;
 
-    const response = await request.post(`${env.USER_API_URL}/ownSecurity/signIn`, {
+    const response = await request.post(`${env.API_USER_BASE_URL}/ownSecurity/signIn`, {
       data: {
         email,
         password,
