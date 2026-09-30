@@ -26,6 +26,7 @@ export class CreateEventPage extends BasePage {
   readonly pictureSection: Locator;
   readonly pictureUploadHint: Locator;
   readonly initiativeTypeLabels: Locator;
+  readonly descriptionValidationMessage: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -62,6 +63,12 @@ export class CreateEventPage extends BasePage {
       { exact: true }
     );
     this.initiativeTypeLabels = page.locator('mat-chip:visible, mat-chip-option:visible');
+    this.descriptionValidationMessage = page.getByText(/Not enough characters\. Left:/i).first();
+  }
+
+  async waitForCreateEventPage(): Promise<void> {
+    await this.titleInput.waitFor({ state: 'visible' });
+    await this.description.waitFor({ state: 'visible' });
   }
 
   async fillTitle(title: string): Promise<void> {
