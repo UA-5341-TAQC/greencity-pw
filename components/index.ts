@@ -1,3 +1,4 @@
+export * from './base-component';
 export * from './eco-news-card';
 export * from './event-card';
 export * from './places';
@@ -7,6 +8,7 @@ export * from './comment-item-component';
 export * from './comments-component';
 export * from './event-item.component';
 export * from './footer-component';
+export * from './friend-item.component';
 export * from './friends-tabs.component';
 export * from './habit-item.component';
 export * from './habit-todo-item-component';
@@ -15,3 +17,5 @@ export * from './header-component';
 export * from './image-upload-component';
 export * from './pagination.component';
 export * from './user-menu-component';
+export * from './calendar-dropdown-component';
+export * from './tag-selector-component';

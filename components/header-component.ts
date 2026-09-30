@@ -1,4 +1,4 @@
-import { Locator, Page, test } from '@playwright/test';
+import { expect, Locator, Page, test } from '@playwright/test';
 import { BaseComponent } from '@/components/base-component';
 import { Language, MenuItem } from '@/types/header.types';
 import { HEADER_I18N, type HeaderI18n } from '@/types/header.i18n';
@@ -99,6 +99,8 @@ export class HeaderComponent extends BaseComponent {
         } else {
           await this.langUkrainianOption.click();
         }
+        // Verify that the language has been switched
+        await expect(this.signInButton).toHaveText(HEADER_I18N[language].signIn);
       }
     });
   }
@@ -156,5 +158,14 @@ export class HeaderComponent extends BaseComponent {
     await test.step(`Navigate to ${item} via Header`, async () => {
       await this.navLinks[item].click();
     });
+  }
+
+  /**
+   * Helper for veryfing all navigation links are visible
+   */
+  async verifyAllNavLinksAreVisible(): Promise<void> {
+    for (const [menuItem, locator] of Object.entries(this.navLinks)) {
+      await expect(locator, `Header menu option ${menuItem} should be visible!`).toBeVisible();
+    }
   }
 }

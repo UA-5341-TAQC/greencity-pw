@@ -17,8 +17,8 @@ export default class BasePage {
     this.context = page.context();
     this.header = new HeaderComponent(page);
     this.toastMessage = page
-      .locator('snack-bar-container .mat-mdc-snack-bar-label, snack-bar-container')
-      .first();
+      .locator('snack-bar-container .mat-mdc-snack-bar-label, mat-snack-bar-container')
+      .last();
   }
 
   /**

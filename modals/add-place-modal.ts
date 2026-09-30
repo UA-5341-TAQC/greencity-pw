@@ -58,4 +58,24 @@ export class AddPlaceModal extends BaseModal {
   async isAddButtonEnabled(): Promise<boolean> {
     return this.addButton.isEnabled();
   }
+
+  async isCategoryVisible(): Promise<boolean> {
+    return await this.categorySelect.isVisible();
+  }
+
+  async isNameInputVisible(): Promise<boolean> {
+    return await this.nameInput.isVisible();
+  }
+
+  async isAddressInputVisible(): Promise<boolean> {
+    return await this.addressInput.isVisible();
+  }
+
+  async isCancelButtonVisible(): Promise<boolean> {
+    return await this.cancelButton.isVisible();
+  }
+
+  async isAddButtonVisible(): Promise<boolean> {
+    return await this.addButton.isVisible();
+  }
 }
