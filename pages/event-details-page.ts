@@ -1,5 +1,6 @@
 import type { Locator, Page } from '@playwright/test';
 import BasePage from '@/pages/base-page';
+import { CommentsComponent } from '@/components';
 
 export class EventDetailsPage extends BasePage {
   private readonly backButton: Locator;
@@ -10,6 +11,9 @@ export class EventDetailsPage extends BasePage {
   private readonly eventInfoBlock: Locator;
   private readonly saveEventButton: Locator;
   private readonly joinEventButton: Locator;
+  private readonly commentsSection: Locator;
+
+  public readonly comments: CommentsComponent;
 
   constructor(page: Page) {
     super(page);
@@ -22,6 +26,8 @@ export class EventDetailsPage extends BasePage {
     this.eventInfoBlock = page.locator('.event-info-block');
     this.saveEventButton = page.locator('.save-join-event-block .secondary-global-button');
     this.joinEventButton = page.locator('.save-join-event-block .primary-global-button');
+    this.commentsSection = page.locator('app-comments-container.event');
+    this.comments = new CommentsComponent(this.commentsSection, page);
   }
 
   async navigateToEventDetails(eventId: string | number): Promise<void> {
@@ -71,5 +77,8 @@ export class EventDetailsPage extends BasePage {
 
   async isJoinEventButtonVisible(): Promise<boolean> {
     return await this.joinEventButton.isVisible();
+  }
+  async scrollToComments(): Promise<void> {
+    await this.commentsSection.scrollIntoViewIfNeeded();
   }
 }
