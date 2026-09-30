@@ -1,0 +1,554 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: eco-news-details.spec.ts >> Eco News Details Page >> TC-44: Verify Eco News details page content displays correctly
+- Location: tests/eco-news-details.spec.ts:5:3
+
+# Error details
+
+```
+TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator('#create-button, a[href*="create-news"]').first() to be visible
+
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e4]:
+      - link "skip to the main content" [ref=e6] [cursor=pointer]:
+        - /url: .main-content
+      - banner "Welcome to header" [ref=e7]:
+        - generic [ref=e9]:
+          - link [ref=e10] [cursor=pointer]:
+            - /url: "#/greenCity"
+            - link "Image green city logo" [ref=e11]
+          - generic [ref=e12]:
+            - navigation [ref=e13]:
+              - tablist [ref=e14]:
+                - listitem [ref=e15]:
+                  - link "Eco news" [ref=e16] [cursor=pointer]:
+                    - /url: "#/greenCity/news"
+                - listitem [ref=e17]:
+                  - link "Events" [ref=e18] [cursor=pointer]:
+                    - /url: "#/greenCity/events"
+                - listitem [ref=e19]:
+                  - link "Places" [ref=e20] [cursor=pointer]:
+                    - /url: "#/greenCity/places"
+                - listitem [ref=e21]:
+                  - link "About us" [ref=e22] [cursor=pointer]:
+                    - /url: "#/greenCity/about"
+                - listitem [ref=e23]:
+                  - link "My space" [ref=e24] [cursor=pointer]:
+                    - /url: "#/greenCity/profile"
+                - listitem [ref=e25]:
+                  - link "UBS courier" [ref=e26] [cursor=pointer]:
+                    - /url: "#/ubs"
+            - menu [ref=e28]:
+              - search "site search" [ref=e29] [cursor=pointer]
+              - menu "language switcher" [ref=e31]:
+                - option "english" [ref=e32] [cursor=pointer]:
+                  - generic [aria-hidden] [ref=e33]: En
+              - link "Sign in" [ref=e35] [cursor=pointer]
+              - link "Sign up" [ref=e36] [cursor=pointer]
+      - generic [ref=e39]:
+        - generic "Tab To Main"
+        - generic [ref=e40]:
+          - main "news list" [ref=e44]:
+            - generic [ref=e45]:
+              - generic [ref=e47]:
+                - heading "Eco news" [level=1] [ref=e48]
+                - generic [ref=e49]:
+                  - generic [ref=e50] [cursor=pointer]
+                  - generic [ref=e52] [cursor=pointer]
+                  - img "my-event" [ref=e55] [cursor=pointer]
+              - generic [ref=e56]:
+                - generic [ref=e59]:
+                  - generic [ref=e60]: Filter by
+                  - generic "filter by items" [ref=e61]:
+                    - button "News" [ref=e62] [cursor=pointer]
+                    - button "Events" [ref=e65] [cursor=pointer]
+                    - button "Education" [ref=e68] [cursor=pointer]
+                    - button "Initiatives" [ref=e71] [cursor=pointer]
+                    - button "Ads" [ref=e74] [cursor=pointer]
+                - separator [ref=e77]
+              - generic [ref=e78]:
+                - heading "4812 items found" [level=2] [ref=e81]
+                - generic [ref=e83]:
+                  - button "table view" [pressed] [ref=e84]:
+                    - emphasis [ref=e85]: 
+                  - button "list view" [ref=e86] [cursor=pointer]:
+                    - emphasis [ref=e87]: 
+              - list "news list" [ref=e89]:
+                - listitem [ref=e90]:
+                  - link "user added image Events TestTest edited 1790773297115 Edited content for the edit news test, Edited content for the edit news test. date of creation Sep 30, 2026 created by Green comments 0 likes 0" [ref=e91] [cursor=pointer]:
+                    - /url: "#/greenCity/news/13512"
+                    - generic [ref=e93]:
+                      - img "user added image" [ref=e94]
+                      - generic [ref=e95]:
+                        - list [ref=e96]:
+                          - generic [ref=e97]: Events
+                        - generic [ref=e98]:
+                          - heading "TestTest edited 1790773297115" [level=3] [ref=e100]
+                          - paragraph [ref=e103]: Edited content for the edit news test, Edited content for the edit news test.
+                        - generic [ref=e104]:
+                          - paragraph [ref=e105]:
+                            - img "date of creation" [ref=e106]
+                            - generic [ref=e107]: Sep 30, 2026
+                          - paragraph [ref=e108]:
+                            - img "created by" [ref=e109]
+                            - generic [ref=e110]: Green
+                          - generic [ref=e111]:
+                            - paragraph [ref=e112]:
+                              - img "comments" [ref=e113]
+                              - generic [ref=e114]: "0"
+                            - paragraph [ref=e115]:
+                              - img "likes" [ref=e116]
+                              - generic [ref=e117]: "0"
+                - listitem [ref=e120]:
+                  - link "user added image News| Education| Initiatives New environmental initiative launched in Lviv 1790772962861 Today we launched a new environmental initiative aimed at reducing plastic waste in our community. Let us work together for a cleaner and greener environment. date of creation Sep 30, 2026 created by Володимир comments 0 likes 0" [ref=e121] [cursor=pointer]:
+                    - /url: "#/greenCity/news/13511"
+                    - generic [ref=e123]:
+                      - img "user added image" [ref=e124]
+                      - generic [ref=e125]:
+                        - list [ref=e126]:
+                          - generic [ref=e127]: News|
+                          - generic [ref=e128]: Education|
+                          - generic [ref=e129]: Initiatives
+                        - generic [ref=e130]:
+                          - heading "New environmental initiative launched in Lviv 1790772962861" [level=3] [ref=e132]
+                          - paragraph [ref=e135]: Today we launched a new environmental initiative aimed at reducing plastic waste in our community. Let us work together for a cleaner and greener environment.
+                        - generic [ref=e136]:
+                          - paragraph [ref=e137]:
+                            - img "date of creation" [ref=e138]
+                            - generic [ref=e139]: Sep 30, 2026
+                          - paragraph [ref=e140]:
+                            - img "created by" [ref=e141]
+                            - generic [ref=e142]: Володимир
+                          - generic [ref=e143]:
+                            - paragraph [ref=e144]:
+                              - img "comments" [ref=e145]
+                              - generic [ref=e146]: "0"
+                            - paragraph [ref=e147]:
+                              - img "likes" [ref=e148]
+                              - generic [ref=e149]: "0"
+                - listitem [ref=e152]:
+                  - link "user added image News| Education| Initiatives New environmental initiative launched in Lviv 1790772962131 Today we launched a new environmental initiative aimed at reducing plastic waste in our community. Let us work together for a cleaner and greener environment. date of creation Sep 30, 2026 created by Володимир comments 0 likes 0" [ref=e153] [cursor=pointer]:
+                    - /url: "#/greenCity/news/13510"
+                    - generic [ref=e155]:
+                      - img "user added image" [ref=e156]
+                      - generic [ref=e157]:
+                        - list [ref=e158]:
+                          - generic [ref=e159]: News|
+                          - generic [ref=e160]: Education|
+                          - generic [ref=e161]: Initiatives
+                        - generic [ref=e162]:
+                          - heading "New environmental initiative launched in Lviv 1790772962131" [level=3] [ref=e164]
+                          - paragraph [ref=e167]: Today we launched a new environmental initiative aimed at reducing plastic waste in our community. Let us work together for a cleaner and greener environment.
+                        - generic [ref=e168]:
+                          - paragraph [ref=e169]:
+                            - img "date of creation" [ref=e170]
+                            - generic [ref=e171]: Sep 30, 2026
+                          - paragraph [ref=e172]:
+                            - img "created by" [ref=e173]
+                            - generic [ref=e174]: Володимир
+                          - generic [ref=e175]:
+                            - paragraph [ref=e176]:
+                              - img "comments" [ref=e177]
+                              - generic [ref=e178]: "0"
+                            - paragraph [ref=e179]:
+                              - img "likes" [ref=e180]
+                              - generic [ref=e181]: "0"
+                - listitem [ref=e184]:
+                  - link "user added image News| Education| Initiatives New environmental initiative launched in Lviv 1790772958237 Today we launched a new environmental initiative aimed at reducing plastic waste in our community. Let us work together for a cleaner and greener environment. date of creation Sep 30, 2026 created by Володимир comments 0 likes 0" [ref=e185] [cursor=pointer]:
+                    - /url: "#/greenCity/news/13509"
+                    - generic [ref=e187]:
+                      - img "user added image" [ref=e188]
+                      - generic [ref=e189]:
+                        - list [ref=e190]:
+                          - generic [ref=e191]: News|
+                          - generic [ref=e192]: Education|
+                          - generic [ref=e193]: Initiatives
+                        - generic [ref=e194]:
+                          - heading "New environmental initiative launched in Lviv 1790772958237" [level=3] [ref=e196]
+                          - paragraph [ref=e199]: Today we launched a new environmental initiative aimed at reducing plastic waste in our community. Let us work together for a cleaner and greener environment.
+                        - generic [ref=e200]:
+                          - paragraph [ref=e201]:
+                            - img "date of creation" [ref=e202]
+                            - generic [ref=e203]: Sep 30, 2026
+                          - paragraph [ref=e204]:
+                            - img "created by" [ref=e205]
+                            - generic [ref=e206]: Володимир
+                          - generic [ref=e207]:
+                            - paragraph [ref=e208]:
+                              - img "comments" [ref=e209]
+                              - generic [ref=e210]: "0"
+                            - paragraph [ref=e211]:
+                              - img "likes" [ref=e212]
+                              - generic [ref=e213]: "0"
+                - listitem [ref=e216]:
+                  - link "user added image News| Education| Initiatives New environmental initiative launched in Lviv 1790772565089 Today we launched a new environmental initiative aimed at reducing plastic waste in our community. Let us work together for a cleaner and greener environment. date of creation Sep 30, 2026 created by Володимир comments 0 likes 0" [ref=e217] [cursor=pointer]:
+                    - /url: "#/greenCity/news/13508"
+                    - generic [ref=e219]:
+                      - img "user added image" [ref=e220]
+                      - generic [ref=e221]:
+                        - list [ref=e222]:
+                          - generic [ref=e223]: News|
+                          - generic [ref=e224]: Education|
+                          - generic [ref=e225]: Initiatives
+                        - generic [ref=e226]:
+                          - heading "New environmental initiative launched in Lviv 1790772565089" [level=3] [ref=e228]
+                          - paragraph [ref=e231]: Today we launched a new environmental initiative aimed at reducing plastic waste in our community. Let us work together for a cleaner and greener environment.
+                        - generic [ref=e232]:
+                          - paragraph [ref=e233]:
+                            - img "date of creation" [ref=e234]
+                            - generic [ref=e235]: Sep 30, 2026
+                          - paragraph [ref=e236]:
+                            - img "created by" [ref=e237]
+                            - generic [ref=e238]: Володимир
+                          - generic [ref=e239]:
+                            - paragraph [ref=e240]:
+                              - img "comments" [ref=e241]
+                              - generic [ref=e242]: "0"
+                            - paragraph [ref=e243]:
+                              - img "likes" [ref=e244]
+                              - generic [ref=e245]: "0"
+                - listitem [ref=e248]:
+                  - link "user added image News| Education| Initiatives New environmental initiative launched in Lviv 1790772504562 Today we launched a new environmental initiative aimed at reducing plastic waste in our community. Let us work together for a cleaner and greener environment. date of creation Sep 30, 2026 created by Володимир comments 0 likes 0" [ref=e249] [cursor=pointer]:
+                    - /url: "#/greenCity/news/13507"
+                    - generic [ref=e251]:
+                      - img "user added image" [ref=e252]
+                      - generic [ref=e253]:
+                        - list [ref=e254]:
+                          - generic [ref=e255]: News|
+                          - generic [ref=e256]: Education|
+                          - generic [ref=e257]: Initiatives
+                        - generic [ref=e258]:
+                          - heading "New environmental initiative launched in Lviv 1790772504562" [level=3] [ref=e260]
+                          - paragraph [ref=e263]: Today we launched a new environmental initiative aimed at reducing plastic waste in our community. Let us work together for a cleaner and greener environment.
+                        - generic [ref=e264]:
+                          - paragraph [ref=e265]:
+                            - img "date of creation" [ref=e266]
+                            - generic [ref=e267]: Sep 30, 2026
+                          - paragraph [ref=e268]:
+                            - img "created by" [ref=e269]
+                            - generic [ref=e270]: Володимир
+                          - generic [ref=e271]:
+                            - paragraph [ref=e272]:
+                              - img "comments" [ref=e273]
+                              - generic [ref=e274]: "0"
+                            - paragraph [ref=e275]:
+                              - img "likes" [ref=e276]
+                              - generic [ref=e277]: "0"
+                - listitem [ref=e280]:
+                  - link "user added image News| Education| Initiatives New environmental initiative launched in Lviv 1790772487364 Today we launched a new environmental initiative aimed at reducing plastic waste in our community. Let us work together for a cleaner and greener environment. date of creation Sep 30, 2026 created by Володимир comments 0 likes 0" [ref=e281] [cursor=pointer]:
+                    - /url: "#/greenCity/news/13506"
+                    - generic [ref=e283]:
+                      - img "user added image" [ref=e284]
+                      - generic [ref=e285]:
+                        - list [ref=e286]:
+                          - generic [ref=e287]: News|
+                          - generic [ref=e288]: Education|
+                          - generic [ref=e289]: Initiatives
+                        - generic [ref=e290]:
+                          - heading "New environmental initiative launched in Lviv 1790772487364" [level=3] [ref=e292]
+                          - paragraph [ref=e295]: Today we launched a new environmental initiative aimed at reducing plastic waste in our community. Let us work together for a cleaner and greener environment.
+                        - generic [ref=e296]:
+                          - paragraph [ref=e297]:
+                            - img "date of creation" [ref=e298]
+                            - generic [ref=e299]: Sep 30, 2026
+                          - paragraph [ref=e300]:
+                            - img "created by" [ref=e301]
+                            - generic [ref=e302]: Володимир
+                          - generic [ref=e303]:
+                            - paragraph [ref=e304]:
+                              - img "comments" [ref=e305]
+                              - generic [ref=e306]: "0"
+                            - paragraph [ref=e307]:
+                              - img "likes" [ref=e308]
+                              - generic [ref=e309]: "0"
+                - listitem [ref=e312]:
+                  - link "user added image News| Education| Initiatives New environmental initiative launched in Lviv 1790771448423 Today we launched a new environmental initiative aimed at reducing plastic waste in our community. Let us work together for a cleaner and greener environment. date of creation Sep 30, 2026 created by Володимир comments 0 likes 0" [ref=e313] [cursor=pointer]:
+                    - /url: "#/greenCity/news/13505"
+                    - generic [ref=e315]:
+                      - img "user added image" [ref=e316]
+                      - generic [ref=e317]:
+                        - list [ref=e318]:
+                          - generic [ref=e319]: News|
+                          - generic [ref=e320]: Education|
+                          - generic [ref=e321]: Initiatives
+                        - generic [ref=e322]:
+                          - heading "New environmental initiative launched in Lviv 1790771448423" [level=3] [ref=e324]
+                          - paragraph [ref=e327]: Today we launched a new environmental initiative aimed at reducing plastic waste in our community. Let us work together for a cleaner and greener environment.
+                        - generic [ref=e328]:
+                          - paragraph [ref=e329]:
+                            - img "date of creation" [ref=e330]
+                            - generic [ref=e331]: Sep 30, 2026
+                          - paragraph [ref=e332]:
+                            - img "created by" [ref=e333]
+                            - generic [ref=e334]: Володимир
+                          - generic [ref=e335]:
+                            - paragraph [ref=e336]:
+                              - img "comments" [ref=e337]
+                              - generic [ref=e338]: "0"
+                            - paragraph [ref=e339]:
+                              - img "likes" [ref=e340]
+                              - generic [ref=e341]: "0"
+                - listitem [ref=e344]:
+                  - link "user added image News| Education| Initiatives New environmental initiative launched in Lviv 1790771429727 Today we launched a new environmental initiative aimed at reducing plastic waste in our community. Let us work together for a cleaner and greener environment. date of creation Sep 30, 2026 created by Володимир comments 0 likes 0" [ref=e345] [cursor=pointer]:
+                    - /url: "#/greenCity/news/13504"
+                    - generic [ref=e347]:
+                      - img "user added image" [ref=e348]
+                      - generic [ref=e349]:
+                        - list [ref=e350]:
+                          - generic [ref=e351]: News|
+                          - generic [ref=e352]: Education|
+                          - generic [ref=e353]: Initiatives
+                        - generic [ref=e354]:
+                          - heading "New environmental initiative launched in Lviv 1790771429727" [level=3] [ref=e356]
+                          - paragraph [ref=e359]: Today we launched a new environmental initiative aimed at reducing plastic waste in our community. Let us work together for a cleaner and greener environment.
+                        - generic [ref=e360]:
+                          - paragraph [ref=e361]:
+                            - img "date of creation" [ref=e362]
+                            - generic [ref=e363]: Sep 30, 2026
+                          - paragraph [ref=e364]:
+                            - img "created by" [ref=e365]
+                            - generic [ref=e366]: Володимир
+                          - generic [ref=e367]:
+                            - paragraph [ref=e368]:
+                              - img "comments" [ref=e369]
+                              - generic [ref=e370]: "0"
+                            - paragraph [ref=e371]:
+                              - img "likes" [ref=e372]
+                              - generic [ref=e373]: "0"
+                - listitem [ref=e376]:
+                  - link "user added image News| Education| Initiatives New environmental initiative launched in Lviv 1790771424370 Today we launched a new environmental initiative aimed at reducing plastic waste in our community. Let us work together for a cleaner and greener environment. date of creation Sep 30, 2026 created by Володимир comments 0 likes 0" [ref=e377] [cursor=pointer]:
+                    - /url: "#/greenCity/news/13503"
+                    - generic [ref=e379]:
+                      - img "user added image" [ref=e380]
+                      - generic [ref=e381]:
+                        - list [ref=e382]:
+                          - generic [ref=e383]: News|
+                          - generic [ref=e384]: Education|
+                          - generic [ref=e385]: Initiatives
+                        - generic [ref=e386]:
+                          - heading "New environmental initiative launched in Lviv 1790771424370" [level=3] [ref=e388]
+                          - paragraph [ref=e391]: Today we launched a new environmental initiative aimed at reducing plastic waste in our community. Let us work together for a cleaner and greener environment.
+                        - generic [ref=e392]:
+                          - paragraph [ref=e393]:
+                            - img "date of creation" [ref=e394]
+                            - generic [ref=e395]: Sep 30, 2026
+                          - paragraph [ref=e396]:
+                            - img "created by" [ref=e397]
+                            - generic [ref=e398]: Володимир
+                          - generic [ref=e399]:
+                            - paragraph [ref=e400]:
+                              - img "comments" [ref=e401]
+                              - generic [ref=e402]: "0"
+                            - paragraph [ref=e403]:
+                              - img "likes" [ref=e404]
+                              - generic [ref=e405]: "0"
+                - listitem [ref=e408]:
+                  - link "user added image Education Title ContentContentContent date of creation Sep 30, 2026 created by dfs comments 0 likes 0" [ref=e409] [cursor=pointer]:
+                    - /url: "#/greenCity/news/13502"
+                    - generic [ref=e411]:
+                      - img "user added image" [ref=e412]
+                      - generic [ref=e413]:
+                        - list [ref=e414]:
+                          - generic [ref=e415]: Education
+                        - generic [ref=e416]:
+                          - heading "Title" [level=3] [ref=e418]
+                          - generic [ref=e419]: ContentContentContent
+                        - generic [ref=e421]:
+                          - paragraph [ref=e422]:
+                            - img "date of creation" [ref=e423]
+                            - generic [ref=e424]: Sep 30, 2026
+                          - paragraph [ref=e425]:
+                            - img "created by" [ref=e426]
+                            - generic [ref=e427]: dfs
+                          - generic [ref=e428]:
+                            - paragraph [ref=e429]:
+                              - img "comments" [ref=e430]
+                              - generic [ref=e431]: "0"
+                            - paragraph [ref=e432]:
+                              - img "likes" [ref=e433]
+                              - generic [ref=e434]: "0"
+                - listitem [ref=e437]:
+                  - link "user added image News| Education| Initiatives New environmental initiative launched in Lviv 1790770912238 Today we launched a new environmental initiative aimed at reducing plastic waste in our community. Let us work together for a cleaner and greener environment. date of creation Sep 30, 2026 created by Володимир comments 0 likes 0" [ref=e438] [cursor=pointer]:
+                    - /url: "#/greenCity/news/13501"
+                    - generic [ref=e440]:
+                      - img "user added image" [ref=e441]
+                      - generic [ref=e442]:
+                        - list [ref=e443]:
+                          - generic [ref=e444]: News|
+                          - generic [ref=e445]: Education|
+                          - generic [ref=e446]: Initiatives
+                        - generic [ref=e447]:
+                          - heading "New environmental initiative launched in Lviv 1790770912238" [level=3] [ref=e449]
+                          - paragraph [ref=e452]: Today we launched a new environmental initiative aimed at reducing plastic waste in our community. Let us work together for a cleaner and greener environment.
+                        - generic [ref=e453]:
+                          - paragraph [ref=e454]:
+                            - img "date of creation" [ref=e455]
+                            - generic [ref=e456]: Sep 30, 2026
+                          - paragraph [ref=e457]:
+                            - img "created by" [ref=e458]
+                            - generic [ref=e459]: Володимир
+                          - generic [ref=e460]:
+                            - paragraph [ref=e461]:
+                              - img "comments" [ref=e462]
+                              - generic [ref=e463]: "0"
+                            - paragraph [ref=e464]:
+                              - img "likes" [ref=e465]
+                              - generic [ref=e466]: "0"
+              - progressbar [ref=e470]
+          - contentinfo [ref=e486]:
+            - generic [ref=e487]:
+              - generic [ref=e488]:
+                - link [ref=e490] [cursor=pointer]:
+                  - /url: "#/greenCity"
+                  - img "GreenCity home" [ref=e491]
+                - navigation [ref=e492]:
+                  - menu [ref=e493]:
+                    - listitem [ref=e494]:
+                      - link "Eco news" [ref=e495] [cursor=pointer]:
+                        - /url: "#/greenCity/news"
+                    - listitem [ref=e496]:
+                      - link "Events" [ref=e497] [cursor=pointer]:
+                        - /url: "#/greenCity/events"
+                    - listitem [ref=e498]:
+                      - link "Places" [ref=e499] [cursor=pointer]:
+                        - /url: "#/greenCity/places"
+                    - listitem [ref=e500]:
+                      - link "About Us" [ref=e501] [cursor=pointer]:
+                        - /url: "#/greenCity/about"
+                    - listitem [ref=e502]:
+                      - link "My Space" [ref=e503] [cursor=pointer]:
+                        - /url: "#/greenCity/profile/not_signed-in"
+                    - listitem [ref=e504]:
+                      - link "UBS Courier" [ref=e505] [cursor=pointer]:
+                        - /url: "#/ubs"
+                  - menu [ref=e506]:
+                    - listitem [ref=e507]:
+                      - paragraph [ref=e508]: Follow us
+                    - listitem [ref=e509]:
+                      - link [ref=e510] [cursor=pointer]:
+                        - /url: "#"
+                        - img "Twitter link" [ref=e511]
+                      - link [ref=e512] [cursor=pointer]:
+                        - /url: "#"
+                        - img "LinkedIn link" [ref=e513]
+                      - link [ref=e514] [cursor=pointer]:
+                        - /url: "#"
+                        - img "Facebook link" [ref=e515]
+                      - link [ref=e516] [cursor=pointer]:
+                        - /url: "#"
+                        - img "Instagram link" [ref=e517]
+                      - link [ref=e518] [cursor=pointer]:
+                        - /url: "#"
+                        - img "YouTube link" [ref=e519]
+              - generic [ref=e520]: © Copyright 2026. Green City.
+    - button [ref=e521] [cursor=pointer]:
+      - img "chat" [ref=e522]
+  - generic [ref=e523]: Welcome to the search window
+```
+
+# Test source
+
+```ts
+  1  | import { test, type Page, type Locator } from '@playwright/test';
+  2  | import BasePage from '@/pages/base-page';
+  3  | 
+  4  | export class EcoNewsPage extends BasePage {
+  5  |   public readonly tableViewButton: Locator;
+  6  |   public readonly listViewButton: Locator;
+  7  |   public readonly newsList: Locator;
+  8  |   public readonly galleryViewCards: Locator;
+  9  |   public readonly listViewCards: Locator;
+  10 |   private readonly newsCards: Locator;
+  11 |   private readonly createNewsButton: Locator;
+  12 |   private readonly tagFilterButtons: Locator;
+  13 | 
+  14 |   constructor(page: Page) {
+  15 |     super(page);
+  16 |     this.tableViewButton = page.getByRole('button', { name: 'table view' });
+  17 |     this.listViewButton = page.getByRole('button', { name: 'list view' });
+  18 |     this.newsList = page.locator('ul[aria-label="news list"]');
+  19 |     this.galleryViewCards = page.locator('li.gallery-view-li-active');
+  20 |     this.listViewCards = page.locator('li.list-view-li-active');
+  21 |     this.newsCards = page.locator('li').filter({ has: page.locator('a.link') });
+  22 |     this.createNewsButton = page.locator('#create-button, a[href*="create-news"]');
+  23 |     this.tagFilterButtons = page.locator(
+  24 |       '.custom-chip, ul.ul-eco-buttons button, button.tag-button'
+  25 |     );
+  26 |   }
+  27 | 
+  28 |   async navigateToEcoNewsPage(): Promise<void> {
+  29 |     await test.step('EcoNews: navigate to Eco News page', async () => {
+  30 |       await this.navigateTo('/#/greenCity/news');
+  31 |     });
+  32 |   }
+  33 | 
+  34 |   async waitForEcoNewsPage(): Promise<void> {
+  35 |     await test.step('EcoNews: wait for Eco News page to load', async () => {
+  36 |       await this.waitForPageLoad();
+> 37 |       await this.createNewsButton.first().waitFor({ state: 'visible' });
+     |                                           ^ TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+  38 |     });
+  39 |   }
+  40 | 
+  41 |   async clickCreateNews(): Promise<void> {
+  42 |     await test.step('EcoNews: click Create news button', async () => {
+  43 |       await this.createNewsButton.first().click();
+  44 |     });
+  45 |   }
+  46 | 
+  47 |   async clickListView(): Promise<void> {
+  48 |     await test.step('EcoNews: switch Eco News display mode to list view', async () => {
+  49 |       await this.listViewButton.click();
+  50 |     });
+  51 |   }
+  52 | 
+  53 |   async clickTableView(): Promise<void> {
+  54 |     await test.step('EcoNews: switch Eco News display mode to table view', async () => {
+  55 |       await this.tableViewButton.click();
+  56 |     });
+  57 |   }
+  58 | 
+  59 |   async getNewsCardsCount(): Promise<number> {
+  60 |     return await test.step('EcoNews: get news cards count', async () => {
+  61 |       return await this.newsCards.count();
+  62 |     });
+  63 |   }
+  64 | 
+  65 |   getNewsCardLocator(index: number): Locator {
+  66 |     return this.newsCards.nth(index);
+  67 |   }
+  68 | 
+  69 |   async getFirstNewsCardTitle(): Promise<string> {
+  70 |     return await test.step('EcoNews: get first news card title', async () => {
+  71 |       const titleElem = this.page
+  72 |         .locator('.eco-news_list-content-title h3, .title-list h3, h3')
+  73 |         .first();
+  74 |       await titleElem.waitFor({ state: 'visible' });
+  75 |       return (await titleElem.innerText()).trim();
+  76 |     });
+  77 |   }
+  78 | 
+  79 |   async filterByTag(tagName: string): Promise<void> {
+  80 |     await test.step(`EcoNews: filter by tag "${tagName}"`, async () => {
+  81 |       const tagBtn = this.tagFilterButtons.filter({ hasText: tagName }).first();
+  82 |       await tagBtn.click();
+  83 |     });
+  84 |   }
+  85 | }
+  86 | export default EcoNewsPage;
+  87 | 
+```
