@@ -1,4 +1,4 @@
-import { test, type Page, type Locator } from '@playwright/test';
+import { test, type Page, type Locator, expect } from '@playwright/test';
 import BasePage from '@/pages/base-page';
 import env from '@/config/env';
 
@@ -85,7 +85,8 @@ export class EcoNewsDetailsPage extends BasePage {
 
   async getTagTexts(): Promise<string[]> {
     return await test.step('Get tag texts', async () => {
-      return this.tags.allInnerTexts();
+      const texts = await this.tags.allInnerTexts();
+      return texts.map((text) => text.trim());
     });
   }
 
@@ -113,7 +114,18 @@ export class EcoNewsDetailsPage extends BasePage {
     });
   }
 
-  async isTagsVisible(): Promise<boolean> {
-    return this.tags.isVisible();
+  async checkAllTagsVisible(): Promise<void> {
+    await test.step('Check that all tags are visible', async () => {
+      const count = await this.tags.count();
+      for (let i = 0; i < count; i++) {
+        await expect(this.tags.nth(i)).toBeVisible();
+      }
+    });
+  }
+
+  async tagsCount(): Promise<number> {
+    return await test.step('Tags count', async () => {
+      return await this.tags.count();
+    });
   }
 }
