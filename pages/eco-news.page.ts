@@ -111,5 +111,3 @@ export class EcoNewsPage extends BasePage {
   }
 }
 export default EcoNewsPage;
-
-

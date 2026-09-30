@@ -21,7 +21,10 @@ test.describe('Eco News — favourites', () => {
     await ecoNewsPage.getNewsCardByHref(newsHref).removeFromFavourite();
   });
 
-  test('TC-80 Verify adding and removing an Eco News item from favorites', async ({page, ecoNewsPage, }) => {
+  test('TC-80 Verify adding and removing an Eco News item from favorites', async ({
+    page,
+    ecoNewsPage,
+  }) => {
     await test.step('1: Locate the first Eco News card and record its title', async () => {
       const firstCard = ecoNewsPage.getNewsCard(0);
       newsHref = await firstCard.getHref();
