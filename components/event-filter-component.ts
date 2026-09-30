@@ -162,8 +162,7 @@ export class EventFilterComponent extends BaseComponent {
   async selectDateRange(startDate: number | string, endDate: number | string): Promise<void> {
     await test.step(`Select date range: ${startDate} - ${endDate}`, async () => {
       await this.openDateRangeFilter();
-      await this.calendarDropdown.selectDate(startDate);
-      await this.calendarDropdown.selectDate(endDate);
+      await this.calendarDropdown.selectDateRange(startDate, endDate);
     });
   }
 

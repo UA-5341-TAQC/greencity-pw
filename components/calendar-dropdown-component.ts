@@ -96,6 +96,16 @@ export class CalendarDropdownComponent extends BaseComponent {
   }
 
   /**
+   * Selects a date range by clicking the start date followed by the end date.
+   */
+  async selectDateRange(startDate: string | number, endDate: string | number): Promise<void> {
+    await test.step(`Select date range "${startDate} - ${endDate}" in calendar`, async () => {
+      await this.selectDate(startDate);
+      await this.selectDate(endDate);
+    });
+  }
+
+  /**
    * Check if the selected date is highlighted (has the class mat-calendar-body-selected)
    * @param targetDate Format "September 26, 2026" or day number "26" / 26
    */

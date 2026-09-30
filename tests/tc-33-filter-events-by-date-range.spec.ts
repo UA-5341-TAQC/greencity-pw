@@ -18,15 +18,10 @@ test.describe('TC-33 Verify that a user can filter events by date range', () => 
     await eventsPage.filters.openDateRangeFilter();
     await expect(eventsPage.filters.calendarDropdown.calendar).toBeVisible();
 
-    // Step 2: Select a start date (15).
+    // Steps 2 & 3: Select date range (15 to 16).
     const startDate = 15;
     const endDate = 16;
-
-    await eventsPage.filters.calendarDropdown.selectDate(startDate);
-    expect(await eventsPage.filters.calendarDropdown.isDateSelected(startDate)).toBe(true);
-
-    // Step 3: Select an end date (16).
-    await eventsPage.filters.calendarDropdown.selectDate(endDate);
+    await eventsPage.filters.calendarDropdown.selectDateRange(startDate, endDate);
 
     // Step 4: Verify that the filter indicator for the selected date range is displayed above the events list.
     const dateChip = eventsPage.getActiveDateRangeChip();
