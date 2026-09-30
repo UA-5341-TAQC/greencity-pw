@@ -16,10 +16,10 @@ env:
   BASE_URL: ${{ secrets.BASE_URL }}
   API_USER_BASE_URL: ${{ secrets.API_USER_BASE_URL }}
   API_GREENCITY_BASE_URL: ${{ secrets.API_GREENCITY_BASE_URL }}
-  USER_EMAIL: ${{ secrets.TEST_EMAIL }}
-  USER_PASSWORD: ${{ secrets.TEST_PASSWORD }}
-  USER_ID: ${{ secrets.TEST_USER_ID }}
-  USER_NAME: ${{ secrets.TEST_USER_NAME }}
+  USER_EMAIL: ${{ secrets.USER_EMAIL }}
+  USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+  USER_ID: ${{ secrets.USER_ID }}
+  USER_NAME: ${{ secrets.USER_NAME }}
   HEADLESS: true
   SHORT_TIMEOUT: ${{ secrets.SHORT_TIMEOUT }}
   MEDIUM_TIMEOUT: ${{ secrets.MEDIUM_TIMEOUT }}
