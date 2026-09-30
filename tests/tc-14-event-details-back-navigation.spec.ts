@@ -1,12 +1,10 @@
 import { test, expect } from '@/fixtures';
-import { EventsPage } from '@/pages';
-import { EventDetailsPage } from '@/pages/event-details-page';
 
 test.describe('Event Details Navigation', () => {
-  test('TC-14: verify navigation from Event Details back to Events', async ({ page }) => {
-    const eventsPage = new EventsPage(page);
-    const eventDetailsPage = new EventDetailsPage(page);
-
+  test('TC-14: verify navigation from Event Details back to Events', async ({
+    eventDetailsPage,
+    eventsPage,
+  }) => {
     await eventsPage.navigateToEventsPage();
     await eventsPage.waitForEventsPage();
 
@@ -20,6 +18,6 @@ test.describe('Event Details Navigation', () => {
     await eventDetailsPage.clickBackToEvents();
     await eventsPage.waitForEventsPage();
 
-    expect(page.url()).toContain('/greenCity/events');
+    expect(eventsPage.url()).toContain('/greenCity/events');
   });
 });
