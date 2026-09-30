@@ -1,5 +1,6 @@
 import { test, type Page, type Locator } from '@playwright/test';
 import BasePage from '@/pages/base-page';
+import { EcoNewsListCardComponent } from '@/components/eco-news-card/eco-news-list-card-component';
 
 export class EcoNewsPage extends BasePage {
   public readonly tableViewButton: Locator;
@@ -10,19 +11,28 @@ export class EcoNewsPage extends BasePage {
   private readonly newsCards: Locator;
   private readonly createNewsButton: Locator;
   private readonly tagFilterButtons: Locator;
+  private readonly itemsFoundText: Locator;
+  private readonly searchButton: Locator;
+  private readonly searchInput: Locator;
+  private readonly bookmarkButton: Locator;
 
   constructor(page: Page) {
     super(page);
-    this.tableViewButton = page.getByRole('button', { name: 'table view' });
-    this.listViewButton = page.getByRole('button', { name: 'list view' });
+    // NOTE: real aria-label on the live site is Ukrainian ("перегляд таблиці" /
+    // "подання списку"), not English "table view"/"list view" — using the
+    // verified CSS classes we found via DevTools instead of getByRole(name).
+    this.tableViewButton = page.locator('span.btn-tiles');
+    this.listViewButton = page.locator('span.btn-bars');
     this.newsList = page.locator('ul[aria-label="news list"]');
     this.galleryViewCards = page.locator('li.gallery-view-li-active');
     this.listViewCards = page.locator('li.list-view-li-active');
     this.newsCards = page.locator('li').filter({ has: page.locator('a.link') });
     this.createNewsButton = page.locator('#create-button, a[href*="create-news"]');
-    this.tagFilterButtons = page.locator(
-      '.custom-chip, ul.ul-eco-buttons button, button.tag-button'
-    );
+    this.tagFilterButtons = page.locator('.ul-eco-buttons button.tag-button');
+    this.itemsFoundText = page.locator('app-remaining-count h2');
+    this.searchButton = page.locator('span.search-img');
+    this.searchInput = page.locator('input.place-input');
+    this.bookmarkButton = page.locator('span.bookmark-img');
   }
 
   async navigateToEcoNewsPage(): Promise<void> {
@@ -55,6 +65,14 @@ export class EcoNewsPage extends BasePage {
     });
   }
 
+  async isTableViewActive(): Promise<boolean> {
+    return (await this.tableViewButton.getAttribute('aria-pressed')) === 'true';
+  }
+
+  async isListViewActive(): Promise<boolean> {
+    return (await this.listViewButton.getAttribute('aria-pressed')) === 'true';
+  }
+
   async getNewsCardsCount(): Promise<number> {
     return await test.step('EcoNews: get news cards count', async () => {
       return await this.newsCards.count();
@@ -63,6 +81,10 @@ export class EcoNewsPage extends BasePage {
 
   getNewsCardLocator(index: number): Locator {
     return this.newsCards.nth(index);
+  }
+
+  getNewsCard(index: number): EcoNewsListCardComponent {
+    return new EcoNewsListCardComponent(this.newsCards.nth(index), this.page);
   }
 
   async getFirstNewsCardTitle(): Promise<string> {
@@ -77,9 +99,34 @@ export class EcoNewsPage extends BasePage {
 
   async filterByTag(tagName: string): Promise<void> {
     await test.step(`EcoNews: filter by tag "${tagName}"`, async () => {
-      const tagBtn = this.tagFilterButtons.filter({ hasText: tagName }).first();
-      await tagBtn.click();
+      await this.tagFilterButtons.filter({ hasText: tagName }).first().click();
     });
+  }
+
+  async getTagNames(): Promise<string[]> {
+    return this.tagFilterButtons.locator('.text').allInnerTexts();
+  }
+
+  async getItemsFoundCount(): Promise<number> {
+    const text = (await this.itemsFoundText.innerText()).trim();
+    const match = text.match(/\d+/);
+    return match ? Number(match[0]) : 0;
+  }
+
+  async openSearch(): Promise<void> {
+    await this.searchButton.click();
+  }
+
+  async searchNews(query: string): Promise<void> {
+    await this.searchInput.fill(query);
+  }
+
+  async clearSearch(): Promise<void> {
+    await this.searchInput.clear();
+  }
+
+  async clickBookmark(): Promise<void> {
+    await this.bookmarkButton.click();
   }
 }
 export default EcoNewsPage;
