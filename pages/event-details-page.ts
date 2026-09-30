@@ -15,6 +15,9 @@ export class EventDetailsPage extends BasePage {
   protected readonly editButton: Locator;
   protected readonly saveEventButton: Locator;
   protected readonly joinEventButton: Locator;
+  protected readonly commentsSection: Locator;
+
+  public readonly comments: CommentsComponent;
 
   constructor(page: Page) {
     super(page);
