@@ -23,7 +23,7 @@ export class EcoNewsDetailsPage extends BasePage {
     this.authorAvatar = page.locator('[class*="author"] img');
     this.publicationDate = page.locator('.news-info-date').first();
     this.tags = page.locator('.tags div.tags-item');
-    this.backButton = page.locator('div.back-button, a[class*="back"]');
+    this.backButton = page.getByRole('link', { name: 'Back to News' });
     this.relatedNewsItems = page.locator(
       '[class*="related"] [class*="news-item"], [class*="related"] [class*="news-card"]'
     );
@@ -110,6 +110,17 @@ export class EcoNewsDetailsPage extends BasePage {
   async openRelatedNewsItem(index: number): Promise<void> {
     await test.step(`Open related news item at index ${index}`, async () => {
       await this.relatedNewsItems.nth(index).click();
+    });
+  }
+
+  async isBackButtonVisible(): Promise<boolean> {
+    return await test.step('Check if back button is visible', async () => {
+      try {
+        await this.backButton.waitFor({ state: 'visible', timeout: env.SHORT_TIMEOUT });
+        return await this.backButton.isVisible();
+      } catch {
+        return false;
+      }
     });
   }
 }
