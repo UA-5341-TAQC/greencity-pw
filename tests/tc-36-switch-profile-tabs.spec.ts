@@ -1,5 +1,6 @@
 import { test, expect } from '@/fixtures';
 import { Language, MenuItem } from '@/types/header.types';
+import { listenerCount } from 'node:cluster';
 
 test.describe('Profile tabs', () => {
   test('Verify user can switch between My Habits, My News, and My Events tabs', async ({
@@ -7,6 +8,9 @@ test.describe('Profile tabs', () => {
     homePage,
     profilePage,
   }) => {
+    // only for lint error fix
+    void authenticatedPage;
+
     await test.step('Precondition: open profile page', async () => {
       await homePage.header.switchLanguage(Language.Uk);
 
