@@ -2,30 +2,36 @@ import type { Locator, Page } from '@playwright/test';
 import BasePage from '@/pages/base-page';
 
 export class CreateEventPage extends BasePage {
-  private readonly titleInput: Locator;
-  private readonly durationSelect: Locator;
+  readonly titleInput: Locator;
+  readonly titleField: Locator;
+  readonly durationSelect: Locator;
   private readonly economicTag: Locator;
   private readonly socialTag: Locator;
   private readonly environmentalTag: Locator;
-  private readonly eventTypeSelect: Locator;
-  private readonly inviteSelect: Locator;
-  private readonly description: Locator;
-  private readonly dayInput: Locator;
-  private readonly startTimeInput: Locator;
-  private readonly finishTimeInput: Locator;
-  private readonly allDayCheckbox: Locator;
-  private readonly placeCheckbox: Locator;
-  private readonly onlineCheckbox: Locator;
+  readonly eventTypeSelect: Locator;
+  readonly inviteSelect: Locator;
+  readonly description: Locator;
+  readonly dayInput: Locator;
+  readonly startTimeInput: Locator;
+  readonly finishTimeInput: Locator;
+  readonly allDayCheckbox: Locator;
+  readonly placeCheckbox: Locator;
+  readonly onlineCheckbox: Locator;
   private readonly placeInput: Locator;
   private readonly onlineLinkInput: Locator;
-  private readonly previewButton: Locator;
-  private readonly publishButton: Locator;
-  private readonly cancelButton: Locator;
+  readonly previewButton: Locator;
+  readonly publishButton: Locator;
+  readonly cancelButton: Locator;
+  readonly descriptionReminder: Locator;
+  readonly pictureSection: Locator;
+  readonly pictureUploadHint: Locator;
+  readonly initiativeTypeLabels: Locator;
 
   constructor(page: Page) {
     super(page);
 
     this.titleInput = page.locator('input[formcontrolname="title"]');
+    this.titleField = page.locator('mat-form-field').filter({ has: this.titleInput }).first();
     this.durationSelect = page.locator('.duration-wrapper mat-select[formcontrolname="duration"]');
     this.economicTag = page.getByRole('option', { name: 'Economic' });
     this.socialTag = page.getByRole('option', { name: 'Social' });
@@ -47,10 +53,24 @@ export class CreateEventPage extends BasePage {
     this.previewButton = submitContainer.getByRole('button', { name: 'Preview' });
     this.publishButton = submitContainer.getByRole('button', { name: 'Publish' });
     this.cancelButton = submitContainer.getByRole('button', { name: 'Cancel' });
+    this.descriptionReminder = page.getByText('Must be minimum 10 and maximum 63 206 symbols', {
+      exact: true,
+    });
+    this.pictureSection = page.getByText('Picture', { exact: true });
+    this.pictureUploadHint = page.getByText(
+      'Upload only PNG or JPG. File size must be less than 10MB',
+      { exact: true }
+    );
+    this.initiativeTypeLabels = page.locator('mat-chip:visible, mat-chip-option:visible');
   }
 
   async fillTitle(title: string): Promise<void> {
     await this.titleInput.fill(title);
+  }
+
+  async waitForCreateEventPage(): Promise<void> {
+    await this.titleInput.waitFor({ state: 'visible' });
+    await this.description.waitFor({ state: 'visible' });
   }
 
   async selectDuration(duration: string): Promise<void> {
