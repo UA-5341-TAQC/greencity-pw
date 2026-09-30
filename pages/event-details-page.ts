@@ -10,6 +10,10 @@ export class EventDetailsPage extends BasePage {
   private readonly eventInfoBlock: Locator;
   private readonly saveEventButton: Locator;
   private readonly joinEventButton: Locator;
+  private readonly likeIcon: Locator;
+  private readonly likesCount: Locator;
+  private readonly likedIcon: Locator;
+  private readonly unlikedIcon: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -22,6 +26,10 @@ export class EventDetailsPage extends BasePage {
     this.eventInfoBlock = page.locator('.event-info-block');
     this.saveEventButton = page.locator('.save-join-event-block .secondary-global-button');
     this.joinEventButton = page.locator('.save-join-event-block .primary-global-button');
+    this.likeIcon = page.getByRole('img', { name: 'like' });
+    this.likedIcon = page.locator('img.event-like[src*="comments/liked.png"]');
+    this.unlikedIcon = page.locator('img.event-like[src*="comments/like.png"]');
+    this.likesCount = page.locator('.numerosity-likes');
   }
 
   async navigateToEventDetails(eventId: string | number): Promise<void> {
@@ -71,5 +79,26 @@ export class EventDetailsPage extends BasePage {
 
   async isJoinEventButtonVisible(): Promise<boolean> {
     return await this.joinEventButton.isVisible();
+  }
+
+  async clickLike(): Promise<void> {
+    await this.likeIcon.click();
+  }
+
+  async isLikeEnabled(): Promise<boolean> {
+    return await this.likeIcon.isEnabled();
+  }
+
+  async isLikeVisible(): Promise<boolean> {
+    return await this.likeIcon.isVisible();
+  }
+
+  async countLike(): Promise<number> {
+    const count = await this.likesCount.innerText();
+    return count ? Number(count.trim()) : 0;
+  }
+
+  async isCountLikeVisible(): Promise<boolean> {
+    return await this.likeIcon.isVisible();
   }
 }
