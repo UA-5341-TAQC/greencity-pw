@@ -152,6 +152,3 @@ vite.config.ts.timestamp-*
 # Allure
 /allure-report/
 /allure-results/
-
-# IDE
-.idea/
