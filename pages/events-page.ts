@@ -1,8 +1,17 @@
-import type { Page, Locator } from '@playwright/test';
+import { test, type Page, type Locator } from '@playwright/test';
 import BasePage from './base-page';
-import { GridEventCardComponent, ListEventCardComponent } from '@/components';
+import {
+  CalendarDropdownComponent,
+  GridEventCardComponent,
+  ListEventCardComponent,
+} from '@/components';
 
 export class EventsPage extends BasePage {
+  public readonly calendarDropdown: CalendarDropdownComponent;
+  public readonly activeFilterIndicator: Locator;
+  public readonly activeFilterCrossButton: Locator;
+  public readonly itemsFoundElement: Locator;
+
   protected readonly pageTitle: Locator;
   protected readonly filterLabel: Locator;
   protected readonly searchButton: Locator;
@@ -38,6 +47,14 @@ export class EventsPage extends BasePage {
   constructor(page: Page) {
     super(page);
 
+    this.calendarDropdown = new CalendarDropdownComponent(
+      page.locator('.cdk-overlay-container'),
+      page
+    );
+    this.activeFilterIndicator = page.locator('div.active-filter');
+    this.activeFilterCrossButton = page.locator('div.active-filter .cross-container');
+    this.itemsFoundElement = page.locator('div.active-filter-container > p');
+
     this.pageTitle = page.locator('p.main-header');
     this.filterLabel = page.locator('p.filter-by');
     this.searchButton = page.locator('span.search-img');
@@ -63,14 +80,13 @@ export class EventsPage extends BasePage {
       .getByRole('combobox');
     this.dateRangeCombobox = page
       .locator('div.dropdown')
-      .filter({ has: page.locator('mat-label', { hasText: 'Date range' }) })
-      .getByRole('combobox');
+      .filter({ has: page.locator('mat-date-range-input') });
     this.filterOptions = page.getByRole('listbox').getByRole('option');
     this.locationFilterCitiesButton = page.locator('div.add-location-option');
     this.resetAllButton = page
       .locator('div.filter-container')
       .getByRole('button', { name: 'Reset all' });
-    this.itemsFoundText = page.locator('div.active-filter-container > p');
+    this.itemsFoundText = this.itemsFoundElement;
     this.gridViewButton = page
       .locator('div.change-view')
       .getByRole('button', { name: 'table view' });
@@ -134,102 +150,160 @@ export class EventsPage extends BasePage {
 
   /** Returns the results counter text */
   async getItemsFoundText(): Promise<string> {
-    return (await this.itemsFoundText.textContent()) ?? '';
+    return await test.step('Get items found text', async () => {
+      return (await this.itemsFoundText.textContent()) ?? '';
+    });
+  }
+
+  /** Returns the numeric items found count */
+  async getItemsFoundCount(): Promise<number> {
+    return await test.step('Get items found count', async () => {
+      const text = await this.getItemsFoundText();
+      const match = text.match(/\d+/);
+      return match ? parseInt(match[0], 10) : 0;
+    });
+  }
+
+  /** Returns the text of the active filter indicator */
+  async getActiveFilterText(): Promise<string> {
+    return await test.step('Get active filter text', async () => {
+      return (await this.activeFilterIndicator.innerText()).trim();
+    });
+  }
+
+  /** Removes the active date filter by clicking the cross icon */
+  async removeActiveDateFilter(): Promise<void> {
+    await test.step('Remove active date filter', async () => {
+      await this.activeFilterCrossButton.click();
+    });
+  }
+
+  /** Checks whether the active filter indicator is visible */
+  async isActiveFilterVisible(): Promise<boolean> {
+    return await test.step('Check if active filter indicator is visible', async () => {
+      return await this.activeFilterIndicator.isVisible();
+    });
   }
 
   /** Switches the event cards view to "grid" */
   async clickGridView(): Promise<void> {
-    await this.gridViewButton.click();
+    await test.step('Switch to grid view', async () => {
+      await this.gridViewButton.click();
+    });
   }
 
   /** Switches the event cards view to "list" */
   async clickListView(): Promise<void> {
-    await this.listViewButton.click();
+    await test.step('Switch to list view', async () => {
+      await this.listViewButton.click();
+    });
   }
 
   /** Checks whether the "Filter" label next to the filters block is visible */
   async isFilterLabelVisible(): Promise<boolean> {
-    return await this.filterLabel.isVisible();
+    return await test.step('Check if filter label is visible', async () => {
+      return await this.filterLabel.isVisible();
+    });
   }
 
-  /**  Opens the "Event time" filter dropdown */
+  /** Opens the "Event time" filter dropdown */
   async openEventTimeFilter(): Promise<void> {
-    await this.eventTimeCombobox.click();
+    await test.step('Open event time filter', async () => {
+      await this.eventTimeCombobox.click();
+    });
   }
 
   /** Opens the "Location" filter dropdown */
   async openLocationFilter(): Promise<void> {
-    await this.locationCombobox.click();
+    await test.step('Open location filter', async () => {
+      await this.locationCombobox.click();
+    });
   }
 
   /** Opens the "Status" filter dropdown */
   async openStatusFilter(): Promise<void> {
-    await this.statusCombobox.click();
+    await test.step('Open status filter', async () => {
+      await this.statusCombobox.click();
+    });
   }
 
   /** Opens the "Type" filter dropdown */
   async openTypeFilter(): Promise<void> {
-    await this.typeCombobox.click();
+    await test.step('Open type filter', async () => {
+      await this.typeCombobox.click();
+    });
   }
 
   /** Opens the "Date range" filter */
   async openDateRangeFilter(): Promise<void> {
-    await this.dateRangeCombobox.click();
+    await test.step('Open date range filter', async () => {
+      await this.dateRangeCombobox.click();
+    });
   }
 
   /** Checks whether the "Reset all" button is enabled */
   async isResetAllEnabled(): Promise<boolean> {
-    return await this.resetAllButton.isEnabled();
+    return await test.step('Check if reset all is enabled', async () => {
+      return await this.resetAllButton.isEnabled();
+    });
   }
 
   /** Clicks "Reset all" button */
   async clickResetAll(): Promise<void> {
-    await this.resetAllButton.click();
+    await test.step('Click reset all button', async () => {
+      await this.resetAllButton.click();
+    });
   }
 
   /** Selects an option from the currently open filter dropdown by its text */
   async selectFilterOption(optionText: string): Promise<void> {
-    await this.filterOptions.filter({ hasText: optionText }).click();
+    await test.step(`Select filter option "${optionText}"`, async () => {
+      await this.filterOptions.filter({ hasText: optionText }).click();
+    });
   }
 
   /** Clicks "Filter cities" button (Location filter) */
   async clickFilterCities(): Promise<void> {
-    await this.locationFilterCitiesButton.click();
+    await test.step('Click filter cities button', async () => {
+      await this.locationFilterCitiesButton.click();
+    });
   }
 
   /** Returns the calendar's current period label */
   async getCalendarPeriodLabel(): Promise<string> {
-    return (await this.calendarPeriodButton.innerText()).trim();
+    return await this.calendarDropdown.getCurrentPeriod();
   }
 
   /** Opens the quick month/year picker in the calendar */
   async openCalendarMonthYearPicker(): Promise<void> {
-    await this.calendarPeriodButton.click();
+    await test.step('Open calendar month/year picker', async () => {
+      await this.calendarPeriodButton.click();
+    });
   }
 
   /** Moves the calendar to the next month */
   async goToNextMonth(): Promise<void> {
-    await this.calendarNextMonthButton.click();
+    await this.calendarDropdown.clickNextMonth();
   }
 
   /** Moves the calendar to the previous month */
   async goToPreviousMonth(): Promise<void> {
-    await this.calendarPreviousMonthButton.click();
+    await this.calendarDropdown.clickPreviousMonth();
   }
 
   /** Returns the locator for a specific day cell in the calendar */
   getCalendarDayCell(day: number): Locator {
-    return this.calendarDayButtons.filter({ hasText: new RegExp(`^${day}$`) });
+    return this.calendarDropdown.getDayCell(day);
   }
 
   /** Clicks a specific day in the calendar (within the currently displayed month) */
   async selectCalendarDay(day: number): Promise<void> {
-    await this.getCalendarDayCell(day).click();
+    await this.calendarDropdown.selectDate(day);
   }
 
   /** Checks whether the calendar is open and visible */
   async isCalendarVisible(): Promise<boolean> {
-    return await this.calendarTable.isVisible();
+    return await this.calendarDropdown.isCalendarVisible();
   }
 
   /** Returns the number of event cards currently rendered in grid mode */
