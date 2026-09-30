@@ -1,4 +1,5 @@
 import {
+  CreateEventPage,
   HomePage,
   ProfilePage,
   EditProfilePage,
@@ -7,10 +8,11 @@ import {
   EcoNewsDetailsPage,
   CreateNewsPage,
   CreateNewsPreviewPage,
+  EventsPage,
   PlacesPage,
   EventsPage,
-  EditEventPage,
   EventDetailsPage,
+  EditEventPage,
 } from '@/pages';
 
 import env from '@/config/env';
@@ -24,6 +26,7 @@ import {
 } from '@/modals';
 
 type PageFixtures = {
+  createEventPage: CreateEventPage;
   homePage: HomePage;
   signInModal: SignInModal;
   updatePhotoModal: UpdatePhotoModal;
@@ -36,15 +39,20 @@ type PageFixtures = {
   addPlaceModal: AddPlaceModal;
   ecoNewsPage: EcoNewsPage;
   ecoNewsDetailsPage: EcoNewsDetailsPage;
+  eventsPage: EventsPage;
   authenticatedUser: ProfilePage;
   ecoNewsCreatePage: CreateNewsPage;
   ecoNewsCreatePreviewPage: CreateNewsPreviewPage;
   eventsPage: EventsPage;
-  editEventPage: EditEventPage;
   eventDetailsPage: EventDetailsPage;
+  editEventPage: EditEventPage;
 };
 
 export const test = baseTest.extend<PageFixtures>({
+  createEventPage: async ({ page }, use): Promise<void> => {
+    await use(new CreateEventPage(page));
+  },
+
   homePage: async ({ page }, use): Promise<void> => {
     await use(new HomePage(page));
   },
@@ -93,6 +101,10 @@ export const test = baseTest.extend<PageFixtures>({
     await use(new EcoNewsDetailsPage(page));
   },
 
+  eventsPage: async ({ page }, use): Promise<void> => {
+    await use(new EventsPage(page));
+  },
+
   authenticatedUser: async ({ page, homePage, signInModal }, use): Promise<void> => {
     await homePage.navigateToHomePage();
     await homePage.waitForHomePage();
@@ -121,12 +133,12 @@ export const test = baseTest.extend<PageFixtures>({
     await use(new EventsPage(page));
   },
 
-  editEventPage: async ({ page }, use): Promise<void> => {
-    await use(new EditEventPage(page));
-  },
-
   eventDetailsPage: async ({ page }, use): Promise<void> => {
     await use(new EventDetailsPage(page));
+  },
+
+  editEventPage: async ({ page }, use): Promise<void> => {
+    await use(new EditEventPage(page));
   },
 });
 

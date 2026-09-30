@@ -3,20 +3,18 @@ import BasePage from '@/pages/base-page';
 import { CommentsComponent } from '@/components';
 
 export class EventDetailsPage extends BasePage {
-  private readonly backButton: Locator;
+  protected readonly backButton: Locator;
   private readonly editEventButton: Locator;
   private readonly deleteEventButton: Locator;
-  private readonly eventTitle: Locator;
-  private readonly dateAuthor: Locator;
-  private readonly descriptionBlockTitle: Locator;
-  private readonly description: Locator;
+  protected readonly eventTitle: Locator;
+  protected readonly dateAuthor: Locator;
+  protected readonly descriptionBlockTitle: Locator;
+  protected readonly description: Locator;
   private readonly eventTag: Locator;
-  private readonly eventInfoBlock: Locator;
-  private readonly saveEventButton: Locator;
-  private readonly joinEventButton: Locator;
-  private readonly commentsSection: Locator;
-
-  public readonly comments: CommentsComponent;
+  protected readonly eventInfoBlock: Locator;
+  protected readonly editButton: Locator;
+  protected readonly saveEventButton: Locator;
+  protected readonly joinEventButton: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -30,6 +28,7 @@ export class EventDetailsPage extends BasePage {
     this.description = page.locator('.ql-editor');
     this.eventTag = page.locator('.event-tag');
     this.eventInfoBlock = page.locator('.event-info-block');
+    this.editButton = page.getByRole('button', { name: 'Edit' });
     this.saveEventButton = page.locator('.save-join-event-block .secondary-global-button');
     this.joinEventButton = page.locator('.save-join-event-block .primary-global-button');
     this.commentsSection = page.locator('app-comments-container.event');
@@ -70,6 +69,14 @@ export class EventDetailsPage extends BasePage {
 
   async clickBackToEvents(): Promise<void> {
     await this.backButton.click();
+  }
+
+  async clickEdit(): Promise<void> {
+    await this.editButton.click();
+  }
+
+  async isEditButtonEnabled(): Promise<boolean> {
+    return await this.editButton.isEnabled();
   }
 
   async isEditEventButtonVisible(): Promise<boolean> {
