@@ -26,7 +26,7 @@ test.describe('Eco News — favourites', () => {
     ecoNewsPage,
   }) => {
     await test.step('1: Locate the first Eco News card and record its title', async () => {
-      const firstCard = ecoNewsPage.getNewsCard(0);
+      const firstCard = ecoNewsPage.getTableNewsCard(0);
       newsHref = await firstCard.getHref();
       expect(newsHref, 'First card link should not be empty').not.toBe('');
       expect(await firstCard.getTitle(), 'First card title should not be empty').not.toBe('');
@@ -42,7 +42,7 @@ test.describe('Eco News — favourites', () => {
     });
 
     await test.step('3: Open the favourites section', async () => {
-      await ecoNewsPage.openFavourites();
+      await ecoNewsPage.clickBookmark();
 
       await expect(ecoNewsPage.getNewsCardByHref(newsHref!).getFavouriteActiveFlag()).toBeVisible();
     });
@@ -57,7 +57,7 @@ test.describe('Eco News — favourites', () => {
     await test.step('5: Refresh the page and check favourites', async () => {
       await page.reload();
       await ecoNewsPage.waitForEcoNewsPage();
-      await ecoNewsPage.openFavourites();
+      await ecoNewsPage.clickBookmark();
 
       await expect(page.locator(`a.link[href="${newsHref}"]`)).toHaveCount(0);
     });
