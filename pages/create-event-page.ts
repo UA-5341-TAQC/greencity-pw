@@ -21,6 +21,7 @@ export class CreateEventPage extends BasePage {
   private readonly previewButton: Locator;
   private readonly publishButton: Locator;
   private readonly cancelButton: Locator;
+  readonly descriptionValidationMessage: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -47,6 +48,12 @@ export class CreateEventPage extends BasePage {
     this.previewButton = submitContainer.getByRole('button', { name: 'Preview' });
     this.publishButton = submitContainer.getByRole('button', { name: 'Publish' });
     this.cancelButton = submitContainer.getByRole('button', { name: 'Cancel' });
+    this.descriptionValidationMessage = page.getByText(/Not enough characters\. Left:/i).first();
+  }
+
+  async waitForCreateEventPage(): Promise<void> {
+    await this.titleInput.waitFor({ state: 'visible' });
+    await this.description.waitFor({ state: 'visible' });
   }
 
   async fillTitle(title: string): Promise<void> {
