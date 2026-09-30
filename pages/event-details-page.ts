@@ -90,7 +90,15 @@ export class EventDetailsPage extends BasePage {
     return (await this.participantsCount.innerText()).trim();
   }
 
+  async waitForParticipantsCount(): Promise<void> {
+    await this.participantsCount.waitFor({ state: 'visible' });
+  }
+
   async getParticipantAvatarsCount(): Promise<number> {
     return await this.participantAvatars.count();
+  }
+
+  async waitForParticipantAvatars(): Promise<void> {
+    await this.participantAvatars.first().waitFor({ state: 'visible' });
   }
 }

@@ -18,11 +18,7 @@ test.describe('Event Details - Join Event', () => {
       await eventsPage.navigateToEventsPage();
       await eventsPage.waitForEventsPage();
       const eventCard = eventsPage.getFirstJoinableGridEventCard();
-      await expect
-        .poll(() => eventCard.isVisible(), {
-          message: 'At least one event should be available for joining',
-        })
-        .toBe(true);
+      await eventCard.waitForVisible();
       await eventCard.clickMore();
       await eventDetailsPage.waitForDetailsPage();
     });
@@ -49,16 +45,18 @@ test.describe('Event Details - Join Event', () => {
     });
 
     await test.step('Verify the current user is listed among event participants', async () => {
-      await expect
-        .poll(() => eventDetailsPage.getParticipantsCountText(), {
-          message: 'The participants count should be displayed after joining',
-        })
-        .toMatch(/^\(\d+\)$/);
-      await expect
-        .poll(() => eventDetailsPage.getParticipantAvatarsCount(), {
-          message: 'The participants section should display participant avatars',
-        })
-        .toBeGreaterThan(0);
+      await eventDetailsPage.waitForParticipantsCount();
+      const participantsCount = await eventDetailsPage.getParticipantsCountText();
+      expect(participantsCount, 'The participants count should be displayed after joining').toMatch(
+        /^\(\d+\)$/
+      );
+
+      await eventDetailsPage.waitForParticipantAvatars();
+      const participantAvatarsCount = await eventDetailsPage.getParticipantAvatarsCount();
+      expect(
+        participantAvatarsCount,
+        'The participants section should display participant avatars'
+      ).toBeGreaterThan(0);
     });
   });
 });
