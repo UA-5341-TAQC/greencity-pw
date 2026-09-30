@@ -78,12 +78,12 @@ export class EventDetailsPage extends BasePage {
     return await this.saveEventButton.isVisible();
   }
 
-  async isJoinEventButtonVisible(): Promise<boolean> {
-    return await this.joinEventButton.isVisible();
+  async waitForJoinEventButton(): Promise<void> {
+    await this.joinEventButton.waitFor({ state: 'visible' });
   }
 
-  async isCancelRequestButtonVisible(): Promise<boolean> {
-    return await this.cancelRequestButton.isVisible();
+  async waitForCancelRequestButton(): Promise<void> {
+    await this.cancelRequestButton.waitFor({ state: 'visible' });
   }
 
   async getParticipantsCountText(): Promise<string> {

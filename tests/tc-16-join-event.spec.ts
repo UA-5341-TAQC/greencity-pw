@@ -28,11 +28,7 @@ test.describe('Event Details - Join Event', () => {
     });
 
     await test.step('Verify the Join event button is visible', async () => {
-      await expect
-        .poll(() => eventDetailsPage.isJoinEventButtonVisible(), {
-          message: 'The Join event button should be visible for an unjoined event',
-        })
-        .toBe(true);
+      await eventDetailsPage.waitForJoinEventButton();
     });
 
     await test.step('Join the event', async () => {
@@ -44,11 +40,7 @@ test.describe('Event Details - Join Event', () => {
     });
 
     await test.step('Verify the button changes to Cancel Request', async () => {
-      await expect
-        .poll(() => eventDetailsPage.isCancelRequestButtonVisible(), {
-          message: 'The Join event button should be replaced after joining',
-        })
-        .toBe(true);
+      await eventDetailsPage.waitForCancelRequestButton();
     });
 
     await test.step('Refresh the Event Details page', async () => {
