@@ -5,12 +5,14 @@ test.describe('Event Details', () => {
     authenticatedPage,
     eventsDetailsPage,
    }) => {
+  const EVENT_ID = 210;
+  
     await test.step('Preconditions', async () => {
-      await authenticatedPage.waitForLoadState('domcontentloaded');
-      await eventsDetailsPage.navigateToEventDetails(210);
+      await authenticatedPage.waitForLoadState('domcontentloaded');;
+      await eventsDetailsPage.navigateToEventDetails(EVENT_ID);
       await eventsDetailsPage.waitForPageLoad();
     });
-
+    
     await test.step('1.Verify the Like icon.', async () => {
       expect(await eventsDetailsPage.isLikeEnabled()).toBe(true);
       expect(await eventsDetailsPage.isLikeVisible()).toBe(true);
@@ -21,6 +23,7 @@ test.describe('Event Details', () => {
     });
 
     await test.step('3.Click the Like icon.', async () => {
+      const defaultCount = await eventsDetailsPage.countLike();
       await eventsDetailsPage.clickLike();
     });
 
@@ -29,7 +32,7 @@ test.describe('Event Details', () => {
     });
 
     await test.step('5.	Verify the number of likes.', async () => {
-      //
+      const updatedCount = await eventsDetailsPage.countLike();
     });
   });
 });

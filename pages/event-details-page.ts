@@ -93,6 +93,10 @@ export class EventDetailsPage extends BasePage {
     return await this.likeIcon.isVisible();
   }
 
+  async likeButtonState():Promise<void>{
+    
+  }
+
   async countLike(): Promise<number> {
     const count = await this.likesCount.innerText();
     return count ? Number(count.trim()) : 0;
