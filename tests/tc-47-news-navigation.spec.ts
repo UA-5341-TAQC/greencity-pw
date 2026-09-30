@@ -6,8 +6,8 @@ test.describe('Navigation from news details', () => {
     ecoNewsPage,
     ecoNewsDetailsPage,
   }) => {
-    const ECO_NEWS_ID = 13268
-    
+    const ECO_NEWS_ID = 13268;
+
     await test.step('Preconditions', async () => {
       await ecoNewsPage.navigateToEcoNewsPage();
       await ecoNewsPage.waitForPageLoad();
