@@ -29,10 +29,9 @@ export class CreateEventPage extends BasePage {
 
     this.titleInput = page.locator('input[formcontrolname="title"]');
     this.titleCounter = page.getByText(/^\s*\d+\s*\/\s*70\s*$/);
-    this.titleValidationError = page.getByText(
-      'Enter a title up to and including 70 characters',
-      { exact: true }
-    );
+    this.titleValidationError = page.getByText('Enter a title up to and including 70 characters', {
+      exact: true,
+    });
     this.durationSelect = page.locator('.duration-wrapper mat-select[formcontrolname="duration"]');
     this.economicTag = page.getByRole('option', { name: 'Economic' });
     this.socialTag = page.getByRole('option', { name: 'Social' });
