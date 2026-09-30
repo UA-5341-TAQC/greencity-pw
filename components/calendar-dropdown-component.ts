@@ -58,6 +58,15 @@ export class CalendarDropdownComponent extends BaseComponent {
   }
 
   /**
+   * Opens the month/year selection view by clicking the period button.
+   */
+  async openMonthYearPicker(): Promise<void> {
+    await test.step('Open month/year picker in calendar', async () => {
+      await this.periodButton.click();
+    });
+  }
+
+  /**
    * Click on the next month.
    */
   async clickNextMonth(): Promise<void> {

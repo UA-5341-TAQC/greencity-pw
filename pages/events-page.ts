@@ -1,92 +1,56 @@
 import { test, type Page, type Locator } from '@playwright/test';
 import BasePage from './base-page';
 import {
-  CalendarDropdownComponent,
+  ActiveFilterChipComponent,
+  EventFilterComponent,
   GridEventCardComponent,
   ListEventCardComponent,
 } from '@/components';
+import {
+  type EventTypeFilter,
+  type EventTimeFilter,
+  type EventLocationFilter,
+  type EventStatusFilter,
+  type EventsI18n,
+  EVENTS_I18N,
+  Language,
+} from '@/types';
 
 export class EventsPage extends BasePage {
-  public readonly calendarDropdown: CalendarDropdownComponent;
-  public readonly activeFilterIndicator: Locator;
-  public readonly activeFilterCrossButton: Locator;
-  public readonly itemsFoundElement: Locator;
+  public readonly i18n: EventsI18n;
+  public readonly filters: EventFilterComponent;
+
+  protected readonly activeFilterChipsRoots: Locator;
+  protected readonly itemsFoundElement: Locator;
 
   protected readonly pageTitle: Locator;
-  protected readonly filterLabel: Locator;
   protected readonly searchButton: Locator;
   protected readonly bookmarkButton: Locator;
   protected readonly createEventButton: Locator;
 
-  // Filter
-  protected readonly eventTimeCombobox: Locator;
-  protected readonly locationCombobox: Locator;
-  protected readonly statusCombobox: Locator;
-  protected readonly typeCombobox: Locator;
-  protected readonly dateRangeCombobox: Locator;
-  protected readonly filterOptions: Locator;
-  protected readonly locationFilterCitiesButton: Locator;
-
-  protected readonly resetAllButton: Locator;
-  protected readonly itemsFoundText: Locator;
   protected readonly gridViewButton: Locator;
   protected readonly listViewButton: Locator;
   protected readonly myEventsButton: Locator;
-
-  // Date range calendar
-  protected readonly calendarPeriodButton: Locator;
-  protected readonly calendarNextMonthButton: Locator;
-  protected readonly calendarPreviousMonthButton: Locator;
-  protected readonly calendarTable: Locator;
-  protected readonly calendarDayButtons: Locator;
 
   // Event cards
   protected readonly gridEventCardRoots: Locator;
   protected readonly listEventCardRoots: Locator;
 
-  constructor(page: Page) {
+  constructor(page: Page, lang: Language = Language.En) {
     super(page);
+    this.i18n = EVENTS_I18N[lang];
 
-    this.calendarDropdown = new CalendarDropdownComponent(
-      page.locator('.cdk-overlay-container'),
-      page
-    );
-    this.activeFilterIndicator = page.locator('div.active-filter');
-    this.activeFilterCrossButton = page.locator('div.active-filter .cross-container');
+    this.filters = new EventFilterComponent(page.locator('div.filter-container'), page, lang);
+    this.activeFilterChipsRoots = page.locator('div.active-filter');
     this.itemsFoundElement = page.locator('div.active-filter-container > p');
 
     this.pageTitle = page.locator('p.main-header');
-    this.filterLabel = page.locator('p.filter-by');
     this.searchButton = page.locator('span.search-img');
     this.bookmarkButton = page.locator('span.bookmark-img');
     this.createEventButton = page
       .locator('div.create')
       .getByRole('button', { name: 'Create event' });
-    this.eventTimeCombobox = page
-      .locator('div.dropdown')
-      .filter({ has: page.locator('mat-label', { hasText: 'Event time' }) })
-      .getByRole('combobox');
-    this.locationCombobox = page
-      .locator('div.dropdown')
-      .filter({ has: page.locator('mat-label', { hasText: 'Location' }) })
-      .getByRole('combobox');
-    this.statusCombobox = page
-      .locator('div.dropdown')
-      .filter({ has: page.locator('mat-label', { hasText: 'Status' }) })
-      .getByRole('combobox');
-    this.typeCombobox = page
-      .locator('div.dropdown')
-      .filter({ has: page.locator('mat-label', { hasText: 'Type' }) })
-      .getByRole('combobox');
-    this.dateRangeCombobox = page
-      .locator('div.dropdown')
-      .filter({ has: page.locator('mat-date-range-input') });
-    this.filterOptions = page.getByRole('listbox').getByRole('option');
-    this.locationFilterCitiesButton = page.locator('div.add-location-option');
-    this.resetAllButton = page
-      .locator('div.filter-container')
-      .getByRole('button', { name: 'Reset all' });
-    this.itemsFoundText = this.itemsFoundElement;
+
     this.gridViewButton = page
       .locator('div.change-view')
       .getByRole('button', { name: 'table view' });
@@ -94,15 +58,7 @@ export class EventsPage extends BasePage {
       .locator('div.change-view')
       .getByRole('button', { name: 'list view' });
     this.myEventsButton = page.getByAltText('my-event');
-    this.calendarPeriodButton = page.getByRole('button', { name: 'Choose month and year' });
-    this.calendarNextMonthButton = page.getByRole('button', {
-      name: 'Next month',
-    });
-    this.calendarPreviousMonthButton = page.getByRole('button', {
-      name: 'Previous month',
-    });
-    this.calendarTable = page.locator('table.mat-calendar-table');
-    this.calendarDayButtons = this.calendarTable.locator('button.mat-calendar-body-cell');
+
     this.gridEventCardRoots = page.locator(
       'div.event-list:not(.list-view) mat-card.event-list-item'
     );
@@ -151,7 +107,7 @@ export class EventsPage extends BasePage {
   /** Returns the results counter text */
   async getItemsFoundText(): Promise<string> {
     return await test.step('Get items found text', async () => {
-      return (await this.itemsFoundText.textContent()) ?? '';
+      return (await this.itemsFoundElement.textContent()) ?? '';
     });
   }
 
@@ -164,24 +120,78 @@ export class EventsPage extends BasePage {
     });
   }
 
-  /** Returns the text of the active filter indicator */
-  async getActiveFilterText(): Promise<string> {
-    return await test.step('Get active filter text', async () => {
-      return (await this.activeFilterIndicator.innerText()).trim();
+  /** Returns the items found element for Playwright assertions */
+  get itemsFound(): Locator {
+    return this.itemsFoundElement;
+  }
+
+  /** Returns the active filter indicator locator (all chips or first chip) */
+  get activeFilterIndicator(): Locator {
+    return this.activeFilterChipsRoots;
+  }
+
+  /** Returns the count of currently displayed active filter chips */
+  async getActiveFilterChipsCount(): Promise<number> {
+    return await test.step('Get active filter chips count', async () => {
+      return await this.activeFilterChipsRoots.count();
     });
   }
 
-  /** Removes the active date filter by clicking the cross icon */
-  async removeActiveDateFilter(): Promise<void> {
-    await test.step('Remove active date filter', async () => {
-      await this.activeFilterCrossButton.click();
-    });
+  /** Returns an ActiveFilterChipComponent by its index */
+  getActiveFilterChipByIndex(index: number): ActiveFilterChipComponent {
+    return new ActiveFilterChipComponent(this.activeFilterChipsRoots.nth(index), this.page);
   }
 
-  /** Checks whether the active filter indicator is visible */
-  async isActiveFilterVisible(): Promise<boolean> {
-    return await test.step('Check if active filter indicator is visible', async () => {
-      return await this.activeFilterIndicator.isVisible();
+  /** Returns an ActiveFilterChipComponent matching the provided text or pattern */
+  getActiveFilterChipByText(text: string | RegExp): ActiveFilterChipComponent {
+    const root = this.activeFilterChipsRoots.filter({ hasText: text }).first();
+    return new ActiveFilterChipComponent(root, this.page);
+  }
+
+  /** Returns the active filter chip for a Type filter enum */
+  getActiveFilterChipByType(type: EventTypeFilter): ActiveFilterChipComponent {
+    return this.getActiveFilterChipByText(this.i18n.typeOptions[type]);
+  }
+
+  /** Returns the active filter chip for a Location filter enum */
+  getActiveFilterChipByLocation(location: EventLocationFilter): ActiveFilterChipComponent {
+    return this.getActiveFilterChipByText(this.i18n.locationOptions[location]);
+  }
+
+  /** Returns the active filter chip for a Status filter enum */
+  getActiveFilterChipByStatus(status: EventStatusFilter): ActiveFilterChipComponent {
+    return this.getActiveFilterChipByText(this.i18n.statusOptions[status]);
+  }
+
+  /** Returns the active filter chip for a Time filter enum */
+  getActiveFilterChipByTime(time: EventTimeFilter): ActiveFilterChipComponent {
+    return this.getActiveFilterChipByText(this.i18n.timeOptions[time]);
+  }
+
+  /** Returns the date range active filter chip */
+  getActiveDateRangeChip(): ActiveFilterChipComponent {
+    return this.getActiveFilterChipByText(/\d+[./]\d+[./]\d{4}/);
+  }
+
+  /** Returns all active filter chips as components */
+  async getAllActiveFilterChips(): Promise<ActiveFilterChipComponent[]> {
+    const count = await this.getActiveFilterChipsCount();
+    const chips: ActiveFilterChipComponent[] = [];
+    for (let i = 0; i < count; i++) {
+      chips.push(this.getActiveFilterChipByIndex(i));
+    }
+    return chips;
+  }
+
+  /** Returns texts of all active filter chips */
+  async getAllActiveFilterTexts(): Promise<string[]> {
+    return await test.step('Get all active filter texts', async () => {
+      const chips = await this.getAllActiveFilterChips();
+      const texts: string[] = [];
+      for (const chip of chips) {
+        texts.push(await chip.getText());
+      }
+      return texts;
     });
   }
 
@@ -197,113 +207,6 @@ export class EventsPage extends BasePage {
     await test.step('Switch to list view', async () => {
       await this.listViewButton.click();
     });
-  }
-
-  /** Checks whether the "Filter" label next to the filters block is visible */
-  async isFilterLabelVisible(): Promise<boolean> {
-    return await test.step('Check if filter label is visible', async () => {
-      return await this.filterLabel.isVisible();
-    });
-  }
-
-  /** Opens the "Event time" filter dropdown */
-  async openEventTimeFilter(): Promise<void> {
-    await test.step('Open event time filter', async () => {
-      await this.eventTimeCombobox.click();
-    });
-  }
-
-  /** Opens the "Location" filter dropdown */
-  async openLocationFilter(): Promise<void> {
-    await test.step('Open location filter', async () => {
-      await this.locationCombobox.click();
-    });
-  }
-
-  /** Opens the "Status" filter dropdown */
-  async openStatusFilter(): Promise<void> {
-    await test.step('Open status filter', async () => {
-      await this.statusCombobox.click();
-    });
-  }
-
-  /** Opens the "Type" filter dropdown */
-  async openTypeFilter(): Promise<void> {
-    await test.step('Open type filter', async () => {
-      await this.typeCombobox.click();
-    });
-  }
-
-  /** Opens the "Date range" filter */
-  async openDateRangeFilter(): Promise<void> {
-    await test.step('Open date range filter', async () => {
-      await this.dateRangeCombobox.click();
-    });
-  }
-
-  /** Checks whether the "Reset all" button is enabled */
-  async isResetAllEnabled(): Promise<boolean> {
-    return await test.step('Check if reset all is enabled', async () => {
-      return await this.resetAllButton.isEnabled();
-    });
-  }
-
-  /** Clicks "Reset all" button */
-  async clickResetAll(): Promise<void> {
-    await test.step('Click reset all button', async () => {
-      await this.resetAllButton.click();
-    });
-  }
-
-  /** Selects an option from the currently open filter dropdown by its text */
-  async selectFilterOption(optionText: string): Promise<void> {
-    await test.step(`Select filter option "${optionText}"`, async () => {
-      await this.filterOptions.filter({ hasText: optionText }).click();
-    });
-  }
-
-  /** Clicks "Filter cities" button (Location filter) */
-  async clickFilterCities(): Promise<void> {
-    await test.step('Click filter cities button', async () => {
-      await this.locationFilterCitiesButton.click();
-    });
-  }
-
-  /** Returns the calendar's current period label */
-  async getCalendarPeriodLabel(): Promise<string> {
-    return await this.calendarDropdown.getCurrentPeriod();
-  }
-
-  /** Opens the quick month/year picker in the calendar */
-  async openCalendarMonthYearPicker(): Promise<void> {
-    await test.step('Open calendar month/year picker', async () => {
-      await this.calendarPeriodButton.click();
-    });
-  }
-
-  /** Moves the calendar to the next month */
-  async goToNextMonth(): Promise<void> {
-    await this.calendarDropdown.clickNextMonth();
-  }
-
-  /** Moves the calendar to the previous month */
-  async goToPreviousMonth(): Promise<void> {
-    await this.calendarDropdown.clickPreviousMonth();
-  }
-
-  /** Returns the locator for a specific day cell in the calendar */
-  getCalendarDayCell(day: number): Locator {
-    return this.calendarDropdown.getDayCell(day);
-  }
-
-  /** Clicks a specific day in the calendar (within the currently displayed month) */
-  async selectCalendarDay(day: number): Promise<void> {
-    await this.calendarDropdown.selectDate(day);
-  }
-
-  /** Checks whether the calendar is open and visible */
-  async isCalendarVisible(): Promise<boolean> {
-    return await this.calendarDropdown.isCalendarVisible();
   }
 
   /** Returns the number of event cards currently rendered in grid mode */

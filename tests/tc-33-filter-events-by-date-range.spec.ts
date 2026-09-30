@@ -15,22 +15,23 @@ test.describe('TC-33 Verify that a user can filter events by date range', () => 
     expect(initialItemsCount).toBeGreaterThan(0);
 
     // Step 1: Click the "Date range" filter.
-    await eventsPage.openDateRangeFilter();
-    await expect(eventsPage.calendarDropdown.calendar).toBeVisible();
+    await eventsPage.filters.openDateRangeFilter();
+    await expect(eventsPage.filters.calendarDropdown.calendar).toBeVisible();
 
     // Step 2: Select a start date (15).
     const startDate = 15;
     const endDate = 16;
 
-    await eventsPage.calendarDropdown.selectDate(startDate);
-    expect(await eventsPage.calendarDropdown.isDateSelected(startDate)).toBe(true);
+    await eventsPage.filters.calendarDropdown.selectDate(startDate);
+    expect(await eventsPage.filters.calendarDropdown.isDateSelected(startDate)).toBe(true);
 
     // Step 3: Select an end date (16).
-    await eventsPage.calendarDropdown.selectDate(endDate);
+    await eventsPage.filters.calendarDropdown.selectDate(endDate);
 
     // Step 4: Verify that the filter indicator for the selected date range is displayed above the events list.
-    await expect(eventsPage.activeFilterIndicator).toBeVisible();
-    const activeFilterText = await eventsPage.getActiveFilterText();
+    const dateChip = eventsPage.getActiveDateRangeChip();
+    await expect(dateChip.chip).toBeVisible();
+    const activeFilterText = await dateChip.getText();
     expect(activeFilterText).toContain(String(startDate));
     expect(activeFilterText).toContain(String(endDate));
 
@@ -43,11 +44,11 @@ test.describe('TC-33 Verify that a user can filter events by date range', () => 
     expect(filteredItemsCount).toBeLessThanOrEqual(initialItemsCount);
 
     // Step 7: Click the "x" icon on the date range filter indicator.
-    await eventsPage.removeActiveDateFilter();
-    await expect(eventsPage.activeFilterIndicator).toBeHidden();
+    await dateChip.remove();
+    await expect(dateChip.chip).toBeHidden();
 
     // Step 8: Verify that the "Items found" count is restored to the value recorded before applying the filter.
-    await expect(eventsPage.itemsFoundElement).toHaveText(new RegExp(`\\b${initialItemsCount}\\b`));
+    await expect(eventsPage.itemsFound).toHaveText(new RegExp(`\\b${initialItemsCount}\\b`));
     const restoredItemsCount = await eventsPage.getItemsFoundCount();
     expect(restoredItemsCount).toBe(initialItemsCount);
   });
