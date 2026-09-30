@@ -11,8 +11,8 @@ import {
   EventsPage,
   PlacesPage,
   EventsPage,
-  EditEventPage,
   EventDetailsPage,
+  EditEventPage,
 } from '@/pages';
 
 import env from '@/config/env';
@@ -44,8 +44,8 @@ type PageFixtures = {
   ecoNewsCreatePage: CreateNewsPage;
   ecoNewsCreatePreviewPage: CreateNewsPreviewPage;
   eventsPage: EventsPage;
-  editEventPage: EditEventPage;
   eventDetailsPage: EventDetailsPage;
+  editEventPage: EditEventPage;
 };
 
 export const test = baseTest.extend<PageFixtures>({
@@ -133,12 +133,12 @@ export const test = baseTest.extend<PageFixtures>({
     await use(new EventsPage(page));
   },
 
-  editEventPage: async ({ page }, use): Promise<void> => {
-    await use(new EditEventPage(page));
-  },
-
   eventDetailsPage: async ({ page }, use): Promise<void> => {
     await use(new EventDetailsPage(page));
+  },
+
+  editEventPage: async ({ page }, use): Promise<void> => {
+    await use(new EditEventPage(page));
   },
 });
 
