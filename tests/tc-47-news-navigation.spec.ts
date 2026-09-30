@@ -1,7 +1,7 @@
 import { test, expect } from '@/fixtures';
 
-test.describe('Page layout and key sections', () => {
-  test('TC-35 Verify profile page layout and key sections after login', async ({
+test.describe('Navigation from news details', () => {
+  test('TC-47: Back navigation from news details', async ({
     page,
     ecoNewsPage,
     ecoNewsDetailsPage,
