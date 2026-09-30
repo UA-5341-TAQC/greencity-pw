@@ -8,6 +8,8 @@ import {
   CreateNewsPage,
   CreateNewsPreviewPage,
   PlacesPage,
+  EventsPage,
+  EditEventPage,
   EventDetailsPage,
 } from '@/pages';
 
@@ -37,6 +39,8 @@ type PageFixtures = {
   authenticatedUser: ProfilePage;
   ecoNewsCreatePage: CreateNewsPage;
   ecoNewsCreatePreviewPage: CreateNewsPreviewPage;
+  eventsPage: EventsPage;
+  editEventPage: EditEventPage;
   eventDetailsPage: EventDetailsPage;
 };
 
@@ -89,10 +93,6 @@ export const test = baseTest.extend<PageFixtures>({
     await use(new EcoNewsDetailsPage(page));
   },
 
-  eventDetailsPage: async ({ page }, use): Promise<void> => {
-    await use(new EventDetailsPage(page));
-  },
-
   authenticatedUser: async ({ page, homePage, signInModal }, use): Promise<void> => {
     await homePage.navigateToHomePage();
     await homePage.waitForHomePage();
@@ -115,6 +115,18 @@ export const test = baseTest.extend<PageFixtures>({
 
   ecoNewsCreatePreviewPage: async ({ page }, use): Promise<void> => {
     await use(new CreateNewsPreviewPage(page));
+  },
+
+  eventsPage: async ({ page }, use): Promise<void> => {
+    await use(new EventsPage(page));
+  },
+
+  editEventPage: async ({ page }, use): Promise<void> => {
+    await use(new EditEventPage(page));
+  },
+
+  eventDetailsPage: async ({ page }, use): Promise<void> => {
+    await use(new EventDetailsPage(page));
   },
 });
 
