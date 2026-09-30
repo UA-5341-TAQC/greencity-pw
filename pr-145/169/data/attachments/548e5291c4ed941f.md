@@ -1,0 +1,267 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: tc-6-7-succesful-editing-news.spec.ts >> TC-007 Verify successful editing of Eco News content and tags >> updates content and tags on an existing Eco News item
+- Location: tests/tc-6-7-succesful-editing-news.spec.ts:65:3
+
+# Error details
+
+```
+Error: expect(received).toEqual(expected) // deep equality
+
+Expected: ArrayContaining ["News", "Education", "Initiatives"]
+Received: []
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e4]:
+      - link "skip to the main content" [ref=e6] [cursor=pointer]:
+        - /url: .main-content
+      - banner "Welcome to header" [ref=e7]:
+        - generic [ref=e9]:
+          - link [ref=e10] [cursor=pointer]:
+            - /url: "#/greenCity"
+            - link "Image green city logo" [ref=e11]
+          - generic [ref=e12]:
+            - navigation [ref=e13]:
+              - tablist [ref=e14]:
+                - listitem [ref=e15]:
+                  - link "Eco news" [ref=e16] [cursor=pointer]:
+                    - /url: "#/greenCity/news"
+                - listitem [ref=e17]:
+                  - link "Events" [ref=e18] [cursor=pointer]:
+                    - /url: "#/greenCity/events"
+                - listitem [ref=e19]:
+                  - link "Places" [ref=e20] [cursor=pointer]:
+                    - /url: "#/greenCity/places"
+                - listitem [ref=e21]:
+                  - link "About us" [ref=e22] [cursor=pointer]:
+                    - /url: "#/greenCity/about"
+                - listitem [ref=e23]:
+                  - link "My space" [ref=e24] [cursor=pointer]:
+                    - /url: "#/greenCity/profile"
+                - listitem [ref=e25]:
+                  - link "UBS courier" [ref=e26] [cursor=pointer]:
+                    - /url: "#/ubs"
+            - menu [ref=e28]:
+              - listitem "site bookmark" [ref=e29] [cursor=pointer]
+              - listitem "site notification" [ref=e31] [cursor=pointer]
+              - search "site search" [ref=e33] [cursor=pointer]
+              - menu "language switcher" [ref=e35]:
+                - option "english" [ref=e36] [cursor=pointer]:
+                  - generic [aria-hidden] [ref=e37]: En
+              - menu "profile options collapsed" [ref=e39]:
+                - listitem [ref=e40] [cursor=pointer]: Володимир
+      - generic [ref=e41]:
+        - generic "Tab To Main"
+        - generic [ref=e42]:
+          - generic [ref=e46]:
+            - generic [ref=e47]:
+              - link "arrow Back to editing" [ref=e49] [cursor=pointer]:
+                - /url: "#/greenCity/news/create-news"
+                - generic [ref=e50]:
+                  - img "arrow" [ref=e52]
+                  - generic [ref=e53]: Back to editing
+              - button "Edit" [ref=e55] [cursor=pointer]
+            - generic [ref=e56]: Edit news
+            - generic [ref=e58]:
+              - generic [ref=e59]: Updated Eco News Title
+              - generic [ref=e61]:
+                - generic [ref=e62]: Sep 30, 2026
+                - img "dot" [ref=e64]
+                - generic [ref=e65]: by Володимир
+              - img "news-image" [ref=e66]
+              - generic [ref=e67]:
+                - generic [ref=e68]:
+                  - img "twitter" [ref=e69]
+                  - img "linkedin" [ref=e70]
+                  - img "facebook" [ref=e71]
+                - paragraph [ref=e74]: Updated Eco News content for testing.
+          - contentinfo [ref=e76]:
+            - generic [ref=e77]:
+              - generic [ref=e78]:
+                - link [ref=e80] [cursor=pointer]:
+                  - /url: "#/greenCity"
+                  - img "GreenCity home" [ref=e81]
+                - navigation [ref=e82]:
+                  - menu [ref=e83]:
+                    - listitem [ref=e84]:
+                      - link "Eco news" [ref=e85] [cursor=pointer]:
+                        - /url: "#/greenCity/news"
+                    - listitem [ref=e86]:
+                      - link "Events" [ref=e87] [cursor=pointer]:
+                        - /url: "#/greenCity/events"
+                    - listitem [ref=e88]:
+                      - link "Places" [ref=e89] [cursor=pointer]:
+                        - /url: "#/greenCity/places"
+                    - listitem [ref=e90]:
+                      - link "About Us" [ref=e91] [cursor=pointer]:
+                        - /url: "#/greenCity/about"
+                    - listitem [ref=e92]:
+                      - link "My Space" [ref=e93] [cursor=pointer]:
+                        - /url: "#/greenCity/profile/2317"
+                    - listitem [ref=e94]:
+                      - link "UBS Courier" [ref=e95] [cursor=pointer]:
+                        - /url: "#/ubs"
+                  - menu [ref=e96]:
+                    - listitem [ref=e97]:
+                      - paragraph [ref=e98]: Follow us
+                    - listitem [ref=e99]:
+                      - link [ref=e100] [cursor=pointer]:
+                        - /url: "#"
+                        - img "Twitter link" [ref=e101]
+                      - link [ref=e102] [cursor=pointer]:
+                        - /url: "#"
+                        - img "LinkedIn link" [ref=e103]
+                      - link [ref=e104] [cursor=pointer]:
+                        - /url: "#"
+                        - img "Facebook link" [ref=e105]
+                      - link [ref=e106] [cursor=pointer]:
+                        - /url: "#"
+                        - img "Instagram link" [ref=e107]
+                      - link [ref=e108] [cursor=pointer]:
+                        - /url: "#"
+                        - img "YouTube link" [ref=e109]
+              - generic [ref=e110]: © Copyright 2026. Green City.
+    - button [ref=e111] [cursor=pointer]:
+      - img "chat" [ref=e112]
+  - generic [ref=e113]: Welcome to the search window
+```
+
+# Test source
+
+```ts
+  26  |     const editableCard = editableCards.first();
+  27  |     await expect(
+  28  |       editableCard.locator('.button-news-card button'),
+  29  |       'The user should have an existing editable Eco News item'
+  30  |     ).toBeVisible();
+  31  |     const originalTitle = (await editableCard.locator('h3').innerText()).trim();
+  32  |     expect(originalTitle).not.toBe('');
+  33  | 
+  34  |     // Step 1: Open the existing news item menu and choose Edit news.
+  35  |     await editableCard.locator('.button-news-card button').click();
+  36  |     await authenticatedPage.getByText('Edit news', { exact: true }).click();
+  37  |     await ecoNewsCreatePage.waitForCreateNewsPage();
+  38  | 
+  39  |     // Step 2: Confirm the Title field contains the current title.
+  40  |     const titleField = authenticatedPage.locator('textarea[formcontrolname="title"]');
+  41  |     await expect(titleField).toHaveValue(originalTitle);
+  42  | 
+  43  |     // Step 3: Replace the title with a valid new value.
+  44  |     await ecoNewsCreatePage.enterTitle(updatedTitle);
+  45  |     await expect(titleField).toHaveValue(updatedTitle);
+  46  | 
+  47  |     // Step 4: Preview and confirm the updated title.
+  48  |     await ecoNewsCreatePage.preview();
+  49  |     await ecoNewsCreatePreviewPage.waitForPreviewPage();
+  50  |     await expect(authenticatedPage.locator('div.news-title')).toHaveText(updatedTitle);
+  51  | 
+  52  |     // Step 5: Save the change from the preview.
+  53  |     await authenticatedPage.getByRole('button', { name: 'Edit', exact: true }).click();
+  54  |     await ecoNewsPage.waitForEcoNewsPage();
+  55  | 
+  56  |     // Step 6: Verify the updated article is present in the Eco News list.
+  57  |     await expect(
+  58  |       ecoNewsPage.listViewCards.getByRole('heading', { name: updatedTitle, exact: true })
+  59  |     ).toBeVisible();
+  60  |     await expect(authenticatedPage).toHaveURL(/\/greenCity\/news/);
+  61  |   });
+  62  | });
+  63  | 
+  64  | test.describe('TC-007 Verify successful editing of Eco News content and tags', () => {
+  65  |   test('updates content and tags on an existing Eco News item', async ({
+  66  |     authenticatedPage,
+  67  |     ecoNewsPage,
+  68  |     ecoNewsCreatePage,
+  69  |     ecoNewsCreatePreviewPage,
+  70  |     ecoNewsDetailsPage,
+  71  |   }) => {
+  72  |     const updatedContent = 'Updated Eco News content for testing.';
+  73  |     const updatedTags = ['News', 'Education', 'Initiatives'];
+  74  | 
+  75  |     // Preconditions: the user is authenticated and English is selected by the auth fixture.
+  76  |     await authenticatedPage.waitForLoadState('domcontentloaded');
+  77  |     await expect(ecoNewsPage.header.userMenuDropdown).toBeVisible();
+  78  |     await expect(authenticatedPage).toHaveURL(/.*greenCity.*/);
+  79  | 
+  80  |     await ecoNewsPage.navigateToEcoNewsPage();
+  81  |     await ecoNewsPage.waitForEcoNewsPage();
+  82  |     await ecoNewsPage.clickListView();
+  83  | 
+  84  |     // Find an existing article owned by the user; only its card exposes the edit menu.
+  85  |     const cards = ecoNewsPage.listViewCards;
+  86  |     const editableCard = cards
+  87  |       .filter({ has: authenticatedPage.locator('.button-news-card button') })
+  88  |       .first();
+  89  |     await expect(
+  90  |       editableCard.locator('.button-news-card button'),
+  91  |       'The user should have an existing editable Eco News item'
+  92  |     ).toBeVisible();
+  93  |     const originalTitle = (await editableCard.locator('h3').innerText()).trim();
+  94  | 
+  95  |     // Step 1: Open the existing news item and choose Edit news.
+  96  |     await editableCard.locator('.button-news-card button').click();
+  97  |     await authenticatedPage.getByText('Edit news', { exact: true }).click();
+  98  |     await ecoNewsCreatePage.waitForCreateNewsPage();
+  99  | 
+  100 |     // Step 2: Update the content.
+  101 |     await ecoNewsCreatePage.enterContent(updatedContent);
+  102 |     await expect(authenticatedPage.locator('div.ql-editor').first()).toContainText(updatedContent);
+  103 | 
+  104 |     // Step 3: Set exactly three tags, deselecting any existing tags that are not needed.
+  105 |     const currentlySelectedTags = await ecoNewsCreatePage.getSelectedTags();
+  106 |     const tagsToRemove = currentlySelectedTags.filter((tag) => !updatedTags.includes(tag));
+  107 |     for (const tag of tagsToRemove) {
+  108 |       await ecoNewsCreatePage.selectTag(tag);
+  109 |     }
+  110 | 
+  111 |     const selectedAfterRemovingExtras = await ecoNewsCreatePage.getSelectedTags();
+  112 |     const tagsToAdd = updatedTags.filter((tag) => !selectedAfterRemovingExtras.includes(tag));
+  113 |     for (const tag of tagsToAdd) {
+  114 |       await ecoNewsCreatePage.selectTag(tag);
+  115 |     }
+  116 | 
+  117 |     const selectedTags = await ecoNewsCreatePage.getSelectedTags();
+  118 |     expect(selectedTags).toEqual(expect.arrayContaining(updatedTags));
+  119 |     expect(selectedTags).toHaveLength(3);
+  120 | 
+  121 |     // Step 4: Preview the updated content and tags.
+  122 |     await ecoNewsCreatePage.preview();
+  123 |     await ecoNewsCreatePreviewPage.waitForPreviewPage();
+  124 |     await expect(authenticatedPage.locator('div.news-text-content')).toContainText(updatedContent);
+  125 |     const previewTags = await ecoNewsCreatePreviewPage.getTags();
+> 126 |     expect(previewTags).toEqual(expect.arrayContaining(updatedTags));
+      |                         ^ Error: expect(received).toEqual(expected) // deep equality
+  127 | 
+  128 |     // Step 5: Save the changes from the preview and return to the news list.
+  129 |     await authenticatedPage.getByRole('button', { name: 'Edit', exact: true }).click();
+  130 |     await ecoNewsPage.waitForEcoNewsPage();
+  131 | 
+  132 |     // Step 6: Verify the edited item is listed, then confirm its saved details.
+  133 |     const updatedItemHeading = ecoNewsPage.listViewCards.getByRole('heading', {
+  134 |       name: originalTitle,
+  135 |       exact: true,
+  136 |     });
+  137 |     await expect(updatedItemHeading).toBeVisible();
+  138 |     await updatedItemHeading.click();
+  139 |     await ecoNewsDetailsPage.waitForDetailsPage();
+  140 |     await expect(authenticatedPage.locator('.news-text-content')).toContainText(updatedContent);
+  141 |     const savedTags = (await ecoNewsDetailsPage.getTagTexts()).map((tag) => tag.trim());
+  142 |     expect(savedTags).toEqual(expect.arrayContaining(updatedTags));
+  143 | 
+  144 |     await ecoNewsPage.navigateToEcoNewsPage();
+  145 |     await ecoNewsPage.waitForEcoNewsPage();
+  146 |   });
+  147 | });
+  148 | 
+```
