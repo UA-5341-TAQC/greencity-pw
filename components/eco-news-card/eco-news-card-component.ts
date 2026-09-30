@@ -57,4 +57,11 @@ export abstract class EcoNewsCardComponent extends BaseComponent {
   async isFavourite(): Promise<boolean> {
     return await this.getFavouriteActiveFlag().isVisible();
   }
+
+  async removeFromFavourite(): Promise<void> {
+    if (await this.isFavourite()) {
+      await this.clickFavouriteButton();
+      await this.favouriteActiveFlag.waitFor({ state: 'hidden' });
+    }
+  }
 }

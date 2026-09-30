@@ -101,7 +101,13 @@ export class EcoNewsPage extends BasePage {
 
   async openFavourites(): Promise<void> {
     await this.favouritesToggle.click();
-    await this.waitForDomContentLoaded();
+  }
+
+  getNewsCardByHref(href: string): EcoNewsTableCardComponent {
+    const card = this.newsCards.filter({
+      has: this.page.locator(`a.link[href="${href}"]`),
+    });
+    return new EcoNewsTableCardComponent(card, this.page);
   }
 }
 export default EcoNewsPage;
