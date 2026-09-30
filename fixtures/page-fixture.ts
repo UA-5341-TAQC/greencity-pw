@@ -8,7 +8,6 @@ import {
   EcoNewsDetailsPage,
   CreateNewsPage,
   CreateNewsPreviewPage,
-  EventsPage,
   PlacesPage,
   EventsPage,
   EventDetailsPage,
@@ -39,7 +38,6 @@ type PageFixtures = {
   addPlaceModal: AddPlaceModal;
   ecoNewsPage: EcoNewsPage;
   ecoNewsDetailsPage: EcoNewsDetailsPage;
-  eventsPage: EventsPage;
   authenticatedUser: ProfilePage;
   ecoNewsCreatePage: CreateNewsPage;
   ecoNewsCreatePreviewPage: CreateNewsPreviewPage;
@@ -127,10 +125,6 @@ export const test = baseTest.extend<PageFixtures>({
 
   ecoNewsCreatePreviewPage: async ({ page }, use): Promise<void> => {
     await use(new CreateNewsPreviewPage(page));
-  },
-
-  eventsPage: async ({ page }, use): Promise<void> => {
-    await use(new EventsPage(page));
   },
 
   eventDetailsPage: async ({ page }, use): Promise<void> => {
