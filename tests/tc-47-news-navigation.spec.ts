@@ -29,7 +29,7 @@ test.describe('Navigation from news details', () => {
     await test.step("3.	Use the browser's back button instead.", async () => {
       await page.goBack();
       await page.waitForLoadState();
-      expect(page.url()).toContain('/greenCity/news/{ECO_NEWS_ID}');
+      expect(page.url()).toContain(`/greenCity/news/${ECO_NEWS_ID}`);
     });
   });
 });
