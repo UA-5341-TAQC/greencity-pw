@@ -2,6 +2,8 @@ import type { Locator, Page } from '@playwright/test';
 import BasePage from '@/pages/base-page';
 
 export class CreateEventPage extends BasePage {
+  private readonly titleCounter: Locator;
+  private readonly titleValidationError: Locator;
   private readonly titleInput: Locator;
   private readonly durationSelect: Locator;
   private readonly economicTag: Locator;
@@ -26,6 +28,11 @@ export class CreateEventPage extends BasePage {
     super(page);
 
     this.titleInput = page.locator('input[formcontrolname="title"]');
+    this.titleCounter = page.getByText(/^\s*\d+\s*\/\s*70\s*$/);
+    this.titleValidationError = page.getByText(
+      'Enter a title up to and including 70 characters',
+      { exact: true }
+    );
     this.durationSelect = page.locator('.duration-wrapper mat-select[formcontrolname="duration"]');
     this.economicTag = page.getByRole('option', { name: 'Economic' });
     this.socialTag = page.getByRole('option', { name: 'Social' });
@@ -49,8 +56,46 @@ export class CreateEventPage extends BasePage {
     this.cancelButton = submitContainer.getByRole('button', { name: 'Cancel' });
   }
 
+  async waitForCreateEventPage(): Promise<void> {
+    await this.titleInput.waitFor({ state: 'visible' });
+  }
+
+  async focusTitle(): Promise<void> {
+    await this.titleInput.click();
+  }
+
+  async focusDescription(): Promise<void> {
+    await this.description.click();
+  }
+
+  async isTitleFocused(): Promise<boolean> {
+    return this.titleInput.evaluate((element) => element === document.activeElement);
+  }
+
+  async isDescriptionFocused(): Promise<boolean> {
+    return this.description.evaluate((element) => element === document.activeElement);
+  }
+
   async fillTitle(title: string): Promise<void> {
     await this.titleInput.fill(title);
+  }
+
+  async getTitle(): Promise<string> {
+    return this.titleInput.inputValue();
+  }
+
+  async getTitleCounter(): Promise<string> {
+    const text = await this.titleCounter.innerText();
+    return text.replace(/\s*\/\s*/, ' / ').trim();
+  }
+
+  async isTitleValidationErrorVisible(): Promise<boolean> {
+    return this.titleValidationError.isVisible();
+  }
+
+  async isTitleInvalid(): Promise<boolean> {
+    const classes = (await this.titleInput.getAttribute('class'))?.split(/\s+/) ?? [];
+    return classes.includes('ng-invalid');
   }
 
   async selectDuration(duration: string): Promise<void> {
