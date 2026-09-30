@@ -1,7 +1,7 @@
-import type { Page, Locator } from '@playwright/test';
+import { test, type Page, type Locator } from '@playwright/test';
 import { BaseComponent } from '@/components/base-component';
 
-export abstract class CalendarDropdownComponent extends BaseComponent {
+export class CalendarDropdownComponent extends BaseComponent {
   protected readonly calendarRoot: Locator;
   protected readonly periodButton: Locator;
   protected readonly previousMonthButton: Locator;
@@ -18,65 +18,113 @@ export abstract class CalendarDropdownComponent extends BaseComponent {
   }
 
   /**
-   * Get the locator for the date cell using the `aria-label` (e.g., "September 26, 2026")
-   * or using the exact day number (e.g., "26").
+   * Returns the mat-calendar locator for visibility assertions.
    */
-  private getDayCellLocator(targetDate: string): Locator {
-    const isFullDate = targetDate.includes(',');
+  get calendar(): Locator {
+    return this.calendarRoot;
+  }
+
+  /**
+   * Get the locator for the date cell using the `aria-label` (e.g., "September 26, 2026")
+   * or using the exact day number (e.g., "26" or 26).
+   */
+  getDayCell(targetDate: string | number): Locator {
+    const targetStr = String(targetDate);
+    const isFullDate = targetStr.includes(',');
 
     return isFullDate
-      ? this.root.locator(`button.mat-calendar-body-cell[aria-label="${targetDate}"]`)
-      : this.root.locator(`button.mat-calendar-body-cell`, {
-          hasText: new RegExp(`^\\s*${targetDate}\\s*$`),
+      ? this.calendarRoot.locator(`button.mat-calendar-body-cell[aria-label="${targetStr}"]`)
+      : this.calendarRoot.locator(`button.mat-calendar-body-cell`, {
+          hasText: new RegExp(`^\\s*${targetStr}\\s*$`),
         });
+  }
+
+  /**
+   * Checks whether the calendar is visible.
+   */
+  async isCalendarVisible(): Promise<boolean> {
+    return await test.step('Check if calendar is visible', async () => {
+      return await this.calendarRoot.isVisible();
+    });
   }
 
   /**
    * Get the currently selected period (e.g., "SEP 2026").
    */
   async getCurrentPeriod(): Promise<string> {
-    return (await this.periodButton.textContent())?.trim() ?? '';
+    return await test.step('Get calendar period label', async () => {
+      return (await this.periodButton.textContent())?.trim() ?? '';
+    });
+  }
+
+  /**
+   * Opens the month/year selection view by clicking the period button.
+   */
+  async openMonthYearPicker(): Promise<void> {
+    await test.step('Open month/year picker in calendar', async () => {
+      await this.periodButton.click();
+    });
   }
 
   /**
    * Click on the next month.
    */
   async clickNextMonth(): Promise<void> {
-    await this.nextMonthButton.click();
+    await test.step('Click next month in calendar', async () => {
+      await this.nextMonthButton.click();
+    });
   }
 
   /**
-   * Click on the previous month
+   * Click on the previous month.
    */
   async clickPreviousMonth(): Promise<void> {
-    await this.previousMonthButton.click();
+    await test.step('Click previous month in calendar', async () => {
+      await this.previousMonthButton.click();
+    });
   }
 
   /**
    * Select a specific day by its exact `aria-label` or day number.
-   * @param targetDate A string in the format "Month Day, Year" (e.g., "September 24, 2026") or simply the day number (e.g., "24").
+   * @param targetDate A string in the format "Month Day, Year" (e.g., "September 24, 2026") or day number (e.g., "24" or 24).
    */
-  async selectDate(targetDate: string): Promise<void> {
-    const dayCell = this.getDayCellLocator(targetDate);
-    await dayCell.click();
+  async selectDate(targetDate: string | number): Promise<void> {
+    await test.step(`Select date "${targetDate}" in calendar`, async () => {
+      const dayCell = this.getDayCell(targetDate);
+      await dayCell.click();
+    });
+  }
+
+  /**
+   * Selects a date range by clicking the start date followed by the end date.
+   */
+  async selectDateRange(startDate: string | number, endDate: string | number): Promise<void> {
+    await test.step(`Select date range "${startDate} - ${endDate}" in calendar`, async () => {
+      await this.selectDate(startDate);
+      await this.selectDate(endDate);
+    });
   }
 
   /**
    * Check if the selected date is highlighted (has the class mat-calendar-body-selected)
-   * @param targetDate Format "September 26, 2026" or simply "26"
+   * @param targetDate Format "September 26, 2026" or day number "26" / 26
    */
-  async isDateSelected(targetDate: string): Promise<boolean> {
-    const dayCell = this.getDayCellLocator(targetDate);
-    const selectedContent = dayCell.locator('.mat-calendar-body-selected');
+  async isDateSelected(targetDate: string | number): Promise<boolean> {
+    return await test.step(`Check if date "${targetDate}" is selected`, async () => {
+      const dayCell = this.getDayCell(targetDate);
+      const selectedContent = dayCell.locator('.mat-calendar-body-selected');
 
-    return await selectedContent.isVisible();
+      return await selectedContent.isVisible();
+    });
   }
 
   /**
    * Check if a specific date is active (clickable).
    */
-  async isDateEnabled(targetDate: string): Promise<boolean> {
-    const dayCell = this.getDayCellLocator(targetDate);
-    return await dayCell.isEnabled();
+  async isDateEnabled(targetDate: string | number): Promise<boolean> {
+    return await test.step(`Check if date "${targetDate}" is enabled`, async () => {
+      const dayCell = this.getDayCell(targetDate);
+      return await dayCell.isEnabled();
+    });
   }
 }
