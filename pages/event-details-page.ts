@@ -3,10 +3,13 @@ import BasePage from '@/pages/base-page';
 
 export class EventDetailsPage extends BasePage {
   private readonly backButton: Locator;
+  private readonly editEventButton: Locator;
+  private readonly deleteEventButton: Locator;
   private readonly eventTitle: Locator;
   private readonly dateAuthor: Locator;
   private readonly descriptionBlockTitle: Locator;
   private readonly description: Locator;
+  private readonly eventTag: Locator;
   private readonly eventInfoBlock: Locator;
   private readonly saveEventButton: Locator;
   private readonly joinEventButton: Locator;
@@ -15,10 +18,13 @@ export class EventDetailsPage extends BasePage {
     super(page);
 
     this.backButton = page.locator('.event-nav .button-content');
+    this.editEventButton = page.locator('.edit-buttons .secondary-global-button');
+    this.deleteEventButton = page.locator('.edit-buttons .tertiary-global-button');
     this.eventTitle = page.locator('.event-title');
     this.dateAuthor = page.locator('.date-author');
     this.descriptionBlockTitle = page.locator('.description-block-title');
     this.description = page.locator('.ql-editor');
+    this.eventTag = page.locator('.event-tag');
     this.eventInfoBlock = page.locator('.event-info-block');
     this.saveEventButton = page.locator('.save-join-event-block .secondary-global-button');
     this.joinEventButton = page.locator('.save-join-event-block .primary-global-button');
@@ -29,7 +35,6 @@ export class EventDetailsPage extends BasePage {
   }
 
   async waitForDetailsPage(): Promise<void> {
-    await this.waitForPageLoad();
     await this.eventTitle.waitFor({ state: 'visible' });
   }
 
@@ -49,12 +54,24 @@ export class EventDetailsPage extends BasePage {
     return (await this.description.innerText()).trim();
   }
 
+  async getEventTag(): Promise<string> {
+    return (await this.eventTag.innerText()).trim();
+  }
+
   async getEventInfo(): Promise<string> {
     return (await this.eventInfoBlock.innerText()).trim();
   }
 
   async clickBackToEvents(): Promise<void> {
     await this.backButton.click();
+  }
+
+  async isEditEventButtonVisible(): Promise<boolean> {
+    return await this.editEventButton.isVisible();
+  }
+
+  async isDeleteEventButtonVisible(): Promise<boolean> {
+    return await this.deleteEventButton.isVisible();
   }
 
   async clickSaveEvent(): Promise<void> {
