@@ -3,7 +3,8 @@ import env from '@/config/env';
 
 type BaseFixtures = {
   baseUrl: string;
-  apiUrl: string;
+  apiUserUrl: string;
+  apiGreenCityUrl: string;
 };
 
 export const test = base.extend<BaseFixtures>({
@@ -12,8 +13,12 @@ export const test = base.extend<BaseFixtures>({
     await use(env.BASE_URL);
   },
   // eslint-disable-next-line no-empty-pattern
-  apiUrl: async ({}, use): Promise<void> => {
-    await use(env.API_URL);
+  apiUserUrl: async ({}, use): Promise<void> => {
+    await use(env.API_USER_BASE_URL);
+  },
+  // eslint-disable-next-line no-empty-pattern
+  apiGreenCityUrl: async ({}, use): Promise<void> => {
+    await use(env.API_GREENCITY_BASE_URL);
   },
 });
 
