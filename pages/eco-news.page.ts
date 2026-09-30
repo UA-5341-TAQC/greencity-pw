@@ -34,6 +34,10 @@ export class EcoNewsPage extends BasePage {
   async waitForEcoNewsPage(): Promise<void> {
     await test.step('EcoNews: wait for Eco News page to load', async () => {
       await this.waitForPageLoad();
+<<<<<<< HEAD
+=======
+      await this.newsCards.first().waitFor({ state: 'visible' });
+>>>>>>> 3c6f33fcfa3fd1dfb2b5cce6c663e8096c36edc0
     });
   }
 
