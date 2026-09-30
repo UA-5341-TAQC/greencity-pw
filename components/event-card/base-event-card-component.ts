@@ -12,6 +12,7 @@ export abstract class BaseEventCardComponent extends BaseComponent {
   protected readonly eventStatus: Locator;
   protected readonly eventTitle: Locator;
   protected readonly moreButton: Locator;
+  protected readonly editEventButton: Locator;
   protected readonly joinEventButton: Locator;
   protected readonly publishDate: Locator;
   protected readonly authorName: Locator;
@@ -36,6 +37,7 @@ export abstract class BaseEventCardComponent extends BaseComponent {
 
     this.eventTitle = this.root.locator('p.event-name');
     this.moreButton = this.root.getByRole('button', { name: 'More' });
+    this.editEventButton = this.root.getByRole('button', { name: 'Edit event' });
     this.joinEventButton = this.root.getByRole('button', { name: 'Join event' });
 
     this.publishDate = this.root.locator('div.additional-info div.date p');
@@ -93,6 +95,21 @@ export abstract class BaseEventCardComponent extends BaseComponent {
   /** Clicks the "More" button */
   async clickMore(): Promise<void> {
     await this.moreButton.click();
+  }
+
+  /** Checks whether the "Edit event" button is visible */
+  async isEditEventButtonVisible(): Promise<boolean> {
+    return await this.editEventButton.isVisible();
+  }
+
+  /** Checks whether the "Edit event" button is enabled */
+  async isEditEventButtonEnabled(): Promise<boolean> {
+    return await this.editEventButton.isEnabled();
+  }
+
+  /** Clicks the "Edit event" button */
+  async clickEditEvent(): Promise<void> {
+    await this.editEventButton.click();
   }
 
   /** Clicks the "Join event" button */

@@ -265,6 +265,43 @@ export class EventsPage extends BasePage {
     return new ListEventCardComponent(root, this.page);
   }
 
+  /** Returns the first event card that offers the author-only edit action */
+  async getFirstEditableEventCard(): Promise<GridEventCardComponent | ListEventCardComponent> {
+    const editButton = this.page.getByRole('button', { name: 'Edit event' });
+    const gridCard = this.gridEventCardRoots.filter({ has: editButton }).first();
+
+    if ((await gridCard.count()) > 0) {
+      return new GridEventCardComponent(gridCard, this.page);
+    }
+
+    const listCard = this.listEventCardRoots.filter({ has: editButton }).first();
+
+    if ((await listCard.count()) > 0) {
+      return new ListEventCardComponent(listCard, this.page);
+    }
+
+    throw new Error('No event card with an Edit event action was found.');
+  }
+
+  /** Returns the event card matching a title in the current view mode */
+  async getEventCardByTitle(
+    title: string
+  ): Promise<GridEventCardComponent | ListEventCardComponent> {
+    const gridCard = this.gridEventCardRoots.filter({ hasText: title }).first();
+
+    if ((await gridCard.count()) > 0) {
+      return new GridEventCardComponent(gridCard, this.page);
+    }
+
+    const listCard = this.listEventCardRoots.filter({ hasText: title }).first();
+
+    if ((await listCard.count()) > 0) {
+      return new ListEventCardComponent(listCard, this.page);
+    }
+
+    throw new Error(`No event card with title "${title}" was found.`);
+  }
+
   /** Returns GridEventCard components for every card on the page */
   async getAllGridEventCards(): Promise<GridEventCardComponent[]> {
     const count = await this.getGridEventCardsCount();
