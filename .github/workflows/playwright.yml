@@ -1,4 +1,4 @@
-name: Speak-Ukrainian CI
+name: GreenCity CI
 
 on:
   push:
@@ -14,10 +14,16 @@ concurrency:
 
 env:
   BASE_URL: ${{ secrets.BASE_URL }}
-  API_URL: ${{ secrets.API_URL }}
+  API_USER_BASE_URL: ${{ secrets.API_USER_BASE_URL }}
+  API_GREENCITY_BASE_URL: ${{ secrets.API_GREENCITY_BASE_URL }}
   USER_EMAIL: ${{ secrets.TEST_EMAIL }}
   USER_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+  USER_ID: ${{ secrets.TEST_USER_ID }}
+  USER_NAME: ${{ secrets.TEST_USER_NAME }}
   HEADLESS: true
+  SHORT_TIMEOUT: ${{ secrets.SHORT_TIMEOUT }}
+  MEDIUM_TIMEOUT: ${{ secrets.MEDIUM_TIMEOUT }}
+  LONG_TIMEOUT: ${{ secrets.LONG_TIMEOUT }}
 
 permissions:
   contents: write

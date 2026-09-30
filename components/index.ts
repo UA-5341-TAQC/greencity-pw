@@ -19,3 +19,5 @@ export * from './pagination.component';
 export * from './user-menu-component';
 export * from './calendar-dropdown-component';
 export * from './tag-selector-component';
+export * from './active-filter-chip-component';
+export * from './event-filter-component';
