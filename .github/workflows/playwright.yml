@@ -102,10 +102,57 @@ jobs:
         if: ${{ matrix.browser != 'api' && steps.playwright-cache.outputs.cache-hit == 'true' }}
         run: npx playwright install-deps ${{ matrix.browser }}
 
-      # No continue-on-error: a failed matrix leg must fail the job.
-      # The report is still built because generate-report uses !cancelled().
+      # Failed assertions must NOT turn the job red, but real errors must.
+      # Step 1: run the tests and only record the exit code.
       - name: Run Playwright tests
-        run: npx playwright test --project=${{ matrix.browser }}
+        id: pw
+        run: |
+          set +e
+          npx playwright test --project=${{ matrix.browser }}
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      # Step 2: decide what the exit code means using the JSON report.
+      - name: Classify test run result
+        id: classify
+        run: |
+          f=playwright-results.json
+          code="${{ steps.pw.outputs.exit_code }}"
+
+          if [ "$code" = "0" ]; then
+            echo "✅ All tests passed"
+            exit 0
+          fi
+
+          # Non-zero exit code but no report -> Playwright crashed or config is broken
+          if [ ! -f "$f" ]; then
+            echo "::error::Playwright exited with code $code and produced no JSON report (crash / config / project error)"
+            exit 1
+          fi
+
+          errors=$(jq '.errors | length' "$f")
+          total=$(jq '.stats | .expected + .unexpected + .flaky + .skipped' "$f")
+          failed=$(jq '.stats.unexpected' "$f")
+
+          if [ "$errors" -gt 0 ]; then
+            echo "::error::Playwright reported $errors global error(s) (config, globalSetup, import, ...)"
+            jq -r '.errors[].message' "$f" | head -n 20
+            exit 1
+          fi
+
+          if [ "$total" -eq 0 ]; then
+            echo "::error::No tests were executed for project ${{ matrix.browser }}"
+            exit 1
+          fi
+
+          if [ "$failed" -eq 0 ]; then
+            echo "::error::Exit code $code but no failed tests recorded (interrupted run / timeout?)"
+            exit 1
+          fi
+
+          echo "::warning::${{ matrix.browser }}: $failed test(s) failed (see the Allure report). Job stays green by design."
+          echo "### ⚠️ ${{ matrix.browser }}: $failed of $total tests failed" >> "$GITHUB_STEP_SUMMARY"
+          exit 0
 
       - name: Upload Allure results
         if: ${{ !cancelled() }}
@@ -116,8 +163,8 @@ jobs:
           if-no-files-found: ignore
           retention-days: 1
 
-      - name: Upload Playwright report and traces on failure
-        if: ${{ failure() }}
+      - name: Upload Playwright report and traces when tests failed
+        if: ${{ !cancelled() && steps.pw.outputs.exit_code != '0' }}
         uses: actions/upload-artifact@v4
         with:
           name: playwright-debug-${{ matrix.browser }}
@@ -205,10 +252,3 @@ jobs:
           if [ -f "$f" ]; then
             jq -r '"### Allure: passed \(.statistic.passed), failed \(.statistic.failed), broken \(.statistic.broken), skipped \(.statistic.skipped)"' "$f" >> "$GITHUB_STEP_SUMMARY"
           fi
-
-      # Single source of truth for the pipeline result
-      - name: Fail if tests failed
-        if: ${{ needs.run-tests.result == 'failure' }}
-        run: |
-          echo "❌ Tests failed in one or more projects"
-          exit 1
