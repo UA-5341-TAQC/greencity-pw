@@ -6,10 +6,12 @@ test.describe('Navigation from news details', () => {
     ecoNewsPage,
     ecoNewsDetailsPage,
   }) => {
+    const ECO_NEWS_ID = 13268
+    
     await test.step('Preconditions', async () => {
       await ecoNewsPage.navigateToEcoNewsPage();
       await ecoNewsPage.waitForPageLoad();
-      await ecoNewsDetailsPage.navigateToNewsDetails(13268);
+      await ecoNewsDetailsPage.navigateToNewsDetails(ECO_NEWS_ID);
       await ecoNewsDetailsPage.waitForPageLoad();
     });
 
@@ -27,7 +29,7 @@ test.describe('Navigation from news details', () => {
     await test.step("3.	Use the browser's back button instead.", async () => {
       await page.goBack();
       await page.waitForLoadState();
-      expect(page.url()).toContain('/greenCity/news/13268');
+      expect(page.url()).toContain('/greenCity/news/{ECO_NEWS_ID}');
     });
   });
 });
