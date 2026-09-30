@@ -44,4 +44,12 @@ export default class BasePage {
   async waitForPageLoad(): Promise<void> {
     await this.page.waitForLoadState('networkidle');
   }
+
+  /**
+   * Waits for the page load state to be "domcontentloaded".
+   * Use instead of "networkidle" on pages with constant background requests.
+   */
+  async waitForDomContentLoaded(): Promise<void> {
+    await this.page.waitForLoadState('domcontentloaded');
+  }
 }
