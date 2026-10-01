@@ -25,6 +25,8 @@ export class CreateEventPage extends BasePage {
   readonly descriptionValidationMessage: Locator;
   private readonly datePicker: CalendarDropdownComponent;
   private readonly datePickerToggle: Locator;
+  public readonly startTimeError: Locator;
+  public readonly finishTimeError: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -56,6 +58,12 @@ export class CreateEventPage extends BasePage {
     this.descriptionValidationMessage = page.getByText(/Not enough characters\. Left:/i).first();
     this.datePicker = new CalendarDropdownComponent(page.locator('mat-datepicker-content'), page);
     this.datePickerToggle = page.getByRole('button', { name: 'Open calendar' });
+    this.startTimeError = page
+      .locator('mat-form-field', { has: this.startTimeInput })
+      .locator('mat-error');
+    this.finishTimeError = page
+      .locator('mat-form-field', { has: this.finishTimeInput })
+      .locator('mat-error');
   }
 
   async waitForCreateEventPage(): Promise<void> {
@@ -250,10 +258,12 @@ export class CreateEventPage extends BasePage {
     return await this.publishButton.isVisible();
   }
 
+  getTimeListbox(field: 'Start Time' | 'End Time'): Locator {
+    return this.page.getByRole('listbox', { name: field });
+  }
+
   private getTimeOption(field: 'Start Time' | 'End Time', time: string): Locator {
-    return this.page
-      .getByRole('listbox', { name: field })
-      .getByRole('option', { name: time, exact: true });
+    return this.getTimeListbox(field).getByRole('option', { name: time, exact: true });
   }
 
   async selectStartTime(time: string): Promise<void> {
@@ -264,5 +274,23 @@ export class CreateEventPage extends BasePage {
   async selectFinishTime(time: string): Promise<void> {
     await this.finishTimeInput.click();
     await this.getTimeOption('End Time', time).click();
+  }
+
+  async clickStartTime(): Promise<void> {
+    await this.startTimeInput.click();
+  }
+
+  async clickFinishTime(): Promise<void> {
+    await this.finishTimeInput.click();
+  }
+
+  async blurStartTime(): Promise<void> {
+    await this.startTimeInput.press('Escape');
+    await this.startTimeInput.blur();
+  }
+
+  async blurFinishTime(): Promise<void> {
+    await this.finishTimeInput.press('Escape');
+    await this.finishTimeInput.blur();
   }
 }

@@ -93,8 +93,6 @@ test.describe('Create event', () => {
       expect(await createEventPage.getDescription()).toBe(description);
     });
 
-    // Крок "Leave 'Picture' field with default value" не має дій і перевірок — пропущено
-
     await test.step('13: Verify "Preview" button', async () => {
       expect(await createEventPage.isPreviewVisible()).toBe(true);
       await expect.poll(() => createEventPage.isPreviewEnabled()).toBe(true);
