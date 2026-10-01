@@ -120,16 +120,28 @@ export class EventDetailsPage extends BasePage {
     return await this.likeIcon.isVisible();
   }
 
-  async likeButtonState():Promise<void>{
-    
-  }
-
-  async countLike(): Promise<number> {
-    const count = await this.likesCount.innerText();
-    return count ? Number(count.trim()) : 0;
+  async getLikeCount(): Promise<number> {
+    await this.likesCount.waitFor({ state: 'visible' });
+    const rawText = (await this.likesCount.textContent()) ?? '';
+    const digitsOnly = rawText.replace(/\D/g, '');
+    return digitsOnly ? Number(digitsOnly) : 0;
   }
 
   async isCountLikeVisible(): Promise<boolean> {
     return await this.likeIcon.isVisible();
+  }
+
+  async getLikeState(): Promise<'liked' | 'unliked' | 'unknown'> {
+    if (await this.likedIcon.isVisible()) {
+      return 'liked';
+    }
+    if (await this.unlikedIcon.isVisible()) {
+      return 'unliked';
+    }
+    return 'unknown';
+  }
+
+  async isLiked(): Promise<boolean> {
+    return await this.likedIcon.isVisible();
   }
 }
