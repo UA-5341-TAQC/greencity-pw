@@ -73,9 +73,7 @@ export class CreateNewsPage extends BasePage {
       .locator('div.date p')
       .filter({ hasText: new RegExp(`${info?.author ?? 'Author:'}|Author:|Автор:`, 'i') });
 
-    this.cancelButton = page.locator(
-      'div.submit-buttons button.tertiary-global-button, button:has-text("Cancel")'
-    );
+    this.cancelButton = page.locator('div.submit-buttons button.tertiary-global-button');
     this.previewButton = page.locator(
       'div.submit-buttons button.secondary-global-button, button:has-text("Preview")'
     );
