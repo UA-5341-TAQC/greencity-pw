@@ -1,4 +1,4 @@
-import { Page, Locator } from '@playwright/test';
+import { expect, Page, Locator } from '@playwright/test';
 import BasePage from '@/pages/base-page';
 
 export class EditEventPage extends BasePage {
@@ -15,6 +15,7 @@ export class EditEventPage extends BasePage {
   readonly mainImage: Locator;
   readonly deleteImageBtn: Locator;
   readonly editImageBtn: Locator;
+  readonly imageCounter: Locator;
   readonly defaultImages: Locator;
   readonly dateInput: Locator;
   readonly datePickerToggleBtn: Locator;
@@ -29,6 +30,8 @@ export class EditEventPage extends BasePage {
   readonly previewButton: Locator;
   readonly saveEventButton: Locator;
   readonly cancelButton: Locator;
+  readonly toastNotification: Locator;
+  readonly attachedImages: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -49,6 +52,9 @@ export class EditEventPage extends BasePage {
     this.mainImage = page.locator('.input-image-wrapper img');
     this.deleteImageBtn = page.locator('.selected-delete');
     this.editImageBtn = page.locator('.selected-edit');
+    this.imageCounter = page.locator(
+      'div.d-flex.flex-row.justify-content-between mat-label.xs-text'
+    );
     this.defaultImages = page.locator('.images-def-wrapper .img-container img');
 
     this.dateInput = page.locator('input[formcontrolname="day"]');
@@ -72,6 +78,9 @@ export class EditEventPage extends BasePage {
     this.cancelButton = page.locator('.submit-container button.tertiary-global-button', {
       hasText: 'Cancel',
     });
+
+    this.toastNotification = page.locator('mat-snack-bar-container.error-snackbar').last();
+    this.attachedImages = page.locator('.input-image-wrapper img[alt="image-of-event"]');
   }
 
   async waitForEditEventPage(): Promise<void> {
@@ -197,5 +206,35 @@ export class EditEventPage extends BasePage {
 
   async clickCancel() {
     await this.cancelButton.click();
+  }
+
+  /**
+   * Get the number of currently attached images
+   */
+  async getAttachedImagesCount(): Promise<number> {
+    return await this.attachedImages.count();
+  }
+
+  /**
+   * Get the image counter text (e.g., "2/5")
+   */
+  async getImageCounter(): Promise<string> {
+    return await this.imageCounter.innerText();
+  }
+
+  /**
+   * Get toast notification message
+   */
+  async getToastMessage(): Promise<string> {
+    await this.toastNotification.waitFor({ state: 'visible' });
+    return await this.toastNotification.innerText();
+  }
+
+  /**
+   * Wait for image upload to complete
+   */
+  async waitForImageUpload(expectedCount: number): Promise<void> {
+    await expect(this.attachedImages).toHaveCount(expectedCount);
+    await expect(this.imageCounter).toHaveText(`${expectedCount}/5`);
   }
 }

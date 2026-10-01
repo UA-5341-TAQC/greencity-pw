@@ -1,0 +1,354 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\ells\\Desktop\\грін\\greencity-pw\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/ui/tc-23.spec.ts"
+    ],
+    "configFile": "C:\\Users\\ells\\Desktop\\грін\\greencity-pw\\playwright.config.ts",
+    "rootDir": "C:/Users/ells/Desktop/грін/greencity-pw/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 3
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/ells/Desktop/грін/greencity-pw/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 3
+        },
+        "id": "api",
+        "name": "api",
+        "testDir": "C:/Users/ells/Desktop/грін/greencity-pw/tests/api",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/ells/Desktop/грін/greencity-pw/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 3
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/ells/Desktop/грін/greencity-pw/tests/ui",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/ells/Desktop/грін/greencity-pw/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 3
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "C:/Users/ells/Desktop/грін/greencity-pw/tests/ui",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/ells/Desktop/грін/greencity-pw/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 3
+        },
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "C:/Users/ells/Desktop/грін/greencity-pw/tests/ui",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      ["list", null],
+      [
+        "html",
+        {
+          "open": "never"
+        }
+      ],
+      [
+        "C:\\Users\\ells\\Desktop\\грін\\greencity-pw\\node_modules\\allure-playwright\\dist\\cjs\\index.js",
+        {
+          "resultsDir": "allure-results"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 8,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "ui\\tc-23.spec.ts",
+      "file": "ui/tc-23.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "TC-23 Edit event image upload validations",
+          "file": "ui/tc-23.spec.ts",
+          "line": 5,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Verify image upload validations (minimum limit, invalid format, maximum limit)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 9156,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Open the Events list as an authenticated user",
+                          "duration": 2528,
+                          "steps": [
+                            {
+                              "title": "Check if user is logged in",
+                              "duration": 22
+                            }
+                          ]
+                        },
+                        {
+                          "title": "Open the edit form for an author event",
+                          "duration": 1057
+                        },
+                        {
+                          "title": "Step 1: Verify minimum limit - attempt to delete the only image",
+                          "duration": 197
+                        },
+                        {
+                          "title": "Step 2: Verify invalid format rejection",
+                          "duration": 98
+                        },
+                        {
+                          "title": "Step 3: Upload valid custom image",
+                          "duration": 75
+                        },
+                        {
+                          "title": "Step 4: Add default Greencity images until maximum limit",
+                          "duration": 552
+                        },
+                        {
+                          "title": "Step 5: Verify maximum limit - attempt to add 6th image",
+                          "duration": 107
+                        }
+                      ],
+                      "startTime": "2026-10-01T15:55:08.328Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f63c413c55e21009a562-06fd11054df0fcc339ed",
+              "file": "ui/tc-23.spec.ts",
+              "line": 6,
+              "column": 3
+            },
+            {
+              "title": "Verify image upload validations (minimum limit, invalid format, maximum limit)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 13325,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Open the Events list as an authenticated user",
+                          "duration": 3749,
+                          "steps": [
+                            {
+                              "title": "Check if user is logged in",
+                              "duration": 23
+                            }
+                          ]
+                        },
+                        {
+                          "title": "Open the edit form for an author event",
+                          "duration": 1168
+                        },
+                        {
+                          "title": "Step 1: Verify minimum limit - attempt to delete the only image",
+                          "duration": 120
+                        },
+                        {
+                          "title": "Step 2: Verify invalid format rejection",
+                          "duration": 180
+                        },
+                        {
+                          "title": "Step 3: Upload valid custom image",
+                          "duration": 105
+                        },
+                        {
+                          "title": "Step 4: Add default Greencity images until maximum limit",
+                          "duration": 492
+                        },
+                        {
+                          "title": "Step 5: Verify maximum limit - attempt to add 6th image",
+                          "duration": 119
+                        }
+                      ],
+                      "startTime": "2026-10-01T15:55:08.346Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f63c413c55e21009a562-f64619d5d09c72236537",
+              "file": "ui/tc-23.spec.ts",
+              "line": 6,
+              "column": 3
+            },
+            {
+              "title": "Verify image upload validations (minimum limit, invalid format, maximum limit)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 21867,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Open the Events list as an authenticated user",
+                          "duration": 3530,
+                          "steps": [
+                            {
+                              "title": "Check if user is logged in",
+                              "duration": 77
+                            }
+                          ]
+                        },
+                        {
+                          "title": "Open the edit form for an author event",
+                          "duration": 2054
+                        },
+                        {
+                          "title": "Step 1: Verify minimum limit - attempt to delete the only image",
+                          "duration": 3868
+                        },
+                        {
+                          "title": "Step 2: Verify invalid format rejection",
+                          "duration": 98
+                        },
+                        {
+                          "title": "Step 3: Upload valid custom image",
+                          "duration": 116
+                        },
+                        {
+                          "title": "Step 4: Add default Greencity images until maximum limit",
+                          "duration": 5000
+                        },
+                        {
+                          "title": "Step 5: Verify maximum limit - attempt to add 6th image",
+                          "duration": 1193
+                        }
+                      ],
+                      "startTime": "2026-10-01T15:55:08.347Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f63c413c55e21009a562-d35981d2788b105e07e3",
+              "file": "ui/tc-23.spec.ts",
+              "line": 6,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-01T15:55:07.264Z",
+    "duration": 24438.925,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

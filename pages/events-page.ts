@@ -242,6 +242,21 @@ export class EventsPage extends BasePage {
     return new ListEventCardComponent(root, this.page);
   }
 
+  /** Returns whether an event with an enabled edit action is available */
+  async hasEditableEventCard(): Promise<boolean> {
+    const editButtons = this.page.getByRole('button', { name: 'Edit event' });
+    const count = await editButtons.count();
+
+    for (let index = 0; index < count; index++) {
+      const editButton = editButtons.nth(index);
+      if ((await editButton.isVisible()) && (await editButton.isEnabled())) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   /** Returns the first event card that offers the author-only edit action */
   async getFirstEditableEventCard(): Promise<GridEventCardComponent | ListEventCardComponent> {
     const editButton = this.page.getByRole('button', { name: 'Edit event' });
