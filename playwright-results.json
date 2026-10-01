@@ -1,0 +1,297 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\ells\\Desktop\\грін\\greencity-pw\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tc-29-news-tags-filters.spec.ts",
+      "--project=chromium"
+    ],
+    "configFile": "C:\\Users\\ells\\Desktop\\грін\\greencity-pw\\playwright.config.ts",
+    "rootDir": "C:/Users/ells/Desktop/грін/greencity-pw/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/ells/Desktop/грін/greencity-pw/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "api",
+        "name": "api",
+        "testDir": "C:/Users/ells/Desktop/грін/greencity-pw/tests/api",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/ells/Desktop/грін/greencity-pw/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/ells/Desktop/грін/greencity-pw/tests/ui",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/ells/Desktop/грін/greencity-pw/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "C:/Users/ells/Desktop/грін/greencity-pw/tests/ui",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/ells/Desktop/грін/greencity-pw/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "C:/Users/ells/Desktop/грін/greencity-pw/tests/ui",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      ["list", null],
+      [
+        "html",
+        {
+          "open": "never"
+        }
+      ],
+      [
+        "C:\\Users\\ells\\Desktop\\грін\\greencity-pw\\node_modules\\allure-playwright\\dist\\cjs\\index.js",
+        {
+          "resultsDir": "allure-results"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 8,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "ui\\tc-29-news-tags-filters.spec.ts",
+      "file": "ui/tc-29-news-tags-filters.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "TC-29 Eco News tags and filters",
+          "file": "ui/tc-29-news-tags-filters.spec.ts",
+          "line": 5,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Verify available tags and filtering functionality",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 29952,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Open Eco News as an authenticated user",
+                          "duration": 9173,
+                          "steps": [
+                            {
+                              "title": "EcoNews: navigate to Eco News page",
+                              "duration": 9
+                            },
+                            {
+                              "title": "EcoNews: wait for Eco News page to load",
+                              "duration": 9075
+                            },
+                            {
+                              "title": "EcoNews: switch Eco News display mode to list view",
+                              "duration": 64
+                            }
+                          ]
+                        },
+                        {
+                          "title": "Verify the five available tag filters",
+                          "duration": 24
+                        },
+                        {
+                          "title": "EcoNews: get news cards count",
+                          "duration": 5
+                        },
+                        {
+                          "title": "Filter Eco News by News and clear the filter",
+                          "duration": 1992,
+                          "steps": [
+                            {
+                              "title": "EcoNews: filter by tag \"News\"",
+                              "duration": 32
+                            },
+                            {
+                              "title": "EcoNews: get news cards count",
+                              "duration": 8
+                            },
+                            {
+                              "title": "EcoNews: filter by tag \"News\"",
+                              "duration": 27
+                            }
+                          ]
+                        },
+                        {
+                          "title": "Filter Eco News by Events and clear the filter",
+                          "duration": 1901,
+                          "steps": [
+                            {
+                              "title": "EcoNews: filter by tag \"Events\"",
+                              "duration": 29
+                            },
+                            {
+                              "title": "EcoNews: get news cards count",
+                              "duration": 4
+                            },
+                            {
+                              "title": "EcoNews: filter by tag \"Events\"",
+                              "duration": 23
+                            }
+                          ]
+                        },
+                        {
+                          "title": "Filter Eco News by Education and clear the filter",
+                          "duration": 1910,
+                          "steps": [
+                            {
+                              "title": "EcoNews: filter by tag \"Education\"",
+                              "duration": 36
+                            },
+                            {
+                              "title": "EcoNews: get news cards count",
+                              "duration": 4
+                            },
+                            {
+                              "title": "EcoNews: filter by tag \"Education\"",
+                              "duration": 24
+                            }
+                          ]
+                        },
+                        {
+                          "title": "Filter Eco News by Initiatives and clear the filter",
+                          "duration": 1894,
+                          "steps": [
+                            {
+                              "title": "EcoNews: filter by tag \"Initiatives\"",
+                              "duration": 31
+                            },
+                            {
+                              "title": "EcoNews: get news cards count",
+                              "duration": 2
+                            },
+                            {
+                              "title": "EcoNews: filter by tag \"Initiatives\"",
+                              "duration": 28
+                            }
+                          ]
+                        },
+                        {
+                          "title": "Filter Eco News by Ads and clear the filter",
+                          "duration": 1867,
+                          "steps": [
+                            {
+                              "title": "EcoNews: filter by tag \"Ads\"",
+                              "duration": 26
+                            },
+                            {
+                              "title": "EcoNews: get news cards count",
+                              "duration": 2
+                            },
+                            {
+                              "title": "EcoNews: filter by tag \"Ads\"",
+                              "duration": 28
+                            }
+                          ]
+                        }
+                      ],
+                      "startTime": "2026-10-01T17:05:24.629Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "caa3eb5c667d13cd6114-d872434091c8232fa18f",
+              "file": "ui/tc-29-news-tags-filters.spec.ts",
+              "line": 6,
+              "column": 2
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-01T17:05:23.871Z",
+    "duration": 31993.683,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
