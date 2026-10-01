@@ -35,6 +35,7 @@ export class EventsPage extends BasePage {
   // Event cards
   protected readonly gridEventCardRoots: Locator;
   protected readonly listEventCardRoots: Locator;
+  protected readonly listEvents: Locator;
 
   constructor(page: Page, lang: Language = Language.En) {
     super(page);
@@ -63,6 +64,7 @@ export class EventsPage extends BasePage {
       'div.event-list:not(.list-view) mat-card.event-list-item'
     );
     this.listEventCardRoots = page.locator('div.event-list.list-view mat-card.event-list-item');
+    this.listEvents = page.locator('.event-list-item').first();
   }
   /** Navigates to the Events page directly by URL */
   async navigateToEventsPage(): Promise<void> {
@@ -297,5 +299,26 @@ export class EventsPage extends BasePage {
       cards.push(this.getListEventCardByIndex(i));
     }
     return cards;
+  }
+  /**
+   * @returns boolean wheter all cards have one of tags as active tag.
+   * Return False if there is no cards
+   * Only for Grid event cards.
+   */
+  async areAllCardsTaggedWith(...types: EventTypeFilter[]): Promise<boolean> {
+    return await test.step(`Verify all event cards have active tags: ${types.join(', ')}`, async () => {
+      const expectedTagNames = types.map((t) => this.i18n.typeOptions[t]);
+
+      const cards = await this.getAllGridEventCards();
+
+      if (cards.length === 0) {
+        return false;
+      }
+      const results = await Promise.all(cards.map((card) => card.hasActiveTags(expectedTagNames)));
+      return results.every((hasTags) => hasTags);
+    });
+  }
+  async isEventCardVisible(): Promise<boolean> {
+    return await this.listEvents.isVisible();
   }
 }
