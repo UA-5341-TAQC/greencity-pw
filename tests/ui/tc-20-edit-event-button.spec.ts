@@ -1,4 +1,5 @@
 import { test, expect } from '@/fixtures';
+import { createSimpleEvent } from '@/helpers';
 
 test.describe('TC-20 Edit event entry points', () => {
   test('Verify author can edit an event from the card and details page', async ({
@@ -6,6 +7,7 @@ test.describe('TC-20 Edit event entry points', () => {
     eventsPage,
     eventDetailsPage,
     editEventPage,
+    createEventPage,
   }) => {
     let eventTitle: string;
     let eventId: string;
@@ -20,6 +22,9 @@ test.describe('TC-20 Edit event entry points', () => {
 
     await test.step('Verify Edit event is available on the author event card', async () => {
       const ownedEventCard = await eventsPage.getFirstEditableEventCard();
+      if (!(await eventsPage.hasEditableEventCard())) {
+        await createSimpleEvent(authenticatedPage, eventsPage, createEventPage);
+      }
       await ownedEventCard.waitForVisible();
 
       expect(await ownedEventCard.isEditEventButtonVisible()).toBe(true);
