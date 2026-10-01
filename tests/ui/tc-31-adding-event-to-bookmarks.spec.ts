@@ -45,7 +45,7 @@ test.describe('TC-31 Verify adding an event to the bookmarks', () => {
       await eventCard.clickBookmarkButton();
       await authenticatedPage.mouse.move(1, 1);
       await expect.poll(() => eventCard.getBookmarkButtonState()).not.toBe(defaultBookmarkState);
-        // eslint-disable-next-line playwright/no-wait-for-timeout
+      // eslint-disable-next-line playwright/no-wait-for-timeout
       await authenticatedPage.waitForTimeout(3000);
     });
 
