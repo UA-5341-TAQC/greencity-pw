@@ -19,7 +19,7 @@ export class CancelWarningModal extends BaseModal {
   /** Returns the warning text displayed in the modal. */
   async getWarningText(): Promise<string> {
     return await test.step('CancelWarningModal: get warning text', async () => {
-      return (await this.warningText.innerText()).trim();
+      return (await this.warningText.innerText()).replace(/\s+/g, ' ').trim();
     });
   }
 
