@@ -9,10 +9,11 @@
     "report": "npx allure generate allure-results -o allure-report && npx allure open allure-report",
     "report:pw": "playwright show-report",
     "lint": "eslint . --ext .ts",
+    "typecheck": "tsc --noEmit",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "pc": "npm run format && npm run lint:fix && npm run lint && npm run format:check"
+    "pc": "npm run format && npm run lint:fix && npm run lint && npm run typecheck && npm run format:check"
   },
   "repository": {
     "type": "git",

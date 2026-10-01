@@ -99,10 +99,6 @@ export const test = baseTest.extend<PageFixtures>({
     await use(new EcoNewsDetailsPage(page));
   },
 
-  eventsPage: async ({ page }, use): Promise<void> => {
-    await use(new EventsPage(page));
-  },
-
   authenticatedUser: async ({ page, homePage, signInModal }, use): Promise<void> => {
     await homePage.navigateToHomePage();
     await homePage.waitForHomePage();

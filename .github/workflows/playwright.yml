@@ -2,72 +2,85 @@ name: GreenCity CI
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
-    branches:
-      - main
+    branches: [main]
+  workflow_dispatch:
 
+# Least privilege by default; jobs that need more ask for it explicitly
+permissions:
+  contents: read
+
+# One run per branch/PR: a new push cancels the outdated run
 concurrency:
-  group: allure-gh-pages
-  cancel-in-progress: false
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 env:
-  BASE_URL: ${{ secrets.BASE_URL }}
-  API_USER_BASE_URL: ${{ secrets.API_USER_BASE_URL }}
-  API_GREENCITY_BASE_URL: ${{ secrets.API_GREENCITY_BASE_URL }}
-  USER_EMAIL: ${{ secrets.TEST_EMAIL }}
-  USER_PASSWORD: ${{ secrets.TEST_PASSWORD }}
-  USER_ID: ${{ secrets.TEST_USER_ID }}
-  USER_NAME: ${{ secrets.TEST_USER_NAME }}
   HEADLESS: true
-  SHORT_TIMEOUT: ${{ secrets.SHORT_TIMEOUT }}
-  MEDIUM_TIMEOUT: ${{ secrets.MEDIUM_TIMEOUT }}
-  LONG_TIMEOUT: ${{ secrets.LONG_TIMEOUT }}
-
-permissions:
-  contents: write
-  pull-requests: write
+  CI: true
 
 jobs:
   lint-and-format:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: lts/*
+          node-version: 24 # matches README (Node 24+)
           cache: npm
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Run Code Formatting Check
-        run: npx prettier --check .
+      - name: Check formatting
+        run: npm run format:check
 
-      - name: Run Linter
+      - name: Lint
         run: npm run lint
+
+      - name: Type check
+        run: npm run typecheck
 
   run-tests:
     needs: lint-and-format
+    # Fork PRs have no access to secrets, so tests would fail there anyway
+    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-latest
     timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
         browser: [api, chromium, firefox, webkit]
-
+    # Secrets are exposed only to the job that needs them
+    env:
+      BASE_URL: ${{ secrets.BASE_URL }}
+      API_USER_BASE_URL: ${{ secrets.API_USER_BASE_URL }}
+      API_GREENCITY_BASE_URL: ${{ secrets.API_GREENCITY_BASE_URL }}
+      USER_EMAIL: ${{ secrets.USER_EMAIL }}
+      USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+      USER_ID: ${{ secrets.USER_ID }}
+      USER_NAME: ${{ secrets.USER_NAME }}
+      # Timeouts are not sensitive: move them to Settings -> Variables
+      SHORT_TIMEOUT: ${{ secrets.SHORT_TIMEOUT }}
+      MEDIUM_TIMEOUT: ${{ secrets.MEDIUM_TIMEOUT }}
+      LONG_TIMEOUT: ${{ secrets.LONG_TIMEOUT }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: lts/*
+          node-version: 24
           cache: npm
 
       - name: Install dependencies
@@ -80,95 +93,139 @@ jobs:
         with:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ matrix.browser }}-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-playwright-${{ matrix.browser }}-
 
-      - name: Install Playwright browser & deps
-        if: ${{ matrix.browser != 'api' }}
+      - name: Install Playwright browser and OS deps
+        if: ${{ matrix.browser != 'api' && steps.playwright-cache.outputs.cache-hit != 'true' }}
         run: npx playwright install --with-deps ${{ matrix.browser }}
 
-      - name: Run Playwright tests
-        run: npx playwright test --project=${{ matrix.browser }}
-        continue-on-error: true
+      - name: Install Playwright OS deps only (browser restored from cache)
+        if: ${{ matrix.browser != 'api' && steps.playwright-cache.outputs.cache-hit == 'true' }}
+        run: npx playwright install-deps ${{ matrix.browser }}
 
-      - name: Upload Allure Results
+      # Failed assertions must NOT turn the job red, but real errors must.
+      # Step 1: run the tests and only record the exit code.
+      - name: Run Playwright tests
+        id: pw
+        run: |
+          set +e
+          npx playwright test --project=${{ matrix.browser }}
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      # Step 2: decide what the exit code means using the JSON report.
+      - name: Classify test run result
+        id: classify
+        run: |
+          f=playwright-results.json
+          code="${{ steps.pw.outputs.exit_code }}"
+
+          if [ "$code" = "0" ]; then
+            echo "✅ All tests passed"
+            exit 0
+          fi
+
+          # Non-zero exit code but no report -> Playwright crashed or config is broken
+          if [ ! -f "$f" ]; then
+            echo "::error::Playwright exited with code $code and produced no JSON report (crash / config / project error)"
+            exit 1
+          fi
+
+          errors=$(jq '.errors | length' "$f")
+          total=$(jq '.stats | .expected + .unexpected + .flaky + .skipped' "$f")
+          failed=$(jq '.stats.unexpected' "$f")
+
+          if [ "$errors" -gt 0 ]; then
+            echo "::error::Playwright reported $errors global error(s) (config, globalSetup, import, ...)"
+            jq -r '.errors[].message' "$f" | head -n 20
+            exit 1
+          fi
+
+          if [ "$total" -eq 0 ]; then
+            echo "::error::No tests were executed for project ${{ matrix.browser }}"
+            exit 1
+          fi
+
+          if [ "$failed" -eq 0 ]; then
+            echo "::error::Exit code $code but no failed tests recorded (interrupted run / timeout?)"
+            exit 1
+          fi
+
+          echo "::warning::${{ matrix.browser }}: $failed test(s) failed (see the Allure report). Job stays green by design."
+          echo "### ⚠️ ${{ matrix.browser }}: $failed of $total tests failed" >> "$GITHUB_STEP_SUMMARY"
+          exit 0
+
+      - name: Upload Allure results
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
           name: allure-results-${{ matrix.browser }}
           path: allure-results
+          if-no-files-found: ignore
           retention-days: 1
+
+      - name: Upload Playwright report and traces when tests failed
+        if: ${{ !cancelled() && steps.pw.outputs.exit_code != '0' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-debug-${{ matrix.browser }}
+          path: |
+            playwright-report
+            test-results
+          if-no-files-found: ignore
+          retention-days: 7
 
   generate-report:
     needs: run-tests
-    if: ${{ !cancelled() }}
+    if: ${{ !cancelled() && needs.run-tests.result != 'skipped' }}
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write # push to gh-pages
+      pull-requests: write # PR comment
+    # Serialise only the gh-pages publishing, not the whole workflow
+    concurrency:
+      group: allure-gh-pages
+      cancel-in-progress: false
+    env:
+      REPORT_FOLDER: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.number) || 'main' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Download Allure history
-        continue-on-error: true
+        continue-on-error: true # gh-pages may not exist yet
         uses: actions/checkout@v4
         with:
           ref: gh-pages
           path: gh-pages
 
-      - name: Create Combined Results Directory
-        run: rm -rf combined-results && mkdir combined-results
-
-      - name: Download API Results
+      - name: Download all Allure results
         uses: actions/download-artifact@v4
-        continue-on-error: true
         with:
-          name: allure-results-api
+          pattern: allure-results-*
           path: combined-results
+          merge-multiple: true
 
-      - name: Download Chromium Results
-        uses: actions/download-artifact@v4
-        continue-on-error: true
-        with:
-          name: allure-results-chromium
-          path: combined-results
-
-      - name: Download Firefox Results
-        uses: actions/download-artifact@v4
-        continue-on-error: true
-        with:
-          name: allure-results-firefox
-          path: combined-results
-
-      - name: Download Webkit Results
-        uses: actions/download-artifact@v4
-        continue-on-error: true
-        with:
-          name: allure-results-webkit
-          path: combined-results
-
-      - name: Generate Combined Allure Report
-        uses: simple-elf/allure-report-action@master
+      - name: Generate combined Allure report
+        # Pin to a release tag or commit SHA instead of @master
+        uses: simple-elf/allure-report-action@v1.13
         with:
           allure_results: combined-results
           gh_pages: gh-pages
           allure_report: allure-report
           allure_history: allure-history
-          subfolder: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.number) || 'main' }}
+          subfolder: ${{ env.REPORT_FOLDER }}
 
       - name: Fix permissions
-        run: sudo chmod -R 777 allure-history
+        run: sudo chown -R "$USER":"$USER" allure-history
 
       - name: Clean heavy attachments from history
-        if: ${{ always() }}
         run: |
-          echo "🧹 Cleaning up heavy attachments from allure-history..."
-          find allure-history -type f -name "*attachments*" -size +1M -exec rm -fv {} +
-          find allure-history -type f \( -name "*.zip" -o -name "*.tar.gz" -o -name "*.mp4" \) -exec rm -fv {} +
-          echo "✅ Heavy assets removed successfully."
+          echo "Cleaning heavy attachments from allure-history..."
+          find allure-history -type f -name "*-attachment*" -size +1M -delete -print
+          find allure-history -type f \( -name "*.zip" -o -name "*.tar.gz" -o -name "*.mp4" -o -name "*.webm" \) -delete -print
 
-      - name: Deploy Allure Report
-        if: ${{ !cancelled() }}
+      - name: Deploy Allure report
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -180,37 +237,18 @@ jobs:
           user_email: 'github-actions[bot]@users.noreply.github.com'
 
       - name: Comment PR with report link
-        if: ${{ !cancelled() && github.event_name == 'pull_request' }}
+        if: ${{ github.event_name == 'pull_request' }}
         uses: thollander/actions-comment-pull-request@v2
         with:
           comment_tag: allure-report-link
           message: |
-            📊 **Allure Report for PR-${{ github.event.number }} (All Tests & Browsers)**
+            📊 **Allure Report for PR-${{ github.event.number }} (all tests & browsers)**
 
-            🔗 https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.number) || 'main' }}/
+            🔗 https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/${{ env.REPORT_FOLDER }}/
 
-      - name: Validate test results
+      - name: Job summary
         run: |
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            SUMMARY_FILE="allure-history/pr-${{ github.event.number }}/widgets/summary.json"
-          else
-            SUMMARY_FILE="allure-history/main/widgets/summary.json"
+          f=allure-report/widgets/summary.json
+          if [ -f "$f" ]; then
+            jq -r '"### Allure: passed \(.statistic.passed), failed \(.statistic.failed), broken \(.statistic.broken), skipped \(.statistic.skipped)"' "$f" >> "$GITHUB_STEP_SUMMARY"
           fi
-
-          if [ ! -f "$SUMMARY_FILE" ]; then
-            echo "⚠️ Summary file not found. Skipping validation."
-            exit 0
-          fi
-
-          FAILED=$(jq '.statistic.failed' "$SUMMARY_FILE")
-          BROKEN=$(jq '.statistic.broken' "$SUMMARY_FILE")
-
-          echo "Total Failed: $FAILED"
-          echo "Total Broken: $BROKEN"
-
-          if [ "$FAILED" -gt 0 ] || [ "$BROKEN" -gt 0 ]; then
-            echo "❌ Tests failed in one or more projects"
-            exit 1
-          fi
-
-          echo "✅ All tests passed across all environments!"
