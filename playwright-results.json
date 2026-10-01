@@ -1,0 +1,224 @@
+{
+  "config": {
+    "argv": [
+      "C:\\nvm4w\\nodejs\\node.exe",
+      "G:\\FMR\\Intership\\greencity-pw\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/ui/tc-22-validation-title-description-events.spec.ts",
+      "--project=chromium"
+    ],
+    "configFile": "G:\\FMR\\Intership\\greencity-pw\\playwright.config.ts",
+    "rootDir": "G:/FMR/Intership/greencity-pw/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "G:/FMR/Intership/greencity-pw/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "api",
+        "name": "api",
+        "testDir": "G:/FMR/Intership/greencity-pw/tests/api",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "G:/FMR/Intership/greencity-pw/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "G:/FMR/Intership/greencity-pw/tests/ui",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "G:/FMR/Intership/greencity-pw/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "G:/FMR/Intership/greencity-pw/tests/ui",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "G:/FMR/Intership/greencity-pw/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "G:/FMR/Intership/greencity-pw/tests/ui",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "open": "never"
+        }
+      ],
+      [
+        "G:\\FMR\\Intership\\greencity-pw\\node_modules\\allure-playwright\\dist\\cjs\\index.js",
+        {
+          "resultsDir": "allure-results"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 6,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "ui\\tc-22-validation-title-description-events.spec.ts",
+      "file": "ui/tc-22-validation-title-description-events.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Events - Edit Event validation",
+          "file": "ui/tc-22-validation-title-description-events.spec.ts",
+          "line": 7,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC-22: Verify title and description validation and Save event state",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 358,
+                      "error": {
+                        "message": "AggregateError: apiRequestContext.post: connect ECONNREFUSED ::1:8080\nconnect ECONNREFUSED 127.0.0.1:8080\nCall log:\n\u001b[2m  - → POST http://localhost:8080/ownSecurity/signIn\u001b[22m\n\u001b[2m    - user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36\u001b[22m\n\u001b[2m    - accept: */*\u001b[22m\n\u001b[2m    - accept-encoding: gzip,deflate,br\u001b[22m\n\u001b[2m    - content-type: application/json\u001b[22m\n\u001b[2m    - content-length: 85\u001b[22m\n",
+                        "stack": "AggregateError: apiRequestContext.post: connect ECONNREFUSED ::1:8080\nconnect ECONNREFUSED 127.0.0.1:8080\nCall log:\n\u001b[2m  - → POST http://localhost:8080/ownSecurity/signIn\u001b[22m\n\u001b[2m    - user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36\u001b[22m\n\u001b[2m    - accept: */*\u001b[22m\n\u001b[2m    - accept-encoding: gzip,deflate,br\u001b[22m\n\u001b[2m    - content-type: application/json\u001b[22m\n\u001b[2m    - content-length: 85\u001b[22m\n\n    at apiRequestContext.post: connect ECONNREFUSED ::1:8080\n    at G:\\FMR\\Intership\\greencity-pw\\helpers\\auth-api.ts:29:36\n    at signInViaApi (G:\\FMR\\Intership\\greencity-pw\\helpers\\auth-api.ts:25:10)\n    at Object.baseTest.extend.authSession.scope (G:\\FMR\\Intership\\greencity-pw\\fixtures\\auth-fixture.ts:20:23)",
+                        "location": {
+                          "file": "apiRequestContext.post: connect ECONNREFUSED :",
+                          "column": 8080,
+                          "line": 1
+                        }
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "apiRequestContext.post: connect ECONNREFUSED :",
+                            "column": 8080,
+                            "line": 1
+                          },
+                          "message": "AggregateError: apiRequestContext.post: connect ECONNREFUSED ::1:8080\nconnect ECONNREFUSED 127.0.0.1:8080\nCall log:\n\u001b[2m  - → POST http://localhost:8080/ownSecurity/signIn\u001b[22m\n\u001b[2m    - user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36\u001b[22m\n\u001b[2m    - accept: */*\u001b[22m\n\u001b[2m    - accept-encoding: gzip,deflate,br\u001b[22m\n\u001b[2m    - content-type: application/json\u001b[22m\n\u001b[2m    - content-length: 85\u001b[22m\n\n\u001b[2m    at apiRequestContext.post: connect ECONNREFUSED ::1:8080\u001b[22m\n\u001b[2m    at G:\\FMR\\Intership\\greencity-pw\\helpers\\auth-api.ts:29:36\u001b[22m\n\u001b[2m    at signInViaApi (G:\\FMR\\Intership\\greencity-pw\\helpers\\auth-api.ts:25:10)\u001b[22m\n\u001b[2m    at Object.baseTest.extend.authSession.scope (G:\\FMR\\Intership\\greencity-pw\\fixtures\\auth-fixture.ts:20:23)\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-01T07:59:35.437Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "G:\\FMR\\Intership\\greencity-pw\\test-results\\tc-22-validation-title-des-8062f-dation-and-Save-event-state-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "G:\\FMR\\Intership\\greencity-pw\\test-results\\tc-22-validation-title-des-8062f-dation-and-Save-event-state-chromium\\error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "apiRequestContext.post: connect ECONNREFUSED :",
+                        "column": 8080,
+                        "line": 1
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "efcb860899a3ff5296e8-f00152da1ae9de9ff588",
+              "file": "ui/tc-22-validation-title-description-events.spec.ts",
+              "line": 8,
+              "column": 2
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-01T07:59:34.569Z",
+    "duration": 1780.2440000000001,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}
