@@ -122,8 +122,16 @@ export class EcoNewsPage extends BasePage {
     await this.searchInput.fill(query);
   }
 
+  async typeSearchText(text: string): Promise<void> {
+    await this.searchInput.pressSequentially(text);
+  }
+
   async clearSearch(): Promise<void> {
     await this.searchInput.clear();
+  }
+
+  async waitForSearchResults(): Promise<void> {
+    await this.newsCards.first().waitFor({ state: 'visible' });
   }
 
   async clickBookmark(): Promise<void> {
