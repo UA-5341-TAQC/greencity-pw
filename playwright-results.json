@@ -1,0 +1,268 @@
+{
+  "config": {
+    "argv": [
+      "C:\\nvm4w\\nodejs\\node.exe",
+      "G:\\FMR\\Intership\\greencity-pw\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--project=chromium",
+      "--project=chromium",
+      "tests/ui/tc-31-adding-event-to-bookmarks.spec.ts"
+    ],
+    "configFile": "G:\\FMR\\Intership\\greencity-pw\\playwright.config.ts",
+    "rootDir": "G:/FMR/Intership/greencity-pw/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "G:/FMR/Intership/greencity-pw/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "api",
+        "name": "api",
+        "testDir": "G:/FMR/Intership/greencity-pw/tests/api",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "G:/FMR/Intership/greencity-pw/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "G:/FMR/Intership/greencity-pw/tests/ui",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "G:/FMR/Intership/greencity-pw/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "G:/FMR/Intership/greencity-pw/tests/ui",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "G:/FMR/Intership/greencity-pw/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "G:/FMR/Intership/greencity-pw/tests/ui",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "open": "never"
+        }
+      ],
+      [
+        "G:\\FMR\\Intership\\greencity-pw\\node_modules\\allure-playwright\\dist\\cjs\\index.js",
+        {
+          "resultsDir": "allure-results"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 6,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "ui\\tc-31-adding-event-to-bookmarks.spec.ts",
+      "file": "ui/tc-31-adding-event-to-bookmarks.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "TC-31 Verify adding an event to the bookmarks",
+          "file": "ui/tc-31-adding-event-to-bookmarks.spec.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should add and remove an event from bookmarks and persist the removal after refresh",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 24197,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\n\nCall Log:\n- Timeout 10000ms exceeded while waiting on the predicate",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\n\nCall Log:\n- Timeout 10000ms exceeded while waiting on the predicate\n    at G:\\FMR\\Intership\\greencity-pw\\tests\\ui\\tc-31-adding-event-to-bookmarks.spec.ts:70:10\n    at G:\\FMR\\Intership\\greencity-pw\\tests\\ui\\tc-31-adding-event-to-bookmarks.spec.ts:66:5",
+                        "location": {
+                          "file": "G:\\FMR\\Intership\\greencity-pw\\tests\\ui\\tc-31-adding-event-to-bookmarks.spec.ts",
+                          "column": 10,
+                          "line": 70
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 68 |\u001b[39m       \u001b[36mawait\u001b[39m expect\n \u001b[90m 69 |\u001b[39m         \u001b[33m.\u001b[39mpoll(() \u001b[33m=>\u001b[39m eventsPage\u001b[33m.\u001b[39mgetGridEventCardsCount())\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 70 |\u001b[39m         \u001b[33m.\u001b[39mtoBe(displayedBookmarkedCount \u001b[33m-\u001b[39m \u001b[35m1\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 71 |\u001b[39m       \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39mpoll(() \u001b[33m=>\u001b[39m bookmarkedEventCard\u001b[33m.\u001b[39misVisible())\u001b[33m.\u001b[39mtoBe(\u001b[36mfalse\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 72 |\u001b[39m     })\u001b[33m;\u001b[39m\n \u001b[90m 73 |\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "G:\\FMR\\Intership\\greencity-pw\\tests\\ui\\tc-31-adding-event-to-bookmarks.spec.ts",
+                            "column": 10,
+                            "line": 70
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\n\nCall Log:\n- Timeout 10000ms exceeded while waiting on the predicate\n\n\u001b[0m \u001b[90m 68 |\u001b[39m       \u001b[36mawait\u001b[39m expect\n \u001b[90m 69 |\u001b[39m         \u001b[33m.\u001b[39mpoll(() \u001b[33m=>\u001b[39m eventsPage\u001b[33m.\u001b[39mgetGridEventCardsCount())\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 70 |\u001b[39m         \u001b[33m.\u001b[39mtoBe(displayedBookmarkedCount \u001b[33m-\u001b[39m \u001b[35m1\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 71 |\u001b[39m       \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39mpoll(() \u001b[33m=>\u001b[39m bookmarkedEventCard\u001b[33m.\u001b[39misVisible())\u001b[33m.\u001b[39mtoBe(\u001b[36mfalse\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 72 |\u001b[39m     })\u001b[33m;\u001b[39m\n \u001b[90m 73 |\u001b[39m\u001b[0m\n\u001b[2m    at G:\\FMR\\Intership\\greencity-pw\\tests\\ui\\tc-31-adding-event-to-bookmarks.spec.ts:70:10\u001b[22m\n\u001b[2m    at G:\\FMR\\Intership\\greencity-pw\\tests\\ui\\tc-31-adding-event-to-bookmarks.spec.ts:66:5\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Open the Events page as an authenticated user",
+                          "duration": 4943
+                        },
+                        {
+                          "title": "Open the bookmarked events and find an event not yet bookmarked",
+                          "duration": 37
+                        },
+                        {
+                          "title": "Add the event to bookmarks and verify the selected icon state",
+                          "duration": 3053
+                        },
+                        {
+                          "title": "Verify the event appears in the bookmarked events list",
+                          "duration": 392
+                        },
+                        {
+                          "title": "Get items found count",
+                          "duration": 2,
+                          "steps": [
+                            {
+                              "title": "Get items found text",
+                              "duration": 2
+                            }
+                          ]
+                        },
+                        {
+                          "title": "Remove the event from bookmarks and verify the default icon state",
+                          "duration": 9994,
+                          "error": {
+                            "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\n\nCall Log:\n- Timeout 10000ms exceeded while waiting on the predicate",
+                            "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\n\nCall Log:\n- Timeout 10000ms exceeded while waiting on the predicate\n    at G:\\FMR\\Intership\\greencity-pw\\tests\\ui\\tc-31-adding-event-to-bookmarks.spec.ts:70:10\n    at G:\\FMR\\Intership\\greencity-pw\\tests\\ui\\tc-31-adding-event-to-bookmarks.spec.ts:66:5",
+                            "location": {
+                              "file": "G:\\FMR\\Intership\\greencity-pw\\tests\\ui\\tc-31-adding-event-to-bookmarks.spec.ts",
+                              "column": 10,
+                              "line": 70
+                            },
+                            "snippet": "\u001b[0m \u001b[90m 68 |\u001b[39m       \u001b[36mawait\u001b[39m expect\n \u001b[90m 69 |\u001b[39m         \u001b[33m.\u001b[39mpoll(() \u001b[33m=>\u001b[39m eventsPage\u001b[33m.\u001b[39mgetGridEventCardsCount())\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 70 |\u001b[39m         \u001b[33m.\u001b[39mtoBe(displayedBookmarkedCount \u001b[33m-\u001b[39m \u001b[35m1\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 71 |\u001b[39m       \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39mpoll(() \u001b[33m=>\u001b[39m bookmarkedEventCard\u001b[33m.\u001b[39misVisible())\u001b[33m.\u001b[39mtoBe(\u001b[36mfalse\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 72 |\u001b[39m     })\u001b[33m;\u001b[39m\n \u001b[90m 73 |\u001b[39m\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2026-10-01T11:59:31.343Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "G:\\FMR\\Intership\\greencity-pw\\test-results\\tc-31-adding-event-to-book-d155e-t-the-removal-after-refresh-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "G:\\FMR\\Intership\\greencity-pw\\test-results\\tc-31-adding-event-to-book-d155e-t-the-removal-after-refresh-chromium\\error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "G:\\FMR\\Intership\\greencity-pw\\tests\\ui\\tc-31-adding-event-to-bookmarks.spec.ts",
+                        "column": 10,
+                        "line": 70
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "511f4c2967bb825b5ee2-ac9fc932eef6f779357d",
+              "file": "ui/tc-31-adding-event-to-bookmarks.spec.ts",
+              "line": 4,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-01T11:59:30.422Z",
+    "duration": 26453.857,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}
