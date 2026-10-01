@@ -30,7 +30,7 @@ test.describe('TC-23 Edit event image upload validations', () => {
       await editEventPage.waitForEditEventPage();
     });
 
-    await test.step('Step 1: Verify minimum limit - attempt to delete the only image', async () => {
+    await test.step('1: Verify minimum limit - attempt to delete the only image', async () => {
       const initialImageCount = await editEventPage.getAttachedImagesCount();
       expect(initialImageCount).toBe(1);
 
@@ -43,7 +43,7 @@ test.describe('TC-23 Edit event image upload validations', () => {
       expect(imageCountAfterDelete).toBe(1);
     });
 
-    await test.step('Step 2: Verify invalid format rejection', async () => {
+    await test.step('2: Verify invalid format rejection', async () => {
       await editEventPage.uploadImage(TEST_NOT_VALID_IMAGE_PATH);
 
       const toastMessage = await editEventPage.getToastMessage();
@@ -53,7 +53,7 @@ test.describe('TC-23 Edit event image upload validations', () => {
       expect(imageCountAfterInvalidUpload).toBe(1);
     });
 
-    await test.step('Step 3: Upload valid custom image', async () => {
+    await test.step('3: Upload valid custom image', async () => {
       await editEventPage.uploadImage(TEST_VALID_IMAGE_PATH);
 
       await editEventPage.waitForImageUpload(2);
@@ -65,7 +65,7 @@ test.describe('TC-23 Edit event image upload validations', () => {
       expect(currentImageCount).toBe(2);
     });
 
-    await test.step('Step 4: Add default Greencity images until maximum limit', async () => {
+    await test.step('4: Add default Greencity images until maximum limit', async () => {
       for (let i = 0; i < 3; i++) {
         await editEventPage.selectDefaultImageByIndex(i);
         await editEventPage.waitForImageUpload(i + 3);
@@ -78,7 +78,7 @@ test.describe('TC-23 Edit event image upload validations', () => {
       expect(finalImageCount).toBe(5);
     });
 
-    await test.step('Step 5: Verify maximum limit - attempt to add 6th image', async () => {
+    await test.step('5: Verify maximum limit - attempt to add 6th image', async () => {
       await editEventPage.selectDefaultImageByIndex(0);
 
       const toastMessage = await editEventPage.getToastMessage();

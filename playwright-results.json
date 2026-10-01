@@ -1,0 +1,240 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\ells\\Desktop\\грін\\greencity-pw\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/ui/tc-20-edit-event-button.spec.ts",
+      "--project=chromium"
+    ],
+    "configFile": "C:\\Users\\ells\\Desktop\\грін\\greencity-pw\\playwright.config.ts",
+    "rootDir": "C:/Users/ells/Desktop/грін/greencity-pw/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/ells/Desktop/грін/greencity-pw/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "api",
+        "name": "api",
+        "testDir": "C:/Users/ells/Desktop/грін/greencity-pw/tests/api",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/ells/Desktop/грін/greencity-pw/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/ells/Desktop/грін/greencity-pw/tests/ui",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/ells/Desktop/грін/greencity-pw/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "C:/Users/ells/Desktop/грін/greencity-pw/tests/ui",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/ells/Desktop/грін/greencity-pw/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "C:/Users/ells/Desktop/грін/greencity-pw/tests/ui",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      ["list", null],
+      [
+        "html",
+        {
+          "open": "never"
+        }
+      ],
+      [
+        "C:\\Users\\ells\\Desktop\\грін\\greencity-pw\\node_modules\\allure-playwright\\dist\\cjs\\index.js",
+        {
+          "resultsDir": "allure-results"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 8,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "ui\\tc-20-edit-event-button.spec.ts",
+      "file": "ui/tc-20-edit-event-button.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "TC-20 Edit event entry points",
+          "file": "ui/tc-20-edit-event-button.spec.ts",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Verify author can edit an event from the card and details page",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 5996,
+                      "error": {
+                        "message": "Error: No event card with an Edit event action was found.",
+                        "stack": "Error: No event card with an Edit event action was found.\n    at EventsPage.getFirstEditableEventCard (C:\\Users\\ells\\Desktop\\грін\\greencity-pw\\pages\\events-page.ts:275:11)\n    at C:\\Users\\ells\\Desktop\\грін\\greencity-pw\\tests\\ui\\tc-20-edit-event-button.spec.ts:32:30\n    at C:\\Users\\ells\\Desktop\\грін\\greencity-pw\\tests\\ui\\tc-20-edit-event-button.spec.ts:31:5",
+                        "location": {
+                          "file": "C:\\Users\\ells\\Desktop\\грін\\greencity-pw\\pages\\events-page.ts",
+                          "column": 11,
+                          "line": 275
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39m..\\pages\\events-page.ts:275\n\n\u001b[0m \u001b[90m 273 |\u001b[39m     }\n \u001b[90m 274 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 275 |\u001b[39m     \u001b[36mthrow\u001b[39m \u001b[36mnew\u001b[39m \u001b[33mError\u001b[39m(\u001b[32m'No event card with an Edit event action was found.'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m           \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 276 |\u001b[39m   }\n \u001b[90m 277 |\u001b[39m\n \u001b[90m 278 |\u001b[39m   \u001b[90m/** Returns the event card matching a title in the current view mode */\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\ells\\Desktop\\грін\\greencity-pw\\pages\\events-page.ts",
+                            "column": 11,
+                            "line": 275
+                          },
+                          "message": "Error: No event card with an Edit event action was found.\n\n\u001b[90m   at \u001b[39m..\\pages\\events-page.ts:275\n\n\u001b[0m \u001b[90m 273 |\u001b[39m     }\n \u001b[90m 274 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 275 |\u001b[39m     \u001b[36mthrow\u001b[39m \u001b[36mnew\u001b[39m \u001b[33mError\u001b[39m(\u001b[32m'No event card with an Edit event action was found.'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m           \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 276 |\u001b[39m   }\n \u001b[90m 277 |\u001b[39m\n \u001b[90m 278 |\u001b[39m   \u001b[90m/** Returns the event card matching a title in the current view mode */\u001b[39m\u001b[0m\n\u001b[2m    at EventsPage.getFirstEditableEventCard (C:\\Users\\ells\\Desktop\\грін\\greencity-pw\\pages\\events-page.ts:275:11)\u001b[22m\n\u001b[2m    at C:\\Users\\ells\\Desktop\\грін\\greencity-pw\\tests\\ui\\tc-20-edit-event-button.spec.ts:32:30\u001b[22m\n\u001b[2m    at C:\\Users\\ells\\Desktop\\грін\\greencity-pw\\tests\\ui\\tc-20-edit-event-button.spec.ts:31:5\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Open the Events list as an authenticated user",
+                          "duration": 67,
+                          "steps": [
+                            {
+                              "title": "Check if user is logged in",
+                              "duration": 13
+                            }
+                          ]
+                        },
+                        {
+                          "title": "Verify Edit event is available on the author event card",
+                          "duration": 12,
+                          "error": {
+                            "message": "Error: No event card with an Edit event action was found.",
+                            "stack": "Error: No event card with an Edit event action was found.\n    at EventsPage.getFirstEditableEventCard (C:\\Users\\ells\\Desktop\\грін\\greencity-pw\\pages\\events-page.ts:275:11)\n    at C:\\Users\\ells\\Desktop\\грін\\greencity-pw\\tests\\ui\\tc-20-edit-event-button.spec.ts:32:30\n    at C:\\Users\\ells\\Desktop\\грін\\greencity-pw\\tests\\ui\\tc-20-edit-event-button.spec.ts:31:5",
+                            "location": {
+                              "file": "C:\\Users\\ells\\Desktop\\грін\\greencity-pw\\pages\\events-page.ts",
+                              "column": 11,
+                              "line": 275
+                            },
+                            "snippet": "\u001b[90m   at \u001b[39m..\\pages\\events-page.ts:275\n\n\u001b[0m \u001b[90m 273 |\u001b[39m     }\n \u001b[90m 274 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 275 |\u001b[39m     \u001b[36mthrow\u001b[39m \u001b[36mnew\u001b[39m \u001b[33mError\u001b[39m(\u001b[32m'No event card with an Edit event action was found.'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m           \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 276 |\u001b[39m   }\n \u001b[90m 277 |\u001b[39m\n \u001b[90m 278 |\u001b[39m   \u001b[90m/** Returns the event card matching a title in the current view mode */\u001b[39m\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2026-10-01T16:15:17.726Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\ells\\Desktop\\грін\\greencity-pw\\test-results\\tc-20-edit-event-button-TC-495fb-m-the-card-and-details-page-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Users\\ells\\Desktop\\грін\\greencity-pw\\test-results\\tc-20-edit-event-button-TC-495fb-m-the-card-and-details-page-chromium\\error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\ells\\Desktop\\грін\\greencity-pw\\pages\\events-page.ts",
+                        "column": 11,
+                        "line": 275
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "e6fe7c7ef3f27c9563d5-3a5db30e9b63e2631137",
+              "file": "ui/tc-20-edit-event-button.spec.ts",
+              "line": 14,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-01T16:15:16.933Z",
+    "duration": 8027.728,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}
