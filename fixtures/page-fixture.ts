@@ -1,4 +1,5 @@
 import {
+  CreateEventPage,
   HomePage,
   ProfilePage,
   EditProfilePage,
@@ -10,6 +11,7 @@ import {
   PlacesPage,
   EventsPage,
   EventDetailsPage,
+  EditEventPage,
 } from '@/pages';
 
 import env from '@/config/env';
@@ -23,6 +25,7 @@ import {
 } from '@/modals';
 
 type PageFixtures = {
+  createEventPage: CreateEventPage;
   homePage: HomePage;
   signInModal: SignInModal;
   updatePhotoModal: UpdatePhotoModal;
@@ -39,10 +42,15 @@ type PageFixtures = {
   ecoNewsCreatePage: CreateNewsPage;
   ecoNewsCreatePreviewPage: CreateNewsPreviewPage;
   eventsPage: EventsPage;
-  eventsDetailsPage: EventDetailsPage;
+  eventDetailsPage: EventDetailsPage;
+  editEventPage: EditEventPage;
 };
 
 export const test = baseTest.extend<PageFixtures>({
+  createEventPage: async ({ page }, use): Promise<void> => {
+    await use(new CreateEventPage(page));
+  },
+
   homePage: async ({ page }, use): Promise<void> => {
     await use(new HomePage(page));
   },
@@ -119,8 +127,12 @@ export const test = baseTest.extend<PageFixtures>({
     await use(new EventsPage(page));
   },
 
-  eventsDetailsPage: async ({ page }, use): Promise<void> => {
+  eventDetailsPage: async ({ page }, use): Promise<void> => {
     await use(new EventDetailsPage(page));
+  },
+
+  editEventPage: async ({ page }, use): Promise<void> => {
+    await use(new EditEventPage(page));
   },
 });
 

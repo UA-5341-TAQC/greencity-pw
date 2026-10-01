@@ -74,6 +74,24 @@ export class EditEventPage extends BasePage {
     });
   }
 
+  async waitForEditEventPage(): Promise<void> {
+    await this.titleInput.waitFor({ state: 'visible' });
+  }
+
+  async getEventTitle(): Promise<string> {
+    return await this.titleInput.inputValue();
+  }
+
+  async getEventId(): Promise<string> {
+    const eventId = this.page.url().match(/create-update-event\/(\d+)$/)?.[1];
+
+    if (!eventId) {
+      throw new Error('The current URL does not contain an event ID.');
+    }
+
+    return eventId;
+  }
+
   async enterTitle(title: string) {
     await this.titleInput.fill(title);
   }

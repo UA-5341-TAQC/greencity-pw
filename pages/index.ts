@@ -1,3 +1,4 @@
+export * from './create-event-page';
 export * from './create-news/create-news-page';
 export * from './create-news/create-news-preview-page';
 export * from './eco-news-details.page';
