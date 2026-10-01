@@ -16,6 +16,10 @@ export class EventDetailsPage extends BasePage {
   protected readonly saveEventButton: Locator;
   protected readonly joinEventButton: Locator;
   protected readonly commentsSection: Locator;
+  private readonly eventImage: Locator;
+  private readonly likeButton: Locator;
+  private readonly likesCount: Locator;
+  private readonly shareButtons: Locator;
 
   public readonly comments: CommentsComponent;
 
@@ -36,6 +40,10 @@ export class EventDetailsPage extends BasePage {
     this.joinEventButton = page.locator('.save-join-event-block .primary-global-button');
     this.commentsSection = page.locator('app-comments-container.event');
     this.comments = new CommentsComponent(this.commentsSection, page);
+    this.eventImage = page.locator('.main-image img.image-active');
+    this.likeButton = page.locator('.date-author .like-wr');
+    this.likesCount = this.likeButton.locator('.numerosity-likes');
+    this.shareButtons = page.locator('.event-header .share-buttons');
   }
 
   async navigateToEventDetails(eventId: string | number): Promise<void> {
@@ -105,7 +113,36 @@ export class EventDetailsPage extends BasePage {
   async isJoinEventButtonVisible(): Promise<boolean> {
     return await this.joinEventButton.isVisible();
   }
+
   async scrollToComments(): Promise<void> {
     await this.commentsSection.scrollIntoViewIfNeeded();
+  }
+
+  async isEventImageVisible(): Promise<boolean> {
+    return await this.eventImage.isVisible();
+  }
+
+  async isEventImageLoaded(): Promise<boolean> {
+    return await this.eventImage.evaluate(
+      (img: HTMLImageElement) => img.complete && img.naturalWidth > 0
+    );
+  }
+
+  async isBackButtonVisible(): Promise<boolean> {
+    return await this.backButton.isVisible();
+  }
+
+  async isLikeButtonVisible(): Promise<boolean> {
+    return await this.likeButton.isVisible();
+  }
+
+  async isLikesCountVisible(): Promise<boolean> {
+    return await this.likesCount.isVisible();
+  }
+
+  async isShareButtonVisible(
+    name: 'Share' | 'Share on Twitter' | 'Share on LinkedIn' | 'Share on Facebook'
+  ): Promise<boolean> {
+    return await this.shareButtons.getByRole('img', { name, exact: true }).isVisible();
   }
 }
