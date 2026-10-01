@@ -258,18 +258,31 @@ export class EventsPage extends BasePage {
   }
 
   /** Returns the first event card that offers the author-only edit action */
-  async getFirstEditableEventCard(): Promise<GridEventCardComponent | ListEventCardComponent> {
-    const editButton = this.page.getByRole('button', { name: 'Edit event' });
-    const gridCard = this.gridEventCardRoots.filter({ has: editButton }).first();
-
-    if ((await gridCard.count()) > 0) {
-      return new GridEventCardComponent(gridCard, this.page);
+  async getFirstEditableEventCard(
+    createEventIfMissing?: () => Promise<unknown>
+  ): Promise<GridEventCardComponent | ListEventCardComponent> {
+    if (!(await this.hasEditableEventCard()) && createEventIfMissing) {
+      await createEventIfMissing();
     }
 
-    const listCard = this.listEventCardRoots.filter({ has: editButton }).first();
+    const gridCardCount = await this.gridEventCardRoots.count();
+    for (let index = 0; index < gridCardCount; index++) {
+      const gridCard = this.gridEventCardRoots.nth(index);
+      const editButton = gridCard.getByRole('button', { name: 'Edit event' });
 
-    if ((await listCard.count()) > 0) {
-      return new ListEventCardComponent(listCard, this.page);
+      if ((await editButton.isVisible()) && (await editButton.isEnabled())) {
+        return new GridEventCardComponent(gridCard, this.page);
+      }
+    }
+
+    const listCardCount = await this.listEventCardRoots.count();
+    for (let index = 0; index < listCardCount; index++) {
+      const listCard = this.listEventCardRoots.nth(index);
+      const editButton = listCard.getByRole('button', { name: 'Edit event' });
+
+      if ((await editButton.isVisible()) && (await editButton.isEnabled())) {
+        return new ListEventCardComponent(listCard, this.page);
+      }
     }
 
     throw new Error('No event card with an Edit event action was found.');
@@ -281,17 +294,15 @@ export class EventsPage extends BasePage {
   ): Promise<GridEventCardComponent | ListEventCardComponent> {
     const gridCard = this.gridEventCardRoots.filter({ hasText: title }).first();
 
-    if ((await gridCard.count()) > 0) {
+    try {
+      await gridCard.waitFor({ state: 'visible' });
       return new GridEventCardComponent(gridCard, this.page);
-    }
+    } catch {
+      const listCard = this.listEventCardRoots.filter({ hasText: title }).first();
 
-    const listCard = this.listEventCardRoots.filter({ hasText: title }).first();
-
-    if ((await listCard.count()) > 0) {
+      await listCard.waitFor({ state: 'visible' });
       return new ListEventCardComponent(listCard, this.page);
     }
-
-    throw new Error(`No event card with title "${title}" was found.`);
   }
 
   /** Returns GridEventCard components for every card on the page */

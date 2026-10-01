@@ -61,7 +61,9 @@ export class EditEventPage extends BasePage {
     this.datePickerToggleBtn = page.locator('mat-datepicker-toggle button');
     this.startTimeInput = page.locator('input[formcontrolname="startTime"]');
     this.endTimeInput = page.locator('input[formcontrolname="finishTime"]');
-    this.allDayCheckbox = page.locator('mat-checkbox[formcontrolname="allDay"] input[type="checkbox"]');
+    this.allDayCheckbox = page.locator(
+      'mat-checkbox[formcontrolname="allDay"] input[type="checkbox"]'
+    );
 
     this.placeCheckbox = page.locator('mat-checkbox', { hasText: 'Place' });
     this.placeInput = page.locator('input[formcontrolname="place"]');

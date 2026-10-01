@@ -18,10 +18,9 @@ test.describe('TC-23 Edit event image upload validations', () => {
     });
 
     await test.step('Open the edit form for an author event', async () => {
-      if (!(await eventsPage.hasEditableEventCard())) {
-        await createSimpleEvent(authenticatedPage, eventsPage, createEventPage);
-      }
-      const ownedEventCard = await eventsPage.getFirstEditableEventCard();
+      const ownedEventCard = await eventsPage.getFirstEditableEventCard(() =>
+        createSimpleEvent(authenticatedPage, eventsPage, createEventPage)
+      );
       await ownedEventCard.waitForVisible();
       expect(await ownedEventCard.isEditEventButtonVisible()).toBe(true);
       expect(await ownedEventCard.isEditEventButtonEnabled()).toBe(true);

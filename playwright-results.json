@@ -4,7 +4,7 @@
       "C:\\Program Files\\nodejs\\node.exe",
       "C:\\Users\\ells\\Desktop\\грін\\greencity-pw\\node_modules\\@playwright\\test\\cli.js",
       "test",
-      "tests/ui/tc-23-edit-event-images.spec.ts",
+      "tc-20-edit-event-button.spec.ts",
       "--project=chromium"
     ],
     "configFile": "C:\\Users\\ells\\Desktop\\грін\\greencity-pw\\playwright.config.ts",
@@ -116,20 +116,20 @@
   },
   "suites": [
     {
-      "title": "ui\\tc-23-edit-event-images.spec.ts",
-      "file": "ui/tc-23-edit-event-images.spec.ts",
+      "title": "ui\\tc-20-edit-event-button.spec.ts",
+      "file": "ui/tc-20-edit-event-button.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "TC-23 Edit event image upload validations",
-          "file": "ui/tc-23-edit-event-images.spec.ts",
-          "line": 5,
+          "title": "TC-20 Edit event entry points",
+          "file": "ui/tc-20-edit-event-button.spec.ts",
+          "line": 4,
           "column": 6,
           "specs": [
             {
-              "title": "Verify image upload validations (minimum limit, invalid format, maximum limit)",
+              "title": "Verify author can edit an event from the card and details page",
               "ok": true,
               "tags": [],
               "tests": [
@@ -144,7 +144,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 7870,
+                      "duration": 20178,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
@@ -152,40 +152,40 @@
                       "steps": [
                         {
                           "title": "Open the Events list as an authenticated user",
-                          "duration": 2314,
+                          "duration": 9516,
                           "steps": [
                             {
                               "title": "Check if user is logged in",
-                              "duration": 5
+                              "duration": 11
                             }
                           ]
                         },
                         {
-                          "title": "Open the edit form for an author event",
-                          "duration": 935
+                          "title": "Verify Edit event is available on the author event card",
+                          "duration": 118
                         },
                         {
-                          "title": "1: Verify minimum limit - attempt to delete the only image",
-                          "duration": 71
+                          "title": "Open the edit form from the event card",
+                          "duration": 846
                         },
                         {
-                          "title": "2: Verify invalid format rejection",
-                          "duration": 44
+                          "title": "Return to the Events list",
+                          "duration": 47
                         },
                         {
-                          "title": "3: Upload valid custom image",
-                          "duration": 48
+                          "title": "Open the same event Details page using More",
+                          "duration": 1180
                         },
                         {
-                          "title": "4: Add default Greencity images until maximum limit",
-                          "duration": 162
+                          "title": "Verify Edit on Details opens the same event edit form",
+                          "duration": 5
                         },
                         {
-                          "title": "5: Verify maximum limit - attempt to add 6th image",
-                          "duration": 161
+                          "title": "Click the \"Edit\" button",
+                          "duration": 391
                         }
                       ],
-                      "startTime": "2026-10-01T16:24:50.159Z",
+                      "startTime": "2026-10-01T18:00:14.914Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -193,9 +193,9 @@
                   "status": "expected"
                 }
               ],
-              "id": "4fe0f8bb018ce89e98c6-98e46cff16ffa10eb72f",
-              "file": "ui/tc-23-edit-event-images.spec.ts",
-              "line": 6,
+              "id": "e6fe7c7ef3f27c9563d5-3a5db30e9b63e2631137",
+              "file": "ui/tc-20-edit-event-button.spec.ts",
+              "line": 5,
               "column": 3
             }
           ]
@@ -205,8 +205,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-10-01T16:24:49.426Z",
-    "duration": 10226.878999999999,
+    "startTime": "2026-10-01T18:00:14.093Z",
+    "duration": 22289.886000000002,
     "expected": 1,
     "skipped": 0,
     "unexpected": 0,
