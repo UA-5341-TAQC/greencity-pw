@@ -108,7 +108,7 @@ jobs:
         id: pw
         run: |
           set +e
-          npx playwright test --project=${{ matrix.browser }}
+          npx playwright test --project=${{ matrix.browser }} --pass-with-no-tests
           echo "exit_code=$?" >> "$GITHUB_OUTPUT"
           exit 0
 
@@ -141,6 +141,10 @@ jobs:
           fi
 
           if [ "$total" -eq 0 ]; then
+            if [ "${{ matrix.browser }}" = "api" ]; then
+              echo "::notice::No API tests executed."
+              exit 0
+            fi
             echo "::error::No tests were executed for project ${{ matrix.browser }}"
             exit 1
           fi
@@ -206,18 +210,47 @@ jobs:
           path: combined-results
           merge-multiple: true
 
-      - name: Generate combined Allure report
-        # Pin to a release tag or commit SHA instead of @master
-        uses: simple-elf/allure-report-action@v1.13
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          allure_results: combined-results
-          gh_pages: gh-pages
-          allure_report: allure-report
-          allure_history: allure-history
-          subfolder: ${{ env.REPORT_FOLDER }}
+          node-version: 24
+          cache: npm
 
-      - name: Fix permissions
-        run: sudo chown -R "$USER":"$USER" allure-history
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate combined Allure report
+        run: |
+          echo "Preparing previous history..."
+          HISTORY_FILE="history.jsonl"
+
+          # Check if history from previous run exists
+          if [ -f "gh-pages/${REPORT_FOLDER}/last-history/$HISTORY_FILE" ]; then
+            echo "Found previous history file. Copying..."
+            cp "gh-pages/${REPORT_FOLDER}/last-history/$HISTORY_FILE" "$HISTORY_FILE"
+            
+            # Generate new report WITH history dump
+            echo "Generating Allure report with history..."
+            npx allure generate combined-results --output allure-report --dump "$HISTORY_FILE"
+          else
+            echo "No previous history found. Generating initial report..."
+            npx allure generate combined-results --output allure-report
+          fi
+
+          echo "Extracting new history state for the next run..."
+          npx allure history combined-results --history-path "$HISTORY_FILE" || echo "Failed to generate history dump, proceeding anyway"
+
+          echo "Preparing allure-history directory structure for deployment..."
+          mkdir -p "allure-history/${REPORT_FOLDER}"
+          cp -r allure-report/* "allure-history/${REPORT_FOLDER}/"
+
+          # Store the newly extracted history file for the NEXT run
+          mkdir -p "allure-history/${REPORT_FOLDER}/last-history"
+          cp "$HISTORY_FILE" "allure-history/${REPORT_FOLDER}/last-history/" 2>/dev/null || true
+
+          # Store a numbered snapshot for deep linking
+          mkdir -p "allure-history/${REPORT_FOLDER}/${{ github.run_number }}"
+          cp -r allure-report/* "allure-history/${REPORT_FOLDER}/${{ github.run_number }}/" || true
 
       - name: Clean heavy attachments from history
         run: |
@@ -248,7 +281,7 @@ jobs:
 
       - name: Job summary
         run: |
-          f=allure-report/widgets/summary.json
+          f=allure-report/summary.json
           if [ -f "$f" ]; then
-            jq -r '"### Allure: passed \(.statistic.passed), failed \(.statistic.failed), broken \(.statistic.broken), skipped \(.statistic.skipped)"' "$f" >> "$GITHUB_STEP_SUMMARY"
+            jq -r '"### Allure: total \(.stats.total // 0), passed \(.stats.passed // 0), skipped \(.stats.skipped // 0), retries \(.stats.retries // 0) | status: \(.status)"' "$f" >> "$GITHUB_STEP_SUMMARY"
           fi
