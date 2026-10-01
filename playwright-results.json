@@ -34,9 +34,7 @@
         "name": "api",
         "testDir": "G:/FMR/Intership/greencity-pw/tests/api",
         "testIgnore": [],
-        "testMatch": [
-          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
-        ],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
         "timeout": 30000
       },
       {
@@ -50,9 +48,7 @@
         "name": "chromium",
         "testDir": "G:/FMR/Intership/greencity-pw/tests/ui",
         "testIgnore": [],
-        "testMatch": [
-          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
-        ],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
         "timeout": 30000
       },
       {
@@ -66,9 +62,7 @@
         "name": "firefox",
         "testDir": "G:/FMR/Intership/greencity-pw/tests/ui",
         "testIgnore": [],
-        "testMatch": [
-          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
-        ],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
         "timeout": 30000
       },
       {
@@ -82,18 +76,13 @@
         "name": "webkit",
         "testDir": "G:/FMR/Intership/greencity-pw/tests/ui",
         "testIgnore": [],
-        "testMatch": [
-          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
-        ],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
         "timeout": 30000
       }
     ],
     "quiet": false,
     "reporter": [
-      [
-        "list",
-        null
-      ],
+      ["list", null],
       [
         "html",
         {
