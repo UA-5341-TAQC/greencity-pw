@@ -21,10 +21,10 @@ test.describe('TC-20 Edit event entry points', () => {
     });
 
     await test.step('Verify Edit event is available on the author event card', async () => {
-      const ownedEventCard = await eventsPage.getFirstEditableEventCard();
       if (!(await eventsPage.hasEditableEventCard())) {
         await createSimpleEvent(authenticatedPage, eventsPage, createEventPage);
       }
+      const ownedEventCard = await eventsPage.getFirstEditableEventCard();
       await ownedEventCard.waitForVisible();
 
       expect(await ownedEventCard.isEditEventButtonVisible()).toBe(true);
