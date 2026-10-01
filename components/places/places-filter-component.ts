@@ -10,4 +10,14 @@ export class PlacesFilterComponent extends BaseComponent {
   async selectFilter(filterName: PlaceFilter): Promise<void> {
     await this.root.getByRole('button', { name: filterName, exact: true }).click();
   }
+
+  async areFiltersVisible(): Promise<boolean> {
+    return await this.root.isVisible();
+  }
+
+  async isFilterSelected(filterName: PlaceFilter): Promise<boolean> {
+    const filter = this.root.getByRole('button', { name: filterName, exact: true }).locator('a');
+
+    return await filter.evaluate((element) => element.classList.contains('global-tag-clicked'));
+  }
 }
