@@ -10,7 +10,10 @@ test.describe('Create event: time fields validation', () => {
     await eventsPage.header.switchLanguage(Language.En);
   });
 
-  test('TC-42 Create event: Verify time fields validation (Negative)', async ({ eventsPage, createEventPage, }) => {
+  test('TC-42 Create event: Verify time fields validation (Negative)', async ({
+    eventsPage,
+    createEventPage,
+  }) => {
     const START_TIME_ERROR = "Start time field can't be empty.";
     const END_TIME_ERROR = 'End time field can’t be empty.';
 
