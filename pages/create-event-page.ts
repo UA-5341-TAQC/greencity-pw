@@ -1,5 +1,6 @@
 import type { Locator, Page } from '@playwright/test';
 import BasePage from '@/pages/base-page';
+import { CalendarDropdownComponent } from '@/components';
 
 export class CreateEventPage extends BasePage {
   private readonly titleInput: Locator;
@@ -22,6 +23,8 @@ export class CreateEventPage extends BasePage {
   private readonly publishButton: Locator;
   private readonly cancelButton: Locator;
   readonly descriptionValidationMessage: Locator;
+  private readonly datePicker: CalendarDropdownComponent;
+  private readonly datePickerToggle: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -41,7 +44,9 @@ export class CreateEventPage extends BasePage {
     this.finishTimeInput = page.locator('input[formcontrolname="finishTime"]');
     this.allDayCheckbox = page.locator('mat-checkbox[formcontrolname="allDay"]');
     this.placeCheckbox = page.locator('mat-checkbox', { hasText: 'Place' });
-    this.onlineCheckbox = page.locator('mat-checkbox', { hasText: 'Online' });
+    this.onlineCheckbox = page
+      .locator('mat-checkbox', { hasText: 'Online' })
+      .locator('input[type="checkbox"]');
     this.placeInput = page.locator('input[formcontrolname="place"]');
     this.onlineLinkInput = page.locator('input[formcontrolname="onlineLink"]');
     const submitContainer = page.locator('.submit-container');
@@ -49,6 +54,8 @@ export class CreateEventPage extends BasePage {
     this.publishButton = submitContainer.getByRole('button', { name: 'Publish' });
     this.cancelButton = submitContainer.getByRole('button', { name: 'Cancel' });
     this.descriptionValidationMessage = page.getByText(/Not enough characters\. Left:/i).first();
+    this.datePicker = new CalendarDropdownComponent(page.locator('mat-datepicker-content'), page);
+    this.datePickerToggle = page.getByRole('button', { name: 'Open calendar' });
   }
 
   async waitForCreateEventPage(): Promise<void> {
@@ -173,5 +180,89 @@ export class CreateEventPage extends BasePage {
 
   async isPreviewEnabled(): Promise<boolean> {
     return await this.previewButton.isEnabled();
+  }
+
+  async getTitleValue(): Promise<string> {
+    return await this.titleInput.inputValue();
+  }
+
+  async getDurationText(): Promise<string> {
+    return (await this.durationSelect.innerText()).trim();
+  }
+
+  async getDayValue(): Promise<string> {
+    return await this.dayInput.inputValue();
+  }
+
+  async selectDate(date: Date): Promise<void> {
+    await this.datePickerToggle.click();
+    await this.datePicker.waitForVisible();
+
+    if (date.getMonth() !== new Date().getMonth()) {
+      await this.datePicker.clickNextMonth();
+    }
+
+    const label = date.toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    });
+    await this.datePicker.selectDate(label);
+  }
+
+  async getStartTimeValue(): Promise<string> {
+    return await this.startTimeInput.inputValue();
+  }
+
+  async getFinishTimeValue(): Promise<string> {
+    return await this.finishTimeInput.inputValue();
+  }
+
+  async isOnlineChecked(): Promise<boolean> {
+    return await this.onlineCheckbox.isChecked();
+  }
+
+  async isOnlineLinkInputVisible(): Promise<boolean> {
+    return await this.onlineLinkInput.isVisible();
+  }
+
+  async getOnlineLinkValue(): Promise<string> {
+    return await this.onlineLinkInput.inputValue();
+  }
+
+  async isEconomicTagSelected(): Promise<boolean> {
+    return (await this.economicTag.getAttribute('aria-selected')) === 'true';
+  }
+
+  async getEventTypeText(): Promise<string> {
+    return (await this.eventTypeSelect.innerText()).trim();
+  }
+
+  async getInviteTypeText(): Promise<string> {
+    return (await this.inviteSelect.innerText()).trim();
+  }
+
+  async isPreviewVisible(): Promise<boolean> {
+    return await this.previewButton.isVisible();
+  }
+
+  async isPublishVisible(): Promise<boolean> {
+    return await this.publishButton.isVisible();
+  }
+
+  private getTimeOption(field: 'Start Time' | 'End Time', time: string): Locator {
+    return this.page
+      .getByRole('listbox', { name: field })
+      .getByRole('option', { name: time, exact: true });
+  }
+
+  async selectStartTime(time: string): Promise<void> {
+    await this.startTimeInput.click();
+    await this.getTimeOption('Start Time', time).click();
+  }
+
+  async selectFinishTime(time: string): Promise<void> {
+    await this.finishTimeInput.click();
+    await this.getTimeOption('End Time', time).click();
   }
 }

@@ -1,0 +1,486 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\sambo\\WebstormProjects\\greencity-pw\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tc-17-create-one-day-event",
+      "--workers=1"
+    ],
+    "configFile": "C:\\Users\\sambo\\WebstormProjects\\greencity-pw\\playwright.config.ts",
+    "rootDir": "C:/Users/sambo/WebstormProjects/greencity-pw/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/sambo/WebstormProjects/greencity-pw/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "api",
+        "name": "api",
+        "testDir": "C:/Users/sambo/WebstormProjects/greencity-pw/tests/api",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/sambo/WebstormProjects/greencity-pw/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/sambo/WebstormProjects/greencity-pw/tests/ui",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/sambo/WebstormProjects/greencity-pw/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "C:/Users/sambo/WebstormProjects/greencity-pw/tests/ui",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/sambo/WebstormProjects/greencity-pw/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "C:/Users/sambo/WebstormProjects/greencity-pw/tests/ui",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "open": "never"
+        }
+      ],
+      [
+        "C:\\Users\\sambo\\WebstormProjects\\greencity-pw\\node_modules\\allure-playwright\\dist\\cjs\\index.js",
+        {
+          "resultsDir": "allure-results"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "ui\\tc-17-create-one-day-event.spec.ts",
+      "file": "ui/tc-17-create-one-day-event.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Create event",
+          "file": "ui/tc-17-create-one-day-event.spec.ts",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC-17 Create one day event (Positive)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 12678,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "1: Click the \"Create event\" button",
+                          "duration": 427
+                        },
+                        {
+                          "title": "2: Fill the \"Title\" field",
+                          "duration": 22
+                        },
+                        {
+                          "title": "3: Leave \"Duration\" field with default value",
+                          "duration": 8
+                        },
+                        {
+                          "title": "4: Choose the next calendar day",
+                          "duration": 377,
+                          "steps": [
+                            {
+                              "title": "Select date \"October 2, 2026\" in calendar",
+                              "duration": 267
+                            }
+                          ]
+                        },
+                        {
+                          "title": "5: Set \"Start Time\" value",
+                          "duration": 401
+                        },
+                        {
+                          "title": "6: Set \"End Time\" value",
+                          "duration": 326
+                        },
+                        {
+                          "title": "7: Click on \"Online\" checkmark",
+                          "duration": 61
+                        },
+                        {
+                          "title": "8: Fill the \"Online Link\" field",
+                          "duration": 16
+                        },
+                        {
+                          "title": "9: Choose \"Initiative type\" label",
+                          "duration": 57
+                        },
+                        {
+                          "title": "10: Leave the first \"Event type\" dropdown with \"Open\" value",
+                          "duration": 4
+                        },
+                        {
+                          "title": "11: Choose \"All\" in the second \"Event type\" dropdown",
+                          "duration": 340
+                        },
+                        {
+                          "title": "12: Fill the \"Events Description\" field",
+                          "duration": 25
+                        },
+                        {
+                          "title": "13: Verify \"Preview\" button",
+                          "duration": 8
+                        },
+                        {
+                          "title": "14: Verify \"Publish\" button",
+                          "duration": 9
+                        },
+                        {
+                          "title": "15: Click \"Publish\" button",
+                          "duration": 43
+                        },
+                        {
+                          "title": "16: Return to events page",
+                          "duration": 5
+                        },
+                        {
+                          "title": "17: Verify event is created",
+                          "duration": 1931
+                        }
+                      ],
+                      "startTime": "2026-10-01T13:20:04.423Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "71ea57ea30993a738cc5-db2657b5779e3413bb93",
+              "file": "ui/tc-17-create-one-day-event.spec.ts",
+              "line": 13,
+              "column": 3
+            },
+            {
+              "title": "TC-17 Create one day event (Positive)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 10981,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "1: Click the \"Create event\" button",
+                          "duration": 526
+                        },
+                        {
+                          "title": "2: Fill the \"Title\" field",
+                          "duration": 49
+                        },
+                        {
+                          "title": "3: Leave \"Duration\" field with default value",
+                          "duration": 9
+                        },
+                        {
+                          "title": "4: Choose the next calendar day",
+                          "duration": 296,
+                          "steps": [
+                            {
+                              "title": "Select date \"October 2, 2026\" in calendar",
+                              "duration": 165
+                            }
+                          ]
+                        },
+                        {
+                          "title": "5: Set \"Start Time\" value",
+                          "duration": 426
+                        },
+                        {
+                          "title": "6: Set \"End Time\" value",
+                          "duration": 232
+                        },
+                        {
+                          "title": "7: Click on \"Online\" checkmark",
+                          "duration": 75
+                        },
+                        {
+                          "title": "8: Fill the \"Online Link\" field",
+                          "duration": 33
+                        },
+                        {
+                          "title": "9: Choose \"Initiative type\" label",
+                          "duration": 84
+                        },
+                        {
+                          "title": "10: Leave the first \"Event type\" dropdown with \"Open\" value",
+                          "duration": 6
+                        },
+                        {
+                          "title": "11: Choose \"All\" in the second \"Event type\" dropdown",
+                          "duration": 340
+                        },
+                        {
+                          "title": "12: Fill the \"Events Description\" field",
+                          "duration": 37
+                        },
+                        {
+                          "title": "13: Verify \"Preview\" button",
+                          "duration": 13
+                        },
+                        {
+                          "title": "14: Verify \"Publish\" button",
+                          "duration": 15
+                        },
+                        {
+                          "title": "15: Click \"Publish\" button",
+                          "duration": 63
+                        },
+                        {
+                          "title": "16: Return to events page",
+                          "duration": 7
+                        },
+                        {
+                          "title": "17: Verify event is created",
+                          "duration": 1974
+                        }
+                      ],
+                      "startTime": "2026-10-01T13:20:18.290Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "71ea57ea30993a738cc5-e3ea53c486e0de5ff089",
+              "file": "ui/tc-17-create-one-day-event.spec.ts",
+              "line": 13,
+              "column": 3
+            },
+            {
+              "title": "TC-17 Create one day event (Positive)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 24686,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "1: Click the \"Create event\" button",
+                          "duration": 2450
+                        },
+                        {
+                          "title": "2: Fill the \"Title\" field",
+                          "duration": 28
+                        },
+                        {
+                          "title": "3: Leave \"Duration\" field with default value",
+                          "duration": 5
+                        },
+                        {
+                          "title": "4: Choose the next calendar day",
+                          "duration": 2272,
+                          "steps": [
+                            {
+                              "title": "Select date \"October 2, 2026\" in calendar",
+                              "duration": 1402
+                            }
+                          ]
+                        },
+                        {
+                          "title": "5: Set \"Start Time\" value",
+                          "duration": 1933
+                        },
+                        {
+                          "title": "6: Set \"End Time\" value",
+                          "duration": 2262
+                        },
+                        {
+                          "title": "7: Click on \"Online\" checkmark",
+                          "duration": 1157
+                        },
+                        {
+                          "title": "8: Fill the \"Online Link\" field",
+                          "duration": 26
+                        },
+                        {
+                          "title": "9: Choose \"Initiative type\" label",
+                          "duration": 782
+                        },
+                        {
+                          "title": "10: Leave the first \"Event type\" dropdown with \"Open\" value",
+                          "duration": 6
+                        },
+                        {
+                          "title": "11: Choose \"All\" in the second \"Event type\" dropdown",
+                          "duration": 2256
+                        },
+                        {
+                          "title": "12: Fill the \"Events Description\" field",
+                          "duration": 28
+                        },
+                        {
+                          "title": "13: Verify \"Preview\" button",
+                          "duration": 8
+                        },
+                        {
+                          "title": "14: Verify \"Publish\" button",
+                          "duration": 11
+                        },
+                        {
+                          "title": "15: Click \"Publish\" button",
+                          "duration": 1056
+                        },
+                        {
+                          "title": "16: Return to events page",
+                          "duration": 4
+                        },
+                        {
+                          "title": "17: Verify event is created",
+                          "duration": 3002
+                        }
+                      ],
+                      "startTime": "2026-10-01T13:20:31.004Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "71ea57ea30993a738cc5-c3ebe3fd41d0fe16220e",
+              "file": "ui/tc-17-create-one-day-event.spec.ts",
+              "line": 13,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-01T13:20:03.605Z",
+    "duration": 52316.144,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

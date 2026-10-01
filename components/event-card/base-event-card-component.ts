@@ -38,7 +38,6 @@ export abstract class BaseEventCardComponent extends BaseComponent {
     this.eventTitle = this.root.locator('p.event-name');
     this.moreButton = this.root.getByRole('button', { name: 'More' });
     this.editEventButton = this.root.getByRole('button', { name: 'Edit event' });
-    this.editEventButton = this.root.getByRole('button', { name: 'Edit event' });
     this.joinEventButton = this.root.getByRole('button', { name: 'Join event' });
 
     this.publishDate = this.root.locator('div.additional-info div.date p');
