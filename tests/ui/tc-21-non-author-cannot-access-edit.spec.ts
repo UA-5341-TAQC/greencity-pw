@@ -1,7 +1,7 @@
 import { test, expect } from '@/fixtures';
 
-const EVENT_TITLE = 'Community Cleanup Saturday';
-const EVENT_ID = 56;
+const EVENT_TITLE = 'Updated Automation Event 2026';
+const EVENT_ID = 210;
 
 test.describe('Events - Edit Event', () => {
   test.beforeEach(async ({ authenticatedUser }) => {
