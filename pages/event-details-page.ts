@@ -14,6 +14,10 @@ export class EventDetailsPage extends BasePage {
   protected readonly editButton: Locator;
   protected readonly saveEventButton: Locator;
   protected readonly joinEventButton: Locator;
+  private readonly likeIcon: Locator;
+  private readonly likesCount: Locator;
+  private readonly likedIcon: Locator;
+  private readonly unlikedIcon: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -30,6 +34,10 @@ export class EventDetailsPage extends BasePage {
     this.editButton = page.getByRole('button', { name: 'Edit' });
     this.saveEventButton = page.locator('.save-join-event-block .secondary-global-button');
     this.joinEventButton = page.locator('.save-join-event-block .primary-global-button');
+    this.likeIcon = page.getByRole('img', { name: 'like' });
+    this.likedIcon = page.locator('img.event-like[src*="comments/liked.png"]');
+    this.unlikedIcon = page.locator('img.event-like[src*="comments/like.png"]');
+    this.likesCount = page.locator('.numerosity-likes');
   }
 
   async navigateToEventDetails(eventId: string | number): Promise<void> {
@@ -98,5 +106,42 @@ export class EventDetailsPage extends BasePage {
 
   async isJoinEventButtonVisible(): Promise<boolean> {
     return await this.joinEventButton.isVisible();
+  }
+
+  async clickLike(): Promise<void> {
+    await this.likeIcon.click();
+  }
+
+  async isLikeEnabled(): Promise<boolean> {
+    return await this.likeIcon.isEnabled();
+  }
+
+  async isLikeVisible(): Promise<boolean> {
+    return await this.likeIcon.isVisible();
+  }
+
+  async getLikeCount(): Promise<number> {
+    await this.likesCount.waitFor({ state: 'visible' });
+    const rawText = (await this.likesCount.textContent()) ?? '';
+    const digitsOnly = rawText.replace(/\D/g, '');
+    return digitsOnly ? Number(digitsOnly) : 0;
+  }
+
+  async isCountLikeVisible(): Promise<boolean> {
+    return await this.likeIcon.isVisible();
+  }
+
+  async getLikeState(): Promise<'liked' | 'unliked' | 'unknown'> {
+    if (await this.likedIcon.isVisible()) {
+      return 'liked';
+    }
+    if (await this.unlikedIcon.isVisible()) {
+      return 'unliked';
+    }
+    return 'unknown';
+  }
+
+  async isLiked(): Promise<boolean> {
+    return await this.likedIcon.isVisible();
   }
 }
