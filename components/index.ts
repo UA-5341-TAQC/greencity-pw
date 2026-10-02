@@ -21,3 +21,5 @@ export * from './calendar-dropdown-component';
 export * from './tag-selector-component';
 export * from './active-filter-chip-component';
 export * from './event-filter-component';
+export * from './event-image-item-component';
+export * from './event-image-upload-component';

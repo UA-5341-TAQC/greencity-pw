@@ -1,5 +1,6 @@
 import type { Locator, Page } from '@playwright/test';
 import BasePage from '@/pages/base-page';
+import { EventImageUploadComponent } from '@/components';
 
 export class CreateEventPage extends BasePage {
   private readonly titleInput: Locator;
@@ -22,6 +23,7 @@ export class CreateEventPage extends BasePage {
   private readonly publishButton: Locator;
   private readonly cancelButton: Locator;
   readonly descriptionValidationMessage: Locator;
+  public readonly pictures: EventImageUploadComponent;
 
   constructor(page: Page) {
     super(page);
@@ -49,6 +51,7 @@ export class CreateEventPage extends BasePage {
     this.publishButton = submitContainer.getByRole('button', { name: 'Publish' });
     this.cancelButton = submitContainer.getByRole('button', { name: 'Cancel' });
     this.descriptionValidationMessage = page.getByText(/Not enough characters\. Left:/i).first();
+    this.pictures = new EventImageUploadComponent(page.locator('app-images-container'), page);
   }
 
   async waitForCreateEventPage(): Promise<void> {
