@@ -1,0 +1,351 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\ells\\Desktop\\грін\\greencity-pw\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tc-28-event-filter-by-time.spec.ts",
+      "--project=chromium"
+    ],
+    "configFile": "C:\\Users\\ells\\Desktop\\грін\\greencity-pw\\playwright.config.ts",
+    "rootDir": "C:/Users/ells/Desktop/грін/greencity-pw/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/ells/Desktop/грін/greencity-pw/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "api",
+        "name": "api",
+        "testDir": "C:/Users/ells/Desktop/грін/greencity-pw/tests/api",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/ells/Desktop/грін/greencity-pw/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/ells/Desktop/грін/greencity-pw/tests/ui",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/ells/Desktop/грін/greencity-pw/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "C:/Users/ells/Desktop/грін/greencity-pw/tests/ui",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/ells/Desktop/грін/greencity-pw/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "C:/Users/ells/Desktop/грін/greencity-pw/tests/ui",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      ["list", null],
+      [
+        "html",
+        {
+          "open": "never"
+        }
+      ],
+      [
+        "C:\\Users\\ells\\Desktop\\грін\\greencity-pw\\node_modules\\allure-playwright\\dist\\cjs\\index.js",
+        {
+          "resultsDir": "allure-results"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 8,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "ui\\tc-28-event-filter-by-time.spec.ts",
+      "file": "ui/tc-28-event-filter-by-time.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "TC-28 Verify that a user can filter events by event time",
+          "file": "ui/tc-28-event-filter-by-time.spec.ts",
+          "line": 37,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should filter upcoming and past events and restore all events",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 21869,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Open the Events page and record the initial count",
+                          "duration": 6329
+                        },
+                        {
+                          "title": "Get items found count",
+                          "duration": 29,
+                          "steps": [
+                            {
+                              "title": "Get items found text",
+                              "duration": 28
+                            }
+                          ]
+                        },
+                        {
+                          "title": "Verify Event time options are available",
+                          "duration": 83,
+                          "steps": [
+                            {
+                              "title": "Open event time filter",
+                              "duration": 50
+                            },
+                            {
+                              "title": "Close dropdown panel",
+                              "duration": 12
+                            }
+                          ]
+                        },
+                        {
+                          "title": "Filter upcoming events and verify their dates",
+                          "duration": 2790,
+                          "steps": [
+                            {
+                              "title": "Select time filter(s): Upcoming",
+                              "duration": 270,
+                              "steps": [
+                                {
+                                  "title": "Open event time filter",
+                                  "duration": 47
+                                },
+                                {
+                                  "title": "Select filter options: Upcoming",
+                                  "duration": 223,
+                                  "steps": [
+                                    {
+                                      "title": "Select filter option \"Upcoming\"",
+                                      "duration": 216
+                                    },
+                                    {
+                                      "title": "Close dropdown panel",
+                                      "duration": 5
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "title": "Get items found count",
+                              "duration": 11,
+                              "steps": [
+                                {
+                                  "title": "Get items found text",
+                                  "duration": 9
+                                }
+                              ]
+                            },
+                            {
+                              "title": "Remove active filter chip",
+                              "duration": 34
+                            }
+                          ]
+                        },
+                        {
+                          "title": "Filter past events and verify their dates",
+                          "duration": 4954,
+                          "steps": [
+                            {
+                              "title": "Select time filter(s): Past",
+                              "duration": 236,
+                              "steps": [
+                                {
+                                  "title": "Open event time filter",
+                                  "duration": 28
+                                },
+                                {
+                                  "title": "Select filter options: Past",
+                                  "duration": 207,
+                                  "steps": [
+                                    {
+                                      "title": "Select filter option \"Past\"",
+                                      "duration": 201
+                                    },
+                                    {
+                                      "title": "Close dropdown panel",
+                                      "duration": 5
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "title": "Get items found count",
+                              "duration": 7,
+                              "steps": [
+                                {
+                                  "title": "Get items found text",
+                                  "duration": 6
+                                }
+                              ]
+                            },
+                            {
+                              "title": "Click reset all filters button",
+                              "duration": 41
+                            }
+                          ]
+                        },
+                        {
+                          "title": "Select Any time and verify both time filters are active",
+                          "duration": 7296,
+                          "steps": [
+                            {
+                              "title": "Select time filter(s): Any",
+                              "duration": 234,
+                              "steps": [
+                                {
+                                  "title": "Open event time filter",
+                                  "duration": 30
+                                },
+                                {
+                                  "title": "Select filter options: Any time",
+                                  "duration": 202,
+                                  "steps": [
+                                    {
+                                      "title": "Select filter option \"Any time\"",
+                                      "duration": 196
+                                    },
+                                    {
+                                      "title": "Close dropdown panel",
+                                      "duration": 5
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "title": "Select time filter(s): Any",
+                              "duration": 292,
+                              "steps": [
+                                {
+                                  "title": "Open event time filter",
+                                  "duration": 53
+                                },
+                                {
+                                  "title": "Select filter options: Any time",
+                                  "duration": 237,
+                                  "steps": [
+                                    {
+                                      "title": "Select filter option \"Any time\"",
+                                      "duration": 230
+                                    },
+                                    {
+                                      "title": "Close dropdown panel",
+                                      "duration": 6
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ],
+                      "startTime": "2026-10-02T12:09:33.237Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c6188ea68b57809069cf-c745759ee6081fc0031c",
+              "file": "ui/tc-28-event-filter-by-time.spec.ts",
+              "line": 38,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-02T12:09:32.428Z",
+    "duration": 23353.811,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
