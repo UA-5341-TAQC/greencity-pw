@@ -9,3 +9,4 @@ export * from './news.i18n';
 export * from './events.types';
 export * from './events.i18n';
 export * from './api.user.types';
+export * from './api.place.types';
