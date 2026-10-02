@@ -8,6 +8,8 @@ import {
   EcoNewsDetailsPage,
   CreateNewsPage,
   CreateNewsPreviewPage,
+  CreateEventPage,
+  EventsPage,
   PlacesPage,
   EventsPage,
   EventDetailsPage,
@@ -42,6 +44,7 @@ type PageFixtures = {
   ecoNewsCreatePage: CreateNewsPage;
   ecoNewsCreatePreviewPage: CreateNewsPreviewPage;
   eventsPage: EventsPage;
+  createEventPage: CreateEventPage;
   eventDetailsPage: EventDetailsPage;
   editEventPage: EditEventPage;
 };
@@ -127,6 +130,8 @@ export const test = baseTest.extend<PageFixtures>({
     await use(new EventsPage(page));
   },
 
+  createEventPage: async ({ page }, use): Promise<void> => {
+    await use(new CreateEventPage(page));
   eventDetailsPage: async ({ page }, use): Promise<void> => {
     await use(new EventDetailsPage(page));
   },
