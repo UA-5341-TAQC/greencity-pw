@@ -1,5 +1,6 @@
-import { Page, Locator } from '@playwright/test';
+import { type Page, type Locator } from '@playwright/test';
 import BasePage from '@/pages/base-page';
+import { EventImageUploadComponent, type EventImageItemComponent } from '@/components';
 
 export class EditEventPage extends BasePage {
   readonly titleInput: Locator;
@@ -11,11 +12,27 @@ export class EditEventPage extends BasePage {
   readonly tagSocial: Locator;
   readonly tagEnvironmental: Locator;
   readonly descriptionEditor: Locator;
-  readonly fileInput: Locator;
-  readonly mainImage: Locator;
-  readonly deleteImageBtn: Locator;
-  readonly editImageBtn: Locator;
-  readonly defaultImages: Locator;
+  public readonly pictures: EventImageUploadComponent;
+
+  get fileInput(): Locator {
+    return this.pictures.fileInput;
+  }
+
+  get defaultImages(): Locator {
+    return this.pictures.defaultImages;
+  }
+
+  get mainImage(): Locator {
+    return this.pictures.getImage(0).image;
+  }
+
+  get deleteImageBtn(): Locator {
+    return this.pictures.getImage(0).deleteButton;
+  }
+
+  get editImageBtn(): Locator {
+    return this.pictures.getImage(0).editButton;
+  }
   readonly dateInput: Locator;
   readonly datePickerToggleBtn: Locator;
   readonly startTimeInput: Locator;
@@ -45,11 +62,7 @@ export class EditEventPage extends BasePage {
 
     this.descriptionEditor = page.locator('quill-editor .ql-editor');
 
-    this.fileInput = page.locator('input#file-upload');
-    this.mainImage = page.locator('.input-image-wrapper img');
-    this.deleteImageBtn = page.locator('.selected-delete');
-    this.editImageBtn = page.locator('.selected-edit');
-    this.defaultImages = page.locator('.images-def-wrapper .img-container img');
+    this.pictures = new EventImageUploadComponent(page.locator('app-images-container'), page);
 
     this.dateInput = page.locator('input[formcontrolname="day"]');
     this.datePickerToggleBtn = page.locator('mat-datepicker-toggle button');
@@ -132,20 +145,41 @@ export class EditEventPage extends BasePage {
     await this.tagEnvironmental.click();
   }
 
-  async uploadImage(filePath: string) {
-    await this.fileInput.setInputFiles(filePath);
+  /**
+   * Returns the attached image component at the given index.
+   */
+  getImage(index: number = 0): EventImageItemComponent {
+    return this.pictures.getImage(index);
   }
 
-  async deleteUploadedImage() {
-    await this.deleteImageBtn.click();
+  /**
+   * Returns the main attached image component (marked as "Main").
+   */
+  getMainImage(): EventImageItemComponent {
+    return this.pictures.getMainImage();
   }
 
-  async clickEditImage() {
-    await this.editImageBtn.click();
+  /**
+   * Returns the count of currently attached images.
+   */
+  async getAttachedImagesCount(): Promise<number> {
+    return await this.pictures.getImagesCount();
   }
 
-  async selectDefaultImageByIndex(index: number) {
-    await this.defaultImages.nth(index).click();
+  async uploadImage(filePath: string): Promise<void> {
+    await this.pictures.uploadImage(filePath);
+  }
+
+  async deleteUploadedImage(index: number = 0): Promise<void> {
+    await this.pictures.getImage(index).clickDelete();
+  }
+
+  async clickEditImage(index: number = 0): Promise<void> {
+    await this.pictures.getImage(index).clickEdit();
+  }
+
+  async selectDefaultImageByIndex(index: number): Promise<void> {
+    await this.pictures.selectDefaultImage(index);
   }
 
   async setEventDate(dateString: string) {
