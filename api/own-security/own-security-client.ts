@@ -13,6 +13,7 @@ import type {
   UnblockAccountDto,
   EmployeeSignUpDto,
   UserManagementCreateDto,
+  PasswordStatusDto,
 } from '@/types';
 
 /**
@@ -248,14 +249,14 @@ export class OwnSecurityClient extends BaseApiClient {
    * GET /ownSecurity/password-status
    * Get password status for current user.
    */
-  public async getPasswordStatus(options?: ApiRequestOptions): Promise<boolean> {
+  public async getPasswordStatus(options?: ApiRequestOptions): Promise<PasswordStatusDto> {
     const response = await this.get('/ownSecurity/password-status', options);
     if (!response.ok()) {
       throw new Error(
         `Get password status failed with status ${response.status()}: ${await response.text()}`
       );
     }
-    return (await response.json()) as boolean;
+    return (await response.json()) as PasswordStatusDto;
   }
 
   /**

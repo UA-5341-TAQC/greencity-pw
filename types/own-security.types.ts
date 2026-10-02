@@ -66,3 +66,7 @@ export interface UserManagementCreateDto {
   role: 'ROLE_USER' | 'ROLE_ADMIN' | 'ROLE_MODERATOR' | 'ROLE_EMPLOYEE' | 'ROLE_UBS_EMPLOYEE';
   name?: string;
 }
+
+export interface PasswordStatusDto {
+  hasPassword: boolean;
+}

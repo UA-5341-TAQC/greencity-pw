@@ -20,3 +20,16 @@ export interface SignInCredentials {
   email?: string;
   password?: string;
 }
+
+export type UserRole = 'user' | 'admin' | 'employee' | 'moderator';
+
+export type ClientConstructor<T> = new (
+  baseUrl?: string,
+  accessToken?: string | null,
+  requestContext?: import('@playwright/test').APIRequestContext
+) => T;
+
+export type AuthorizedClientFactory = <T>(
+  clientClass: ClientConstructor<T>,
+  role?: UserRole
+) => Promise<T>;

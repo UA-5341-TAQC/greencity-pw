@@ -1,5 +1,6 @@
 import { test, expect } from '@/fixtures';
 import env from '@/config/env';
+import { OwnSecurityClient } from '@/api';
 
 test.describe('Own Security API & Temp Mail Helper', () => {
   test('TC-API-1 Verify successful authentication via ownSecurityClient.signIn', async ({
@@ -49,5 +50,23 @@ test.describe('Own Security API & Temp Mail Helper', () => {
     const details = await tempMailClient.extractVerificationDetails(mockEmailHtml);
     expect(details.token).toBe('abc-123-uuid');
     expect(details.userId).toBe(999);
+  });
+
+  test('TC-API-4 Verify authorizedClient factory instantiates client with authenticated session', async ({
+    authorizedClient,
+  }) => {
+    const userClient = await authorizedClient(OwnSecurityClient, 'user');
+    expect(userClient.getAccessToken()).toBeTruthy();
+
+    const passwordStatus = await userClient.getPasswordStatus();
+    expect(typeof passwordStatus.hasPassword).toBe('boolean');
+  });
+
+  test('TC-API-5 Verify authorizedClient throws meaningful error when role credentials are missing', async ({
+    authorizedClient,
+  }) => {
+    await expect(authorizedClient(OwnSecurityClient, 'moderator')).rejects.toThrow(
+      /Missing credentials in configuration for role 'moderator'/
+    );
   });
 });
