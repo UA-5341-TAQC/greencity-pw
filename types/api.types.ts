@@ -1,3 +1,5 @@
+import type { APIRequestContext } from '@playwright/test';
+
 export interface ApiRequestOptions {
   headers?: Record<string, string>;
   data?: unknown;
@@ -26,10 +28,11 @@ export type UserRole = 'user' | 'admin' | 'employee' | 'moderator';
 export type ClientConstructor<T> = new (
   baseUrl?: string,
   accessToken?: string | null,
-  requestContext?: import('@playwright/test').APIRequestContext
+  requestContext?: APIRequestContext
 ) => T;
 
 export type AuthorizedClientFactory = <T>(
   clientClass: ClientConstructor<T>,
-  role?: UserRole
+  role?: UserRole | (string & {}),
+  baseUrl?: string
 ) => Promise<T>;

@@ -67,6 +67,12 @@ jobs:
       USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
       USER_ID: ${{ secrets.USER_ID }}
       USER_NAME: ${{ secrets.USER_NAME }}
+      ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+      ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+      EMPLOYEE_EMAIL: ${{ secrets.EMPLOYEE_EMAIL }}
+      EMPLOYEE_PASSWORD: ${{ secrets.EMPLOYEE_PASSWORD }}
+      MODERATOR_EMAIL: ${{ secrets.MODERATOR_EMAIL }}
+      MODERATOR_PASSWORD: ${{ secrets.MODERATOR_PASSWORD }}
       # Timeouts are not sensitive: move them to Settings -> Variables
       SHORT_TIMEOUT: ${{ secrets.SHORT_TIMEOUT }}
       MEDIUM_TIMEOUT: ${{ secrets.MEDIUM_TIMEOUT }}

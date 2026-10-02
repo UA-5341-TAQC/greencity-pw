@@ -77,7 +77,8 @@ export class TempMailApiClient {
         ...options,
       });
 
-      if (response.status() === 429) {
+      const retryableStatuses = [429, 502, 503, 504];
+      if (retryableStatuses.includes(response.status())) {
         const delayMs = 2000 * (attempt + 1);
         await new Promise((resolve) => setTimeout(resolve, delayMs));
         continue;
@@ -93,7 +94,7 @@ export class TempMailApiClient {
       return response;
     }
 
-    throw new Error(`Max retries exceeded with 429 errors for ${method} ${url}`);
+    throw new Error(`Max retries exceeded for ${method} ${url}`);
   }
 
   /**
@@ -220,10 +221,11 @@ export class TempMailApiClient {
    */
   public async extractVerificationLink(emailHtml: string): Promise<string> {
     return await test.step('Extract verification link from email HTML', async () => {
-      // Matches href="https?://.../verify?code=..." or GreenCity verification links containing token/verify
+      // Matches verification link patterns containing verification tokens, endpoints, or parameters
       const match =
-        emailHtml.match(/href="([^"]*(?:verify\?code=|verifyEmail|token=)[^"]*)"/i) ||
-        emailHtml.match(/href="(https?:\/\/[^"]+)"/i);
+        emailHtml.match(
+          /href="([^"]*(?:verify\?code=|verifyEmail|token=|userId=|user_id=)[^"]*)"/i
+        ) || emailHtml.match(/href="([^"]*greencity[^"]*(?:token|verify|userId|user_id)[^"]*)"/i);
 
       if (!match || !match[1]) {
         throw new Error('Verification link not found in the email content.');

@@ -98,10 +98,8 @@ export class BaseApiClient {
         // Ignore failure to read response body
       }
 
-      let statusInfo = String(statusCode);
-      if (statusCode >= 400 && responseText) {
-        statusInfo += ` - ${responseText}`;
-      }
+      const statusText = response.statusText();
+      const statusInfo = statusText ? `${statusCode} ${statusText}` : String(statusCode);
 
       await this.attachToReport('Response status', statusInfo, 'text/plain');
 

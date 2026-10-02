@@ -2,10 +2,10 @@ import { test as baseTest, expect as baseExpect } from '@/fixtures/base-fixture'
 import env from '@/config/env';
 import { OwnSecurityClient } from '@/api';
 import { TempMailApiClient, signInViaApi } from '@/helpers';
-import type { AuthorizedClientFactory, AuthSessionData, UserRole } from '@/types';
+import type { AuthorizedClientFactory, AuthSessionData } from '@/types';
 
 // Worker-level session cache to avoid repeating signInViaApi calls for each test
-const roleSessionsCache = new Map<UserRole, AuthSessionData>();
+const roleSessionsCache = new Map<string, AuthSessionData>();
 
 export interface ApiFixtures {
   ownSecurityClient: OwnSecurityClient;
@@ -26,13 +26,21 @@ export const test = baseTest.extend<ApiFixtures>({
   },
 
   authorizedClient: async ({ request }, use): Promise<void> => {
-    const factory: AuthorizedClientFactory = async (clientClass, role: UserRole = 'user') => {
-      const credentialsMap: Record<UserRole, { email?: string; password?: string }> = {
+    const factory: AuthorizedClientFactory = async (
+      clientClass,
+      role = 'user',
+      baseUrl?: string
+    ) => {
+      const credentialsMap: Record<string, { email?: string; password?: string }> = {
         user: { email: env.USER_EMAIL, password: env.USER_PASSWORD },
         admin: { email: env.ADMIN_EMAIL, password: env.ADMIN_PASSWORD },
         employee: { email: env.EMPLOYEE_EMAIL, password: env.EMPLOYEE_PASSWORD },
         moderator: { email: env.MODERATOR_EMAIL, password: env.MODERATOR_PASSWORD },
       };
+
+      if (!(role in credentialsMap)) {
+        throw new Error(`Unsupported role: '${role}'.`);
+      }
 
       const creds = credentialsMap[role];
       if (!creds?.email || !creds?.password) {
@@ -47,7 +55,7 @@ export const test = baseTest.extend<ApiFixtures>({
         roleSessionsCache.set(role, session);
       }
 
-      return new clientClass(env.API_USER_BASE_URL, session.accessToken, request);
+      return new clientClass(baseUrl, session.accessToken, request);
     };
 
     await use(factory);

@@ -156,12 +156,12 @@ export class OwnSecurityClient extends BaseApiClient {
    */
   public async restorePassword(
     email: string,
-    ubs?: string,
+    ubs?: string | boolean,
     options?: ApiRequestOptions
   ): Promise<APIResponse> {
     const params: Record<string, string> = { email };
     if (ubs !== undefined) {
-      params['ubs'] = ubs;
+      params['ubs'] = String(ubs);
     }
     return await this.get('/ownSecurity/restorePassword', {
       ...options,

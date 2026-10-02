@@ -25,14 +25,17 @@ test.describe('Own Security API - Authentication & Tokens', () => {
     expect(response.status()).toBe(400);
   });
 
-  test('TC-API-3 [GET /ownSecurity/updateAccessToken] Verify access token refresh endpoint is invoked with refresh token', async ({
+  test('TC-API-3 [GET /ownSecurity/updateAccessToken] Verify access token refresh endpoint returns 200 with new tokens', async ({
     ownSecurityClient,
   }) => {
     const auth = await ownSecurityClient.signIn(env.USER_EMAIL, env.USER_PASSWORD);
 
     const response = await ownSecurityClient.rawUpdateAccessToken(auth.refreshToken, 'GREENCITY');
 
-    expect(response.status()).toBeDefined();
+    expect(response.status()).toBe(200);
+    const body = (await response.json()) as { accessToken: string; refreshToken: string };
+    expect(body.accessToken).toBeTruthy();
+    expect(body.refreshToken).toBeTruthy();
   });
 
   test('TC-API-4 [GET /ownSecurity/password-status] Verify getPasswordStatus returns hasPassword status', async ({
@@ -175,6 +178,11 @@ test.describe('Own Security API - Role-Based Endpoints (Admin, Employee, Moderat
   test('TC-API-ROLE-1 [GET /ownSecurity/authorities/categories] Verify admin authorities categories endpoint via admin role', async ({
     authorizedClient,
   }) => {
+    // eslint-disable-next-line playwright/no-skipped-test
+    test.skip(
+      !env.ADMIN_EMAIL || !env.ADMIN_PASSWORD,
+      'Admin credentials are not configured in environment'
+    );
     const adminClient = await authorizedClient(OwnSecurityClient, 'admin');
     const categories = await adminClient.getAuthoritiesCategories();
 
@@ -184,6 +192,11 @@ test.describe('Own Security API - Role-Based Endpoints (Admin, Employee, Moderat
   test('TC-API-ROLE-2 [GET /ownSecurity/authorities/by-category] Verify admin authorities by category endpoint via admin role', async ({
     authorizedClient,
   }) => {
+    // eslint-disable-next-line playwright/no-skipped-test
+    test.skip(
+      !env.ADMIN_EMAIL || !env.ADMIN_PASSWORD,
+      'Admin credentials are not configured in environment'
+    );
     const adminClient = await authorizedClient(OwnSecurityClient, 'admin');
     const authorities = await adminClient.getAuthoritiesByCategory(1);
 
@@ -193,34 +206,43 @@ test.describe('Own Security API - Role-Based Endpoints (Admin, Employee, Moderat
   test('TC-API-ROLE-3 [POST /ownSecurity/register] Verify register endpoint via admin role', async ({
     authorizedClient,
   }) => {
+    // eslint-disable-next-line playwright/no-skipped-test
+    test.skip(
+      !env.ADMIN_EMAIL || !env.ADMIN_PASSWORD,
+      'Admin credentials are not configured in environment'
+    );
     const adminClient = await authorizedClient(OwnSecurityClient, 'admin');
     const response = await adminClient.register({
-      id: 0,
       email: `new.user.${Date.now()}@example.com`,
       role: 'ROLE_USER',
       name: 'RegisteredUser',
     });
 
-    expect(response.status()).toBeLessThan(400);
+    expect([200, 201]).toContain(response.status());
   });
 
   test('TC-API-ROLE-4 [POST /ownSecurity/sign-up-employee] Verify signUpEmployee endpoint via employee role', async ({
     authorizedClient,
   }) => {
+    // eslint-disable-next-line playwright/no-skipped-test
+    test.skip(
+      !env.EMPLOYEE_EMAIL || !env.EMPLOYEE_PASSWORD,
+      'Employee credentials are not configured in environment'
+    );
     const employeeClient = await authorizedClient(OwnSecurityClient, 'employee');
     const response = await employeeClient.signUpEmployee({
       email: `employee.${Date.now()}@example.com`,
       name: 'EmployeeTest',
     });
 
-    expect(response.status()).toBeLessThan(500);
+    expect([200, 201]).toContain(response.status());
   });
 
-  test('TC-API-ROLE-5 [ROLE CONFIG] Verify missing credentials error for unconfigured moderator role', async ({
+  test('TC-API-ROLE-5 [ROLE FACTORY] Verify authorizedClient throws error for unsupported role', async ({
     authorizedClient,
   }) => {
-    await expect(authorizedClient(OwnSecurityClient, 'moderator')).rejects.toThrow(
-      /Missing credentials in configuration for role 'moderator'/
+    await expect(authorizedClient(OwnSecurityClient, 'unsupported_role')).rejects.toThrow(
+      /Unsupported role: 'unsupported_role'/
     );
   });
 });
