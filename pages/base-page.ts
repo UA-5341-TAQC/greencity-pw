@@ -39,7 +39,7 @@ export default class BasePage {
 
   /**
    * Scrolls the page to the top or bottom based on the specified direction.
-   * @param direction 
+   * @param direction
    */
   async scrollPage(direction: 'up' | 'down'): Promise<void> {
     await this.page.evaluate((scrollDirection) => {

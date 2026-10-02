@@ -65,7 +65,7 @@ test.describe('TC-28 Verify that a user can filter events by event time', () => 
       const upcomingChip = eventsPage.getActiveFilterChipByTime(EventTimeFilter.Upcoming);
       await expect(upcomingChip.chip).toBeVisible();
 
-	  await eventsPage.getGridEventCardByIndex(0).waitForVisible();
+      await eventsPage.getGridEventCardByIndex(0).waitForVisible();
       const upcomingCount = await eventsPage.getItemsFoundCount();
       expect(upcomingCount).toBeGreaterThan(0);
       await eventsPage.scrollUntilAllEventCardsLoad();
@@ -88,7 +88,7 @@ test.describe('TC-28 Verify that a user can filter events by event time', () => 
       const pastChip = eventsPage.getActiveFilterChipByTime(EventTimeFilter.Past);
       await expect(pastChip.chip).toBeVisible();
 
-	  await eventsPage.getGridEventCardByIndex(0).waitForVisible();
+      await eventsPage.getGridEventCardByIndex(0).waitForVisible();
       const pastCount = await eventsPage.getItemsFoundCount();
       expect(pastCount).toBeGreaterThan(0);
       await eventsPage.scrollUntilAllEventCardsLoad();

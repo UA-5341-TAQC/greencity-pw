@@ -224,12 +224,10 @@ export class EventsPage extends BasePage {
 
       await this.scrollPage('down');
 
-      await expect
-        .poll(() => this.getGridEventCardsCount())
-        .toBeGreaterThanOrEqual(loadedCount);
+      await expect.poll(() => this.getGridEventCardsCount()).toBeGreaterThanOrEqual(loadedCount);
     }
   }
-  
+
   /** Returns the number of event cards currently rendered in list mode */
   async getListEventCardsCount(): Promise<number> {
     return await this.listEventCardRoots.count();
