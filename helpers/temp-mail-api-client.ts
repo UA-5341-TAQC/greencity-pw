@@ -229,7 +229,7 @@ export class TempMailApiClient {
         throw new Error('Verification link not found in the email content.');
       }
 
-      return match[1];
+      return match[1].replace(/&amp;/g, '&');
     });
   }
 

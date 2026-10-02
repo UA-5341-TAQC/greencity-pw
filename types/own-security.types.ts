@@ -15,7 +15,7 @@ export interface SuccessSignUpDto {
 export interface OwnSignInDto {
   email: string;
   password: string;
-  projectName: 'GREENCITY' | 'PICKUP';
+  projectName?: 'GREENCITY' | 'PICKUP';
 }
 
 export interface SuccessSignInDto {

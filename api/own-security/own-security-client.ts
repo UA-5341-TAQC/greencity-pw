@@ -5,7 +5,6 @@ import type {
   ApiRequestOptions,
   OwnSignUpDto,
   SuccessSignUpDto,
-  OwnSignInDto,
   SuccessSignInDto,
   OwnRestoreDto,
   UpdatePasswordDto,
@@ -61,15 +60,24 @@ export class OwnSecurityClient extends BaseApiClient {
    * POST /ownSecurity/signIn
    * Authenticate user with email and password.
    */
-  public async rawSignIn(data: OwnSignInDto, options?: ApiRequestOptions): Promise<APIResponse> {
+  public async rawSignIn(
+    email: string,
+    password: string,
+    projectName: 'GREENCITY' | 'PICKUP' = 'GREENCITY',
+    options?: ApiRequestOptions
+  ): Promise<APIResponse> {
     return await this.post('/ownSecurity/signIn', {
       ...options,
-      data,
+      data: { email, password, projectName },
     });
   }
 
-  public async signIn(data: OwnSignInDto): Promise<SuccessSignInDto> {
-    const response = await this.rawSignIn(data);
+  public async signIn(
+    email: string,
+    password: string,
+    projectName: 'GREENCITY' | 'PICKUP' = 'GREENCITY'
+  ): Promise<SuccessSignInDto> {
+    const response = await this.rawSignIn(email, password, projectName);
     if (!response.ok()) {
       throw new Error(`Sign in failed with status ${response.status()}: ${await response.text()}`);
     }
@@ -101,14 +109,14 @@ export class OwnSecurityClient extends BaseApiClient {
 
   /**
    * GET /ownSecurity/updateAccessToken
-   * Refresh access token using refresh token.
+   * Raw request for refreshing access token.
    */
-  public async updateAccessToken(
+  public async rawUpdateAccessToken(
     refreshToken: string,
     projectName: 'GREENCITY' | 'PICKUP' = 'GREENCITY',
     options?: ApiRequestOptions
-  ): Promise<SuccessSignInDto> {
-    const response = await this.get('/ownSecurity/updateAccessToken', {
+  ): Promise<APIResponse> {
+    return await this.get('/ownSecurity/updateAccessToken', {
       ...options,
       params: {
         refreshToken,
@@ -116,6 +124,18 @@ export class OwnSecurityClient extends BaseApiClient {
         ...(options?.params as Record<string, string> | undefined),
       },
     });
+  }
+
+  /**
+   * GET /ownSecurity/updateAccessToken
+   * Refresh access token using refresh token.
+   */
+  public async updateAccessToken(
+    refreshToken: string,
+    projectName: 'GREENCITY' | 'PICKUP' = 'GREENCITY',
+    options?: ApiRequestOptions
+  ): Promise<SuccessSignInDto> {
+    const response = await this.rawUpdateAccessToken(refreshToken, projectName, options);
 
     if (!response.ok()) {
       throw new Error(

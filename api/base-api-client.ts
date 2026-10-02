@@ -73,6 +73,7 @@ export class BaseApiClient {
     options: ApiRequestOptions = {}
   ): Promise<APIResponse> {
     const url = this.resolveUrl(endpoint);
+
     const headers: Record<string, string> = { ...(options.headers ?? {}) };
 
     if (this.accessToken && !headers['Authorization'] && !headers['authorization']) {
