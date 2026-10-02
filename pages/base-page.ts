@@ -38,6 +38,17 @@ export default class BasePage {
   }
 
   /**
+   * Scrolls the page to the top or bottom based on the specified direction.
+   * @param direction 
+   */
+  async scrollPage(direction: 'up' | 'down'): Promise<void> {
+    await this.page.evaluate((scrollDirection) => {
+      const top = scrollDirection === 'down' ? document.documentElement.scrollHeight : 0;
+      window.scrollTo(0, top);
+    }, direction);
+  }
+
+  /**
    * Waits for the page load state to be "networkidle".
    * This ensures all background network requests are finished.
    */

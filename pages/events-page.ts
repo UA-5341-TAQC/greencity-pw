@@ -1,4 +1,4 @@
-import { test, type Page, type Locator } from '@playwright/test';
+import { expect, test, type Page, type Locator } from '@playwright/test';
 import BasePage from './base-page';
 import {
   ActiveFilterChipComponent,
@@ -36,6 +36,8 @@ export class EventsPage extends BasePage {
   protected readonly gridEventCardRoots: Locator;
   protected readonly listEventCardRoots: Locator;
 
+  protected readonly endOfListMessage: Locator;
+
   constructor(page: Page, lang: Language = Language.En) {
     super(page);
     this.i18n = EVENTS_I18N[lang];
@@ -63,6 +65,7 @@ export class EventsPage extends BasePage {
       'div.event-list:not(.list-view) mat-card.event-list-item'
     );
     this.listEventCardRoots = page.locator('div.event-list.list-view mat-card.event-list-item');
+    this.endOfListMessage = page.locator('p.end-page-txt');
   }
   /** Navigates to the Events page directly by URL */
   async navigateToEventsPage(): Promise<void> {
@@ -214,6 +217,19 @@ export class EventsPage extends BasePage {
     return await this.gridEventCardRoots.count();
   }
 
+  /** Scrolls through the grid until the end-of-list indicator is visible. */
+  async scrollUntilAllEventCardsLoad(): Promise<void> {
+    while (!(await this.isEndOfEventsListVisible())) {
+      const loadedCount = await this.getGridEventCardsCount();
+
+      await this.scrollPage('down');
+
+      await expect
+        .poll(() => this.getGridEventCardsCount())
+        .toBeGreaterThanOrEqual(loadedCount);
+    }
+  }
+  
   /** Returns the number of event cards currently rendered in list mode */
   async getListEventCardsCount(): Promise<number> {
     return await this.listEventCardRoots.count();
@@ -323,5 +339,10 @@ export class EventsPage extends BasePage {
       cards.push(this.getListEventCardByIndex(i));
     }
     return cards;
+  }
+
+  /** Checks whether the "End of events list" message is visible */
+  async isEndOfEventsListVisible(): Promise<boolean> {
+    return this.endOfListMessage.isVisible();
   }
 }
