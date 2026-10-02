@@ -12,6 +12,7 @@ export class EcoNewsDetailsPage extends BasePage {
   private readonly publicationDate: Locator;
   private readonly tags: Locator;
   private readonly backButton: Locator;
+  private readonly editNewsButton: Locator;
   readonly relatedNews: EcoNewsDetailsRelatedNewsComponent;
   private readonly likeButton: Locator;
   private readonly likesCount: Locator;
@@ -30,6 +31,7 @@ export class EcoNewsDetailsPage extends BasePage {
     this.publicationDate = page.locator('.news-info-date').first();
     this.tags = page.locator('.tags div.tags-item');
     this.backButton = page.locator('div.back-button, a[class*="back"]');
+    this.editNewsButton = page.getByText('Edit news', { exact: true });
     this.relatedNews = new EcoNewsDetailsRelatedNewsComponent(
       page.locator('app-eco-news-widget'),
       page
@@ -111,6 +113,12 @@ export class EcoNewsDetailsPage extends BasePage {
   async clickBack(): Promise<void> {
     await test.step('Click back button', async () => {
       await this.backButton.click();
+    });
+  }
+
+  async clickEditNews(): Promise<void> {
+    await test.step('Click Edit news', async () => {
+      await this.editNewsButton.click();
     });
   }
 
