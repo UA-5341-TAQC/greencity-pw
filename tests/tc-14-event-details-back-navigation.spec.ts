@@ -19,5 +19,6 @@ test.describe('Event Details Navigation', () => {
     await eventsPage.waitForEventsPage();
 
     expect(eventsPage.url()).toContain('/greenCity/events');
+    await expect.poll(() => eventsPage.getItemsFoundCount()).toBeGreaterThan(0);
   });
 });
