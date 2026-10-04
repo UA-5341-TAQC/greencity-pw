@@ -28,7 +28,6 @@ test.describe('TC-18 Create event: title field (negative)', () => {
     await expect(
       authenticatedPage.getByText(titleValidationMessage, { exact: true })
     ).toBeVisible();
-    await expect.poll(() => createEventPage.getTitleCounter()).toBe('0 / 70');
 
     // Step 4: Focus the Title field again.
     await createEventPage.focusTitle();

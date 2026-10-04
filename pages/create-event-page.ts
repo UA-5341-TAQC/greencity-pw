@@ -62,12 +62,12 @@ export class CreateEventPage extends BasePage {
     await this.description.waitFor({ state: 'visible' });
   }
 
-  async waitForCreateEventPage(): Promise<void> {
-    await this.titleInput.waitFor({ state: 'visible' });
-  }
-
   async focusTitle(): Promise<void> {
-    await this.titleInput.click();
+    await this.page
+      .locator('mat-form-field')
+      .filter({ has: this.titleInput })
+      .locator('mat-label')
+      .click();
   }
 
   async focusDescription(): Promise<void> {
