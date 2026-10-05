@@ -4,6 +4,7 @@ import { Language } from '@/types/header.types';
 import { NEWS_I18N } from '@/types/news.i18n';
 import { NewsType } from '@/types/news.types';
 import { TagSelectorComponent } from '@/components/tag-selector-component';
+import { CancelWarningModal } from '@/modals/cancel-warning-modal';
 
 /**
  * Edit News page.
@@ -16,6 +17,7 @@ export class EditNewsPage extends BasePage {
   protected readonly titleInfo: Locator;
 
   readonly tagSelector: TagSelectorComponent;
+  readonly cancelModal: CancelWarningModal;
 
   protected readonly pictureBox: Locator;
   protected readonly pictureInput: Locator;
@@ -46,6 +48,7 @@ export class EditNewsPage extends BasePage {
     this.titleInfo = page.locator('div.title-block span.field-info');
 
     this.tagSelector = new TagSelectorComponent(page.locator('div.tags-box'), page, language);
+    this.cancelModal = new CancelWarningModal(page);
 
     this.pictureBox = page.locator('div.dropzone, div.picture-block, .image-preview');
     this.pictureInput = page.locator('div.dropzone input[type="file"], input[type="file"]');
@@ -73,9 +76,7 @@ export class EditNewsPage extends BasePage {
       .locator('div.date p')
       .filter({ hasText: new RegExp(`${info?.author ?? 'Author:'}|Author:|Автор:`, 'i') });
 
-    this.cancelButton = page.locator(
-      'div.submit-buttons button.tertiary-global-button, button:has-text("Cancel")'
-    );
+    this.cancelButton = page.locator('button.tertiary-global-button', { hasText: 'Cancel' });
     this.previewButton = page.locator(
       'div.submit-buttons button.secondary-global-button, button:has-text("Preview")'
     );

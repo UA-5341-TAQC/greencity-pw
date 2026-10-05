@@ -12,3 +12,4 @@ export * from './habit';
 export * from './home-page';
 export * from './places-page';
 export * from './profile-page';
+export * from './edit-news-page';
