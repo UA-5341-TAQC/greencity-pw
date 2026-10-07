@@ -8,5 +8,11 @@ export * from './news.types';
 export * from './news.i18n';
 export * from './events.types';
 export * from './events.i18n';
+<<<<<<< HEAD
 export * from './api.user.types';
 export * from './api.place.types';
+=======
+export * from './own-security.types';
+export * from './temp-mail.types';
+export * from './api.types';
+>>>>>>> main
