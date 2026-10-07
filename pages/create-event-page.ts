@@ -2,14 +2,14 @@ import type { Locator, Page } from '@playwright/test';
 import BasePage from '@/pages/base-page';
 
 export class CreateEventPage extends BasePage {
-  private readonly titleCounter: Locator;
-  private readonly titleValidationError: Locator;
-  private readonly titleInput: Locator;
-  private readonly titleField: Locator;
-  private readonly durationSelect: Locator;
-  private readonly economicTag: Locator;
-  private readonly socialTag: Locator;
-  private readonly environmentalTag: Locator;
+  readonly titleCounter: Locator;
+  readonly titleValidationError: Locator;
+  readonly titleInput: Locator;
+  readonly titleField: Locator;
+  readonly durationSelect: Locator;
+  readonly economicTag: Locator;
+  readonly socialTag: Locator;
+  readonly environmentalTag: Locator;
   readonly eventTypeSelect: Locator;
   readonly inviteSelect: Locator;
   readonly description: Locator;
@@ -19,8 +19,8 @@ export class CreateEventPage extends BasePage {
   readonly allDayCheckbox: Locator;
   readonly placeCheckbox: Locator;
   readonly onlineCheckbox: Locator;
-  private readonly placeInput: Locator;
-  private readonly onlineLinkInput: Locator;
+  readonly placeInput: Locator;
+  readonly onlineLinkInput: Locator;
   readonly previewButton: Locator;
   readonly publishButton: Locator;
   readonly cancelButton: Locator;
