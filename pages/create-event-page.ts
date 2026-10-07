@@ -5,6 +5,7 @@ export class CreateEventPage extends BasePage {
   private readonly titleCounter: Locator;
   private readonly titleValidationError: Locator;
   private readonly titleInput: Locator;
+  private readonly titleField: Locator;
   private readonly durationSelect: Locator;
   private readonly economicTag: Locator;
   private readonly socialTag: Locator;
