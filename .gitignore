@@ -156,3 +156,6 @@ playwright-results*
 
 # projects
 audit*.md
+
+# Playwright test results
+playwright-results.json

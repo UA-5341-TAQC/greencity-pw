@@ -1,4 +1,4 @@
-import { type Page, type Locator } from '@playwright/test';
+import { expect, type Page, type Locator } from '@playwright/test';
 import BasePage from '@/pages/base-page';
 import { EventImageUploadComponent, type EventImageItemComponent } from '@/components';
 
@@ -12,6 +12,7 @@ export class EditEventPage extends BasePage {
   readonly tagSocial: Locator;
   readonly tagEnvironmental: Locator;
   readonly descriptionEditor: Locator;
+  readonly imageCounter: Locator;
   public readonly pictures: EventImageUploadComponent;
 
   get fileInput(): Locator {
@@ -46,6 +47,8 @@ export class EditEventPage extends BasePage {
   readonly previewButton: Locator;
   readonly saveEventButton: Locator;
   readonly cancelButton: Locator;
+  readonly toastNotification: Locator;
+  readonly attachedImages: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -63,12 +66,16 @@ export class EditEventPage extends BasePage {
     this.descriptionEditor = page.locator('quill-editor .ql-editor');
 
     this.pictures = new EventImageUploadComponent(page.locator('app-images-container'), page);
-
+    this.imageCounter = page.locator(
+      'div.d-flex.flex-row.justify-content-between mat-label.xs-text'
+    );
     this.dateInput = page.locator('input[formcontrolname="day"]');
     this.datePickerToggleBtn = page.locator('mat-datepicker-toggle button');
     this.startTimeInput = page.locator('input[formcontrolname="startTime"]');
     this.endTimeInput = page.locator('input[formcontrolname="finishTime"]');
-    this.allDayCheckbox = page.locator('mat-checkbox[formcontrolname="allDay"]');
+    this.allDayCheckbox = page.locator(
+      'mat-checkbox[formcontrolname="allDay"] input[type="checkbox"]'
+    );
 
     this.placeCheckbox = page.locator('mat-checkbox', { hasText: 'Place' });
     this.placeInput = page.locator('input[formcontrolname="place"]');
@@ -85,6 +92,9 @@ export class EditEventPage extends BasePage {
     this.cancelButton = page.locator('.submit-container button.tertiary-global-button', {
       hasText: 'Cancel',
     });
+
+    this.toastNotification = page.locator('mat-snack-bar-container.error-snackbar').last();
+    this.attachedImages = page.locator('.input-image-wrapper img[alt="image-of-event"]');
   }
 
   async waitForEditEventPage(): Promise<void> {
@@ -231,5 +241,28 @@ export class EditEventPage extends BasePage {
 
   async clickCancel() {
     await this.cancelButton.click();
+  }
+
+  /**
+   * Get the image counter text (e.g., "2/5")
+   */
+  async getImageCounter(): Promise<string> {
+    return await this.imageCounter.innerText();
+  }
+
+  /**
+   * Get toast notification message
+   */
+  async getToastMessage(): Promise<string> {
+    await this.toastNotification.waitFor({ state: 'visible' });
+    return await this.toastNotification.innerText();
+  }
+
+  /**
+   * Wait for image upload to complete
+   */
+  async waitForImageUpload(expectedCount: number): Promise<void> {
+    await expect(this.attachedImages).toHaveCount(expectedCount);
+    await expect(this.imageCounter).toHaveText(`${expectedCount}/5`);
   }
 }
