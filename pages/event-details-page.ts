@@ -132,6 +132,11 @@ export class EventDetailsPage extends BasePage {
     return await this.joinEventButton.isVisible();
   }
 
+  async isEventSaved(): Promise<boolean> {
+    const text = (await this.saveEventButton.innerText()).trim().toLowerCase();
+    return text.includes('unsave event');
+  }
+
   async waitForJoinEventButton(): Promise<void> {
     await this.joinEventButton.waitFor({ state: 'visible' });
   }
