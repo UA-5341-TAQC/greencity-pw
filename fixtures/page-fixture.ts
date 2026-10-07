@@ -8,8 +8,8 @@ import {
   EcoNewsDetailsPage,
   CreateNewsPage,
   CreateNewsPreviewPage,
-  PlacesPage,
   EventsPage,
+  PlacesPage,
   EventDetailsPage,
   EditEventPage,
 } from '@/pages';
