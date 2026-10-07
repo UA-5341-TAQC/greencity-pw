@@ -1,2 +1,0 @@
-"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","10012","Verify API authentication returns valid session data","api","Wed Oct 07 13:30:07 UTC 2026","failed","Wed Oct 07 13:30:17 UTC 2026","API - Authentication","api/auth-sign-in.spec.ts","",""
