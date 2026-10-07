@@ -63,6 +63,10 @@ export const test = baseTest.extend<PageFixtures>({
     await use(new UpdatePhotoModal(page));
   },
 
+  eventsPage: async ({ page }, use): Promise<void> => {
+    await use(new EventsPage(page));
+  },
+
   signUpModal: async ({ page }, use): Promise<void> => {
     await use(new SignUpModal(page));
   },
@@ -121,10 +125,6 @@ export const test = baseTest.extend<PageFixtures>({
 
   ecoNewsCreatePreviewPage: async ({ page }, use): Promise<void> => {
     await use(new CreateNewsPreviewPage(page));
-  },
-
-  eventsPage: async ({ page }, use): Promise<void> => {
-    await use(new EventsPage(page));
   },
 
   eventDetailsPage: async ({ page }, use): Promise<void> => {
