@@ -19,4 +19,12 @@ export class PlacesSearchComponent extends BaseComponent {
   async fillLocation(value: string): Promise<void> {
     await this.locationInput.fill(value);
   }
+
+  async isSearchVisible(): Promise<boolean> {
+    return await this.searchInput.isVisible();
+  }
+
+  async getSearchValue(): Promise<string> {
+    return await this.searchInput.inputValue();
+  }
 }
