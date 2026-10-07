@@ -8,13 +8,14 @@ import { CancelWarningModal } from '@/modals/cancel-warning-modal';
 
 /**
  * Edit News page.
- * Contains fields and controls for creating a new news article.
+ * Contains fields and controls for editing an existing news article.
  */
 export class EditNewsPage extends BasePage {
   protected readonly pageTitle: Locator;
 
-  protected readonly titleInput: Locator;
-  protected readonly titleInfo: Locator;
+  readonly titleBlock: Locator;
+  readonly titleInput: Locator;
+  readonly titleInfo: Locator;
 
   readonly tagSelector: TagSelectorComponent;
   readonly cancelModal: CancelWarningModal;
@@ -35,7 +36,7 @@ export class EditNewsPage extends BasePage {
 
   protected readonly cancelButton: Locator;
   protected readonly previewButton: Locator;
-  protected readonly editButton: Locator;
+  readonly editButton: Locator;
 
   constructor(page: Page, language: Language = Language.En) {
     super(page);
@@ -44,6 +45,7 @@ export class EditNewsPage extends BasePage {
 
     this.pageTitle = page.locator('h2.title-header', { hasText: 'Edit news' });
 
+    this.titleBlock = page.locator('div.title-block');
     this.titleInput = page.locator('textarea[formcontrolname="title"]');
     this.titleInfo = page.locator('div.title-block span.field-info');
 

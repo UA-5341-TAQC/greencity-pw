@@ -4,6 +4,7 @@ export * from './create-news/create-news-preview-page';
 export * from './eco-news-details.page';
 export * from './eco-news.page';
 export * from './edit-event-page';
+export * from './edit-news-page';
 export * from './edit-profile-page';
 export * from './event-details-page';
 export * from './events-page';
