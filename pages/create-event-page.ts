@@ -2,12 +2,14 @@ import type { Locator, Page } from '@playwright/test';
 import BasePage from '@/pages/base-page';
 
 export class CreateEventPage extends BasePage {
+  readonly titleCounter: Locator;
+  readonly titleValidationError: Locator;
   readonly titleInput: Locator;
   readonly titleField: Locator;
   readonly durationSelect: Locator;
-  private readonly economicTag: Locator;
-  private readonly socialTag: Locator;
-  private readonly environmentalTag: Locator;
+  readonly economicTag: Locator;
+  readonly socialTag: Locator;
+  readonly environmentalTag: Locator;
   readonly eventTypeSelect: Locator;
   readonly inviteSelect: Locator;
   readonly description: Locator;
@@ -17,8 +19,8 @@ export class CreateEventPage extends BasePage {
   readonly allDayCheckbox: Locator;
   readonly placeCheckbox: Locator;
   readonly onlineCheckbox: Locator;
-  private readonly placeInput: Locator;
-  private readonly onlineLinkInput: Locator;
+  readonly placeInput: Locator;
+  readonly onlineLinkInput: Locator;
   readonly previewButton: Locator;
   readonly publishButton: Locator;
   readonly cancelButton: Locator;
@@ -32,6 +34,10 @@ export class CreateEventPage extends BasePage {
     super(page);
 
     this.titleInput = page.locator('input[formcontrolname="title"]');
+    this.titleCounter = page.getByText(/^\s*\d+\s*\/\s*70\s*$/);
+    this.titleValidationError = page.getByText('Enter a title up to and including 70 characters', {
+      exact: true,
+    });
     this.titleField = page.locator('mat-form-field').filter({ has: this.titleInput }).first();
     this.durationSelect = page.locator('.duration-wrapper mat-select[formcontrolname="duration"]');
     this.economicTag = page.getByRole('option', { name: 'Economic' });
@@ -71,8 +77,46 @@ export class CreateEventPage extends BasePage {
     await this.description.waitFor({ state: 'visible' });
   }
 
+  async focusTitle(): Promise<void> {
+    await this.page
+      .locator('mat-form-field')
+      .filter({ has: this.titleInput })
+      .locator('mat-label')
+      .click();
+  }
+
+  async focusDescription(): Promise<void> {
+    await this.description.click();
+  }
+
+  async isTitleFocused(): Promise<boolean> {
+    return this.titleInput.evaluate((element) => element === document.activeElement);
+  }
+
+  async isDescriptionFocused(): Promise<boolean> {
+    return this.description.evaluate((element) => element === document.activeElement);
+  }
+
   async fillTitle(title: string): Promise<void> {
     await this.titleInput.fill(title);
+  }
+
+  async getTitle(): Promise<string> {
+    return this.titleInput.inputValue();
+  }
+
+  async getTitleCounter(): Promise<string> {
+    const text = await this.titleCounter.innerText();
+    return text.replace(/\s*\/\s*/, ' / ').trim();
+  }
+
+  async isTitleValidationErrorVisible(): Promise<boolean> {
+    return this.titleValidationError.isVisible();
+  }
+
+  async isTitleInvalid(): Promise<boolean> {
+    const classes = (await this.titleInput.getAttribute('class'))?.split(/\s+/) ?? [];
+    return classes.includes('ng-invalid');
   }
 
   async selectDuration(duration: string): Promise<void> {

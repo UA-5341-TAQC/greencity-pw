@@ -8,8 +8,8 @@ import {
   EcoNewsDetailsPage,
   CreateNewsPage,
   CreateNewsPreviewPage,
-  PlacesPage,
   EventsPage,
+  PlacesPage,
   EventDetailsPage,
   EditEventPage,
   EditNewsPage,
@@ -127,10 +127,6 @@ export const test = baseTest.extend<PageFixtures>({
 
   ecoNewsCreatePreviewPage: async ({ page }, use): Promise<void> => {
     await use(new CreateNewsPreviewPage(page));
-  },
-
-  eventsPage: async ({ page }, use): Promise<void> => {
-    await use(new EventsPage(page));
   },
 
   eventDetailsPage: async ({ page }, use): Promise<void> => {
