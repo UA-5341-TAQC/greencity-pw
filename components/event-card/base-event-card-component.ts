@@ -58,6 +58,40 @@ export abstract class BaseEventCardComponent extends BaseComponent {
     await this.bookmarkButton.click();
   }
 
+  /** Returns the bookmark button's rendered styles to verify its selected state */
+  async getBookmarkButtonState(): Promise<string> {
+    return await this.bookmarkButton.evaluate((element) => {
+      const summarize = (item: Element | null) => {
+        if (!item) return null;
+
+        const styles = (pseudo: string) => {
+          const style = getComputedStyle(item, pseudo);
+          return [
+            style.backgroundImage,
+            style.backgroundPosition,
+            style.backgroundColor,
+            style.color,
+            style.opacity,
+            style.content,
+          ];
+        };
+
+        return {
+          html: item.outerHTML,
+          attributes: Array.from(item.attributes).map(({ name, value }) => [name, value]),
+          style: styles(''),
+          before: styles('::before'),
+          after: styles('::after'),
+        };
+      };
+
+      return JSON.stringify({
+        button: summarize(element),
+        parent: summarize(element.parentElement),
+      });
+    });
+  }
+
   /** Checks whether the event image is visible */
   async isImageVisible(): Promise<boolean> {
     return await this.image.isVisible();
