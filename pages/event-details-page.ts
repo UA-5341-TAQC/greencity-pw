@@ -25,6 +25,8 @@ export class EventDetailsPage extends BasePage {
   private readonly shareButtons: Locator;
 
   public readonly comments: CommentsComponent;
+  private readonly likedIcon: Locator;
+  private readonly unlikedIcon: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -53,6 +55,8 @@ export class EventDetailsPage extends BasePage {
     this.likeButton = page.locator('.date-author .like-wr');
     this.likesCount = this.likeButton.locator('.numerosity-likes');
     this.shareButtons = page.locator('.event-header .share-buttons');
+    this.likedIcon = page.locator('img.event-like[src*="comments/liked.png"]');
+    this.unlikedIcon = page.locator('img.event-like[src*="comments/like.png"]');
   }
 
   async navigateToEventDetails(eventId: string | number): Promise<void> {
@@ -182,5 +186,42 @@ export class EventDetailsPage extends BasePage {
     name: 'Share' | 'Share on Twitter' | 'Share on LinkedIn' | 'Share on Facebook'
   ): Promise<boolean> {
     return await this.shareButtons.getByRole('img', { name, exact: true }).isVisible();
+  }
+
+  async clickLike(): Promise<void> {
+    await this.likeButton.click();
+  }
+
+  async isLikeEnabled(): Promise<boolean> {
+    return await this.likeButton.isEnabled();
+  }
+
+  async isLikeVisible(): Promise<boolean> {
+    return await this.likeButton.isVisible();
+  }
+
+  async getLikeCount(): Promise<number> {
+    await this.likesCount.waitFor({ state: 'visible' });
+    const rawText = (await this.likesCount.textContent()) ?? '';
+    const digitsOnly = rawText.replace(/\D/g, '');
+    return digitsOnly ? Number(digitsOnly) : 0;
+  }
+
+  async isCountLikeVisible(): Promise<boolean> {
+    return await this.likesCount.isVisible();
+  }
+
+  async getLikeState(): Promise<'liked' | 'unliked' | 'unknown'> {
+    if (await this.likedIcon.isVisible()) {
+      return 'liked';
+    }
+    if (await this.unlikedIcon.isVisible()) {
+      return 'unliked';
+    }
+    return 'unknown';
+  }
+
+  async isLiked(): Promise<boolean> {
+    return await this.likedIcon.isVisible();
   }
 }

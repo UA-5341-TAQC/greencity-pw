@@ -19,6 +19,7 @@ export class EcoNewsDetailsPage extends BasePage {
   private readonly commentInput: Locator;
   private readonly submitCommentButton: Locator;
   private readonly commentsCounter: Locator;
+  private readonly editButton: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -41,6 +42,7 @@ export class EcoNewsDetailsPage extends BasePage {
     this.commentInput = page.locator('app-comment-textarea');
     this.submitCommentButton = page.locator('button.primary-global-button');
     this.commentsCounter = page.locator('app-comments-container .counter');
+    this.editButton = page.locator('.edit-news');
   }
 
   async navigateToNewsDetails(newsId: string | number): Promise<void> {
@@ -175,5 +177,20 @@ export class EcoNewsDetailsPage extends BasePage {
         return false;
       }
     });
+  }
+
+  async clickEditButton(): Promise<void> {
+    await this.editButton.click();
+  }
+
+  async getNewsIdFromUrl(): Promise<number> {
+    const url = this.page.url();
+    const match = url.match(/(?:\/news\/|id=)(\d+)/);
+
+    if (!match) {
+      throw new Error(`Couldn't find the id in current url: ${url}`);
+    }
+
+    return parseInt(match[1], 10);
   }
 }
