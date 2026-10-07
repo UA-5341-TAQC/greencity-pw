@@ -65,7 +65,7 @@ test.describe('TC-30 Verify that a user can filter events by city', () => {
     expect(filteredCount).toBeLessThanOrEqual(initialCount);
 
     const renderedCards = await eventsPage.getAllGridEventCards();
-    expect(renderedCards.length).toBe(filteredCount);
+    expect(renderedCards).toHaveLength(filteredCount);
     for (const card of renderedCards) {
       expect(await card.getLocation()).toContain(cityName);
     }

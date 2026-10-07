@@ -1,18 +1,19 @@
-import { test, type Page, type Locator } from '@playwright/test';
+import { test, type Page, type Locator, expect } from '@playwright/test';
 import BasePage from '@/pages/base-page';
 import env from '@/config/env';
+import { EcoNewsDetailsRelatedNewsComponent } from '@/components/eco-news-details-related-news-component';
 
 export class EcoNewsDetailsPage extends BasePage {
-  private readonly title: Locator;
-  private readonly content: Locator;
+  readonly title: Locator;
+  readonly content: Locator;
   private readonly coverImage: Locator;
   private readonly authorName: Locator;
   private readonly authorAvatar: Locator;
   private readonly publicationDate: Locator;
   private readonly tags: Locator;
   private readonly backButton: Locator;
-  private readonly relatedNewsHeading: Locator;
-  private readonly relatedNewsItems: Locator;
+  private readonly editNewsButton: Locator;
+  readonly relatedNews: EcoNewsDetailsRelatedNewsComponent;
   private readonly likeButton: Locator;
   private readonly likesCount: Locator;
   private readonly commentInput: Locator;
@@ -22,7 +23,6 @@ export class EcoNewsDetailsPage extends BasePage {
   constructor(page: Page) {
     super(page);
 
-    // verified via DevTools against the live site
     this.title = page.locator('.news-title');
     this.content = page.locator('.news-text .ql-editor');
     this.coverImage = page.locator('.news-image-img').first();
@@ -31,8 +31,11 @@ export class EcoNewsDetailsPage extends BasePage {
     this.publicationDate = page.locator('.news-info-date').first();
     this.tags = page.locator('.tags div.tags-item');
     this.backButton = page.locator('div.back-button, a[class*="back"]');
-    this.relatedNewsHeading = page.locator('app-eco-news-widget p');
-    this.relatedNewsItems = page.locator('app-eco-news-widget .gallery-view-active li');
+    this.editNewsButton = page.getByText('Edit news', { exact: true });
+    this.relatedNews = new EcoNewsDetailsRelatedNewsComponent(
+      page.locator('app-eco-news-widget'),
+      page
+    );
     this.likeButton = page.locator('img.news_like');
     this.likesCount = page.locator('.numerosity_likes');
     this.commentInput = page.locator('app-comment-textarea');
@@ -97,7 +100,8 @@ export class EcoNewsDetailsPage extends BasePage {
 
   async getTagTexts(): Promise<string[]> {
     return await test.step('Get tag texts', async () => {
-      return this.tags.allInnerTexts();
+      const texts = await this.tags.allInnerTexts();
+      return texts.map((text) => text.trim());
     });
   }
 
@@ -113,19 +117,30 @@ export class EcoNewsDetailsPage extends BasePage {
     });
   }
 
-  async isRelatedNewsWidgetVisible(): Promise<boolean> {
-    return this.relatedNewsHeading.isVisible();
-  }
-
-  async getRelatedNewsCount(): Promise<number> {
-    return await test.step('Get related news count', async () => {
-      return this.relatedNewsItems.count();
+  async clickEditNews(): Promise<void> {
+    await test.step('Click Edit news', async () => {
+      await this.editNewsButton.click();
     });
   }
 
-  async openRelatedNewsItem(index: number): Promise<void> {
-    await test.step(`Open related news item at index ${index}`, async () => {
-      await this.relatedNewsItems.nth(index).click();
+  async isTagVisible(tagName: string): Promise<boolean> {
+    return await test.step(`Check if the specific tag is visible: ${tagName}`, async () => {
+      return await this.tags.filter({ hasText: tagName }).first().isVisible();
+    });
+  }
+
+  async checkAllTagsVisible(): Promise<void> {
+    await test.step('Check that all tags are visible', async () => {
+      const count = await this.tags.count();
+      for (let i = 0; i < count; i++) {
+        await expect(this.tags.nth(i)).toBeVisible();
+      }
+    });
+  }
+
+  async tagsCount(): Promise<number> {
+    return await test.step('Tags count', async () => {
+      return await this.tags.count();
     });
   }
 
@@ -149,5 +164,16 @@ export class EcoNewsDetailsPage extends BasePage {
 
   async getCommentsCountText(): Promise<string> {
     return (await this.commentsCounter.innerText()).trim();
+  }
+
+  async isBackButtonVisible(): Promise<boolean> {
+    return await test.step('Check if back button is visible', async () => {
+      try {
+        await this.backButton.waitFor({ state: 'visible', timeout: env.SHORT_TIMEOUT });
+        return await this.backButton.isVisible();
+      } catch {
+        return false;
+      }
+    });
   }
 }
