@@ -65,7 +65,7 @@ export class EditEventPage extends BasePage {
 
     this.descriptionEditor = page.locator('quill-editor .ql-editor');
 
-      this.pictures = new EventImageUploadComponent(page.locator('app-images-container'), page);
+    this.pictures = new EventImageUploadComponent(page.locator('app-images-container'), page);
     this.imageCounter = page.locator(
       'div.d-flex.flex-row.justify-content-between mat-label.xs-text'
     );
