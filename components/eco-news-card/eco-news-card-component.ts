@@ -8,6 +8,7 @@ export abstract class EcoNewsCardComponent extends BaseComponent {
   protected abstract readonly title: Locator;
   protected abstract readonly description: Locator;
   protected abstract readonly favouriteButton: Locator;
+  protected abstract readonly favouriteActiveFlag: Locator;
 
   protected constructor(rootLocator: Locator, page?: Page) {
     super(rootLocator, page);
@@ -43,5 +44,24 @@ export abstract class EcoNewsCardComponent extends BaseComponent {
 
   async isFavouriteButtonVisible(): Promise<boolean> {
     return await this.favouriteButton.isVisible();
+  }
+
+  getFavouriteActiveFlag(): Locator {
+    return this.favouriteActiveFlag;
+  }
+
+  async clickFavouriteButton(): Promise<void> {
+    await this.favouriteButton.click();
+  }
+
+  async isFavourite(): Promise<boolean> {
+    return await this.getFavouriteActiveFlag().isVisible();
+  }
+
+  async removeFromFavourite(): Promise<void> {
+    if (await this.isFavourite()) {
+      await this.clickFavouriteButton();
+      await this.favouriteActiveFlag.waitFor({ state: 'hidden' });
+    }
   }
 }

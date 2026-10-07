@@ -75,11 +75,6 @@ export class CreateEventPage extends BasePage {
     await this.titleInput.fill(title);
   }
 
-  async waitForCreateEventPage(): Promise<void> {
-    await this.titleInput.waitFor({ state: 'visible' });
-    await this.description.waitFor({ state: 'visible' });
-  }
-
   async selectDuration(duration: string): Promise<void> {
     await this.durationSelect.click();
     await this.page.getByRole('option', { name: duration }).click();

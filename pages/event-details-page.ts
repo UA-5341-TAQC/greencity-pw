@@ -1,5 +1,6 @@
 import type { Locator, Page } from '@playwright/test';
 import BasePage from '@/pages/base-page';
+import { CommentsComponent } from '@/components';
 
 export class EventDetailsPage extends BasePage {
   protected readonly backButton: Locator;
@@ -17,6 +18,13 @@ export class EventDetailsPage extends BasePage {
   private readonly cancelRequestButton: Locator;
   private readonly participantsCount: Locator;
   private readonly participantAvatars: Locator;
+  protected readonly commentsSection: Locator;
+  private readonly eventImage: Locator;
+  private readonly likeButton: Locator;
+  private readonly likesCount: Locator;
+  private readonly shareButtons: Locator;
+
+  public readonly comments: CommentsComponent;
 
   constructor(page: Page) {
     super(page);
@@ -39,6 +47,12 @@ export class EventDetailsPage extends BasePage {
     });
     this.participantsCount = page.locator('.event-participants-count');
     this.participantAvatars = page.locator('.event-participants-avatar');
+    this.commentsSection = page.locator('app-comments-container.event');
+    this.comments = new CommentsComponent(this.commentsSection, page);
+    this.eventImage = page.locator('.main-image img.image-active');
+    this.likeButton = page.locator('.date-author .like-wr');
+    this.likesCount = this.likeButton.locator('.numerosity-likes');
+    this.shareButtons = page.locator('.event-header .share-buttons');
   }
 
   async navigateToEventDetails(eventId: string | number): Promise<void> {
@@ -136,5 +150,37 @@ export class EventDetailsPage extends BasePage {
 
   async waitForParticipantAvatars(): Promise<void> {
     await this.participantAvatars.first().waitFor({ state: 'visible' });
+  }
+
+  async scrollToComments(): Promise<void> {
+    await this.commentsSection.scrollIntoViewIfNeeded();
+  }
+
+  async isEventImageVisible(): Promise<boolean> {
+    return await this.eventImage.isVisible();
+  }
+
+  async isEventImageLoaded(): Promise<boolean> {
+    return await this.eventImage.evaluate(
+      (img: HTMLImageElement) => img.complete && img.naturalWidth > 0
+    );
+  }
+
+  async isBackButtonVisible(): Promise<boolean> {
+    return await this.backButton.isVisible();
+  }
+
+  async isLikeButtonVisible(): Promise<boolean> {
+    return await this.likeButton.isVisible();
+  }
+
+  async isLikesCountVisible(): Promise<boolean> {
+    return await this.likesCount.isVisible();
+  }
+
+  async isShareButtonVisible(
+    name: 'Share' | 'Share on Twitter' | 'Share on LinkedIn' | 'Share on Facebook'
+  ): Promise<boolean> {
+    return await this.shareButtons.getByRole('img', { name, exact: true }).isVisible();
   }
 }
