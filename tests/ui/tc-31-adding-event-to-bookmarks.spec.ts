@@ -11,6 +11,7 @@ test.describe('TC-31 Verify adding an event to the bookmarks', () => {
 
       await expect(authenticatedPage).toHaveURL(/#\/greenCity\/events\/?$/);
     });
+
     const waitForEventCountToMatchCards = async () => {
       await expect
         .poll(async () => {
