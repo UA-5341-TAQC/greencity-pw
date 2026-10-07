@@ -8,9 +8,9 @@ import {
   EcoNewsDetailsPage,
   CreateNewsPage,
   CreateNewsPreviewPage,
+  EventDetailsPage,
   EventsPage,
   PlacesPage,
-  EventDetailsPage,
   EditEventPage,
 } from '@/pages';
 
@@ -38,11 +38,11 @@ type PageFixtures = {
   addPlaceModal: AddPlaceModal;
   ecoNewsPage: EcoNewsPage;
   ecoNewsDetailsPage: EcoNewsDetailsPage;
+  eventDetailsPage: EventDetailsPage;
+  eventsPage: EventsPage;
   authenticatedUser: ProfilePage;
   ecoNewsCreatePage: CreateNewsPage;
   ecoNewsCreatePreviewPage: CreateNewsPreviewPage;
-  eventsPage: EventsPage;
-  eventDetailsPage: EventDetailsPage;
   editEventPage: EditEventPage;
 };
 
@@ -61,10 +61,6 @@ export const test = baseTest.extend<PageFixtures>({
 
   updatePhotoModal: async ({ page }, use): Promise<void> => {
     await use(new UpdatePhotoModal(page));
-  },
-
-  eventsPage: async ({ page }, use): Promise<void> => {
-    await use(new EventsPage(page));
   },
 
   signUpModal: async ({ page }, use): Promise<void> => {
@@ -103,6 +99,14 @@ export const test = baseTest.extend<PageFixtures>({
     await use(new EcoNewsDetailsPage(page));
   },
 
+  eventDetailsPage: async ({ page }, use): Promise<void> => {
+    await use(new EventDetailsPage(page));
+  },
+
+  eventsPage: async ({ page }, use): Promise<void> => {
+    await use(new EventsPage(page));
+  },
+
   authenticatedUser: async ({ page, homePage, signInModal }, use): Promise<void> => {
     await homePage.navigateToHomePage();
     await homePage.waitForHomePage();
@@ -125,10 +129,6 @@ export const test = baseTest.extend<PageFixtures>({
 
   ecoNewsCreatePreviewPage: async ({ page }, use): Promise<void> => {
     await use(new CreateNewsPreviewPage(page));
-  },
-
-  eventDetailsPage: async ({ page }, use): Promise<void> => {
-    await use(new EventDetailsPage(page));
   },
 
   editEventPage: async ({ page }, use): Promise<void> => {
