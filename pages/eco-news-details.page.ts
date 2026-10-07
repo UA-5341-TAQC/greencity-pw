@@ -1,4 +1,4 @@
-import { test, type Page, type Locator } from '@playwright/test';
+import { test, type Page, type Locator, expect } from '@playwright/test';
 import BasePage from '@/pages/base-page';
 import env from '@/config/env';
 
@@ -30,7 +30,7 @@ export class EcoNewsDetailsPage extends BasePage {
     this.authorAvatar = page.locator('[class*="author"] img');
     this.publicationDate = page.locator('.news-info-date').first();
     this.tags = page.locator('.tags div.tags-item');
-    this.backButton = page.locator('div.back-button, a[class*="back"]');
+    this.backButton = page.getByRole('link', { name: 'Back to News' });
     this.relatedNewsHeading = page.locator('app-eco-news-widget p');
     this.relatedNewsItems = page.locator('app-eco-news-widget .gallery-view-active li');
     this.likeButton = page.locator('img.news_like');
@@ -97,7 +97,8 @@ export class EcoNewsDetailsPage extends BasePage {
 
   async getTagTexts(): Promise<string[]> {
     return await test.step('Get tag texts', async () => {
-      return this.tags.allInnerTexts();
+      const texts = await this.tags.allInnerTexts();
+      return texts.map((text) => text.trim());
     });
   }
 
@@ -129,6 +130,27 @@ export class EcoNewsDetailsPage extends BasePage {
     });
   }
 
+  async isTagVisible(tagName: string): Promise<boolean> {
+    return await test.step(`Check if the specific tag is visible: ${tagName}`, async () => {
+      return await this.tags.filter({ hasText: tagName }).first().isVisible();
+    });
+  }
+
+  async checkAllTagsVisible(): Promise<void> {
+    await test.step('Check that all tags are visible', async () => {
+      const count = await this.tags.count();
+      for (let i = 0; i < count; i++) {
+        await expect(this.tags.nth(i)).toBeVisible();
+      }
+    });
+  }
+
+  async tagsCount(): Promise<number> {
+    return await test.step('Tags count', async () => {
+      return await this.tags.count();
+    });
+  }
+
   async clickLike(): Promise<void> {
     await this.likeButton.click();
   }
@@ -149,5 +171,16 @@ export class EcoNewsDetailsPage extends BasePage {
 
   async getCommentsCountText(): Promise<string> {
     return (await this.commentsCounter.innerText()).trim();
+  }
+
+  async isBackButtonVisible(): Promise<boolean> {
+    return await test.step('Check if back button is visible', async () => {
+      try {
+        await this.backButton.waitFor({ state: 'visible', timeout: env.SHORT_TIMEOUT });
+        return await this.backButton.isVisible();
+      } catch {
+        return false;
+      }
+    });
   }
 }

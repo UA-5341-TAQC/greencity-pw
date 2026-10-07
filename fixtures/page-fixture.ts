@@ -123,10 +123,6 @@ export const test = baseTest.extend<PageFixtures>({
     await use(new CreateNewsPreviewPage(page));
   },
 
-  eventsPage: async ({ page }, use): Promise<void> => {
-    await use(new EventsPage(page));
-  },
-
   eventDetailsPage: async ({ page }, use): Promise<void> => {
     await use(new EventDetailsPage(page));
   },

@@ -9,20 +9,24 @@ export class CreateEventPage extends BasePage {
   private readonly economicTag: Locator;
   private readonly socialTag: Locator;
   private readonly environmentalTag: Locator;
-  private readonly eventTypeSelect: Locator;
-  private readonly inviteSelect: Locator;
-  private readonly description: Locator;
-  private readonly dayInput: Locator;
-  private readonly startTimeInput: Locator;
-  private readonly finishTimeInput: Locator;
-  private readonly allDayCheckbox: Locator;
-  private readonly placeCheckbox: Locator;
-  private readonly onlineCheckbox: Locator;
+  readonly eventTypeSelect: Locator;
+  readonly inviteSelect: Locator;
+  readonly description: Locator;
+  readonly dayInput: Locator;
+  readonly startTimeInput: Locator;
+  readonly finishTimeInput: Locator;
+  readonly allDayCheckbox: Locator;
+  readonly placeCheckbox: Locator;
+  readonly onlineCheckbox: Locator;
   private readonly placeInput: Locator;
   private readonly onlineLinkInput: Locator;
-  private readonly previewButton: Locator;
-  private readonly publishButton: Locator;
-  private readonly cancelButton: Locator;
+  readonly previewButton: Locator;
+  readonly publishButton: Locator;
+  readonly cancelButton: Locator;
+  readonly descriptionReminder: Locator;
+  readonly pictureSection: Locator;
+  readonly pictureUploadHint: Locator;
+  readonly initiativeTypeLabels: Locator;
   readonly descriptionValidationMessage: Locator;
 
   constructor(page: Page) {
@@ -33,6 +37,7 @@ export class CreateEventPage extends BasePage {
     this.titleValidationError = page.getByText('Enter a title up to and including 70 characters', {
       exact: true,
     });
+    this.titleField = page.locator('mat-form-field').filter({ has: this.titleInput }).first();
     this.durationSelect = page.locator('.duration-wrapper mat-select[formcontrolname="duration"]');
     this.economicTag = page.getByRole('option', { name: 'Economic' });
     this.socialTag = page.getByRole('option', { name: 'Social' });
@@ -54,6 +59,15 @@ export class CreateEventPage extends BasePage {
     this.previewButton = submitContainer.getByRole('button', { name: 'Preview' });
     this.publishButton = submitContainer.getByRole('button', { name: 'Publish' });
     this.cancelButton = submitContainer.getByRole('button', { name: 'Cancel' });
+    this.descriptionReminder = page.getByText('Must be minimum 10 and maximum 63 206 symbols', {
+      exact: true,
+    });
+    this.pictureSection = page.getByText('Picture', { exact: true });
+    this.pictureUploadHint = page.getByText(
+      'Upload only PNG or JPG. File size must be less than 10MB',
+      { exact: true }
+    );
+    this.initiativeTypeLabels = page.locator('mat-chip:visible, mat-chip-option:visible');
     this.descriptionValidationMessage = page.getByText(/Not enough characters\. Left:/i).first();
   }
 
