@@ -52,6 +52,17 @@ export class CityFilterModal extends BaseModal {
     return (await this.cityTags.filter({ hasText: new RegExp(`^${cityName}$`) }).count()) > 0;
   }
 
+  /** Selects a city only when it is not already present in the modal. */
+  async ensureCitySelected(cityName: string, cityOption: string): Promise<void> {
+    if (await this.isCitySelected(cityName)) {
+      return;
+    }
+
+    await this.fillCitySearch(cityName);
+    await this.citySuggestions.first().waitFor({ state: 'visible' });
+    await this.selectFirstCitySuggestion(cityOption);
+  }
+
   /** Removes a selected city tag by its name  */
   async removeCity(cityName: string): Promise<void> {
     await this.cityTags

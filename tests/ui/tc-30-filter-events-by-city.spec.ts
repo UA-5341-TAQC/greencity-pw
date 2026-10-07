@@ -11,10 +11,8 @@ test.describe('TC-30 Verify that a user can filter events by city', () => {
 
     await eventsPage.navigateToEventsPage();
     await eventsPage.waitForEventsPage();
-    if (await eventsPage.filters.isResetButtonEnabled()) {
-      await eventsPage.filters.resetAll();
-      await expect(eventsPage.itemsFound).toBeVisible();
-    }
+    await eventsPage.filters.resetAllIfEnabled();
+    await expect(eventsPage.itemsFound).toBeVisible();
     const initialCount = await eventsPage.getItemsFoundCount();
     expect(initialCount).toBeGreaterThan(0);
 
@@ -30,11 +28,7 @@ test.describe('TC-30 Verify that a user can filter events by city', () => {
     await expect(modalRoot).toBeVisible();
     await expect(modalRoot.getByRole('combobox')).toBeVisible();
 
-    if (!(await modal.isCitySelected(cityName))) {
-      await modal.fillCitySearch(cityName);
-      await expect(authenticatedPage.getByRole('listbox')).toBeVisible();
-      await modal.selectFirstCitySuggestion(cityOption);
-    }
+    await modal.ensureCitySelected(cityName, cityOption);
     await expect(modalRoot.locator('div.city-tag').filter({ hasText: cityName })).toBeVisible();
     await modal.clickAddSelectedCities();
     await expect(modalRoot).toBeHidden();

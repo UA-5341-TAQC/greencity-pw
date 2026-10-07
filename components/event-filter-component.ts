@@ -173,6 +173,15 @@ export class EventFilterComponent extends BaseComponent {
     });
   }
 
+  /** Resets active filters without attempting to click a disabled reset button. */
+  async resetAllIfEnabled(): Promise<void> {
+    await test.step('Reset filters when any are active', async () => {
+      if (await this.resetButton.isEnabled()) {
+        await this.resetButton.click();
+      }
+    });
+  }
+
   /** Checks whether the "Reset all" button is enabled */
   async isResetButtonEnabled(): Promise<boolean> {
     return await test.step('Check if reset button is enabled', async () => {
