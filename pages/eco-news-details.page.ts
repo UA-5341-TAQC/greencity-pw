@@ -1,18 +1,19 @@
 import { test, type Page, type Locator, expect } from '@playwright/test';
 import BasePage from '@/pages/base-page';
 import env from '@/config/env';
+import { EcoNewsDetailsRelatedNewsComponent } from '@/components/eco-news-details-related-news-component';
 
 export class EcoNewsDetailsPage extends BasePage {
-  private readonly title: Locator;
-  private readonly content: Locator;
+  readonly title: Locator;
+  readonly content: Locator;
   private readonly coverImage: Locator;
   private readonly authorName: Locator;
   private readonly authorAvatar: Locator;
   private readonly publicationDate: Locator;
   private readonly tags: Locator;
   private readonly backButton: Locator;
-  private readonly relatedNewsHeading: Locator;
-  private readonly relatedNewsItems: Locator;
+  private readonly editNewsButton: Locator;
+  readonly relatedNews: EcoNewsDetailsRelatedNewsComponent;
   private readonly likeButton: Locator;
   private readonly likesCount: Locator;
   private readonly commentInput: Locator;
@@ -22,7 +23,6 @@ export class EcoNewsDetailsPage extends BasePage {
   constructor(page: Page) {
     super(page);
 
-    // verified via DevTools against the live site
     this.title = page.locator('.news-title');
     this.content = page.locator('.news-text .ql-editor');
     this.coverImage = page.locator('.news-image-img').first();
@@ -30,9 +30,12 @@ export class EcoNewsDetailsPage extends BasePage {
     this.authorAvatar = page.locator('[class*="author"] img');
     this.publicationDate = page.locator('.news-info-date').first();
     this.tags = page.locator('.tags div.tags-item');
-    this.backButton = page.getByRole('link', { name: 'Back to News' });
-    this.relatedNewsHeading = page.locator('app-eco-news-widget p');
-    this.relatedNewsItems = page.locator('app-eco-news-widget .gallery-view-active li');
+    this.backButton = page.locator('div.back-button, a[class*="back"]');
+    this.editNewsButton = page.getByText('Edit news', { exact: true });
+    this.relatedNews = new EcoNewsDetailsRelatedNewsComponent(
+      page.locator('app-eco-news-widget'),
+      page
+    );
     this.likeButton = page.locator('img.news_like');
     this.likesCount = page.locator('.numerosity_likes');
     this.commentInput = page.locator('app-comment-textarea');
@@ -114,19 +117,9 @@ export class EcoNewsDetailsPage extends BasePage {
     });
   }
 
-  async isRelatedNewsWidgetVisible(): Promise<boolean> {
-    return this.relatedNewsHeading.isVisible();
-  }
-
-  async getRelatedNewsCount(): Promise<number> {
-    return await test.step('Get related news count', async () => {
-      return this.relatedNewsItems.count();
-    });
-  }
-
-  async openRelatedNewsItem(index: number): Promise<void> {
-    await test.step(`Open related news item at index ${index}`, async () => {
-      await this.relatedNewsItems.nth(index).click();
+  async clickEditNews(): Promise<void> {
+    await test.step('Click Edit news', async () => {
+      await this.editNewsButton.click();
     });
   }
 
