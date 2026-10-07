@@ -1,18 +1,9 @@
 import { test, type APIRequestContext } from '@playwright/test';
 import env from '@/config/env';
 
-export interface AuthSessionData {
-  userId: number;
-  accessToken: string;
-  refreshToken: string;
-  name: string;
-  ownRegistrations?: boolean;
-}
+import type { AuthSessionData, SignInCredentials } from '@/types';
 
-export interface SignInCredentials {
-  email?: string;
-  password?: string;
-}
+export type { AuthSessionData, SignInCredentials };
 
 /**
  * Performs authentication via the GreenCity User REST API.
