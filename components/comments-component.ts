@@ -231,4 +231,9 @@ export class CommentsComponent extends BaseComponent {
   async clickNextCommentsPage(): Promise<void> {
     await this.nextCommentsPageButton.click();
   }
+
+  /** Checks whether the Comment button is visible. */
+  async isSubmitCommentButtonVisible(): Promise<boolean> {
+    return await this.submitCommentButton.isVisible();
+  }
 }

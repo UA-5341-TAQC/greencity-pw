@@ -1,6 +1,7 @@
 import { test, type Page, type Locator } from '@playwright/test';
 import BasePage from '@/pages/base-page';
 import { EcoNewsListCardComponent } from '@/components/eco-news-card/eco-news-list-card-component';
+import { EcoNewsTableCardComponent } from '@/components';
 
 export class EcoNewsPage extends BasePage {
   public readonly tableViewButton: Locator;
@@ -44,7 +45,6 @@ export class EcoNewsPage extends BasePage {
   async waitForEcoNewsPage(): Promise<void> {
     await test.step('EcoNews: wait for Eco News page to load', async () => {
       await this.waitForPageLoad();
-      await this.newsCards.first().waitFor({ state: 'visible' });
     });
   }
 
@@ -122,12 +122,38 @@ export class EcoNewsPage extends BasePage {
     await this.searchInput.fill(query);
   }
 
+  async typeSearchText(text: string): Promise<void> {
+    await this.searchInput.pressSequentially(text);
+  }
+
   async clearSearch(): Promise<void> {
     await this.searchInput.clear();
   }
 
+  async waitForSearchResults(): Promise<void> {
+    await this.newsCards.first().waitFor({ state: 'visible' });
+  }
+
   async clickBookmark(): Promise<void> {
     await this.bookmarkButton.click();
+  }
+
+  getTableNewsCard(index: number): EcoNewsTableCardComponent {
+    return new EcoNewsTableCardComponent(this.newsCards.nth(index), this.page);
+  }
+
+  getNewsCardByTitle(title: string): EcoNewsTableCardComponent {
+    const card = this.newsCards.filter({
+      has: this.page.getByRole('heading', { name: title, exact: true }),
+    });
+    return new EcoNewsTableCardComponent(card, this.page);
+  }
+
+  getNewsCardByHref(href: string): EcoNewsTableCardComponent {
+    const card = this.newsCards.filter({
+      has: this.page.locator(`a.link[href="${href}"]`),
+    });
+    return new EcoNewsTableCardComponent(card, this.page);
   }
 }
 export default EcoNewsPage;

@@ -382,4 +382,9 @@ export class CommentItemComponent extends BaseComponent {
   getReply(index: number): CommentItemComponent {
     return new CommentItemComponent(this.replyItems.nth(index), this.page);
   }
+
+  /** Checks whether the Reply submit button is visible. */
+  async isSubmitReplyButtonVisible(): Promise<boolean> {
+    return await this.submitReplyButton.isVisible();
+  }
 }
