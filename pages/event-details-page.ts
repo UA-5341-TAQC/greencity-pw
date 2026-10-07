@@ -22,8 +22,6 @@ export class EventDetailsPage extends BasePage {
   private readonly shareButtons: Locator;
 
   public readonly comments: CommentsComponent;
-  private readonly likeIcon: Locator;
-  private readonly likesCount: Locator;
   private readonly likedIcon: Locator;
   private readonly unlikedIcon: Locator;
 
@@ -48,10 +46,8 @@ export class EventDetailsPage extends BasePage {
     this.likeButton = page.locator('.date-author .like-wr');
     this.likesCount = this.likeButton.locator('.numerosity-likes');
     this.shareButtons = page.locator('.event-header .share-buttons');
-    this.likeIcon = page.getByRole('img', { name: 'like' });
     this.likedIcon = page.locator('img.event-like[src*="comments/liked.png"]');
     this.unlikedIcon = page.locator('img.event-like[src*="comments/like.png"]');
-    this.likesCount = page.locator('.numerosity-likes');
   }
 
   async navigateToEventDetails(eventId: string | number): Promise<void> {
@@ -155,15 +151,15 @@ export class EventDetailsPage extends BasePage {
   }
 
   async clickLike(): Promise<void> {
-    await this.likeIcon.click();
+    await this.likeButton.click();
   }
 
   async isLikeEnabled(): Promise<boolean> {
-    return await this.likeIcon.isEnabled();
+    return await this.likeButton.isEnabled();
   }
 
   async isLikeVisible(): Promise<boolean> {
-    return await this.likeIcon.isVisible();
+    return await this.likeButton.isVisible();
   }
 
   async getLikeCount(): Promise<number> {
@@ -174,7 +170,7 @@ export class EventDetailsPage extends BasePage {
   }
 
   async isCountLikeVisible(): Promise<boolean> {
-    return await this.likeIcon.isVisible();
+    return await this.likesCount.isVisible();
   }
 
   async getLikeState(): Promise<'liked' | 'unliked' | 'unknown'> {
