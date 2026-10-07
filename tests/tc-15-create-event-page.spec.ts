@@ -88,14 +88,26 @@ test.describe('Create Event Page', () => {
         createEventPageAny.pictureUploadHint,
         'Picture upload requirements should be visible'
       ).toBeVisible();
-      await expect(createEventPageAny.cancelButton, 'Cancel button should be visible').toBeVisible();
-      await expect(createEventPageAny.cancelButton, 'Cancel button should be enabled').toBeEnabled();
-      await expect(createEventPageAny.previewButton, 'Preview button should be visible').toBeVisible();
+      await expect(
+        createEventPageAny.cancelButton,
+        'Cancel button should be visible'
+      ).toBeVisible();
+      await expect(
+        createEventPageAny.cancelButton,
+        'Cancel button should be enabled'
+      ).toBeEnabled();
+      await expect(
+        createEventPageAny.previewButton,
+        'Preview button should be visible'
+      ).toBeVisible();
       await expect(
         createEventPageAny.previewButton,
         'Preview button should be disabled'
       ).toBeDisabled();
-      await expect(createEventPageAny.publishButton, 'Publish button should be visible').toBeVisible();
+      await expect(
+        createEventPageAny.publishButton,
+        'Publish button should be visible'
+      ).toBeVisible();
       await expect(
         createEventPageAny.publishButton,
         'Publish button should be disabled'
