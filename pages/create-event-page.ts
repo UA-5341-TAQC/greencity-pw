@@ -31,8 +31,8 @@ export class CreateEventPage extends BasePage {
   readonly pictureUploadHint: Locator;
   readonly initiativeTypeLabels: Locator;
   readonly descriptionValidationMessage: Locator;
-  private readonly datePicker: CalendarDropdownComponent;
-  private readonly datePickerToggle: Locator;
+  readonly datePicker: CalendarDropdownComponent;
+  readonly datePickerToggle: Locator;
   public readonly startTimeError: Locator;
   public readonly finishTimeError: Locator;
   public readonly pictures: EventImageUploadComponent;
