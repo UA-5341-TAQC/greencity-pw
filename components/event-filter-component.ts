@@ -179,4 +179,28 @@ export class EventFilterComponent extends BaseComponent {
       return await this.resetButton.isEnabled();
     });
   }
+
+  /** Checks whether the filter label ("Filter by") is visible */
+  async isTypeDropdownVisible(): Promise<boolean> {
+    return await test.step('Check if type dropwdown is visible', async () => {
+      return await this.typeDropdown.isVisible();
+    });
+  }
+
+  /** Return boolean wheter specific option/-s by enum value is selected */
+  async isSpecificOptionsSelected(...types: EventTypeFilter[]): Promise<boolean> {
+    return await test.step(`Check type filter(s): ${types.join(', ')}`, async () => {
+      const names = types.map((t) => this.i18n.typeOptions[t]);
+
+      for (const name of names) {
+        const option = this.page.locator('mat-option', { hasText: name });
+        const isSelected = (await option.getAttribute('aria-selected')) === 'true';
+
+        if (!isSelected) {
+          return false;
+        }
+      }
+      return true;
+    });
+  }
 }

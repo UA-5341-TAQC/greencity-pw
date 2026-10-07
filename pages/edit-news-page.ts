@@ -4,18 +4,21 @@ import { Language } from '@/types/header.types';
 import { NEWS_I18N } from '@/types/news.i18n';
 import { NewsType } from '@/types/news.types';
 import { TagSelectorComponent } from '@/components/tag-selector-component';
+import { CancelWarningModal } from '@/modals/cancel-warning-modal';
 
 /**
  * Edit News page.
- * Contains fields and controls for creating a new news article.
+ * Contains fields and controls for editing an existing news article.
  */
 export class EditNewsPage extends BasePage {
   protected readonly pageTitle: Locator;
 
-  protected readonly titleInput: Locator;
-  protected readonly titleInfo: Locator;
+  readonly titleBlock: Locator;
+  readonly titleInput: Locator;
+  readonly titleInfo: Locator;
 
   readonly tagSelector: TagSelectorComponent;
+  readonly cancelModal: CancelWarningModal;
 
   protected readonly pictureBox: Locator;
   protected readonly pictureInput: Locator;
@@ -33,7 +36,7 @@ export class EditNewsPage extends BasePage {
 
   protected readonly cancelButton: Locator;
   protected readonly previewButton: Locator;
-  protected readonly editButton: Locator;
+  readonly editButton: Locator;
 
   constructor(page: Page, language: Language = Language.En) {
     super(page);
@@ -42,10 +45,12 @@ export class EditNewsPage extends BasePage {
 
     this.pageTitle = page.locator('h2.title-header', { hasText: 'Edit news' });
 
+    this.titleBlock = page.locator('div.title-block');
     this.titleInput = page.locator('textarea[formcontrolname="title"]');
     this.titleInfo = page.locator('div.title-block span.field-info');
 
     this.tagSelector = new TagSelectorComponent(page.locator('div.tags-box'), page, language);
+    this.cancelModal = new CancelWarningModal(page);
 
     this.pictureBox = page.locator('div.dropzone, div.picture-block, .image-preview');
     this.pictureInput = page.locator('div.dropzone input[type="file"], input[type="file"]');
@@ -73,9 +78,7 @@ export class EditNewsPage extends BasePage {
       .locator('div.date p')
       .filter({ hasText: new RegExp(`${info?.author ?? 'Author:'}|Author:|Автор:`, 'i') });
 
-    this.cancelButton = page.locator(
-      'div.submit-buttons button.tertiary-global-button, button:has-text("Cancel")'
-    );
+    this.cancelButton = page.locator('button.tertiary-global-button', { hasText: 'Cancel' });
     this.previewButton = page.locator(
       'div.submit-buttons button.secondary-global-button, button:has-text("Preview")'
     );
