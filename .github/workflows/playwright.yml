@@ -125,12 +125,7 @@ jobs:
           f=playwright-results.json
           code="${{ steps.pw.outputs.exit_code }}"
 
-          if [ "$code" = "0" ]; then
-            echo "✅ All tests passed"
-            exit 0
-          fi
-
-          # Non-zero exit code but no report -> Playwright crashed or config is broken
+          # Require the JSON report even when Playwright exits successfully
           if [ ! -f "$f" ]; then
             echo "::error::Playwright exited with code $code and produced no JSON report (crash / config / project error)"
             exit 1
@@ -147,11 +142,17 @@ jobs:
           fi
 
           if [ "$total" -eq 0 ]; then
-            if [ "${{ matrix.browser }}" = "api" ]; then
-              echo "::notice::No API tests executed."
-              exit 0
-            fi
             echo "::error::No tests were executed for project ${{ matrix.browser }}"
+            exit 1
+          fi
+
+          if [ "$code" = "0" ]; then
+            echo "✅ Test run completed successfully"
+            exit 0
+          fi
+
+          if [ "$code" != "1" ]; then
+            echo "::error::Playwright exited with code $code (interrupted run / infrastructure error)"
             exit 1
           fi
 
@@ -170,8 +171,8 @@ jobs:
         with:
           name: allure-results-${{ matrix.browser }}
           path: allure-results
-          if-no-files-found: ignore
-          retention-days: 1
+          if-no-files-found: error
+          retention-days: 7
 
       - name: Upload Playwright report and traces when tests failed
         if: ${{ !cancelled() && steps.pw.outputs.exit_code != '0' }}
@@ -180,6 +181,7 @@ jobs:
           name: playwright-debug-${{ matrix.browser }}
           path: |
             playwright-report
+            playwright-results.json
             test-results
           if-no-files-found: ignore
           retention-days: 7
@@ -196,6 +198,7 @@ jobs:
     concurrency:
       group: allure-gh-pages
       cancel-in-progress: false
+      queue: max
     env:
       REPORT_FOLDER: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.number) || 'main' }}
     steps:
@@ -216,8 +219,19 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           pattern: allure-results-*
-          path: combined-results
-          merge-multiple: true
+          path: downloaded-results
+
+      - name: Validate and combine all project results
+        run: |
+          mkdir -p combined-results
+          for project in api chromium firefox webkit; do
+            source="downloaded-results/allure-results-${project}"
+            if [ ! -d "$source" ] || [ -z "$(find "$source" -type f -name '*-result.json' -print -quit)" ]; then
+              echo "::error::Missing Allure test results for ${project}; refusing to publish an incomplete report"
+              exit 1
+            fi
+            cp -R "$source/." combined-results/
+          done
 
       - name: Setup Java for Allure 2
         uses: actions/setup-java@v4
@@ -251,7 +265,7 @@ jobs:
             --arg reportUrl "$PAGE_URL/${GITHUB_RUN_NUMBER}" \
             --arg buildUrl "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" \
             --arg buildName "GitHub Actions Run #${GITHUB_RUN_ID}" \
-            --arg buildOrder "$GITHUB_RUN_NUMBER" \
+            --argjson buildOrder "$GITHUB_RUN_NUMBER" \
             '{name:"GitHub Actions",type:"github",reportName:$reportName,url:$url,reportUrl:$reportUrl,buildUrl:$buildUrl,buildName:$buildName,buildOrder:$buildOrder}' \
             > combined-results/executor.json
 
@@ -265,6 +279,11 @@ jobs:
           printf '<!DOCTYPE html><meta charset="utf-8"><meta http-equiv="refresh" content="0; URL=%s/%s/index.html">\n' \
             "$PAGE_URL" "$GITHUB_RUN_NUMBER" > "allure-history/${REPORT_FOLDER}/index.html"
 
+          # GitHub Pages advertises the site root, so it must also resolve.
+          printf '<!DOCTYPE html><meta charset="utf-8"><meta http-equiv="refresh" content="0; URL=main/"><a href="main/">Latest main report</a>\n' \
+            > allure-history/index.html
+          touch allure-history/.nojekyll
+
           # Store the newly extracted history file for the NEXT run
           mkdir -p "allure-history/${REPORT_FOLDER}/last-history"
           cp -R allure-report/history/. "allure-history/${REPORT_FOLDER}/last-history/"
@@ -272,13 +291,25 @@ jobs:
           # Store a numbered snapshot for deep linking
           echo "Published report at ${PAGE_URL}/${GITHUB_RUN_NUMBER}/"
 
-      - name: Clean heavy attachments from history
+      # Keep attachments intact: Allure references them for screenshots and traces.
+      - name: Check PR is still open before publishing
+        id: publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.number }}
         run: |
-          echo "Cleaning heavy attachments from allure-history..."
-          find allure-history -type f -name "*-attachment*" -size +1M -delete -print
-          find allure-history -type f \( -name "*.zip" -o -name "*.tar.gz" -o -name "*.mp4" -o -name "*.webm" \) -delete -print
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
+            state=$(gh api "repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}" --jq '.state')
+            if [ "$state" != "open" ]; then
+              echo "::notice::PR is closed; skipping report publication"
+              echo "enabled=false" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          fi
+          echo "enabled=true" >> "$GITHUB_OUTPUT"
 
       - name: Deploy Allure report
+        if: ${{ steps.publish.outputs.enabled == 'true' }}
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -290,7 +321,7 @@ jobs:
           user_email: 'github-actions[bot]@users.noreply.github.com'
 
       - name: Comment PR with report link
-        if: ${{ github.event_name == 'pull_request' }}
+        if: ${{ steps.publish.outputs.enabled == 'true' && github.event_name == 'pull_request' }}
         uses: thollander/actions-comment-pull-request@v2
         with:
           comment_tag: allure-report-link
