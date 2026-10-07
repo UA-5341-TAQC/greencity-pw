@@ -31,4 +31,8 @@ export class PlacesPage extends BasePage {
   async clickAddPlaceButton(): Promise<void> {
     await this.addPlaceButton.click();
   }
+
+  async isAddPlaceButtonVisible(): Promise<boolean> {
+    return await this.addPlaceButton.isVisible();
+  }
 }

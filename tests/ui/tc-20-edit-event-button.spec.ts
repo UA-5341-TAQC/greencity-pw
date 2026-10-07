@@ -1,4 +1,5 @@
 import { test, expect } from '@/fixtures';
+import { createSimpleEvent } from '@/helpers';
 
 test.describe('TC-20 Edit event entry points', () => {
   test('Verify author can edit an event from the card and details page', async ({
@@ -6,6 +7,7 @@ test.describe('TC-20 Edit event entry points', () => {
     eventsPage,
     eventDetailsPage,
     editEventPage,
+    createEventPage,
   }) => {
     let eventTitle: string;
     let eventId: string;
@@ -19,7 +21,9 @@ test.describe('TC-20 Edit event entry points', () => {
     });
 
     await test.step('Verify Edit event is available on the author event card', async () => {
-      const ownedEventCard = await eventsPage.getFirstEditableEventCard();
+      const ownedEventCard = await eventsPage.getFirstEditableEventCard(() =>
+        createSimpleEvent(authenticatedPage, eventsPage, createEventPage)
+      );
       await ownedEventCard.waitForVisible();
 
       expect(await ownedEventCard.isEditEventButtonVisible()).toBe(true);
@@ -37,7 +41,7 @@ test.describe('TC-20 Edit event entry points', () => {
     });
 
     await test.step('Return to the Events list', async () => {
-      await authenticatedPage.goBack();
+      await eventsPage.navigateToEventsPage();
       await eventsPage.waitForEventsPage();
 
       await expect(authenticatedPage).toHaveURL(/#\/greenCity\/events\/?$/);
@@ -54,7 +58,7 @@ test.describe('TC-20 Edit event entry points', () => {
     });
 
     await test.step('Verify Edit on Details opens the same event edit form', async () => {
-      // expect(await eventDetailsPage.isEditButtonVisible()).toBe(true); #ToDo
+      // expect(await eventDetailsPage.isEditButtonVisible()).toBe(true); //TODO: Uncomment when the edit button is visible on the event details page
       expect(await eventDetailsPage.isEditButtonEnabled()).toBe(true);
     });
 
