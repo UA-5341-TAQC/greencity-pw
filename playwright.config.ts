@@ -39,8 +39,7 @@ export default defineConfig({
   },
 
   projects: [
-    // Required by the CI matrix (`--project=api`). No browser is launched
-    // unless a test asks for the `page` fixture.
+    // API tests run against backend endpoints using request fixture
     {
       name: 'api',
       testDir: './tests/api',
