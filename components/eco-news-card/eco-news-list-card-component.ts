@@ -8,6 +8,7 @@ export class EcoNewsListCardComponent extends EcoNewsCardComponent {
   protected readonly title: Locator;
   protected readonly description: Locator;
   protected readonly favouriteButton: Locator;
+  protected readonly favouriteActiveFlag: Locator;
 
   protected readonly moreButton: Locator;
   protected readonly creationDate: Locator;
@@ -22,6 +23,7 @@ export class EcoNewsListCardComponent extends EcoNewsCardComponent {
     this.title = this.root.locator('.eco-news_list-content-title h3');
     this.description = this.root.locator('.eco-news_list-content-text');
     this.favouriteButton = this.root.locator('.favourite-button');
+    this.favouriteActiveFlag = this.favouriteButton.locator('.flag-active');
 
     this.moreButton = this.root.locator('.button-news-card button');
     this.creationDate = this.root.locator('.eco-news_data-text-date .text');
