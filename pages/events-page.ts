@@ -101,7 +101,6 @@ export class EventsPage extends BasePage {
 
   /** Waits for the bookmark change to be saved */
   async waitForBookmarkUpdate(): Promise<void> {
-    // eslint-disable-next-line
     await this.page.waitForTimeout(3000);
   }
 
