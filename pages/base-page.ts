@@ -55,4 +55,7 @@ export default class BasePage {
   async waitForPageLoad(): Promise<void> {
     await this.page.waitForLoadState('networkidle');
   }
+  url(): string {
+    return this.page.url();
+  }
 }
