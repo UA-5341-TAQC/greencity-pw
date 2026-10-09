@@ -6,11 +6,7 @@ import { UserStatus, type CreateUserRequest } from '@/types';
  * Client for working with the User Controller API.
  */
 export class UserClient extends BaseApiClient {
-  constructor(
-    baseUrl: string,
-    accessToken?: string | null,
-    requestContext?: APIRequestContext
-  ) {
+  constructor(baseUrl: string, accessToken?: string | null, requestContext?: APIRequestContext) {
     super(baseUrl, accessToken, requestContext);
   }
 
@@ -20,10 +16,7 @@ export class UserClient extends BaseApiClient {
    * @param email - User email.
    * @param profilePicturePath - New profile picture path.
    */
-  async updateUserPicturePath(
-    email: string,
-    profilePicturePath: string
-  ): Promise<APIResponse> {
+  async updateUserPicturePath(email: string, profilePicturePath: string): Promise<APIResponse> {
     return await this.put('/users/user/picturePath', {
       params: { email, profilePicturePath },
     });
@@ -35,10 +28,7 @@ export class UserClient extends BaseApiClient {
    * @param userId - User ID.
    * @param status - New user status.
    */
-  async changeUserStatus(
-    userId: number,
-    status: UserStatus
-  ): Promise<APIResponse> {
+  async changeUserStatus(userId: number, status: UserStatus): Promise<APIResponse> {
     return await this.put(`/users/status/${userId}`, {
       params: { status },
     });
@@ -61,10 +51,7 @@ export class UserClient extends BaseApiClient {
    * @param userId - User ID.
    * @param userName - New user name.
    */
-  async updateUserName(
-    userId: number,
-    userName: string
-  ): Promise<APIResponse> {
+  async updateUserName(userId: number, userName: string): Promise<APIResponse> {
     return await this.patch(`/users/${userId}/name`, {
       params: { userName },
     });

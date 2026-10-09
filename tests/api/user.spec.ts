@@ -8,16 +8,10 @@ test.describe('User Controller API', () => {
   let userClient: UserClient;
 
   test.beforeEach(async ({ request, authSession }) => {
-    userClient = new UserClient(
-      env.API_GREENCITY_BASE_URL,
-      authSession.accessToken,
-      request
-    );
+    userClient = new UserClient(env.API_GREENCITY_BASE_URL, authSession.accessToken, request);
   });
 
-  test('GET /users/{id}/location - should return user location', async ({
-    authSession,
-  }) => {
+  test('GET /users/{id}/location - should return user location', async ({ authSession }) => {
     const response = await userClient.getUserLocation(authSession.userId);
 
     expect(response.status()).toBe(200);
@@ -39,17 +33,12 @@ test.describe('User Controller API', () => {
     );
   });
 
-  test('PATCH /users/{userId}/name - should update user name', async ({
-    authSession,
-  }) => {
+  test('PATCH /users/{userId}/name - should update user name', async ({ authSession }) => {
     const originalName = authSession.name;
     const newName = `API Test ${Date.now()}`;
 
     try {
-      const response = await userClient.updateUserName(
-        authSession.userId,
-        newName
-      );
+      const response = await userClient.updateUserName(authSession.userId, newName);
 
       expect(response.status()).toBe(200);
     } finally {
@@ -58,24 +47,15 @@ test.describe('User Controller API', () => {
   });
 
   test('PUT /users/user/picturePath - should update user picture path', async () => {
-    const profilePicturePath =
-      'https://example.com/test-profile-picture.jpg';
+    const profilePicturePath = 'https://example.com/test-profile-picture.jpg';
 
-    const response = await userClient.updateUserPicturePath(
-      env.USER_EMAIL,
-      profilePicturePath
-    );
+    const response = await userClient.updateUserPicturePath(env.USER_EMAIL, profilePicturePath);
 
     expect(response.status()).toBe(200);
   });
 
-  test('PUT /users/status/{userId} - should change user status', async ({
-    authSession,
-  }) => {
-    const response = await userClient.changeUserStatus(
-      authSession.userId,
-      UserStatus.Activated
-    );
+  test('PUT /users/status/{userId} - should change user status', async ({ authSession }) => {
+    const response = await userClient.changeUserStatus(authSession.userId, UserStatus.Activated);
 
     expect(response.status()).toBe(200);
   });
