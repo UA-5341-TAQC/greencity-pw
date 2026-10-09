@@ -99,6 +99,11 @@ export class EventsPage extends BasePage {
     await this.bookmarkButton.click();
   }
 
+  /** Waits for the bookmark change to be saved */
+  async waitForBookmarkUpdate(): Promise<void> {
+    await this.page.waitForTimeout(3000);
+  }
+
   /** Clicks the "My events" (calendar) icon */
   async clickMyEventsButton(): Promise<void> {
     await this.myEventsButton.click();
