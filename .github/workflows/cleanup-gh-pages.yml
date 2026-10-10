@@ -10,6 +10,12 @@ permissions:
 jobs:
   cleanup-gh-pages:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+    # Share the publisher's lock, including checkout, to avoid stale pushes.
+    concurrency:
+      group: allure-gh-pages
+      cancel-in-progress: false
+      queue: max
     steps:
       - name: Checkout gh-pages
         uses: actions/checkout@v4

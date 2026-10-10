@@ -1,13 +1,17 @@
 import type { Locator, Page } from '@playwright/test';
 import BasePage from '@/pages/base-page';
+import { CalendarDropdownComponent } from '@/components';
+import { EventImageUploadComponent } from '@/components';
 
 export class CreateEventPage extends BasePage {
+  readonly titleCounter: Locator;
+  readonly titleValidationError: Locator;
   readonly titleInput: Locator;
   readonly titleField: Locator;
   readonly durationSelect: Locator;
-  private readonly economicTag: Locator;
-  private readonly socialTag: Locator;
-  private readonly environmentalTag: Locator;
+  readonly economicTag: Locator;
+  readonly socialTag: Locator;
+  readonly environmentalTag: Locator;
   readonly eventTypeSelect: Locator;
   readonly inviteSelect: Locator;
   readonly description: Locator;
@@ -17,8 +21,8 @@ export class CreateEventPage extends BasePage {
   readonly allDayCheckbox: Locator;
   readonly placeCheckbox: Locator;
   readonly onlineCheckbox: Locator;
-  private readonly placeInput: Locator;
-  private readonly onlineLinkInput: Locator;
+  readonly placeInput: Locator;
+  readonly onlineLinkInput: Locator;
   readonly previewButton: Locator;
   readonly publishButton: Locator;
   readonly cancelButton: Locator;
@@ -27,11 +31,20 @@ export class CreateEventPage extends BasePage {
   readonly pictureUploadHint: Locator;
   readonly initiativeTypeLabels: Locator;
   readonly descriptionValidationMessage: Locator;
+  readonly datePicker: CalendarDropdownComponent;
+  readonly datePickerToggle: Locator;
+  public readonly startTimeError: Locator;
+  public readonly finishTimeError: Locator;
+  public readonly pictures: EventImageUploadComponent;
 
   constructor(page: Page) {
     super(page);
 
     this.titleInput = page.locator('input[formcontrolname="title"]');
+    this.titleCounter = page.getByText(/^\s*\d+\s*\/\s*70\s*$/);
+    this.titleValidationError = page.getByText('Enter a title up to and including 70 characters', {
+      exact: true,
+    });
     this.titleField = page.locator('mat-form-field').filter({ has: this.titleInput }).first();
     this.durationSelect = page.locator('.duration-wrapper mat-select[formcontrolname="duration"]');
     this.economicTag = page.getByRole('option', { name: 'Economic' });
@@ -47,7 +60,9 @@ export class CreateEventPage extends BasePage {
     this.finishTimeInput = page.locator('input[formcontrolname="finishTime"]');
     this.allDayCheckbox = page.locator('mat-checkbox[formcontrolname="allDay"]');
     this.placeCheckbox = page.locator('mat-checkbox', { hasText: 'Place' });
-    this.onlineCheckbox = page.locator('mat-checkbox', { hasText: 'Online' });
+    this.onlineCheckbox = page
+      .locator('mat-checkbox', { hasText: 'Online' })
+      .locator('input[type="checkbox"]');
     this.placeInput = page.locator('input[formcontrolname="place"]');
     this.onlineLinkInput = page.locator('input[formcontrolname="onlineLink"]');
     const submitContainer = page.locator('.submit-container');
@@ -64,6 +79,15 @@ export class CreateEventPage extends BasePage {
     );
     this.initiativeTypeLabels = page.locator('mat-chip:visible, mat-chip-option:visible');
     this.descriptionValidationMessage = page.getByText(/Not enough characters\. Left:/i).first();
+    this.datePicker = new CalendarDropdownComponent(page.locator('mat-datepicker-content'), page);
+    this.datePickerToggle = page.getByRole('button', { name: 'Open calendar' });
+    this.startTimeError = page
+      .locator('mat-form-field', { has: this.startTimeInput })
+      .locator('mat-error');
+    this.finishTimeError = page
+      .locator('mat-form-field', { has: this.finishTimeInput })
+      .locator('mat-error');
+    this.pictures = new EventImageUploadComponent(page.locator('app-images-container'), page);
   }
 
   async waitForCreateEventPage(): Promise<void> {
@@ -71,8 +95,46 @@ export class CreateEventPage extends BasePage {
     await this.description.waitFor({ state: 'visible' });
   }
 
+  async focusTitle(): Promise<void> {
+    await this.page
+      .locator('mat-form-field')
+      .filter({ has: this.titleInput })
+      .locator('mat-label')
+      .click();
+  }
+
+  async focusDescription(): Promise<void> {
+    await this.description.click();
+  }
+
+  async isTitleFocused(): Promise<boolean> {
+    return this.titleInput.evaluate((element) => element === document.activeElement);
+  }
+
+  async isDescriptionFocused(): Promise<boolean> {
+    return this.description.evaluate((element) => element === document.activeElement);
+  }
+
   async fillTitle(title: string): Promise<void> {
     await this.titleInput.fill(title);
+  }
+
+  async getTitle(): Promise<string> {
+    return this.titleInput.inputValue();
+  }
+
+  async getTitleCounter(): Promise<string> {
+    const text = await this.titleCounter.innerText();
+    return text.replace(/\s*\/\s*/, ' / ').trim();
+  }
+
+  async isTitleValidationErrorVisible(): Promise<boolean> {
+    return this.titleValidationError.isVisible();
+  }
+
+  async isTitleInvalid(): Promise<boolean> {
+    const classes = (await this.titleInput.getAttribute('class'))?.split(/\s+/) ?? [];
+    return classes.includes('ng-invalid');
   }
 
   async selectDuration(duration: string): Promise<void> {
@@ -188,5 +250,109 @@ export class CreateEventPage extends BasePage {
 
   async isPreviewEnabled(): Promise<boolean> {
     return await this.previewButton.isEnabled();
+  }
+
+  async getTitleValue(): Promise<string> {
+    return await this.titleInput.inputValue();
+  }
+
+  async getDurationText(): Promise<string> {
+    return (await this.durationSelect.innerText()).trim();
+  }
+
+  async getDayValue(): Promise<string> {
+    return await this.dayInput.inputValue();
+  }
+
+  async selectDate(date: Date): Promise<void> {
+    await this.datePickerToggle.click();
+    await this.datePicker.waitForVisible();
+
+    if (date.getMonth() !== new Date().getMonth()) {
+      await this.datePicker.clickNextMonth();
+    }
+
+    const label = date.toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    });
+    await this.datePicker.selectDate(label);
+  }
+
+  async getStartTimeValue(): Promise<string> {
+    return await this.startTimeInput.inputValue();
+  }
+
+  async getFinishTimeValue(): Promise<string> {
+    return await this.finishTimeInput.inputValue();
+  }
+
+  async isOnlineChecked(): Promise<boolean> {
+    return await this.onlineCheckbox.isChecked();
+  }
+
+  async isOnlineLinkInputVisible(): Promise<boolean> {
+    return await this.onlineLinkInput.isVisible();
+  }
+
+  async getOnlineLinkValue(): Promise<string> {
+    return await this.onlineLinkInput.inputValue();
+  }
+
+  async isEconomicTagSelected(): Promise<boolean> {
+    return (await this.economicTag.getAttribute('aria-selected')) === 'true';
+  }
+
+  async getEventTypeText(): Promise<string> {
+    return (await this.eventTypeSelect.innerText()).trim();
+  }
+
+  async getInviteTypeText(): Promise<string> {
+    return (await this.inviteSelect.innerText()).trim();
+  }
+
+  async isPreviewVisible(): Promise<boolean> {
+    return await this.previewButton.isVisible();
+  }
+
+  async isPublishVisible(): Promise<boolean> {
+    return await this.publishButton.isVisible();
+  }
+
+  getTimeListbox(field: 'Start Time' | 'End Time'): Locator {
+    return this.page.getByRole('listbox', { name: field });
+  }
+
+  private getTimeOption(field: 'Start Time' | 'End Time', time: string): Locator {
+    return this.getTimeListbox(field).getByRole('option', { name: time, exact: true });
+  }
+
+  async selectStartTime(time: string): Promise<void> {
+    await this.startTimeInput.click();
+    await this.getTimeOption('Start Time', time).click();
+  }
+
+  async selectFinishTime(time: string): Promise<void> {
+    await this.finishTimeInput.click();
+    await this.getTimeOption('End Time', time).click();
+  }
+
+  async clickStartTime(): Promise<void> {
+    await this.startTimeInput.click();
+  }
+
+  async clickFinishTime(): Promise<void> {
+    await this.finishTimeInput.click();
+  }
+
+  async blurStartTime(): Promise<void> {
+    await this.startTimeInput.press('Escape');
+    await this.startTimeInput.blur();
+  }
+
+  async blurFinishTime(): Promise<void> {
+    await this.finishTimeInput.press('Escape');
+    await this.finishTimeInput.blur();
   }
 }

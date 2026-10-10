@@ -1,4 +1,4 @@
-import { test, type Page, type Locator } from '@playwright/test';
+import { expect, test, type Page, type Locator } from '@playwright/test';
 import BasePage from './base-page';
 import {
   ActiveFilterChipComponent,
@@ -36,6 +36,9 @@ export class EventsPage extends BasePage {
   protected readonly gridEventCardRoots: Locator;
   protected readonly listEventCardRoots: Locator;
 
+  protected readonly endOfListMessage: Locator;
+  protected readonly listEvents: Locator;
+
   constructor(page: Page, lang: Language = Language.En) {
     super(page);
     this.i18n = EVENTS_I18N[lang];
@@ -63,6 +66,8 @@ export class EventsPage extends BasePage {
       'div.event-list:not(.list-view) mat-card.event-list-item'
     );
     this.listEventCardRoots = page.locator('div.event-list.list-view mat-card.event-list-item');
+    this.endOfListMessage = page.locator('p.end-page-txt');
+    this.listEvents = page.locator('.event-list-item').first();
   }
   /** Navigates to the Events page directly by URL */
   async navigateToEventsPage(): Promise<void> {
@@ -92,6 +97,11 @@ export class EventsPage extends BasePage {
   /** Clicks the bookmarks icon */
   async clickBookmarkButton(): Promise<void> {
     await this.bookmarkButton.click();
+  }
+
+  /** Waits for the bookmark change to be saved */
+  async waitForBookmarkUpdate(): Promise<void> {
+    await this.page.waitForTimeout(3000);
   }
 
   /** Clicks the "My events" (calendar) icon */
@@ -214,6 +224,17 @@ export class EventsPage extends BasePage {
     return await this.gridEventCardRoots.count();
   }
 
+  /** Scrolls through the grid until the end-of-list indicator is visible. */
+  async scrollUntilAllEventCardsLoad(): Promise<void> {
+    while (!(await this.isEndOfEventsListVisible())) {
+      const loadedCount = await this.getGridEventCardsCount();
+
+      await this.scrollPage('down');
+
+      await expect.poll(() => this.getGridEventCardsCount()).toBeGreaterThanOrEqual(loadedCount);
+    }
+  }
+
   /** Returns the number of event cards currently rendered in list mode */
   async getListEventCardsCount(): Promise<number> {
     return await this.listEventCardRoots.count();
@@ -222,6 +243,17 @@ export class EventsPage extends BasePage {
   /** Returns a GridEventCardComponent for the card at the given position */
   getGridEventCardByIndex(index: number): GridEventCardComponent {
     return new GridEventCardComponent(this.gridEventCardRoots.nth(index), this.page);
+  }
+
+  /** Returns the first event card that is available for joining. */
+  getFirstJoinableGridEventCard(): GridEventCardComponent {
+    const root = this.gridEventCardRoots
+      .filter({
+        has: this.page.getByRole('button', { name: 'Join event', exact: true }),
+      })
+      .first();
+
+    return new GridEventCardComponent(root, this.page);
   }
   /** Returns a ListEventCardComponent for the card at the given position */
   getListEventCardByIndex(index: number): ListEventCardComponent {
@@ -242,19 +274,47 @@ export class EventsPage extends BasePage {
     return new ListEventCardComponent(root, this.page);
   }
 
-  /** Returns the first event card that offers the author-only edit action */
-  async getFirstEditableEventCard(): Promise<GridEventCardComponent | ListEventCardComponent> {
-    const editButton = this.page.getByRole('button', { name: 'Edit event' });
-    const gridCard = this.gridEventCardRoots.filter({ has: editButton }).first();
+  /** Returns whether an event with an enabled edit action is available */
+  async hasEditableEventCard(): Promise<boolean> {
+    const editButtons = this.page.getByRole('button', { name: 'Edit event' });
+    const count = await editButtons.count();
 
-    if ((await gridCard.count()) > 0) {
-      return new GridEventCardComponent(gridCard, this.page);
+    for (let index = 0; index < count; index++) {
+      const editButton = editButtons.nth(index);
+      if ((await editButton.isVisible()) && (await editButton.isEnabled())) {
+        return true;
+      }
     }
 
-    const listCard = this.listEventCardRoots.filter({ has: editButton }).first();
+    return false;
+  }
 
-    if ((await listCard.count()) > 0) {
-      return new ListEventCardComponent(listCard, this.page);
+  /** Returns the first event card that offers the author-only edit action */
+  async getFirstEditableEventCard(
+    createEventIfMissing?: () => Promise<unknown>
+  ): Promise<GridEventCardComponent | ListEventCardComponent> {
+    if (!(await this.hasEditableEventCard()) && createEventIfMissing) {
+      await createEventIfMissing();
+    }
+
+    const gridCardCount = await this.gridEventCardRoots.count();
+    for (let index = 0; index < gridCardCount; index++) {
+      const gridCard = this.gridEventCardRoots.nth(index);
+      const editButton = gridCard.getByRole('button', { name: 'Edit event' });
+
+      if ((await editButton.isVisible()) && (await editButton.isEnabled())) {
+        return new GridEventCardComponent(gridCard, this.page);
+      }
+    }
+
+    const listCardCount = await this.listEventCardRoots.count();
+    for (let index = 0; index < listCardCount; index++) {
+      const listCard = this.listEventCardRoots.nth(index);
+      const editButton = listCard.getByRole('button', { name: 'Edit event' });
+
+      if ((await editButton.isVisible()) && (await editButton.isEnabled())) {
+        return new ListEventCardComponent(listCard, this.page);
+      }
     }
 
     throw new Error('No event card with an Edit event action was found.');
@@ -266,17 +326,15 @@ export class EventsPage extends BasePage {
   ): Promise<GridEventCardComponent | ListEventCardComponent> {
     const gridCard = this.gridEventCardRoots.filter({ hasText: title }).first();
 
-    if ((await gridCard.count()) > 0) {
+    try {
+      await gridCard.waitFor({ state: 'visible' });
       return new GridEventCardComponent(gridCard, this.page);
-    }
+    } catch {
+      const listCard = this.listEventCardRoots.filter({ hasText: title }).first();
 
-    const listCard = this.listEventCardRoots.filter({ hasText: title }).first();
-
-    if ((await listCard.count()) > 0) {
+      await listCard.waitFor({ state: 'visible' });
       return new ListEventCardComponent(listCard, this.page);
     }
-
-    throw new Error(`No event card with title "${title}" was found.`);
   }
 
   /** Returns GridEventCard components for every card on the page */
@@ -297,5 +355,31 @@ export class EventsPage extends BasePage {
       cards.push(this.getListEventCardByIndex(i));
     }
     return cards;
+  }
+
+  /** Checks whether the "End of events list" message is visible */
+  async isEndOfEventsListVisible(): Promise<boolean> {
+    return this.endOfListMessage.isVisible();
+  }
+  /**
+   * @returns boolean wheter all cards have one of tags as active tag.
+   * Return False if there is no cards
+   * Only for Grid event cards.
+   */
+  async areAllCardsTaggedWith(...types: EventTypeFilter[]): Promise<boolean> {
+    return await test.step(`Verify all event cards have active tags: ${types.join(', ')}`, async () => {
+      const expectedTagNames = types.map((t) => this.i18n.typeOptions[t]);
+
+      const cards = await this.getAllGridEventCards();
+
+      if (cards.length === 0) {
+        return false;
+      }
+      const results = await Promise.all(cards.map((card) => card.hasActiveTags(expectedTagNames)));
+      return results.every((hasTags) => hasTags);
+    });
+  }
+  async isEventCardVisible(): Promise<boolean> {
+    return await this.listEvents.isVisible();
   }
 }

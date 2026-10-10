@@ -38,7 +38,6 @@ export abstract class BaseEventCardComponent extends BaseComponent {
     this.eventTitle = this.root.locator('p.event-name');
     this.moreButton = this.root.getByRole('button', { name: 'More' });
     this.editEventButton = this.root.getByRole('button', { name: 'Edit event' });
-    this.editEventButton = this.root.getByRole('button', { name: 'Edit event' });
     this.joinEventButton = this.root.getByRole('button', { name: 'Join event' });
 
     this.publishDate = this.root.locator('div.additional-info div.date p');
@@ -56,6 +55,40 @@ export abstract class BaseEventCardComponent extends BaseComponent {
   /** Clicks the bookmark button on the card */
   async clickBookmarkButton(): Promise<void> {
     await this.bookmarkButton.click();
+  }
+
+  /** Returns the bookmark button's rendered styles to verify its selected state */
+  async getBookmarkButtonState(): Promise<string> {
+    return await this.bookmarkButton.evaluate((element) => {
+      const summarize = (item: Element | null) => {
+        if (!item) return null;
+
+        const styles = (pseudo: string) => {
+          const style = getComputedStyle(item, pseudo);
+          return [
+            style.backgroundImage,
+            style.backgroundPosition,
+            style.backgroundColor,
+            style.color,
+            style.opacity,
+            style.content,
+          ];
+        };
+
+        return {
+          html: item.outerHTML,
+          attributes: Array.from(item.attributes).map(({ name, value }) => [name, value]),
+          style: styles(''),
+          before: styles('::before'),
+          after: styles('::after'),
+        };
+      };
+
+      return JSON.stringify({
+        button: summarize(element),
+        parent: summarize(element.parentElement),
+      });
+    });
   }
 
   /** Checks whether the event image is visible */
