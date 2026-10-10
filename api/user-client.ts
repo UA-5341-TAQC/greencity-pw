@@ -6,7 +6,11 @@ import { UserStatus, type CreateUserRequest } from '@/types';
  * Client for working with the User Controller API.
  */
 export class UserClient extends BaseApiClient {
-  constructor(baseUrl: string, accessToken?: string | null, requestContext?: APIRequestContext) {
+  // Optional baseUrl for compatibility with ClientConstructor<T>.
+  constructor(baseUrl?: string, accessToken?: string | null, requestContext?: APIRequestContext) {
+    if (!baseUrl) {
+      throw new Error('Base URL is required for UserClient');
+    }
     super(baseUrl, accessToken, requestContext);
   }
 
