@@ -6,11 +6,15 @@ import { PlaceStatus } from '@/types';
  * Client for working with the Place Controller API.
  */
 export class PlaceClient extends BaseApiClient {
+   // Optional baseUrl for compatibility with ClientConstructor<T>.
   constructor(
-    baseUrl: string,
+    baseUrl?: string,
     accessToken?: string | null,
     requestContext?: APIRequestContext
   ) {
+    if (!baseUrl) {
+      throw new Error('Base URL is required for PlaceClient');
+    } 
     super(baseUrl, accessToken, requestContext);
   }
 

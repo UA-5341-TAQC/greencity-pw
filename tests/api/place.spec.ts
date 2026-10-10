@@ -1,36 +1,37 @@
-import { expect } from '@playwright/test';
-import { test } from '@/fixtures/auth-fixture';
+import { test, expect } from '@/fixtures';
 import { PlaceClient } from '@/api/place-client';
 import { PlaceStatus } from '@/types';
 import env from '@/config/env';
 
 test.describe('Place Controller', () => {
-  let placeClient: PlaceClient;
+  test('GET /place/statuses - should return available place statuses', async ({
+    authorizedClient,
+  }) => {
 
-  test.beforeEach(async ({ request, authSession }) => {
-    placeClient = new PlaceClient(
-      env.API_GREENCITY_BASE_URL,
-      authSession.accessToken,
-      request
+    const placeClient = await authorizedClient(
+      PlaceClient,
+      'user',
+      env.API_GREENCITY_BASE_URL
     );
-  });
-
-  test('GET /place/statuses - should return available place statuses', async () => {
     const response = await placeClient.getStatuses();
 
     expect(response.status()).toBe(200);
 
     const statuses = await response.json();
 
-    expect(statuses).toEqual([
-      'PROPOSED',
-      'DECLINED',
-      'APPROVED',
-      'DELETED',
-    ]);
+    expect(statuses).toEqual(Object.values(PlaceStatus));
   });
 
-  test('GET /place/{status} - should return places by status', async () => {
+  test('GET /place/{status} - should return places by status', async ({
+    authorizedClient,
+  }) => {
+
+    const placeClient = await authorizedClient(
+      PlaceClient,
+      'user',
+      env.API_GREENCITY_BASE_URL
+    );
+    
     const response = await placeClient.getPlacesByStatus(
       PlaceStatus.Proposed
     );
@@ -45,7 +46,15 @@ test.describe('Place Controller', () => {
     expect(body).toHaveProperty('totalPages');
   });
 
-  test('GET /place/v2/filteredPlacesCategories - should return place categories', async () => {
+  test('GET /place/v2/filteredPlacesCategories - should return place categories', async ({
+    authorizedClient,
+  }) => {
+
+    const placeClient = await authorizedClient(
+      PlaceClient,
+      'user',
+      env.API_GREENCITY_BASE_URL
+    );
     const response = await placeClient.getFilteredPlaceCategories();
 
     expect(response.status()).toBe(200);
@@ -64,7 +73,15 @@ test.describe('Place Controller', () => {
     );
   });
 
-  test('GET /place/info/{id} - should return place info', async () => {
+  test('GET /place/info/{id} - should return place info', async ({
+    authorizedClient,
+  }) => {
+
+    const placeClient = await authorizedClient(
+      PlaceClient,
+      'user',
+      env.API_GREENCITY_BASE_URL
+    );
     const placeId = 1;
 
     const response = await placeClient.getPlaceInfo(placeId);
