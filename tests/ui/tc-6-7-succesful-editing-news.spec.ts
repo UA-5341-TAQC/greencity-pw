@@ -11,7 +11,7 @@ test.describe('TC-006 Verify successful editing of Eco News title', () => {
     editNewsPage,
     ecoNewsCreatePreviewPage,
   }) => {
-    const updatedTitle = 'Updated Eco News Title';
+    const updatedTitle = `Updated Eco News Title ${Date.now()}`;
 
     // Preconditions: the user is authenticated and English is selected by the auth fixture.
     await authenticatedPage.waitForLoadState('domcontentloaded');
@@ -29,6 +29,7 @@ test.describe('TC-006 Verify successful editing of Eco News title', () => {
     // Open a news item from the authenticated user's own profile.
     await ownNews.open();
     await ecoNewsDetailsPage.waitForDetailsPage();
+    const newsId = await ecoNewsDetailsPage.getNewsIdFromUrl();
     await ecoNewsDetailsPage.clickEditNews();
     await editNewsPage.waitForEditNewsPage();
 
@@ -52,9 +53,11 @@ test.describe('TC-006 Verify successful editing of Eco News title', () => {
     await expect(ecoNewsPage.listViewCards.first()).toBeVisible();
 
     // Step 6: Verify the updated article is present in the Eco News list.
-    await expect(
-      ecoNewsPage.listViewCards.getByRole('heading', { name: updatedTitle, exact: true })
-    ).toBeVisible();
+    const updatedArticle = ecoNewsPage.listViewCards.filter({
+      has: authenticatedPage.locator(`a.link[href="#/greenCity/news/${newsId}"]`),
+    });
+    await expect(updatedArticle).toHaveCount(1);
+    await expect(updatedArticle.getByRole('heading', { name: updatedTitle, exact: true })).toBeVisible();
     await expect(authenticatedPage).toHaveURL(/\/greenCity\/news/);
   });
 });
@@ -87,6 +90,7 @@ test.describe('TC-007 Verify successful editing of Eco News content and tags', (
     // Open a news item from the authenticated user's own profile.
     await ownNews.open();
     await ecoNewsDetailsPage.waitForDetailsPage();
+    const newsId = await ecoNewsDetailsPage.getNewsIdFromUrl();
     await ecoNewsDetailsPage.clickEditNews();
     await editNewsPage.waitForEditNewsPage();
 
@@ -123,12 +127,12 @@ test.describe('TC-007 Verify successful editing of Eco News content and tags', (
     await expect(ecoNewsPage.listViewCards.first()).toBeVisible();
 
     // Step 6: Verify the edited item is listed, then confirm its saved details.
-    const updatedItemHeading = ecoNewsPage.listViewCards.getByRole('heading', {
-      name: originalTitle,
-      exact: true,
+    const updatedArticle = ecoNewsPage.listViewCards.filter({
+      has: authenticatedPage.locator(`a.link[href="#/greenCity/news/${newsId}"]`),
     });
-    await expect(updatedItemHeading).toBeVisible();
-    await updatedItemHeading.click();
+    await expect(updatedArticle).toHaveCount(1);
+    await expect(updatedArticle.getByRole('heading', { name: originalTitle, exact: true })).toBeVisible();
+    await updatedArticle.getByRole('heading', { name: originalTitle, exact: true }).click();
     await ecoNewsDetailsPage.waitForDetailsPage();
     await expect(authenticatedPage.locator('.news-text-content')).toContainText(updatedContent);
     const savedTags = (await ecoNewsDetailsPage.getTagTexts()).map((tag) => tag.trim());
