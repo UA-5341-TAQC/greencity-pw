@@ -1,0 +1,76 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: ui/tc-20-edit-event-button.spec.ts >> TC-20 Edit event entry points >> Verify author can edit an event from the card and details page
+- Location: tests/ui/tc-20-edit-event-button.spec.ts:4:3
+
+# Error details
+
+```
+TimeoutError: apiRequestContext.post: Timeout 10000ms exceeded.
+Call log:
+  - → POST https://greencity-user.greencity.cx.ua/ownSecurity/signIn
+    - user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36
+    - accept: */*
+    - accept-encoding: gzip,deflate,br
+    - content-type: application/json
+    - content-length: 91
+
+```
+
+# Test source
+
+```ts
+  1  | import { test, type APIRequestContext } from '@playwright/test';
+  2  | import env from '@/config/env';
+  3  | 
+  4  | export interface AuthSessionData {
+  5  |   userId: number;
+  6  |   accessToken: string;
+  7  |   refreshToken: string;
+  8  |   name: string;
+  9  |   ownRegistrations?: boolean;
+  10 | }
+  11 | 
+  12 | export interface SignInCredentials {
+  13 |   email?: string;
+  14 |   password?: string;
+  15 | }
+  16 | 
+  17 | /**
+  18 |  * Performs authentication via the GreenCity User REST API.
+  19 |  * Returns auth tokens and user information without UI interaction.
+  20 |  */
+  21 | export async function signInViaApi(
+  22 |   request: APIRequestContext,
+  23 |   credentials?: SignInCredentials
+  24 | ): Promise<AuthSessionData> {
+  25 |   return await test.step('API: Sign in via user service', async () => {
+  26 |     const email = credentials?.email || env.USER_EMAIL;
+  27 |     const password = credentials?.password || env.USER_PASSWORD;
+  28 | 
+> 29 |     const response = await request.post(`${env.API_USER_BASE_URL}/ownSecurity/signIn`, {
+     |                                    ^ TimeoutError: apiRequestContext.post: Timeout 10000ms exceeded.
+  30 |       data: {
+  31 |         email,
+  32 |         password,
+  33 |         projectName: 'GREENCITY',
+  34 |       },
+  35 |     });
+  36 | 
+  37 |     if (!response.ok()) {
+  38 |       throw new Error(
+  39 |         `API sign in failed with status ${response.status()}: ${await response.text()}`
+  40 |       );
+  41 |     }
+  42 | 
+  43 |     return (await response.json()) as AuthSessionData;
+  44 |   });
+  45 | }
+  46 | 
+```

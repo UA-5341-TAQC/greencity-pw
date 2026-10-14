@@ -1,0 +1,409 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: ui/tc-30-filter-events-by-city.spec.ts >> TC-30 Verify that a user can filter events by city >> filters events by Odesa and restores the default filter state
+- Location: tests/ui/tc-30-filter-events-by-city.spec.ts:5:3
+
+# Error details
+
+```
+TimeoutError: locator.click: Timeout 10000ms exceeded.
+Call log:
+  - waiting for getByRole('listbox').getByRole('option').filter({ hasText: 'Odesa, Odesa Oblast, Ukraine' }).first()
+
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - generic [aria-hidden] [ref=e2]:
+    - generic [ref=e4]:
+      - link [ref=e6] [cursor=pointer]:
+        - /url: .main-content
+        - text: skip to the main content
+      - banner [ref=e7]:
+        - generic [ref=e9]:
+          - link [ref=e10] [cursor=pointer]:
+            - /url: "#/greenCity"
+            - link [ref=e11]
+          - generic [ref=e12]:
+            - navigation [ref=e13]:
+              - tablist [ref=e14]:
+                - listitem [ref=e15]:
+                  - link [ref=e16] [cursor=pointer]:
+                    - /url: "#/greenCity/news"
+                    - text: Eco news
+                - listitem [ref=e17]:
+                  - link [ref=e18] [cursor=pointer]:
+                    - /url: "#/greenCity/events"
+                    - text: Events
+                - listitem [ref=e19]:
+                  - link [ref=e20] [cursor=pointer]:
+                    - /url: "#/greenCity/places"
+                    - text: Places
+                - listitem [ref=e21]:
+                  - link [ref=e22] [cursor=pointer]:
+                    - /url: "#/greenCity/about"
+                    - text: About us
+                - listitem [ref=e23]:
+                  - link [ref=e24] [cursor=pointer]:
+                    - /url: "#/greenCity/profile"
+                    - text: My space
+                - listitem [ref=e25]:
+                  - link [ref=e26] [cursor=pointer]:
+                    - /url: "#/ubs"
+                    - text: UBS courier
+            - menu [ref=e28]:
+              - listitem [ref=e29] [cursor=pointer]
+              - listitem [ref=e31] [cursor=pointer]:
+                - generic [ref=e33]: 99+
+              - search [ref=e34] [cursor=pointer]
+              - menu [ref=e36]:
+                - option [ref=e37] [cursor=pointer]:
+                  - generic [aria-hidden] [ref=e38]: En
+              - menu [ref=e40]:
+                - listitem [ref=e41] [cursor=pointer]: TestATestA
+      - generic [ref=e43]:
+        - generic [ref=e48]:
+          - generic [ref=e49]:
+            - generic [ref=e50]:
+              - paragraph [ref=e51]: Events
+              - generic [ref=e52]:
+                - generic [ref=e53] [cursor=pointer]
+                - generic [ref=e55] [cursor=pointer]
+                - generic [ref=e57] [cursor=pointer]
+            - button [ref=e60] [cursor=pointer]: Create event
+          - generic [ref=e61]:
+            - paragraph [ref=e62]: Filter
+            - generic [ref=e63]:
+              - generic [ref=e64] [cursor=pointer]:
+                - generic [ref=e65]: Event time
+                - combobox [ref=e66]
+              - generic [ref=e72] [cursor=pointer]:
+                - generic [ref=e73]: Location
+                - combobox [expanded] [ref=e74]
+              - generic [ref=e80] [cursor=pointer]:
+                - generic [ref=e81]: Status
+                - combobox [ref=e82]
+              - generic [ref=e88] [cursor=pointer]:
+                - generic [ref=e89]: Type
+                - combobox [ref=e90]
+              - generic [ref=e96] [cursor=pointer]: Date range
+              - button [disabled] [ref=e103]: Reset all
+          - separator [ref=e104]
+          - generic [ref=e105]:
+            - paragraph [ref=e106]: 116 Items found
+            - generic [ref=e108]:
+              - button [pressed] [ref=e109] [cursor=pointer]:
+                - emphasis [ref=e110]: 
+              - button [ref=e111] [cursor=pointer]:
+                - emphasis [ref=e112]: 
+          - generic [ref=e113]:
+            - generic [ref=e129]:
+              - generic [ref=e130]:
+                - list [ref=e131]:
+                  - listitem [ref=e132]:
+                    - button [ref=e133] [cursor=pointer]:
+                      - generic [ref=e134]: Social
+                - generic [ref=e135]:
+                  - generic [ref=e137]: Apr 7, 2026
+                  - generic [ref=e138]: "|"
+                  - generic [ref=e139]: 3:30 PM
+                - paragraph [ref=e142]: L'viv, Tyutyunnykiv Street, 23
+                - generic [ref=e143]: Open
+                - paragraph [ref=e147]: TESTEVENT
+              - button [ref=e149] [cursor=pointer]: More
+              - generic [ref=e150]:
+                - paragraph [ref=e153]: Apr 07, 2026
+                - paragraph [ref=e156]: TestATestA
+                - paragraph [ref=e159]: "0"
+                - generic [ref=e160]:
+                  - button [ref=e161] [cursor=pointer]: "0"
+                  - button [ref=e163] [cursor=pointer]: "0"
+            - generic [ref=e167]:
+              - generic [ref=e168] [cursor=pointer]
+              - generic [ref=e172]:
+                - generic [ref=e173]:
+                  - list [ref=e174]:
+                    - listitem [ref=e175]:
+                      - button [ref=e176] [cursor=pointer]:
+                        - generic [ref=e177]: Economic
+                  - generic [ref=e178]:
+                    - generic [ref=e180]: Oct 15, 2026
+                    - generic [ref=e181]: "|"
+                    - generic [ref=e182]: 6:00 PM
+                  - paragraph [ref=e185]:
+                    - link [ref=e186] [cursor=pointer]:
+                      - /url: https://example.com/test-link
+                      - text: Online
+                  - generic [ref=e187]: Open
+                  - paragraph [ref=e191]: Test Title Positive 51954428
+                - generic [ref=e192]:
+                  - button [ref=e193] [cursor=pointer]: More
+                  - button [ref=e194] [cursor=pointer]: Edit event
+                - generic [ref=e195]:
+                  - paragraph [ref=e198]: Oct 14, 2026
+                  - paragraph [ref=e201]: TestATestA
+                  - paragraph [ref=e204]: "0"
+                  - generic [ref=e205]:
+                    - button [ref=e206] [cursor=pointer]: "0"
+                    - button [ref=e208] [cursor=pointer]: "0"
+            - generic [ref=e212]:
+              - generic [ref=e213] [cursor=pointer]
+              - generic [ref=e217]:
+                - generic [ref=e218]:
+                  - list [ref=e219]:
+                    - listitem [ref=e220]:
+                      - button [ref=e221] [cursor=pointer]:
+                        - generic [ref=e222]: Economic
+                  - generic [ref=e223]:
+                    - generic [ref=e225]: Oct 15, 2026
+                    - generic [ref=e226]: "|"
+                    - generic [ref=e227]: 6:00 PM
+                  - paragraph [ref=e230]:
+                    - link [ref=e231] [cursor=pointer]:
+                      - /url: https://example.com/test-link
+                      - text: Online
+                  - generic [ref=e232]: Open
+                  - paragraph [ref=e236]: Test Title Positive 51863805
+                - generic [ref=e237]:
+                  - button [ref=e238] [cursor=pointer]: More
+                  - button [ref=e239] [cursor=pointer]: Edit event
+                - generic [ref=e240]:
+                  - paragraph [ref=e243]: Oct 14, 2026
+                  - paragraph [ref=e246]: TestATestA
+                  - paragraph [ref=e249]: "0"
+                  - generic [ref=e250]:
+                    - button [ref=e251] [cursor=pointer]: "0"
+                    - button [ref=e253] [cursor=pointer]: "0"
+            - generic [ref=e257]:
+              - generic [ref=e258] [cursor=pointer]
+              - generic [ref=e262]:
+                - generic [ref=e263]:
+                  - list [ref=e264]:
+                    - listitem [ref=e265]:
+                      - button [ref=e266] [cursor=pointer]:
+                        - generic [ref=e267]: Economic
+                  - generic [ref=e268]:
+                    - generic [ref=e270]: Oct 15, 2026
+                    - generic [ref=e271]: "|"
+                    - generic [ref=e272]: 6:00 PM
+                  - paragraph [ref=e275]:
+                    - link [ref=e276] [cursor=pointer]:
+                      - /url: https://example.com/test-link
+                      - text: Online
+                  - generic [ref=e277]: Open
+                  - paragraph [ref=e281]: Test Title Positive 51875006
+                - generic [ref=e282]:
+                  - button [ref=e283] [cursor=pointer]: More
+                  - button [ref=e284] [cursor=pointer]: Edit event
+                - generic [ref=e285]:
+                  - paragraph [ref=e288]: Oct 14, 2026
+                  - paragraph [ref=e291]: TestATestA
+                  - paragraph [ref=e294]: "0"
+                  - generic [ref=e295]:
+                    - button [ref=e296] [cursor=pointer]: "0"
+                    - button [ref=e298] [cursor=pointer]: "0"
+            - generic [ref=e315]:
+              - generic [ref=e316]:
+                - list [ref=e317]:
+                  - listitem [ref=e318]:
+                    - button [ref=e319] [cursor=pointer]:
+                      - generic [ref=e320]: Economic
+                - generic [ref=e321]:
+                  - generic [ref=e323]: Oct 2, 2026
+                  - generic [ref=e324]: "|"
+                  - generic [ref=e325]: 6:00 PM
+                - paragraph [ref=e328]:
+                  - link [ref=e329] [cursor=pointer]:
+                    - /url: https://example.com/test-link
+                    - text: Online
+                - generic [ref=e330]: Open
+                - paragraph [ref=e334]: Test Title Positive 65576233
+              - button [ref=e336] [cursor=pointer]: More
+              - generic [ref=e337]:
+                - paragraph [ref=e340]: Oct 01, 2026
+                - paragraph [ref=e343]: TestATestA
+                - paragraph [ref=e346]: "0"
+                - generic [ref=e347]:
+                  - button [ref=e348] [cursor=pointer]: "0"
+                  - button [ref=e350] [cursor=pointer]: "0"
+            - generic [ref=e367]:
+              - generic [ref=e368]:
+                - list [ref=e369]:
+                  - listitem [ref=e370]:
+                    - button [ref=e371] [cursor=pointer]:
+                      - generic [ref=e372]: Economic
+                - generic [ref=e373]:
+                  - generic [ref=e375]: Oct 2, 2026
+                  - generic [ref=e376]: "|"
+                  - generic [ref=e377]: 6:00 PM
+                - paragraph [ref=e380]:
+                  - link [ref=e381] [cursor=pointer]:
+                    - /url: https://example.com/test-link
+                    - text: Online
+                - generic [ref=e382]: Open
+                - paragraph [ref=e386]: Test Title Positive 65607903
+              - button [ref=e388] [cursor=pointer]: More
+              - generic [ref=e389]:
+                - paragraph [ref=e392]: Oct 01, 2026
+                - paragraph [ref=e395]: TestATestA
+                - paragraph [ref=e398]: "0"
+                - generic [ref=e399]:
+                  - button [ref=e400] [cursor=pointer]: "0"
+                  - button [ref=e402] [cursor=pointer]: "0"
+          - progressbar [ref=e405]
+        - contentinfo [ref=e421]:
+          - generic [ref=e422]:
+            - generic [ref=e423]:
+              - link [ref=e425] [cursor=pointer]:
+                - /url: "#/greenCity"
+              - navigation [ref=e427]:
+                - menu [ref=e428]:
+                  - listitem [ref=e429]:
+                    - link [ref=e430] [cursor=pointer]:
+                      - /url: "#/greenCity/news"
+                      - text: Eco news
+                  - listitem [ref=e431]:
+                    - link [ref=e432] [cursor=pointer]:
+                      - /url: "#/greenCity/events"
+                      - text: Events
+                  - listitem [ref=e433]:
+                    - link [ref=e434] [cursor=pointer]:
+                      - /url: "#/greenCity/places"
+                      - text: Places
+                  - listitem [ref=e435]:
+                    - link [ref=e436] [cursor=pointer]:
+                      - /url: "#/greenCity/about"
+                      - text: About Us
+                  - listitem [ref=e437]:
+                    - link [ref=e438] [cursor=pointer]:
+                      - /url: "#/greenCity/profile/1205"
+                      - text: My Space
+                  - listitem [ref=e439]:
+                    - link [ref=e440] [cursor=pointer]:
+                      - /url: "#/ubs"
+                      - text: UBS Courier
+                - menu [ref=e441]:
+                  - listitem [ref=e442]:
+                    - paragraph [ref=e443]: Follow us
+                  - listitem [ref=e444]:
+                    - link [ref=e445] [cursor=pointer]:
+                      - /url: "#"
+                    - link [ref=e447] [cursor=pointer]:
+                      - /url: "#"
+                    - link [ref=e449] [cursor=pointer]:
+                      - /url: "#"
+                    - link [ref=e451] [cursor=pointer]:
+                      - /url: "#"
+                    - link [ref=e453] [cursor=pointer]:
+                      - /url: "#"
+            - generic [ref=e455]: © Copyright 2026. Green City.
+    - button [ref=e456] [cursor=pointer]
+  - generic [ref=e458]: Welcome to the search window
+  - generic:
+    - listbox [ref=e461]:
+      - option "Select All" [ref=e462] [cursor=pointer]
+      - separator [ref=e465]
+      - option "Online" [ref=e466] [cursor=pointer]
+      - option "Offline" [ref=e469] [cursor=pointer]
+      - separator [ref=e472]
+      - generic [ref=e473]: Filter cities
+    - generic [ref=e479]:
+      - button [ref=e480] [cursor=pointer]:
+        - img [aria-hidden] [ref=e481]: close
+      - heading "Filter cities" [level=2] [ref=e483]
+      - combobox [active] [ref=e487]: Odesa
+      - button "Add selected cities" [ref=e488] [cursor=pointer]
+```
+
+# Test source
+
+```ts
+  1  | import type { Locator, Page } from '@playwright/test';
+  2  | import { BaseModal } from '@/modals/base-modal';
+  3  | 
+  4  | export class CityFilterModal extends BaseModal {
+  5  |   protected readonly closeButton: Locator;
+  6  |   protected readonly title: Locator;
+  7  |   protected readonly citySearchInput: Locator;
+  8  |   protected readonly citySuggestions: Locator;
+  9  |   protected readonly cityList: Locator;
+  10 |   protected readonly cityTags: Locator;
+  11 |   protected readonly saveCitiesButton: Locator;
+  12 | 
+  13 |   constructor(page: Page, root: Locator) {
+  14 |     super(page, root);
+  15 | 
+  16 |     this.closeButton = this.root.locator('button.close-btn');
+  17 |     this.title = this.root.locator('div.city-modal-header h2');
+  18 |     this.citySearchInput = this.root.getByRole('combobox');
+  19 |     this.citySuggestions = this.page.getByRole('listbox').getByRole('option');
+  20 |     this.cityList = this.root.locator('div.city-list');
+  21 |     this.cityTags = this.cityList.locator('div.city-tag');
+  22 |     this.saveCitiesButton = this.root.getByRole('button', { name: 'Add selected cities' });
+  23 |   }
+  24 | 
+  25 |   /** Clicks the close button */
+  26 |   async close(): Promise<void> {
+  27 |     await this.closeButton.click();
+  28 |   }
+  29 | 
+  30 |   /** Returns the modal title text */
+  31 |   async getTitle(): Promise<string> {
+  32 |     return (await this.title.textContent()) ?? '';
+  33 |   }
+  34 | 
+  35 |   /** Types text into the city search input */
+  36 |   async fillCitySearch(text: string): Promise<void> {
+  37 |     await this.citySearchInput.fill(text);
+  38 |   }
+  39 | 
+  40 |   /** Selects a first city suggestion from the autocomplete dropdown by its text. */
+  41 |   async selectFirstCitySuggestion(cityName: string): Promise<void> {
+> 42 |     await this.citySuggestions.filter({ hasText: cityName }).first().click();
+     |                                                                      ^ TimeoutError: locator.click: Timeout 10000ms exceeded.
+  43 |   }
+  44 | 
+  45 |   /** Returns the number of currently selected city tags */
+  46 |   async getSelectedCitiesCount(): Promise<number> {
+  47 |     return await this.cityTags.count();
+  48 |   }
+  49 | 
+  50 |   /** Checks whether a city tag with the given name is currently selected */
+  51 |   async isCitySelected(cityName: string): Promise<boolean> {
+  52 |     return (await this.cityTags.filter({ hasText: new RegExp(`^${cityName}$`) }).count()) > 0;
+  53 |   }
+  54 | 
+  55 |   /** Selects a city only when it is not already present in the modal. */
+  56 |   async ensureCitySelected(cityName: string, cityOption: string): Promise<void> {
+  57 |     if (await this.isCitySelected(cityName)) {
+  58 |       return;
+  59 |     }
+  60 | 
+  61 |     await this.fillCitySearch(cityName);
+  62 |     await this.citySuggestions.first().waitFor({ state: 'visible' });
+  63 |     await this.selectFirstCitySuggestion(cityOption);
+  64 |   }
+  65 | 
+  66 |   /** Removes a selected city tag by its name  */
+  67 |   async removeCity(cityName: string): Promise<void> {
+  68 |     await this.cityTags
+  69 |       .filter({ hasText: new RegExp(`^${cityName}$`) })
+  70 |       .getByRole('button')
+  71 |       .click();
+  72 |   }
+  73 | 
+  74 |   /** Clicks "Add selected cities" to confirm the selection */
+  75 |   async clickAddSelectedCities(): Promise<void> {
+  76 |     await this.saveCitiesButton.click();
+  77 |   }
+  78 | }
+  79 | 
+```
