@@ -173,7 +173,7 @@ export class EditEventPage extends BasePage {
    * Returns the count of currently attached images.
    */
   async getAttachedImagesCount(): Promise<number> {
-    return await this.pictures.getImagesCount();
+    return await this.attachedImages.count();
   }
 
   async uploadImage(filePath: string): Promise<void> {
