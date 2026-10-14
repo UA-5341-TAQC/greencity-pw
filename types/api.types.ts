@@ -4,6 +4,7 @@ export interface ApiRequestOptions {
   headers?: Record<string, string>;
   data?: unknown;
   params?: Record<string, string | number | boolean>;
+  multipart?: NonNullable<Parameters<APIRequestContext['fetch']>[1]>['multipart'];
   timeout?: number;
   failOnStatusCode?: boolean;
   ignoreHTTPSErrors?: boolean;
