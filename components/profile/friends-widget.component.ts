@@ -6,7 +6,7 @@ import { BaseComponent } from '@/components/base-component';
  *
  * Empty state (verified live, 0 connections):
  *   .friends-error > .text-title > p / .text-number / .error-message > .add-friends > a
- * Populated state swaps `.add-friends` for `a.text-more`.
+ * Populated state uses `p.text-title` and swaps `.add-friends` for `a.text-more`.
  *
  * Note: `a[href*="/friends"]` was removed from `seeAllLink` — on the empty state it
  * resolved to the SAME node as `addFriendLink` ("+" → /friends/recommended), which made
@@ -24,7 +24,7 @@ export class FriendsWidgetComponent extends BaseComponent {
   constructor(page: Page) {
     super(page.locator('app-users-friends').first(), page);
 
-    this.title = this.root.locator('.text-title p').first();
+    this.title = this.root.locator('.text-title').first();
     this.quantity = this.root.locator('.text-number').first();
     // Populated state only: "see all" link to .../friends.
     this.seeAllLink = this.root.locator('a.text-more').first();
@@ -39,11 +39,7 @@ export class FriendsWidgetComponent extends BaseComponent {
   /** "See all" when the strip is populated, otherwise the empty-state "+" link. */
   async clickSeeAll(): Promise<void> {
     await test.step('FriendsWidget: see all', async () => {
-      if (await this.seeAllLink.isVisible().catch(() => false)) {
-        await this.seeAllLink.click();
-        return;
-      }
-      await this.addFriendLink.click();
+      await this.seeAllLink.or(this.addFriendLink).click();
     });
   }
 
