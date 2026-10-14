@@ -1,0 +1,477 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: ui/tc-28-event-filter-by-time.spec.ts >> TC-28 Verify that a user can filter events by event time >> should filter upcoming and past events and restore all events
+- Location: tests/ui/tc-28-event-filter-by-time.spec.ts:6:3
+
+# Error details
+
+```
+Error: expect(received).toBe(expected) // Object.is equality
+
+Expected: 149
+Received: 151
+
+Call Log:
+- Timeout 10000ms exceeded while waiting on the predicate
+```
+
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e4]:
+      - link "skip to the main content" [ref=e6] [cursor=pointer]:
+        - /url: .main-content
+      - banner "Welcome to header" [ref=e7]:
+        - generic [ref=e9]:
+          - link [ref=e10] [cursor=pointer]:
+            - /url: "#/greenCity"
+            - link "Image green city logo" [ref=e11]
+          - generic [ref=e12]:
+            - navigation [ref=e13]:
+              - tablist [ref=e14]:
+                - listitem [ref=e15]:
+                  - link "Eco news" [ref=e16] [cursor=pointer]:
+                    - /url: "#/greenCity/news"
+                - listitem [ref=e17]:
+                  - link "Events" [ref=e18] [cursor=pointer]:
+                    - /url: "#/greenCity/events"
+                - listitem [ref=e19]:
+                  - link "Places" [ref=e20] [cursor=pointer]:
+                    - /url: "#/greenCity/places"
+                - listitem [ref=e21]:
+                  - link "About us" [ref=e22] [cursor=pointer]:
+                    - /url: "#/greenCity/about"
+                - listitem [ref=e23]:
+                  - link "My space" [ref=e24] [cursor=pointer]:
+                    - /url: "#/greenCity/profile"
+                - listitem [ref=e25]:
+                  - link "UBS courier" [ref=e26] [cursor=pointer]:
+                    - /url: "#/ubs"
+            - menu [ref=e28]:
+              - search "site search" [ref=e29] [cursor=pointer]
+              - menu "language switcher" [ref=e31]:
+                - option "english" [ref=e32] [cursor=pointer]:
+                  - generic [aria-hidden] [ref=e33]: En
+              - link "Sign in" [ref=e35] [cursor=pointer]
+              - link "Sign up" [ref=e36] [cursor=pointer]
+      - generic [ref=e39]:
+        - generic "Tab To Main"
+        - generic [ref=e40]:
+          - generic [ref=e45]:
+            - generic [ref=e46]:
+              - generic [ref=e47]:
+                - paragraph [ref=e48]: Events
+                - generic [ref=e49]:
+                  - generic [ref=e50] [cursor=pointer]
+                  - generic [ref=e52] [cursor=pointer]
+                  - img "my-event" [ref=e55] [cursor=pointer]
+              - button "Create event" [ref=e57] [cursor=pointer]
+            - generic [ref=e58]:
+              - paragraph [ref=e59]: Filter
+              - generic [ref=e60]:
+                - generic [ref=e61] [cursor=pointer]:
+                  - generic [ref=e62]: Event time
+                  - combobox [ref=e63]
+                - generic [ref=e69] [cursor=pointer]:
+                  - generic [ref=e70]: Location
+                  - combobox [ref=e71]
+                - generic [ref=e77] [cursor=pointer]:
+                  - generic [ref=e78]: Status
+                  - combobox [ref=e79]
+                - generic [ref=e85] [cursor=pointer]:
+                  - generic [ref=e86]: Type
+                  - combobox [ref=e87]
+                - generic [ref=e93] [cursor=pointer]: Date range
+                - button "Reset all" [disabled] [ref=e100]
+            - separator [ref=e101]
+            - generic [ref=e102]:
+              - paragraph [ref=e103]: 151 Items found
+              - generic [ref=e105]:
+                - button "table view" [pressed] [ref=e106] [cursor=pointer]:
+                  - emphasis [ref=e107]: 
+                - button "list view" [ref=e108] [cursor=pointer]:
+                  - emphasis [ref=e109]: 
+            - generic [ref=e110]:
+              - generic [ref=e113]:
+                - generic [ref=e114] [cursor=pointer]
+                - generic [ref=e116]: "+2"
+                - img "event" [ref=e121]
+                - generic [ref=e122]:
+                  - generic [ref=e123]:
+                    - list "filter by items" [ref=e124]:
+                      - listitem [ref=e125]:
+                        - button "Economic" [ref=e126] [cursor=pointer]
+                    - generic [ref=e128]:
+                      - generic [ref=e130]: Oct 14, 2026
+                      - generic [ref=e131]: "|"
+                      - generic [ref=e132]: 11:00 PM
+                    - paragraph [ref=e135]:
+                      - link "Online" [ref=e136] [cursor=pointer]:
+                        - /url: https://www.greencity.cx.ua/#/greenCity/events/create-update-event
+                    - generic [ref=e137]: Open
+                    - paragraph [ref=e141]: test
+                  - generic [ref=e142]:
+                    - button "More" [ref=e143] [cursor=pointer]
+                    - button "Join event" [ref=e144] [cursor=pointer]
+                  - generic [ref=e145]:
+                    - generic [ref=e146]:
+                      - img "date" [ref=e147]
+                      - paragraph [ref=e148]: Oct 03, 2026
+                    - generic [ref=e149]:
+                      - img "author" [ref=e150]
+                      - paragraph [ref=e151]: Yurii Kravchuc
+                    - generic [ref=e152]:
+                      - img "frame" [ref=e153]
+                      - paragraph [ref=e154]: "0"
+                    - generic [ref=e155]:
+                      - button "Like this event" [ref=e156] [cursor=pointer]:
+                        - img "Like" [ref=e157]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e158] [cursor=pointer]:
+                        - img "Dislike" [ref=e159]
+                        - text: "0"
+              - generic [ref=e162]:
+                - generic [ref=e163] [cursor=pointer]
+                - img "event" [ref=e166]
+                - generic [ref=e167]:
+                  - generic [ref=e168]:
+                    - list "filter by items" [ref=e169]:
+                      - listitem [ref=e170]:
+                        - button "Economic" [ref=e171] [cursor=pointer]
+                    - generic [ref=e173]:
+                      - generic [ref=e175]: Oct 15, 2026
+                      - generic [ref=e176]: "|"
+                      - generic [ref=e177]: 6:00 PM
+                    - paragraph [ref=e180]:
+                      - link "Online" [ref=e181] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e182]: Open
+                    - paragraph [ref=e186]: Test Title Positive 58599526
+                  - generic [ref=e187]:
+                    - button "More" [ref=e188] [cursor=pointer]
+                    - button "Join event" [ref=e189] [cursor=pointer]
+                  - generic [ref=e190]:
+                    - generic [ref=e191]:
+                      - img "date" [ref=e192]
+                      - paragraph [ref=e193]: Oct 14, 2026
+                    - generic [ref=e194]:
+                      - img "author" [ref=e195]
+                      - paragraph [ref=e196]: TestATestA
+                    - generic [ref=e197]:
+                      - img "frame" [ref=e198]
+                      - paragraph [ref=e199]: "0"
+                    - generic [ref=e200]:
+                      - button "Like this event" [ref=e201] [cursor=pointer]:
+                        - img "Like" [ref=e202]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e203] [cursor=pointer]:
+                        - img "Dislike" [ref=e204]
+                        - text: "0"
+              - generic [ref=e207]:
+                - generic [ref=e208] [cursor=pointer]
+                - img "event" [ref=e211]
+                - generic [ref=e212]:
+                  - generic [ref=e213]:
+                    - list "filter by items" [ref=e214]:
+                      - listitem [ref=e215]:
+                        - button "Economic" [ref=e216] [cursor=pointer]
+                    - generic [ref=e218]:
+                      - generic [ref=e220]: Oct 15, 2026
+                      - generic [ref=e221]: "|"
+                      - generic [ref=e222]: 6:00 PM
+                    - paragraph [ref=e225]:
+                      - link "Online" [ref=e226] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e227]: Open
+                    - paragraph [ref=e231]: Test Title Positive 51954428
+                  - generic [ref=e232]:
+                    - button "More" [ref=e233] [cursor=pointer]
+                    - button "Join event" [ref=e234] [cursor=pointer]
+                  - generic [ref=e235]:
+                    - generic [ref=e236]:
+                      - img "date" [ref=e237]
+                      - paragraph [ref=e238]: Oct 14, 2026
+                    - generic [ref=e239]:
+                      - img "author" [ref=e240]
+                      - paragraph [ref=e241]: TestATestA
+                    - generic [ref=e242]:
+                      - img "frame" [ref=e243]
+                      - paragraph [ref=e244]: "0"
+                    - generic [ref=e245]:
+                      - button "Like this event" [ref=e246] [cursor=pointer]:
+                        - img "Like" [ref=e247]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e248] [cursor=pointer]:
+                        - img "Dislike" [ref=e249]
+                        - text: "0"
+              - generic [ref=e252]:
+                - generic [ref=e253] [cursor=pointer]
+                - img "event" [ref=e256]
+                - generic [ref=e257]:
+                  - generic [ref=e258]:
+                    - list "filter by items" [ref=e259]:
+                      - listitem [ref=e260]:
+                        - button "Economic" [ref=e261] [cursor=pointer]
+                    - generic [ref=e263]:
+                      - generic [ref=e265]: Oct 15, 2026
+                      - generic [ref=e266]: "|"
+                      - generic [ref=e267]: 6:00 PM
+                    - paragraph [ref=e270]:
+                      - link "Online" [ref=e271] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e272]: Open
+                    - paragraph [ref=e276]: Test Title Positive 51875006
+                  - generic [ref=e277]:
+                    - button "More" [ref=e278] [cursor=pointer]
+                    - button "Join event" [ref=e279] [cursor=pointer]
+                  - generic [ref=e280]:
+                    - generic [ref=e281]:
+                      - img "date" [ref=e282]
+                      - paragraph [ref=e283]: Oct 14, 2026
+                    - generic [ref=e284]:
+                      - img "author" [ref=e285]
+                      - paragraph [ref=e286]: TestATestA
+                    - generic [ref=e287]:
+                      - img "frame" [ref=e288]
+                      - paragraph [ref=e289]: "0"
+                    - generic [ref=e290]:
+                      - button "Like this event" [ref=e291] [cursor=pointer]:
+                        - img "Like" [ref=e292]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e293] [cursor=pointer]:
+                        - img "Dislike" [ref=e294]
+                        - text: "0"
+              - generic [ref=e297]:
+                - generic [ref=e298] [cursor=pointer]
+                - generic [ref=e300]: "+1"
+                - img "event" [ref=e305]
+                - generic [ref=e306]:
+                  - generic [ref=e307]:
+                    - list "filter by items" [ref=e308]:
+                      - listitem [ref=e309]:
+                        - button "Economic" [ref=e310] [cursor=pointer]
+                    - generic [ref=e312]:
+                      - generic [ref=e314]: Oct 15, 2026
+                      - generic [ref=e315]: "|"
+                      - generic [ref=e316]: 6:00 PM
+                    - paragraph [ref=e319]:
+                      - link "Online" [ref=e320] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e321]: Open
+                    - paragraph [ref=e325]: Test Title Positive 58589473
+                  - generic [ref=e326]:
+                    - button "More" [ref=e327] [cursor=pointer]
+                    - button "Join event" [ref=e328] [cursor=pointer]
+                  - generic [ref=e329]:
+                    - generic [ref=e330]:
+                      - img "date" [ref=e331]
+                      - paragraph [ref=e332]: Oct 14, 2026
+                    - generic [ref=e333]:
+                      - img "author" [ref=e334]
+                      - paragraph [ref=e335]: TestATestA
+                    - generic [ref=e336]:
+                      - img "frame" [ref=e337]
+                      - paragraph [ref=e338]: "0"
+                    - generic [ref=e339]:
+                      - button "Like this event" [ref=e340] [cursor=pointer]:
+                        - img "Like" [ref=e341]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e342] [cursor=pointer]:
+                        - img "Dislike" [ref=e343]
+                        - text: "0"
+              - generic [ref=e346]:
+                - generic [ref=e347] [cursor=pointer]
+                - img "event" [ref=e350]
+                - generic [ref=e351]:
+                  - generic [ref=e352]:
+                    - list "filter by items" [ref=e353]:
+                      - listitem [ref=e354]:
+                        - button "Economic" [ref=e355] [cursor=pointer]
+                    - generic [ref=e357]:
+                      - generic [ref=e359]: Oct 15, 2026
+                      - generic [ref=e360]: "|"
+                      - generic [ref=e361]: 6:00 PM
+                    - paragraph [ref=e364]:
+                      - link "Online" [ref=e365] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e366]: Open
+                    - paragraph [ref=e370]: Test Title Positive 58692905
+                  - generic [ref=e371]:
+                    - button "More" [ref=e372] [cursor=pointer]
+                    - button "Join event" [ref=e373] [cursor=pointer]
+                  - generic [ref=e374]:
+                    - generic [ref=e375]:
+                      - img "date" [ref=e376]
+                      - paragraph [ref=e377]: Oct 14, 2026
+                    - generic [ref=e378]:
+                      - img "author" [ref=e379]
+                      - paragraph [ref=e380]: TestATestA
+                    - generic [ref=e381]:
+                      - img "frame" [ref=e382]
+                      - paragraph [ref=e383]: "0"
+                    - generic [ref=e384]:
+                      - button "Like this event" [ref=e385] [cursor=pointer]:
+                        - img "Like" [ref=e386]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e387] [cursor=pointer]:
+                        - img "Dislike" [ref=e388]
+                        - text: "0"
+            - progressbar [ref=e390]
+          - contentinfo [ref=e406]:
+            - generic [ref=e407]:
+              - generic [ref=e408]:
+                - link [ref=e410] [cursor=pointer]:
+                  - /url: "#/greenCity"
+                  - img "GreenCity home" [ref=e411]
+                - navigation [ref=e412]:
+                  - menu [ref=e413]:
+                    - listitem [ref=e414]:
+                      - link "Eco news" [ref=e415] [cursor=pointer]:
+                        - /url: "#/greenCity/news"
+                    - listitem [ref=e416]:
+                      - link "Events" [ref=e417] [cursor=pointer]:
+                        - /url: "#/greenCity/events"
+                    - listitem [ref=e418]:
+                      - link "Places" [ref=e419] [cursor=pointer]:
+                        - /url: "#/greenCity/places"
+                    - listitem [ref=e420]:
+                      - link "About Us" [ref=e421] [cursor=pointer]:
+                        - /url: "#/greenCity/about"
+                    - listitem [ref=e422]:
+                      - link "My Space" [ref=e423] [cursor=pointer]:
+                        - /url: "#/greenCity/profile/not_signed-in"
+                    - listitem [ref=e424]:
+                      - link "UBS Courier" [ref=e425] [cursor=pointer]:
+                        - /url: "#/ubs"
+                  - menu [ref=e426]:
+                    - listitem [ref=e427]:
+                      - paragraph [ref=e428]: Follow us
+                    - listitem [ref=e429]:
+                      - link [ref=e430] [cursor=pointer]:
+                        - /url: "#"
+                        - img "Twitter link" [ref=e431]
+                      - link [ref=e432] [cursor=pointer]:
+                        - /url: "#"
+                        - img "LinkedIn link" [ref=e433]
+                      - link [ref=e434] [cursor=pointer]:
+                        - /url: "#"
+                        - img "Facebook link" [ref=e435]
+                      - link [ref=e436] [cursor=pointer]:
+                        - /url: "#"
+                        - img "Instagram link" [ref=e437]
+                      - link [ref=e438] [cursor=pointer]:
+                        - /url: "#"
+                        - img "YouTube link" [ref=e439]
+              - generic [ref=e440]: © Copyright 2026. Green City.
+    - button [ref=e441] [cursor=pointer]:
+      - img "chat" [ref=e442]
+  - generic [ref=e443]: Welcome to the search window
+```
+
+# Test source
+
+```ts
+  1  | import { test, expect } from '@/fixtures';
+  2  | import { parseEventDateTime } from '@/helpers';
+  3  | import { EventTimeFilter } from '@/types';
+  4  | 
+  5  | test.describe('TC-28 Verify that a user can filter events by event time', () => {
+  6  |   test('should filter upcoming and past events and restore all events', async ({
+  7  |     page,
+  8  |     eventsPage,
+  9  |   }) => {
+  10 |     await test.step('Open the Events page and record the initial count', async () => {
+  11 |       await eventsPage.navigateToEventsPage();
+  12 |       await eventsPage.waitForEventsPage();
+  13 |     });
+  14 | 
+  15 |     const initialItemsCount = await eventsPage.getItemsFoundCount();
+  16 |     expect(initialItemsCount).toBeGreaterThan(0);
+  17 | 
+  18 |     await test.step('Verify Event time options are available', async () => {
+  19 |       await eventsPage.filters.openTimeFilter();
+  20 | 
+  21 |       for (const filter of [EventTimeFilter.Any, EventTimeFilter.Upcoming, EventTimeFilter.Past]) {
+  22 |         await expect(
+  23 |           page.getByRole('option', { name: eventsPage.i18n.timeOptions[filter], exact: true })
+  24 |         ).toBeVisible();
+  25 |       }
+  26 | 
+  27 |       await eventsPage.filters.closeDropdown();
+  28 |     });
+  29 | 
+  30 |     await test.step('Filter upcoming events and verify their dates', async () => {
+  31 |       await eventsPage.filters.selectTimeFilter(EventTimeFilter.Upcoming);
+  32 | 
+  33 |       const upcomingChip = eventsPage.getActiveFilterChipByTime(EventTimeFilter.Upcoming);
+  34 |       await expect(upcomingChip.chip).toBeVisible();
+  35 | 
+  36 |       await eventsPage.getGridEventCardByIndex(0).waitForVisible();
+  37 |       const upcomingCount = await eventsPage.getItemsFoundCount();
+  38 |       expect(upcomingCount).toBeGreaterThan(0);
+  39 |       await eventsPage.scrollUntilAllEventCardsLoad();
+  40 | 
+  41 |       const now = Date.now();
+  42 |       for (const card of await eventsPage.getAllGridEventCards()) {
+  43 |         const eventDateTime = parseEventDateTime(await card.getDate(), await card.getTime());
+  44 |         expect(eventDateTime.getTime()).toBeGreaterThan(now);
+  45 |       }
+  46 |       expect(upcomingCount).toBeLessThanOrEqual(initialItemsCount);
+  47 | 
+  48 |       await upcomingChip.remove();
+  49 |       await expect(upcomingChip.chip).toBeHidden();
+> 50 |       await expect.poll(() => eventsPage.getItemsFoundCount()).toBe(initialItemsCount);
+     |                                                                ^ Error: expect(received).toBe(expected) // Object.is equality
+  51 |     });
+  52 | 
+  53 |     await test.step('Filter past events and verify their dates', async () => {
+  54 |       await eventsPage.filters.selectTimeFilter(EventTimeFilter.Past);
+  55 | 
+  56 |       const pastChip = eventsPage.getActiveFilterChipByTime(EventTimeFilter.Past);
+  57 |       await expect(pastChip.chip).toBeVisible();
+  58 | 
+  59 |       await eventsPage.getGridEventCardByIndex(0).waitForVisible();
+  60 |       const pastCount = await eventsPage.getItemsFoundCount();
+  61 |       expect(pastCount).toBeGreaterThan(0);
+  62 |       await eventsPage.scrollUntilAllEventCardsLoad();
+  63 | 
+  64 |       const now = Date.now();
+  65 |       for (const card of await eventsPage.getAllGridEventCards()) {
+  66 |         const eventDateTime = parseEventDateTime(await card.getDate(), await card.getTime());
+  67 |         expect(eventDateTime.getTime()).toBeLessThan(now);
+  68 |       }
+  69 |       expect(pastCount).toBeLessThanOrEqual(initialItemsCount);
+  70 | 
+  71 |       await eventsPage.filters.resetAll();
+  72 |       await expect(pastChip.chip).toBeHidden();
+  73 |       await expect.poll(() => eventsPage.getItemsFoundCount()).toBe(initialItemsCount);
+  74 |     });
+  75 | 
+  76 |     await test.step('Select Any time and verify both time filters are active', async () => {
+  77 |       await eventsPage.filters.selectTimeFilter(EventTimeFilter.Any);
+  78 | 
+  79 |       const upcomingChip = eventsPage.getActiveFilterChipByTime(EventTimeFilter.Upcoming);
+  80 |       const pastChip = eventsPage.getActiveFilterChipByTime(EventTimeFilter.Past);
+  81 |       await expect(upcomingChip.chip).toBeVisible();
+  82 |       await expect(pastChip.chip).toBeVisible();
+  83 |       await expect.poll(() => eventsPage.getItemsFoundCount()).toBe(initialItemsCount);
+  84 |       await eventsPage.getGridEventCardByIndex(0).waitForVisible();
+  85 |       await eventsPage.scrollUntilAllEventCardsLoad();
+  86 | 
+  87 |       await eventsPage.filters.selectTimeFilter(EventTimeFilter.Any);
+  88 |       await expect(upcomingChip.chip).toBeHidden();
+  89 |       await expect(pastChip.chip).toBeHidden();
+  90 |       await expect.poll(() => eventsPage.getItemsFoundCount()).toBe(initialItemsCount);
+  91 |     });
+  92 |   });
+  93 | });
+  94 | 
+```
