@@ -8,7 +8,7 @@ test.describe('User Controller API', () => {
     authorizedClient,
     authSession,
   }) => {
-    const userClient = await authorizedClient(UserClient, 'user', env.API_GREENCITY_BASE_URL);
+    const userClient = await authorizedClient(UserClient, 'admin', env.API_GREENCITY_BASE_URL);
 
     const response = await userClient.getUserLocation(authSession.userId);
 
@@ -35,7 +35,7 @@ test.describe('User Controller API', () => {
     authorizedClient,
     authSession,
   }) => {
-    const userClient = await authorizedClient(UserClient, 'user', env.API_GREENCITY_BASE_URL);
+    const userClient = await authorizedClient(UserClient, 'admin', env.API_GREENCITY_BASE_URL);
 
     const response = await userClient.changeUserStatus(authSession.userId, UserStatus.Activated);
 
