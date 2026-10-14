@@ -27,8 +27,8 @@ test.describe('Friends Page', () => {
       ).toHaveText(/\d+\s+(connections|зв'язків)/i);
     });
 
-    await test.step('2. Navigate to Friends page via widget "+" button', async () => {
-      await profilePage.friendsWidget.clickAddFriend();
+    await test.step('2. Open Friends via the widget and select Find Friends', async () => {
+      await profilePage.friendsWidget.clickSeeAll();
       await friendsPage.waitForFriends();
       await expect(friendsPage.heading, 'Friends page heading should display "Friends"').toHaveText(
         /Friends|Друзі/i
@@ -38,8 +38,11 @@ test.describe('Friends Page', () => {
         'Back to profile link should be visible'
       ).toBeVisible();
 
-      const isFindFriendActive = await friendsPage.isTabActive('findFriend');
-      expect(isFindFriendActive, 'Find Friends tab should be active by default').toBe(true);
+      await friendsPage.openTab('findFriend');
+      await expect(
+        friendsPage.tabs.findFriendTab,
+        'Find Friends tab should be active after selection'
+      ).toHaveClass(/\bactive\b/);
       await expect(friendsPage.searchInput, 'Search input field should be visible').toBeVisible();
     });
 
