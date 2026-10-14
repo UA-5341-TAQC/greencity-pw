@@ -1,0 +1,5757 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: ui/tc-28-event-filter-by-time.spec.ts >> TC-28 Verify that a user can filter events by event time >> should filter upcoming and past events and restore all events
+- Location: tests/ui/tc-28-event-filter-by-time.spec.ts:6:3
+
+# Error details
+
+```
+Error: expect(received).toBeGreaterThan(expected)
+
+Expected: > 1791979021923
+Received:   1791972000000
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e4]:
+      - link "skip to the main content" [ref=e6] [cursor=pointer]:
+        - /url: .main-content
+      - banner "Welcome to header" [ref=e7]:
+        - generic [ref=e9]:
+          - link [ref=e10] [cursor=pointer]:
+            - /url: "#/greenCity"
+            - link "Image green city logo" [ref=e11]
+          - generic [ref=e12]:
+            - navigation [ref=e13]:
+              - tablist [ref=e14]:
+                - listitem [ref=e15]:
+                  - link "Eco news" [ref=e16] [cursor=pointer]:
+                    - /url: "#/greenCity/news"
+                - listitem [ref=e17]:
+                  - link "Events" [ref=e18] [cursor=pointer]:
+                    - /url: "#/greenCity/events"
+                - listitem [ref=e19]:
+                  - link "Places" [ref=e20] [cursor=pointer]:
+                    - /url: "#/greenCity/places"
+                - listitem [ref=e21]:
+                  - link "About us" [ref=e22] [cursor=pointer]:
+                    - /url: "#/greenCity/about"
+                - listitem [ref=e23]:
+                  - link "My space" [ref=e24] [cursor=pointer]:
+                    - /url: "#/greenCity/profile"
+                - listitem [ref=e25]:
+                  - link "UBS courier" [ref=e26] [cursor=pointer]:
+                    - /url: "#/ubs"
+            - menu [ref=e28]:
+              - search "site search" [ref=e29] [cursor=pointer]
+              - menu "language switcher" [ref=e31]:
+                - option "english" [ref=e32] [cursor=pointer]:
+                  - generic [aria-hidden] [ref=e33]: En
+              - link "Sign in" [ref=e35] [cursor=pointer]
+              - link "Sign up" [ref=e36] [cursor=pointer]
+      - generic [ref=e39]:
+        - generic "Tab To Main"
+        - generic [ref=e40]:
+          - generic [ref=e45]:
+            - generic [ref=e46]:
+              - generic [ref=e47]:
+                - paragraph [ref=e48]: Events
+                - generic [ref=e49]:
+                  - generic [ref=e50] [cursor=pointer]
+                  - generic [ref=e52] [cursor=pointer]
+                  - img "my-event" [ref=e55] [cursor=pointer]
+              - button "Create event" [ref=e57] [cursor=pointer]
+            - generic [ref=e58]:
+              - paragraph [ref=e59]: Filter
+              - generic [ref=e60]:
+                - generic [ref=e61] [cursor=pointer]:
+                  - generic [ref=e62]: Event time
+                  - combobox [active] [ref=e63]
+                - generic [ref=e69] [cursor=pointer]:
+                  - generic [ref=e70]: Location
+                  - combobox [ref=e71]
+                - generic [ref=e77] [cursor=pointer]:
+                  - generic [ref=e78]: Status
+                  - combobox [ref=e79]
+                - generic [ref=e85] [cursor=pointer]:
+                  - generic [ref=e86]: Type
+                  - combobox [ref=e87]
+                - generic [ref=e93] [cursor=pointer]: Date range
+                - button "Reset all" [ref=e100] [cursor=pointer]
+            - separator [ref=e101]
+            - generic [ref=e102]:
+              - paragraph [ref=e103]: 149 Items found
+              - generic [ref=e104]:
+                - generic [ref=e106]:
+                  - generic [ref=e107]: Upcoming
+                  - img "cross" [ref=e109] [cursor=pointer]
+                - generic [ref=e110]:
+                  - button "table view" [pressed] [ref=e111] [cursor=pointer]:
+                    - emphasis [ref=e112]: 
+                  - button "list view" [ref=e113] [cursor=pointer]:
+                    - emphasis [ref=e114]: 
+            - generic [ref=e115]:
+              - generic [ref=e118]:
+                - generic [ref=e119] [cursor=pointer]
+                - generic [ref=e121]: "+2"
+                - img "event" [ref=e126]
+                - generic [ref=e127]:
+                  - generic [ref=e128]:
+                    - list "filter by items" [ref=e129]:
+                      - listitem [ref=e130]:
+                        - button "Economic" [ref=e131] [cursor=pointer]
+                    - generic [ref=e133]:
+                      - generic [ref=e135]: Oct 14, 2026
+                      - generic [ref=e136]: "|"
+                      - generic [ref=e137]: 11:00 PM
+                    - paragraph [ref=e140]:
+                      - link "Online" [ref=e141] [cursor=pointer]:
+                        - /url: https://www.greencity.cx.ua/#/greenCity/events/create-update-event
+                    - generic [ref=e142]: Open
+                    - paragraph [ref=e146]: test
+                  - generic [ref=e147]:
+                    - button "More" [ref=e148] [cursor=pointer]
+                    - button "Join event" [ref=e149] [cursor=pointer]
+                  - generic [ref=e150]:
+                    - generic [ref=e151]:
+                      - img "date" [ref=e152]
+                      - paragraph [ref=e153]: Oct 03, 2026
+                    - generic [ref=e154]:
+                      - img "author" [ref=e155]
+                      - paragraph [ref=e156]: Yurii Kravchuc
+                    - generic [ref=e157]:
+                      - img "frame" [ref=e158]
+                      - paragraph [ref=e159]: "0"
+                    - generic [ref=e160]:
+                      - button "Like this event" [ref=e161] [cursor=pointer]:
+                        - img "Like" [ref=e162]
+                        - text: "1"
+                      - button "Dislike this event" [ref=e163] [cursor=pointer]:
+                        - img "Dislike" [ref=e164]
+                        - text: "0"
+              - generic [ref=e167]:
+                - generic [ref=e168] [cursor=pointer]
+                - img "event" [ref=e171]
+                - generic [ref=e172]:
+                  - generic [ref=e173]:
+                    - list "filter by items" [ref=e174]:
+                      - listitem [ref=e175]:
+                        - button "Environmental" [ref=e176] [cursor=pointer]
+                    - generic [ref=e178]:
+                      - generic [ref=e180]: Oct 14, 2026
+                      - generic [ref=e181]: "|"
+                      - generic [ref=e182]: 10:00 AM
+                    - paragraph [ref=e185]:
+                      - link "Online" [ref=e186] [cursor=pointer]:
+                        - /url: https://www.greencity.cx.ua/#/greenCity/events/create-update-event
+                    - generic [ref=e187]: Open
+                    - paragraph [ref=e191]: "22131"
+                  - generic [ref=e192]:
+                    - button "More" [ref=e193] [cursor=pointer]
+                    - button "Join event" [disabled] [ref=e194]
+                  - generic [ref=e195]:
+                    - generic [ref=e196]:
+                      - img "date" [ref=e197]
+                      - paragraph [ref=e198]: Oct 14, 2026
+                    - generic [ref=e199]:
+                      - img "author" [ref=e200]
+                      - paragraph [ref=e201]: Abc123
+                    - generic [ref=e202]:
+                      - img "frame" [ref=e203]
+                      - paragraph [ref=e204]: "0"
+                    - generic [ref=e205]:
+                      - button "Like this event" [ref=e206] [cursor=pointer]:
+                        - img "Like" [ref=e207]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e208] [cursor=pointer]:
+                        - img "Dislike" [ref=e209]
+                        - text: "0"
+              - generic [ref=e212]:
+                - generic [ref=e213] [cursor=pointer]
+                - img "event" [ref=e216]
+                - generic [ref=e217]:
+                  - generic [ref=e218]:
+                    - list "filter by items" [ref=e219]:
+                      - listitem [ref=e220]:
+                        - button "Economic" [ref=e221] [cursor=pointer]
+                    - generic [ref=e223]:
+                      - generic [ref=e225]: Oct 15, 2026
+                      - generic [ref=e226]: "|"
+                      - generic [ref=e227]: 6:00 PM
+                    - paragraph [ref=e230]:
+                      - link "Online" [ref=e231] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e232]: Open
+                    - paragraph [ref=e236]: Test Title Positive 58599526
+                  - generic [ref=e237]:
+                    - button "More" [ref=e238] [cursor=pointer]
+                    - button "Join event" [ref=e239] [cursor=pointer]
+                  - generic [ref=e240]:
+                    - generic [ref=e241]:
+                      - img "date" [ref=e242]
+                      - paragraph [ref=e243]: Oct 14, 2026
+                    - generic [ref=e244]:
+                      - img "author" [ref=e245]
+                      - paragraph [ref=e246]: TestATestA
+                    - generic [ref=e247]:
+                      - img "frame" [ref=e248]
+                      - paragraph [ref=e249]: "0"
+                    - generic [ref=e250]:
+                      - button "Like this event" [ref=e251] [cursor=pointer]:
+                        - img "Like" [ref=e252]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e253] [cursor=pointer]:
+                        - img "Dislike" [ref=e254]
+                        - text: "0"
+              - generic [ref=e257]:
+                - generic [ref=e258] [cursor=pointer]
+                - img "event" [ref=e261]
+                - generic [ref=e262]:
+                  - generic [ref=e263]:
+                    - list "filter by items" [ref=e264]:
+                      - listitem [ref=e265]:
+                        - button "Economic" [ref=e266] [cursor=pointer]
+                    - generic [ref=e268]:
+                      - generic [ref=e270]: Oct 15, 2026
+                      - generic [ref=e271]: "|"
+                      - generic [ref=e272]: 6:00 PM
+                    - paragraph [ref=e275]:
+                      - link "Online" [ref=e276] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e277]: Open
+                    - paragraph [ref=e281]: Test Title Positive 51875006
+                  - generic [ref=e282]:
+                    - button "More" [ref=e283] [cursor=pointer]
+                    - button "Join event" [ref=e284] [cursor=pointer]
+                  - generic [ref=e285]:
+                    - generic [ref=e286]:
+                      - img "date" [ref=e287]
+                      - paragraph [ref=e288]: Oct 14, 2026
+                    - generic [ref=e289]:
+                      - img "author" [ref=e290]
+                      - paragraph [ref=e291]: TestATestA
+                    - generic [ref=e292]:
+                      - img "frame" [ref=e293]
+                      - paragraph [ref=e294]: "0"
+                    - generic [ref=e295]:
+                      - button "Like this event" [ref=e296] [cursor=pointer]:
+                        - img "Like" [ref=e297]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e298] [cursor=pointer]:
+                        - img "Dislike" [ref=e299]
+                        - text: "0"
+              - generic [ref=e302]:
+                - generic [ref=e303] [cursor=pointer]
+                - generic [ref=e305]: "+1"
+                - img "event" [ref=e310]
+                - generic [ref=e311]:
+                  - generic [ref=e312]:
+                    - list "filter by items" [ref=e313]:
+                      - listitem [ref=e314]:
+                        - button "Economic" [ref=e315] [cursor=pointer]
+                    - generic [ref=e317]:
+                      - generic [ref=e319]: Oct 15, 2026
+                      - generic [ref=e320]: "|"
+                      - generic [ref=e321]: 6:00 PM
+                    - paragraph [ref=e324]:
+                      - link "Online" [ref=e325] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e326]: Open
+                    - paragraph [ref=e330]: Test Title Positive 58589473
+                  - generic [ref=e331]:
+                    - button "More" [ref=e332] [cursor=pointer]
+                    - button "Join event" [ref=e333] [cursor=pointer]
+                  - generic [ref=e334]:
+                    - generic [ref=e335]:
+                      - img "date" [ref=e336]
+                      - paragraph [ref=e337]: Oct 14, 2026
+                    - generic [ref=e338]:
+                      - img "author" [ref=e339]
+                      - paragraph [ref=e340]: TestATestA
+                    - generic [ref=e341]:
+                      - img "frame" [ref=e342]
+                      - paragraph [ref=e343]: "0"
+                    - generic [ref=e344]:
+                      - button "Like this event" [ref=e345] [cursor=pointer]:
+                        - img "Like" [ref=e346]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e347] [cursor=pointer]:
+                        - img "Dislike" [ref=e348]
+                        - text: "1"
+              - generic [ref=e351]:
+                - generic [ref=e352] [cursor=pointer]
+                - img "event" [ref=e355]
+                - generic [ref=e356]:
+                  - generic [ref=e357]:
+                    - list "filter by items" [ref=e358]:
+                      - listitem [ref=e359]:
+                        - button "Economic" [ref=e360] [cursor=pointer]
+                    - generic [ref=e362]:
+                      - generic [ref=e364]: Oct 15, 2026
+                      - generic [ref=e365]: "|"
+                      - generic [ref=e366]: 6:00 PM
+                    - paragraph [ref=e369]:
+                      - link "Online" [ref=e370] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e371]: Open
+                    - paragraph [ref=e375]: Test Title Positive 51954428
+                  - generic [ref=e376]:
+                    - button "More" [ref=e377] [cursor=pointer]
+                    - button "Join event" [ref=e378] [cursor=pointer]
+                  - generic [ref=e379]:
+                    - generic [ref=e380]:
+                      - img "date" [ref=e381]
+                      - paragraph [ref=e382]: Oct 14, 2026
+                    - generic [ref=e383]:
+                      - img "author" [ref=e384]
+                      - paragraph [ref=e385]: TestATestA
+                    - generic [ref=e386]:
+                      - img "frame" [ref=e387]
+                      - paragraph [ref=e388]: "0"
+                    - generic [ref=e389]:
+                      - button "Like this event" [ref=e390] [cursor=pointer]:
+                        - img "Like" [ref=e391]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e392] [cursor=pointer]:
+                        - img "Dislike" [ref=e393]
+                        - text: "0"
+              - generic [ref=e396]:
+                - generic [ref=e397] [cursor=pointer]
+                - img "event" [ref=e400]
+                - generic [ref=e401]:
+                  - generic [ref=e402]:
+                    - list "filter by items" [ref=e403]:
+                      - listitem [ref=e404]:
+                        - button "Economic" [ref=e405] [cursor=pointer]
+                    - generic [ref=e407]:
+                      - generic [ref=e409]: Oct 15, 2026
+                      - generic [ref=e410]: "|"
+                      - generic [ref=e411]: 6:00 PM
+                    - paragraph [ref=e414]:
+                      - link "Online" [ref=e415] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e416]: Open
+                    - paragraph [ref=e420]: Test Title Positive 51875006
+                  - generic [ref=e421]:
+                    - button "More" [ref=e422] [cursor=pointer]
+                    - button "Join event" [ref=e423] [cursor=pointer]
+                  - generic [ref=e424]:
+                    - generic [ref=e425]:
+                      - img "date" [ref=e426]
+                      - paragraph [ref=e427]: Oct 14, 2026
+                    - generic [ref=e428]:
+                      - img "author" [ref=e429]
+                      - paragraph [ref=e430]: TestATestA
+                    - generic [ref=e431]:
+                      - img "frame" [ref=e432]
+                      - paragraph [ref=e433]: "0"
+                    - generic [ref=e434]:
+                      - button "Like this event" [ref=e435] [cursor=pointer]:
+                        - img "Like" [ref=e436]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e437] [cursor=pointer]:
+                        - img "Dislike" [ref=e438]
+                        - text: "0"
+              - generic [ref=e441]:
+                - generic [ref=e442] [cursor=pointer]
+                - img "event" [ref=e445]
+                - generic [ref=e446]:
+                  - generic [ref=e447]:
+                    - list "filter by items" [ref=e448]:
+                      - listitem [ref=e449]:
+                        - button "Economic" [ref=e450] [cursor=pointer]
+                    - generic [ref=e452]:
+                      - generic [ref=e454]: Oct 15, 2026
+                      - generic [ref=e455]: "|"
+                      - generic [ref=e456]: 6:00 PM
+                    - paragraph [ref=e459]:
+                      - link "Online" [ref=e460] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e461]: Open
+                    - paragraph [ref=e465]: Test Title Positive 51954428
+                  - generic [ref=e466]:
+                    - button "More" [ref=e467] [cursor=pointer]
+                    - button "Join event" [ref=e468] [cursor=pointer]
+                  - generic [ref=e469]:
+                    - generic [ref=e470]:
+                      - img "date" [ref=e471]
+                      - paragraph [ref=e472]: Oct 14, 2026
+                    - generic [ref=e473]:
+                      - img "author" [ref=e474]
+                      - paragraph [ref=e475]: TestATestA
+                    - generic [ref=e476]:
+                      - img "frame" [ref=e477]
+                      - paragraph [ref=e478]: "0"
+                    - generic [ref=e479]:
+                      - button "Like this event" [ref=e480] [cursor=pointer]:
+                        - img "Like" [ref=e481]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e482] [cursor=pointer]:
+                        - img "Dislike" [ref=e483]
+                        - text: "0"
+              - generic [ref=e486]:
+                - generic [ref=e487] [cursor=pointer]
+                - generic [ref=e489]: "+1"
+                - img "event" [ref=e494]
+                - generic [ref=e495]:
+                  - generic [ref=e496]:
+                    - list "filter by items" [ref=e497]:
+                      - listitem [ref=e498]:
+                        - button "Economic" [ref=e499] [cursor=pointer]
+                    - generic [ref=e501]:
+                      - generic [ref=e503]: Oct 15, 2026
+                      - generic [ref=e504]: "|"
+                      - generic [ref=e505]: 6:00 PM
+                    - paragraph [ref=e508]:
+                      - link "Online" [ref=e509] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e510]: Open
+                    - paragraph [ref=e514]: Test Title Positive 58589473
+                  - generic [ref=e515]:
+                    - button "More" [ref=e516] [cursor=pointer]
+                    - button "Join event" [ref=e517] [cursor=pointer]
+                  - generic [ref=e518]:
+                    - generic [ref=e519]:
+                      - img "date" [ref=e520]
+                      - paragraph [ref=e521]: Oct 14, 2026
+                    - generic [ref=e522]:
+                      - img "author" [ref=e523]
+                      - paragraph [ref=e524]: TestATestA
+                    - generic [ref=e525]:
+                      - img "frame" [ref=e526]
+                      - paragraph [ref=e527]: "0"
+                    - generic [ref=e528]:
+                      - button "Like this event" [ref=e529] [cursor=pointer]:
+                        - img "Like" [ref=e530]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e531] [cursor=pointer]:
+                        - img "Dislike" [ref=e532]
+                        - text: "1"
+              - generic [ref=e535]:
+                - generic [ref=e536] [cursor=pointer]
+                - img "event" [ref=e539]
+                - generic [ref=e540]:
+                  - generic [ref=e541]:
+                    - list "filter by items" [ref=e542]:
+                      - listitem [ref=e543]:
+                        - button "Economic" [ref=e544] [cursor=pointer]
+                    - generic [ref=e546]:
+                      - generic [ref=e548]: Oct 15, 2026
+                      - generic [ref=e549]: "|"
+                      - generic [ref=e550]: 6:00 PM
+                    - paragraph [ref=e553]:
+                      - link "Online" [ref=e554] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e555]: Open
+                    - paragraph [ref=e559]: Test Title Positive 58599526
+                  - generic [ref=e560]:
+                    - button "More" [ref=e561] [cursor=pointer]
+                    - button "Join event" [ref=e562] [cursor=pointer]
+                  - generic [ref=e563]:
+                    - generic [ref=e564]:
+                      - img "date" [ref=e565]
+                      - paragraph [ref=e566]: Oct 14, 2026
+                    - generic [ref=e567]:
+                      - img "author" [ref=e568]
+                      - paragraph [ref=e569]: TestATestA
+                    - generic [ref=e570]:
+                      - img "frame" [ref=e571]
+                      - paragraph [ref=e572]: "0"
+                    - generic [ref=e573]:
+                      - button "Like this event" [ref=e574] [cursor=pointer]:
+                        - img "Like" [ref=e575]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e576] [cursor=pointer]:
+                        - img "Dislike" [ref=e577]
+                        - text: "0"
+              - generic [ref=e580]:
+                - generic [ref=e581] [cursor=pointer]
+                - img "event" [ref=e584]
+                - generic [ref=e585]:
+                  - generic [ref=e586]:
+                    - list "filter by items" [ref=e587]:
+                      - listitem [ref=e588]:
+                        - button "Economic" [ref=e589] [cursor=pointer]
+                    - generic [ref=e591]:
+                      - generic [ref=e593]: Oct 15, 2026
+                      - generic [ref=e594]: "|"
+                      - generic [ref=e595]: 6:00 PM
+                    - paragraph [ref=e598]:
+                      - link "Online" [ref=e599] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e600]: Open
+                    - paragraph [ref=e604]: Test Title Positive 62644622
+                  - generic [ref=e605]:
+                    - button "More" [ref=e606] [cursor=pointer]
+                    - button "Join event" [ref=e607] [cursor=pointer]
+                  - generic [ref=e608]:
+                    - generic [ref=e609]:
+                      - img "date" [ref=e610]
+                      - paragraph [ref=e611]: Oct 14, 2026
+                    - generic [ref=e612]:
+                      - img "author" [ref=e613]
+                      - paragraph [ref=e614]: TestATestA
+                    - generic [ref=e615]:
+                      - img "frame" [ref=e616]
+                      - paragraph [ref=e617]: "0"
+                    - generic [ref=e618]:
+                      - button "Like this event" [ref=e619] [cursor=pointer]:
+                        - img "Like" [ref=e620]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e621] [cursor=pointer]:
+                        - img "Dislike" [ref=e622]
+                        - text: "0"
+              - generic [ref=e625]:
+                - generic [ref=e626] [cursor=pointer]
+                - img "event" [ref=e629]
+                - generic [ref=e630]:
+                  - generic [ref=e631]:
+                    - list "filter by items" [ref=e632]:
+                      - listitem [ref=e633]:
+                        - button "Economic" [ref=e634] [cursor=pointer]
+                    - generic [ref=e636]:
+                      - generic [ref=e638]: Oct 15, 2026
+                      - generic [ref=e639]: "|"
+                      - generic [ref=e640]: 6:00 PM
+                    - paragraph [ref=e643]:
+                      - link "Online" [ref=e644] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e645]: Open
+                    - paragraph [ref=e649]: Test Title Positive 62627116
+                  - generic [ref=e650]:
+                    - button "More" [ref=e651] [cursor=pointer]
+                    - button "Join event" [ref=e652] [cursor=pointer]
+                  - generic [ref=e653]:
+                    - generic [ref=e654]:
+                      - img "date" [ref=e655]
+                      - paragraph [ref=e656]: Oct 14, 2026
+                    - generic [ref=e657]:
+                      - img "author" [ref=e658]
+                      - paragraph [ref=e659]: TestATestA
+                    - generic [ref=e660]:
+                      - img "frame" [ref=e661]
+                      - paragraph [ref=e662]: "0"
+                    - generic [ref=e663]:
+                      - button "Like this event" [ref=e664] [cursor=pointer]:
+                        - img "Like" [ref=e665]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e666] [cursor=pointer]:
+                        - img "Dislike" [ref=e667]
+                        - text: "0"
+              - generic [ref=e670]:
+                - generic [ref=e671] [cursor=pointer]
+                - img "event" [ref=e674]
+                - generic [ref=e675]:
+                  - generic [ref=e676]:
+                    - list "filter by items" [ref=e677]:
+                      - listitem [ref=e678]:
+                        - button "Economic" [ref=e679] [cursor=pointer]
+                    - generic [ref=e681]:
+                      - generic [ref=e683]: Oct 15, 2026
+                      - generic [ref=e684]: "|"
+                      - generic [ref=e685]: 6:00 PM
+                    - paragraph [ref=e688]:
+                      - link "Online" [ref=e689] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e690]: Open
+                    - paragraph [ref=e694]: Test Title Positive 51875006
+                  - generic [ref=e695]:
+                    - button "More" [ref=e696] [cursor=pointer]
+                    - button "Join event" [ref=e697] [cursor=pointer]
+                  - generic [ref=e698]:
+                    - generic [ref=e699]:
+                      - img "date" [ref=e700]
+                      - paragraph [ref=e701]: Oct 14, 2026
+                    - generic [ref=e702]:
+                      - img "author" [ref=e703]
+                      - paragraph [ref=e704]: TestATestA
+                    - generic [ref=e705]:
+                      - img "frame" [ref=e706]
+                      - paragraph [ref=e707]: "0"
+                    - generic [ref=e708]:
+                      - button "Like this event" [ref=e709] [cursor=pointer]:
+                        - img "Like" [ref=e710]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e711] [cursor=pointer]:
+                        - img "Dislike" [ref=e712]
+                        - text: "0"
+              - generic [ref=e715]:
+                - generic [ref=e716] [cursor=pointer]
+                - img "event" [ref=e719]
+                - generic [ref=e720]:
+                  - generic [ref=e721]:
+                    - list "filter by items" [ref=e722]:
+                      - listitem [ref=e723]:
+                        - button "Economic" [ref=e724] [cursor=pointer]
+                    - generic [ref=e726]:
+                      - generic [ref=e728]: Oct 15, 2026
+                      - generic [ref=e729]: "|"
+                      - generic [ref=e730]: 6:00 PM
+                    - paragraph [ref=e733]:
+                      - link "Online" [ref=e734] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e735]: Open
+                    - paragraph [ref=e739]: Test Title Positive 51954428
+                  - generic [ref=e740]:
+                    - button "More" [ref=e741] [cursor=pointer]
+                    - button "Join event" [ref=e742] [cursor=pointer]
+                  - generic [ref=e743]:
+                    - generic [ref=e744]:
+                      - img "date" [ref=e745]
+                      - paragraph [ref=e746]: Oct 14, 2026
+                    - generic [ref=e747]:
+                      - img "author" [ref=e748]
+                      - paragraph [ref=e749]: TestATestA
+                    - generic [ref=e750]:
+                      - img "frame" [ref=e751]
+                      - paragraph [ref=e752]: "0"
+                    - generic [ref=e753]:
+                      - button "Like this event" [ref=e754] [cursor=pointer]:
+                        - img "Like" [ref=e755]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e756] [cursor=pointer]:
+                        - img "Dislike" [ref=e757]
+                        - text: "0"
+              - generic [ref=e760]:
+                - generic [ref=e761] [cursor=pointer]
+                - img "event" [ref=e764]
+                - generic [ref=e765]:
+                  - generic [ref=e766]:
+                    - list "filter by items" [ref=e767]:
+                      - listitem [ref=e768]:
+                        - button "Economic" [ref=e769] [cursor=pointer]
+                    - generic [ref=e771]:
+                      - generic [ref=e773]: Oct 15, 2026
+                      - generic [ref=e774]: "|"
+                      - generic [ref=e775]: 6:00 PM
+                    - paragraph [ref=e778]:
+                      - link "Online" [ref=e779] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e780]: Open
+                    - paragraph [ref=e784]: Test Title Positive 62667769
+                  - generic [ref=e785]:
+                    - button "More" [ref=e786] [cursor=pointer]
+                    - button "Join event" [ref=e787] [cursor=pointer]
+                  - generic [ref=e788]:
+                    - generic [ref=e789]:
+                      - img "date" [ref=e790]
+                      - paragraph [ref=e791]: Oct 14, 2026
+                    - generic [ref=e792]:
+                      - img "author" [ref=e793]
+                      - paragraph [ref=e794]: TestATestA
+                    - generic [ref=e795]:
+                      - img "frame" [ref=e796]
+                      - paragraph [ref=e797]: "0"
+                    - generic [ref=e798]:
+                      - button "Like this event" [ref=e799] [cursor=pointer]:
+                        - img "Like" [ref=e800]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e801] [cursor=pointer]:
+                        - img "Dislike" [ref=e802]
+                        - text: "0"
+              - generic [ref=e805]:
+                - generic [ref=e806] [cursor=pointer]
+                - img "event" [ref=e809]
+                - generic [ref=e810]:
+                  - generic [ref=e811]:
+                    - list "filter by items" [ref=e812]:
+                      - listitem [ref=e813]:
+                        - button "Economic" [ref=e814] [cursor=pointer]
+                    - generic [ref=e816]:
+                      - generic [ref=e818]: Oct 15, 2026
+                      - generic [ref=e819]: "|"
+                      - generic [ref=e820]: 6:00 PM
+                    - paragraph [ref=e823]:
+                      - link "Online" [ref=e824] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e825]: Open
+                    - paragraph [ref=e829]: Test Title Positive 58599526
+                  - generic [ref=e830]:
+                    - button "More" [ref=e831] [cursor=pointer]
+                    - button "Join event" [ref=e832] [cursor=pointer]
+                  - generic [ref=e833]:
+                    - generic [ref=e834]:
+                      - img "date" [ref=e835]
+                      - paragraph [ref=e836]: Oct 14, 2026
+                    - generic [ref=e837]:
+                      - img "author" [ref=e838]
+                      - paragraph [ref=e839]: TestATestA
+                    - generic [ref=e840]:
+                      - img "frame" [ref=e841]
+                      - paragraph [ref=e842]: "0"
+                    - generic [ref=e843]:
+                      - button "Like this event" [ref=e844] [cursor=pointer]:
+                        - img "Like" [ref=e845]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e846] [cursor=pointer]:
+                        - img "Dislike" [ref=e847]
+                        - text: "0"
+              - generic [ref=e850]:
+                - generic [ref=e851] [cursor=pointer]
+                - img "event" [ref=e854]
+                - generic [ref=e855]:
+                  - generic [ref=e856]:
+                    - list "filter by items" [ref=e857]:
+                      - listitem [ref=e858]:
+                        - button "Economic" [ref=e859] [cursor=pointer]
+                    - generic [ref=e861]:
+                      - generic [ref=e863]: Oct 15, 2026
+                      - generic [ref=e864]: "|"
+                      - generic [ref=e865]: 6:00 PM
+                    - paragraph [ref=e868]:
+                      - link "Online" [ref=e869] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e870]: Open
+                    - paragraph [ref=e874]: Test Title Positive 58692905
+                  - generic [ref=e875]:
+                    - button "More" [ref=e876] [cursor=pointer]
+                    - button "Join event" [ref=e877] [cursor=pointer]
+                  - generic [ref=e878]:
+                    - generic [ref=e879]:
+                      - img "date" [ref=e880]
+                      - paragraph [ref=e881]: Oct 14, 2026
+                    - generic [ref=e882]:
+                      - img "author" [ref=e883]
+                      - paragraph [ref=e884]: TestATestA
+                    - generic [ref=e885]:
+                      - img "frame" [ref=e886]
+                      - paragraph [ref=e887]: "0"
+                    - generic [ref=e888]:
+                      - button "Like this event" [ref=e889] [cursor=pointer]:
+                        - img "Like" [ref=e890]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e891] [cursor=pointer]:
+                        - img "Dislike" [ref=e892]
+                        - text: "0"
+              - generic [ref=e895]:
+                - generic [ref=e896] [cursor=pointer]
+                - img "event" [ref=e899]
+                - generic [ref=e900]:
+                  - generic [ref=e901]:
+                    - list "filter by items" [ref=e902]:
+                      - listitem [ref=e903]:
+                        - button "Economic" [ref=e904] [cursor=pointer]
+                    - generic [ref=e906]:
+                      - generic [ref=e908]: Oct 15, 2026
+                      - generic [ref=e909]: "|"
+                      - generic [ref=e910]: 6:00 PM
+                    - paragraph [ref=e913]:
+                      - link "Online" [ref=e914] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e915]: Open
+                    - paragraph [ref=e919]: Test Title Positive 63899753
+                  - generic [ref=e920]:
+                    - button "More" [ref=e921] [cursor=pointer]
+                    - button "Join event" [ref=e922] [cursor=pointer]
+                  - generic [ref=e923]:
+                    - generic [ref=e924]:
+                      - img "date" [ref=e925]
+                      - paragraph [ref=e926]: Oct 14, 2026
+                    - generic [ref=e927]:
+                      - img "author" [ref=e928]
+                      - paragraph [ref=e929]: TestATestA
+                    - generic [ref=e930]:
+                      - img "frame" [ref=e931]
+                      - paragraph [ref=e932]: "0"
+                    - generic [ref=e933]:
+                      - button "Like this event" [ref=e934] [cursor=pointer]:
+                        - img "Like" [ref=e935]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e936] [cursor=pointer]:
+                        - img "Dislike" [ref=e937]
+                        - text: "0"
+              - generic [ref=e940]:
+                - generic [ref=e941] [cursor=pointer]
+                - img "event" [ref=e944]
+                - generic [ref=e945]:
+                  - generic [ref=e946]:
+                    - list "filter by items" [ref=e947]:
+                      - listitem [ref=e948]:
+                        - button "Economic" [ref=e949] [cursor=pointer]
+                    - generic [ref=e951]:
+                      - generic [ref=e953]: Oct 15, 2026
+                      - generic [ref=e954]: "|"
+                      - generic [ref=e955]: 6:00 PM
+                    - paragraph [ref=e958]:
+                      - link "Online" [ref=e959] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e960]: Open
+                    - paragraph [ref=e964]: Test Title Positive 62627116
+                  - generic [ref=e965]:
+                    - button "More" [ref=e966] [cursor=pointer]
+                    - button "Join event" [ref=e967] [cursor=pointer]
+                  - generic [ref=e968]:
+                    - generic [ref=e969]:
+                      - img "date" [ref=e970]
+                      - paragraph [ref=e971]: Oct 14, 2026
+                    - generic [ref=e972]:
+                      - img "author" [ref=e973]
+                      - paragraph [ref=e974]: TestATestA
+                    - generic [ref=e975]:
+                      - img "frame" [ref=e976]
+                      - paragraph [ref=e977]: "0"
+                    - generic [ref=e978]:
+                      - button "Like this event" [ref=e979] [cursor=pointer]:
+                        - img "Like" [ref=e980]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e981] [cursor=pointer]:
+                        - img "Dislike" [ref=e982]
+                        - text: "0"
+              - generic [ref=e985]:
+                - generic [ref=e986] [cursor=pointer]
+                - img "event" [ref=e989]
+                - generic [ref=e990]:
+                  - generic [ref=e991]:
+                    - list "filter by items" [ref=e992]:
+                      - listitem [ref=e993]:
+                        - button "Economic" [ref=e994] [cursor=pointer]
+                    - generic [ref=e996]:
+                      - generic [ref=e998]: Oct 15, 2026
+                      - generic [ref=e999]: "|"
+                      - generic [ref=e1000]: 6:00 PM
+                    - paragraph [ref=e1003]:
+                      - link "Online" [ref=e1004] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e1005]: Open
+                    - paragraph [ref=e1009]: Test Title Positive 63921357
+                  - generic [ref=e1010]:
+                    - button "More" [ref=e1011] [cursor=pointer]
+                    - button "Join event" [ref=e1012] [cursor=pointer]
+                  - generic [ref=e1013]:
+                    - generic [ref=e1014]:
+                      - img "date" [ref=e1015]
+                      - paragraph [ref=e1016]: Oct 14, 2026
+                    - generic [ref=e1017]:
+                      - img "author" [ref=e1018]
+                      - paragraph [ref=e1019]: TestATestA
+                    - generic [ref=e1020]:
+                      - img "frame" [ref=e1021]
+                      - paragraph [ref=e1022]: "0"
+                    - generic [ref=e1023]:
+                      - button "Like this event" [ref=e1024] [cursor=pointer]:
+                        - img "Like" [ref=e1025]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e1026] [cursor=pointer]:
+                        - img "Dislike" [ref=e1027]
+                        - text: "0"
+              - generic [ref=e1030]:
+                - generic [ref=e1031] [cursor=pointer]
+                - img "event" [ref=e1034]
+                - generic [ref=e1035]:
+                  - generic [ref=e1036]:
+                    - list "filter by items" [ref=e1037]:
+                      - listitem [ref=e1038]:
+                        - button "Economic" [ref=e1039] [cursor=pointer]
+                    - generic [ref=e1041]:
+                      - generic [ref=e1043]: Oct 15, 2026
+                      - generic [ref=e1044]: "|"
+                      - generic [ref=e1045]: 6:00 PM
+                    - paragraph [ref=e1048]:
+                      - link "Online" [ref=e1049] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e1050]: Open
+                    - paragraph [ref=e1054]: Test Title Positive 63955264
+                  - generic [ref=e1055]:
+                    - button "More" [ref=e1056] [cursor=pointer]
+                    - button "Join event" [ref=e1057] [cursor=pointer]
+                  - generic [ref=e1058]:
+                    - generic [ref=e1059]:
+                      - img "date" [ref=e1060]
+                      - paragraph [ref=e1061]: Oct 14, 2026
+                    - generic [ref=e1062]:
+                      - img "author" [ref=e1063]
+                      - paragraph [ref=e1064]: TestATestA
+                    - generic [ref=e1065]:
+                      - img "frame" [ref=e1066]
+                      - paragraph [ref=e1067]: "0"
+                    - generic [ref=e1068]:
+                      - button "Like this event" [ref=e1069] [cursor=pointer]:
+                        - img "Like" [ref=e1070]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e1071] [cursor=pointer]:
+                        - img "Dislike" [ref=e1072]
+                        - text: "0"
+              - generic [ref=e1075]:
+                - generic [ref=e1076] [cursor=pointer]
+                - img "event" [ref=e1079]
+                - generic [ref=e1080]:
+                  - generic [ref=e1081]:
+                    - list "filter by items" [ref=e1082]:
+                      - listitem [ref=e1083]:
+                        - button "Economic" [ref=e1084] [cursor=pointer]
+                    - generic [ref=e1086]:
+                      - generic [ref=e1088]: Oct 15, 2026
+                      - generic [ref=e1089]: "|"
+                      - generic [ref=e1090]: 6:00 PM
+                    - paragraph [ref=e1093]:
+                      - link "Online" [ref=e1094] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e1095]: Open
+                    - paragraph [ref=e1099]: Test Title Positive 67960111
+                  - generic [ref=e1100]:
+                    - button "More" [ref=e1101] [cursor=pointer]
+                    - button "Join event" [ref=e1102] [cursor=pointer]
+                  - generic [ref=e1103]:
+                    - generic [ref=e1104]:
+                      - img "date" [ref=e1105]
+                      - paragraph [ref=e1106]: Oct 14, 2026
+                    - generic [ref=e1107]:
+                      - img "author" [ref=e1108]
+                      - paragraph [ref=e1109]: TestATestA
+                    - generic [ref=e1110]:
+                      - img "frame" [ref=e1111]
+                      - paragraph [ref=e1112]: "0"
+                    - generic [ref=e1113]:
+                      - button "Like this event" [ref=e1114] [cursor=pointer]:
+                        - img "Like" [ref=e1115]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e1116] [cursor=pointer]:
+                        - img "Dislike" [ref=e1117]
+                        - text: "0"
+              - generic [ref=e1120]:
+                - generic [ref=e1121] [cursor=pointer]
+                - img "event" [ref=e1124]
+                - generic [ref=e1125]:
+                  - generic [ref=e1126]:
+                    - list "filter by items" [ref=e1127]:
+                      - listitem [ref=e1128]:
+                        - button "Economic" [ref=e1129] [cursor=pointer]
+                    - generic [ref=e1131]:
+                      - generic [ref=e1133]: Oct 15, 2026
+                      - generic [ref=e1134]: "|"
+                      - generic [ref=e1135]: 6:00 PM
+                    - paragraph [ref=e1138]:
+                      - link "Online" [ref=e1139] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e1140]: Open
+                    - paragraph [ref=e1144]: Test Title Positive 62667769
+                  - generic [ref=e1145]:
+                    - button "More" [ref=e1146] [cursor=pointer]
+                    - button "Join event" [ref=e1147] [cursor=pointer]
+                  - generic [ref=e1148]:
+                    - generic [ref=e1149]:
+                      - img "date" [ref=e1150]
+                      - paragraph [ref=e1151]: Oct 14, 2026
+                    - generic [ref=e1152]:
+                      - img "author" [ref=e1153]
+                      - paragraph [ref=e1154]: TestATestA
+                    - generic [ref=e1155]:
+                      - img "frame" [ref=e1156]
+                      - paragraph [ref=e1157]: "0"
+                    - generic [ref=e1158]:
+                      - button "Like this event" [ref=e1159] [cursor=pointer]:
+                        - img "Like" [ref=e1160]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e1161] [cursor=pointer]:
+                        - img "Dislike" [ref=e1162]
+                        - text: "0"
+              - generic [ref=e1165]:
+                - generic [ref=e1166] [cursor=pointer]
+                - generic [ref=e1168]: "+1"
+                - img "event" [ref=e1173]
+                - generic [ref=e1174]:
+                  - generic [ref=e1175]:
+                    - list "filter by items" [ref=e1176]:
+                      - listitem [ref=e1177]:
+                        - button "Economic" [ref=e1178] [cursor=pointer]
+                    - generic [ref=e1180]:
+                      - generic [ref=e1182]: Oct 15, 2026
+                      - generic [ref=e1183]: "|"
+                      - generic [ref=e1184]: 6:00 PM
+                    - paragraph [ref=e1187]:
+                      - link "Online" [ref=e1188] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e1189]: Open
+                    - paragraph [ref=e1193]: Test Title Positive 67999963
+                  - generic [ref=e1194]:
+                    - button "More" [ref=e1195] [cursor=pointer]
+                    - button "Join event" [ref=e1196] [cursor=pointer]
+                  - generic [ref=e1197]:
+                    - generic [ref=e1198]:
+                      - img "date" [ref=e1199]
+                      - paragraph [ref=e1200]: Oct 14, 2026
+                    - generic [ref=e1201]:
+                      - img "author" [ref=e1202]
+                      - paragraph [ref=e1203]: TestATestA
+                    - generic [ref=e1204]:
+                      - img "frame" [ref=e1205]
+                      - paragraph [ref=e1206]: "0"
+                    - generic [ref=e1207]:
+                      - button "Like this event" [ref=e1208] [cursor=pointer]:
+                        - img "Like" [ref=e1209]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e1210] [cursor=pointer]:
+                        - img "Dislike" [ref=e1211]
+                        - text: "0"
+              - generic [ref=e1214]:
+                - generic [ref=e1215] [cursor=pointer]
+                - img "event" [ref=e1218]
+                - generic [ref=e1219]:
+                  - generic [ref=e1220]:
+                    - list "filter by items" [ref=e1221]:
+                      - listitem [ref=e1222]:
+                        - button "Economic" [ref=e1223] [cursor=pointer]
+                    - generic [ref=e1225]:
+                      - generic [ref=e1227]: Oct 15, 2026
+                      - generic [ref=e1228]: "|"
+                      - generic [ref=e1229]: 6:00 PM
+                    - paragraph [ref=e1232]:
+                      - link "Online" [ref=e1233] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e1234]: Open
+                    - paragraph [ref=e1238]: Test Title Positive 63899753
+                  - generic [ref=e1239]:
+                    - button "More" [ref=e1240] [cursor=pointer]
+                    - button "Join event" [ref=e1241] [cursor=pointer]
+                  - generic [ref=e1242]:
+                    - generic [ref=e1243]:
+                      - img "date" [ref=e1244]
+                      - paragraph [ref=e1245]: Oct 14, 2026
+                    - generic [ref=e1246]:
+                      - img "author" [ref=e1247]
+                      - paragraph [ref=e1248]: TestATestA
+                    - generic [ref=e1249]:
+                      - img "frame" [ref=e1250]
+                      - paragraph [ref=e1251]: "0"
+                    - generic [ref=e1252]:
+                      - button "Like this event" [ref=e1253] [cursor=pointer]:
+                        - img "Like" [ref=e1254]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e1255] [cursor=pointer]:
+                        - img "Dislike" [ref=e1256]
+                        - text: "0"
+              - generic [ref=e1259]:
+                - generic [ref=e1260] [cursor=pointer]
+                - img "event" [ref=e1263]
+                - generic [ref=e1264]:
+                  - generic [ref=e1265]:
+                    - list "filter by items" [ref=e1266]:
+                      - listitem [ref=e1267]:
+                        - button "Economic" [ref=e1268] [cursor=pointer]
+                    - generic [ref=e1270]:
+                      - generic [ref=e1272]: Oct 15, 2026
+                      - generic [ref=e1273]: "|"
+                      - generic [ref=e1274]: 6:00 PM
+                    - paragraph [ref=e1277]:
+                      - link "Online" [ref=e1278] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e1279]: Open
+                    - paragraph [ref=e1283]: Test Title Positive 67987683
+                  - generic [ref=e1284]:
+                    - button "More" [ref=e1285] [cursor=pointer]
+                    - button "Join event" [ref=e1286] [cursor=pointer]
+                  - generic [ref=e1287]:
+                    - generic [ref=e1288]:
+                      - img "date" [ref=e1289]
+                      - paragraph [ref=e1290]: Oct 14, 2026
+                    - generic [ref=e1291]:
+                      - img "author" [ref=e1292]
+                      - paragraph [ref=e1293]: TestATestA
+                    - generic [ref=e1294]:
+                      - img "frame" [ref=e1295]
+                      - paragraph [ref=e1296]: "0"
+                    - generic [ref=e1297]:
+                      - button "Like this event" [ref=e1298] [cursor=pointer]:
+                        - img "Like" [ref=e1299]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e1300] [cursor=pointer]:
+                        - img "Dislike" [ref=e1301]
+                        - text: "0"
+              - generic [ref=e1304]:
+                - generic [ref=e1305] [cursor=pointer]
+                - img "event" [ref=e1308]
+                - generic [ref=e1309]:
+                  - generic [ref=e1310]:
+                    - list "filter by items" [ref=e1311]:
+                      - listitem [ref=e1312]:
+                        - button "Economic" [ref=e1313] [cursor=pointer]
+                    - generic [ref=e1315]:
+                      - generic [ref=e1317]: Oct 15, 2026
+                      - generic [ref=e1318]: "|"
+                      - generic [ref=e1319]: 6:00 PM
+                    - paragraph [ref=e1322]:
+                      - link "Online" [ref=e1323] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e1324]: Open
+                    - paragraph [ref=e1328]: Test Title Positive 51875006
+                  - generic [ref=e1329]:
+                    - button "More" [ref=e1330] [cursor=pointer]
+                    - button "Join event" [ref=e1331] [cursor=pointer]
+                  - generic [ref=e1332]:
+                    - generic [ref=e1333]:
+                      - img "date" [ref=e1334]
+                      - paragraph [ref=e1335]: Oct 14, 2026
+                    - generic [ref=e1336]:
+                      - img "author" [ref=e1337]
+                      - paragraph [ref=e1338]: TestATestA
+                    - generic [ref=e1339]:
+                      - img "frame" [ref=e1340]
+                      - paragraph [ref=e1341]: "0"
+                    - generic [ref=e1342]:
+                      - button "Like this event" [ref=e1343] [cursor=pointer]:
+                        - img "Like" [ref=e1344]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e1345] [cursor=pointer]:
+                        - img "Dislike" [ref=e1346]
+                        - text: "0"
+              - generic [ref=e1349]:
+                - generic [ref=e1350] [cursor=pointer]
+                - img "event" [ref=e1353]
+                - generic [ref=e1354]:
+                  - generic [ref=e1355]:
+                    - list "filter by items" [ref=e1356]:
+                      - listitem [ref=e1357]:
+                        - button "Economic" [ref=e1358] [cursor=pointer]
+                    - generic [ref=e1360]:
+                      - generic [ref=e1362]: Oct 15, 2026
+                      - generic [ref=e1363]: "|"
+                      - generic [ref=e1364]: 6:00 PM
+                    - paragraph [ref=e1367]:
+                      - link "Online" [ref=e1368] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e1369]: Open
+                    - paragraph [ref=e1373]: Test Title Positive 63924905
+                  - generic [ref=e1374]:
+                    - button "More" [ref=e1375] [cursor=pointer]
+                    - button "Join event" [ref=e1376] [cursor=pointer]
+                  - generic [ref=e1377]:
+                    - generic [ref=e1378]:
+                      - img "date" [ref=e1379]
+                      - paragraph [ref=e1380]: Oct 14, 2026
+                    - generic [ref=e1381]:
+                      - img "author" [ref=e1382]
+                      - paragraph [ref=e1383]: TestATestA
+                    - generic [ref=e1384]:
+                      - img "frame" [ref=e1385]
+                      - paragraph [ref=e1386]: "0"
+                    - generic [ref=e1387]:
+                      - button "Like this event" [ref=e1388] [cursor=pointer]:
+                        - img "Like" [ref=e1389]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e1390] [cursor=pointer]:
+                        - img "Dislike" [ref=e1391]
+                        - text: "0"
+              - generic [ref=e1394]:
+                - generic [ref=e1395] [cursor=pointer]
+                - img "event" [ref=e1398]
+                - generic [ref=e1399]:
+                  - generic [ref=e1400]:
+                    - list "filter by items" [ref=e1401]:
+                      - listitem [ref=e1402]:
+                        - button "Economic" [ref=e1403] [cursor=pointer]
+                    - generic [ref=e1405]:
+                      - generic [ref=e1407]: Oct 15, 2026
+                      - generic [ref=e1408]: "|"
+                      - generic [ref=e1409]: 6:00 PM
+                    - paragraph [ref=e1412]:
+                      - link "Online" [ref=e1413] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e1414]: Open
+                    - paragraph [ref=e1418]: Test Title Positive 51954428
+                  - generic [ref=e1419]:
+                    - button "More" [ref=e1420] [cursor=pointer]
+                    - button "Join event" [ref=e1421] [cursor=pointer]
+                  - generic [ref=e1422]:
+                    - generic [ref=e1423]:
+                      - img "date" [ref=e1424]
+                      - paragraph [ref=e1425]: Oct 14, 2026
+                    - generic [ref=e1426]:
+                      - img "author" [ref=e1427]
+                      - paragraph [ref=e1428]: TestATestA
+                    - generic [ref=e1429]:
+                      - img "frame" [ref=e1430]
+                      - paragraph [ref=e1431]: "0"
+                    - generic [ref=e1432]:
+                      - button "Like this event" [ref=e1433] [cursor=pointer]:
+                        - img "Like" [ref=e1434]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e1435] [cursor=pointer]:
+                        - img "Dislike" [ref=e1436]
+                        - text: "0"
+              - generic [ref=e1439]:
+                - generic [ref=e1440] [cursor=pointer]
+                - img "event" [ref=e1443]
+                - generic [ref=e1444]:
+                  - generic [ref=e1445]:
+                    - list "filter by items" [ref=e1446]:
+                      - listitem [ref=e1447]:
+                        - button "Economic" [ref=e1448] [cursor=pointer]
+                    - generic [ref=e1450]:
+                      - generic [ref=e1452]: Oct 15, 2026
+                      - generic [ref=e1453]: "|"
+                      - generic [ref=e1454]: 6:00 PM
+                    - paragraph [ref=e1457]:
+                      - link "Online" [ref=e1458] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e1459]: Open
+                    - paragraph [ref=e1463]: Test Title Positive 68004548
+                  - generic [ref=e1464]:
+                    - button "More" [ref=e1465] [cursor=pointer]
+                    - button "Join event" [ref=e1466] [cursor=pointer]
+                  - generic [ref=e1467]:
+                    - generic [ref=e1468]:
+                      - img "date" [ref=e1469]
+                      - paragraph [ref=e1470]: Oct 14, 2026
+                    - generic [ref=e1471]:
+                      - img "author" [ref=e1472]
+                      - paragraph [ref=e1473]: TestATestA
+                    - generic [ref=e1474]:
+                      - img "frame" [ref=e1475]
+                      - paragraph [ref=e1476]: "0"
+                    - generic [ref=e1477]:
+                      - button "Like this event" [ref=e1478] [cursor=pointer]:
+                        - img "Like" [ref=e1479]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e1480] [cursor=pointer]:
+                        - img "Dislike" [ref=e1481]
+                        - text: "1"
+              - generic [ref=e1484]:
+                - generic [ref=e1485] [cursor=pointer]
+                - img "event" [ref=e1488]
+                - generic [ref=e1489]:
+                  - generic [ref=e1490]:
+                    - list "filter by items" [ref=e1491]:
+                      - listitem [ref=e1492]:
+                        - button "Economic" [ref=e1493] [cursor=pointer]
+                    - generic [ref=e1495]:
+                      - generic [ref=e1497]: Oct 15, 2026
+                      - generic [ref=e1498]: "|"
+                      - generic [ref=e1499]: 6:00 PM
+                    - paragraph [ref=e1502]:
+                      - link "Online" [ref=e1503] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e1504]: Open
+                    - paragraph [ref=e1508]: Test Title Positive 67960111
+                  - generic [ref=e1509]:
+                    - button "More" [ref=e1510] [cursor=pointer]
+                    - button "Join event" [ref=e1511] [cursor=pointer]
+                  - generic [ref=e1512]:
+                    - generic [ref=e1513]:
+                      - img "date" [ref=e1514]
+                      - paragraph [ref=e1515]: Oct 14, 2026
+                    - generic [ref=e1516]:
+                      - img "author" [ref=e1517]
+                      - paragraph [ref=e1518]: TestATestA
+                    - generic [ref=e1519]:
+                      - img "frame" [ref=e1520]
+                      - paragraph [ref=e1521]: "0"
+                    - generic [ref=e1522]:
+                      - button "Like this event" [ref=e1523] [cursor=pointer]:
+                        - img "Like" [ref=e1524]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e1525] [cursor=pointer]:
+                        - img "Dislike" [ref=e1526]
+                        - text: "0"
+              - generic [ref=e1529]:
+                - generic [ref=e1530] [cursor=pointer]
+                - img "event" [ref=e1533]
+                - generic [ref=e1534]:
+                  - generic [ref=e1535]:
+                    - list "filter by items" [ref=e1536]:
+                      - listitem [ref=e1537]:
+                        - button "Economic" [ref=e1538] [cursor=pointer]
+                    - generic [ref=e1540]:
+                      - generic [ref=e1542]: Oct 15, 2026
+                      - generic [ref=e1543]: "|"
+                      - generic [ref=e1544]: 6:00 PM
+                    - paragraph [ref=e1547]:
+                      - link "Online" [ref=e1548] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e1549]: Open
+                    - paragraph [ref=e1553]: Test Title Positive 62667769
+                  - generic [ref=e1554]:
+                    - button "More" [ref=e1555] [cursor=pointer]
+                    - button "Join event" [ref=e1556] [cursor=pointer]
+                  - generic [ref=e1557]:
+                    - generic [ref=e1558]:
+                      - img "date" [ref=e1559]
+                      - paragraph [ref=e1560]: Oct 14, 2026
+                    - generic [ref=e1561]:
+                      - img "author" [ref=e1562]
+                      - paragraph [ref=e1563]: TestATestA
+                    - generic [ref=e1564]:
+                      - img "frame" [ref=e1565]
+                      - paragraph [ref=e1566]: "0"
+                    - generic [ref=e1567]:
+                      - button "Like this event" [ref=e1568] [cursor=pointer]:
+                        - img "Like" [ref=e1569]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e1570] [cursor=pointer]:
+                        - img "Dislike" [ref=e1571]
+                        - text: "0"
+              - generic [ref=e1574]:
+                - generic [ref=e1575] [cursor=pointer]
+                - img "event" [ref=e1578]
+                - generic [ref=e1579]:
+                  - generic [ref=e1580]:
+                    - list "filter by items" [ref=e1581]:
+                      - listitem [ref=e1582]:
+                        - button "Economic" [ref=e1583] [cursor=pointer]
+                    - generic [ref=e1585]:
+                      - generic [ref=e1587]: Oct 15, 2026
+                      - generic [ref=e1588]: "|"
+                      - generic [ref=e1589]: 6:00 PM
+                    - paragraph [ref=e1592]:
+                      - link "Online" [ref=e1593] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e1594]: Open
+                    - paragraph [ref=e1598]: Test Title Positive 62697293
+                  - generic [ref=e1599]:
+                    - button "More" [ref=e1600] [cursor=pointer]
+                    - button "Join event" [ref=e1601] [cursor=pointer]
+                  - generic [ref=e1602]:
+                    - generic [ref=e1603]:
+                      - img "date" [ref=e1604]
+                      - paragraph [ref=e1605]: Oct 14, 2026
+                    - generic [ref=e1606]:
+                      - img "author" [ref=e1607]
+                      - paragraph [ref=e1608]: TestATestA
+                    - generic [ref=e1609]:
+                      - img "frame" [ref=e1610]
+                      - paragraph [ref=e1611]: "0"
+                    - generic [ref=e1612]:
+                      - button "Like this event" [ref=e1613] [cursor=pointer]:
+                        - img "Like" [ref=e1614]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e1615] [cursor=pointer]:
+                        - img "Dislike" [ref=e1616]
+                        - text: "0"
+              - generic [ref=e1619]:
+                - generic [ref=e1620] [cursor=pointer]
+                - img "event" [ref=e1623]
+                - generic [ref=e1624]:
+                  - generic [ref=e1625]:
+                    - list "filter by items" [ref=e1626]:
+                      - listitem [ref=e1627]:
+                        - button "Economic" [ref=e1628] [cursor=pointer]
+                    - generic [ref=e1630]:
+                      - generic [ref=e1632]: Oct 15, 2026
+                      - generic [ref=e1633]: "|"
+                      - generic [ref=e1634]: 6:00 PM
+                    - paragraph [ref=e1637]:
+                      - link "Online" [ref=e1638] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e1639]: Open
+                    - paragraph [ref=e1643]: Test Title Positive 58599526
+                  - generic [ref=e1644]:
+                    - button "More" [ref=e1645] [cursor=pointer]
+                    - button "Join event" [ref=e1646] [cursor=pointer]
+                  - generic [ref=e1647]:
+                    - generic [ref=e1648]:
+                      - img "date" [ref=e1649]
+                      - paragraph [ref=e1650]: Oct 14, 2026
+                    - generic [ref=e1651]:
+                      - img "author" [ref=e1652]
+                      - paragraph [ref=e1653]: TestATestA
+                    - generic [ref=e1654]:
+                      - img "frame" [ref=e1655]
+                      - paragraph [ref=e1656]: "0"
+                    - generic [ref=e1657]:
+                      - button "Like this event" [ref=e1658] [cursor=pointer]:
+                        - img "Like" [ref=e1659]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e1660] [cursor=pointer]:
+                        - img "Dislike" [ref=e1661]
+                        - text: "0"
+              - generic [ref=e1664]:
+                - generic [ref=e1665] [cursor=pointer]
+                - img "event" [ref=e1668]
+                - generic [ref=e1669]:
+                  - generic [ref=e1670]:
+                    - list "filter by items" [ref=e1671]:
+                      - listitem [ref=e1672]:
+                        - button "Economic" [ref=e1673] [cursor=pointer]
+                    - generic [ref=e1675]:
+                      - generic [ref=e1677]: Oct 15, 2026
+                      - generic [ref=e1678]: "|"
+                      - generic [ref=e1679]: 6:00 PM
+                    - paragraph [ref=e1682]:
+                      - link "Online" [ref=e1683] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e1684]: Open
+                    - paragraph [ref=e1688]: Test Title Positive 63867535
+                  - generic [ref=e1689]:
+                    - button "More" [ref=e1690] [cursor=pointer]
+                    - button "Join event" [ref=e1691] [cursor=pointer]
+                  - generic [ref=e1692]:
+                    - generic [ref=e1693]:
+                      - img "date" [ref=e1694]
+                      - paragraph [ref=e1695]: Oct 14, 2026
+                    - generic [ref=e1696]:
+                      - img "author" [ref=e1697]
+                      - paragraph [ref=e1698]: TestATestA
+                    - generic [ref=e1699]:
+                      - img "frame" [ref=e1700]
+                      - paragraph [ref=e1701]: "0"
+                    - generic [ref=e1702]:
+                      - button "Like this event" [ref=e1703] [cursor=pointer]:
+                        - img "Like" [ref=e1704]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e1705] [cursor=pointer]:
+                        - img "Dislike" [ref=e1706]
+                        - text: "0"
+              - generic [ref=e1709]:
+                - generic [ref=e1710] [cursor=pointer]
+                - img "event" [ref=e1713]
+                - generic [ref=e1714]:
+                  - generic [ref=e1715]:
+                    - list "filter by items" [ref=e1716]:
+                      - listitem [ref=e1717]:
+                        - button "Economic" [ref=e1718] [cursor=pointer]
+                    - generic [ref=e1720]:
+                      - generic [ref=e1722]: Oct 15, 2026
+                      - generic [ref=e1723]: "|"
+                      - generic [ref=e1724]: 6:00 PM
+                    - paragraph [ref=e1727]:
+                      - link "Online" [ref=e1728] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e1729]: Open
+                    - paragraph [ref=e1733]: Test Title Positive 69040227
+                  - generic [ref=e1734]:
+                    - button "More" [ref=e1735] [cursor=pointer]
+                    - button "Join event" [ref=e1736] [cursor=pointer]
+                  - generic [ref=e1737]:
+                    - generic [ref=e1738]:
+                      - img "date" [ref=e1739]
+                      - paragraph [ref=e1740]: Oct 14, 2026
+                    - generic [ref=e1741]:
+                      - img "author" [ref=e1742]
+                      - paragraph [ref=e1743]: TestATestA
+                    - generic [ref=e1744]:
+                      - img "frame" [ref=e1745]
+                      - paragraph [ref=e1746]: "0"
+                    - generic [ref=e1747]:
+                      - button "Like this event" [ref=e1748] [cursor=pointer]:
+                        - img "Like" [ref=e1749]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e1750] [cursor=pointer]:
+                        - img "Dislike" [ref=e1751]
+                        - text: "0"
+              - generic [ref=e1754]:
+                - generic [ref=e1755] [cursor=pointer]
+                - img "event" [ref=e1758]
+                - generic [ref=e1759]:
+                  - generic [ref=e1760]:
+                    - list "filter by items" [ref=e1761]:
+                      - listitem [ref=e1762]:
+                        - button "Economic" [ref=e1763] [cursor=pointer]
+                    - generic [ref=e1765]:
+                      - generic [ref=e1767]: Oct 15, 2026
+                      - generic [ref=e1768]: "|"
+                      - generic [ref=e1769]: 6:00 PM
+                    - paragraph [ref=e1772]:
+                      - link "Online" [ref=e1773] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e1774]: Open
+                    - paragraph [ref=e1778]: Test Title Positive 63899753
+                  - generic [ref=e1779]:
+                    - button "More" [ref=e1780] [cursor=pointer]
+                    - button "Join event" [ref=e1781] [cursor=pointer]
+                  - generic [ref=e1782]:
+                    - generic [ref=e1783]:
+                      - img "date" [ref=e1784]
+                      - paragraph [ref=e1785]: Oct 14, 2026
+                    - generic [ref=e1786]:
+                      - img "author" [ref=e1787]
+                      - paragraph [ref=e1788]: TestATestA
+                    - generic [ref=e1789]:
+                      - img "frame" [ref=e1790]
+                      - paragraph [ref=e1791]: "0"
+                    - generic [ref=e1792]:
+                      - button "Like this event" [ref=e1793] [cursor=pointer]:
+                        - img "Like" [ref=e1794]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e1795] [cursor=pointer]:
+                        - img "Dislike" [ref=e1796]
+                        - text: "0"
+              - generic [ref=e1799]:
+                - generic [ref=e1800] [cursor=pointer]
+                - img "event" [ref=e1803]
+                - generic [ref=e1804]:
+                  - generic [ref=e1805]:
+                    - list "filter by items" [ref=e1806]:
+                      - listitem [ref=e1807]:
+                        - button "Economic" [ref=e1808] [cursor=pointer]
+                    - generic [ref=e1810]:
+                      - generic [ref=e1812]: Oct 15, 2026
+                      - generic [ref=e1813]: "|"
+                      - generic [ref=e1814]: 6:00 PM
+                    - paragraph [ref=e1817]:
+                      - link "Online" [ref=e1818] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e1819]: Open
+                    - paragraph [ref=e1823]: Test Title Positive 63901606
+                  - generic [ref=e1824]:
+                    - button "More" [ref=e1825] [cursor=pointer]
+                    - button "Join event" [ref=e1826] [cursor=pointer]
+                  - generic [ref=e1827]:
+                    - generic [ref=e1828]:
+                      - img "date" [ref=e1829]
+                      - paragraph [ref=e1830]: Oct 14, 2026
+                    - generic [ref=e1831]:
+                      - img "author" [ref=e1832]
+                      - paragraph [ref=e1833]: TestATestA
+                    - generic [ref=e1834]:
+                      - img "frame" [ref=e1835]
+                      - paragraph [ref=e1836]: "0"
+                    - generic [ref=e1837]:
+                      - button "Like this event" [ref=e1838] [cursor=pointer]:
+                        - img "Like" [ref=e1839]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e1840] [cursor=pointer]:
+                        - img "Dislike" [ref=e1841]
+                        - text: "0"
+              - generic [ref=e1844]:
+                - generic [ref=e1845] [cursor=pointer]
+                - img "event" [ref=e1848]
+                - generic [ref=e1849]:
+                  - generic [ref=e1850]:
+                    - list "filter by items" [ref=e1851]:
+                      - listitem [ref=e1852]:
+                        - button "Economic" [ref=e1853] [cursor=pointer]
+                    - generic [ref=e1855]:
+                      - generic [ref=e1857]: Oct 15, 2026
+                      - generic [ref=e1858]: "|"
+                      - generic [ref=e1859]: 6:00 PM
+                    - paragraph [ref=e1862]:
+                      - link "Online" [ref=e1863] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e1864]: Open
+                    - paragraph [ref=e1868]: Test Title Positive 63895503
+                  - generic [ref=e1869]:
+                    - button "More" [ref=e1870] [cursor=pointer]
+                    - button "Join event" [ref=e1871] [cursor=pointer]
+                  - generic [ref=e1872]:
+                    - generic [ref=e1873]:
+                      - img "date" [ref=e1874]
+                      - paragraph [ref=e1875]: Oct 14, 2026
+                    - generic [ref=e1876]:
+                      - img "author" [ref=e1877]
+                      - paragraph [ref=e1878]: TestATestA
+                    - generic [ref=e1879]:
+                      - img "frame" [ref=e1880]
+                      - paragraph [ref=e1881]: "0"
+                    - generic [ref=e1882]:
+                      - button "Like this event" [ref=e1883] [cursor=pointer]:
+                        - img "Like" [ref=e1884]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e1885] [cursor=pointer]:
+                        - img "Dislike" [ref=e1886]
+                        - text: "0"
+              - generic [ref=e1889]:
+                - generic [ref=e1890] [cursor=pointer]
+                - img "event" [ref=e1893]
+                - generic [ref=e1894]:
+                  - generic [ref=e1895]:
+                    - list "filter by items" [ref=e1896]:
+                      - listitem [ref=e1897]:
+                        - button "Economic" [ref=e1898] [cursor=pointer]
+                    - generic [ref=e1900]:
+                      - generic [ref=e1902]: Oct 15, 2026
+                      - generic [ref=e1903]: "|"
+                      - generic [ref=e1904]: 6:00 PM
+                    - paragraph [ref=e1907]:
+                      - link "Online" [ref=e1908] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e1909]: Open
+                    - paragraph [ref=e1913]: Test Title Positive 63921357
+                  - generic [ref=e1914]:
+                    - button "More" [ref=e1915] [cursor=pointer]
+                    - button "Join event" [ref=e1916] [cursor=pointer]
+                  - generic [ref=e1917]:
+                    - generic [ref=e1918]:
+                      - img "date" [ref=e1919]
+                      - paragraph [ref=e1920]: Oct 14, 2026
+                    - generic [ref=e1921]:
+                      - img "author" [ref=e1922]
+                      - paragraph [ref=e1923]: TestATestA
+                    - generic [ref=e1924]:
+                      - img "frame" [ref=e1925]
+                      - paragraph [ref=e1926]: "0"
+                    - generic [ref=e1927]:
+                      - button "Like this event" [ref=e1928] [cursor=pointer]:
+                        - img "Like" [ref=e1929]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e1930] [cursor=pointer]:
+                        - img "Dislike" [ref=e1931]
+                        - text: "0"
+              - generic [ref=e1934]:
+                - generic [ref=e1935] [cursor=pointer]
+                - img "event" [ref=e1938]
+                - generic [ref=e1939]:
+                  - generic [ref=e1940]:
+                    - list "filter by items" [ref=e1941]:
+                      - listitem [ref=e1942]:
+                        - button "Economic" [ref=e1943] [cursor=pointer]
+                    - generic [ref=e1945]:
+                      - generic [ref=e1947]: Oct 15, 2026
+                      - generic [ref=e1948]: "|"
+                      - generic [ref=e1949]: 6:00 PM
+                    - paragraph [ref=e1952]:
+                      - link "Online" [ref=e1953] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e1954]: Open
+                    - paragraph [ref=e1958]: Test Title Positive 63924905
+                  - generic [ref=e1959]:
+                    - button "More" [ref=e1960] [cursor=pointer]
+                    - button "Join event" [ref=e1961] [cursor=pointer]
+                  - generic [ref=e1962]:
+                    - generic [ref=e1963]:
+                      - img "date" [ref=e1964]
+                      - paragraph [ref=e1965]: Oct 14, 2026
+                    - generic [ref=e1966]:
+                      - img "author" [ref=e1967]
+                      - paragraph [ref=e1968]: TestATestA
+                    - generic [ref=e1969]:
+                      - img "frame" [ref=e1970]
+                      - paragraph [ref=e1971]: "0"
+                    - generic [ref=e1972]:
+                      - button "Like this event" [ref=e1973] [cursor=pointer]:
+                        - img "Like" [ref=e1974]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e1975] [cursor=pointer]:
+                        - img "Dislike" [ref=e1976]
+                        - text: "0"
+              - generic [ref=e1979]:
+                - generic [ref=e1980] [cursor=pointer]
+                - img "event" [ref=e1983]
+                - generic [ref=e1984]:
+                  - generic [ref=e1985]:
+                    - list "filter by items" [ref=e1986]:
+                      - listitem [ref=e1987]:
+                        - button "Economic" [ref=e1988] [cursor=pointer]
+                    - generic [ref=e1990]:
+                      - generic [ref=e1992]: Oct 15, 2026
+                      - generic [ref=e1993]: "|"
+                      - generic [ref=e1994]: 6:00 PM
+                    - paragraph [ref=e1997]:
+                      - link "Online" [ref=e1998] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e1999]: Open
+                    - paragraph [ref=e2003]: Test Title Positive 69130737
+                  - generic [ref=e2004]:
+                    - button "More" [ref=e2005] [cursor=pointer]
+                    - button "Join event" [ref=e2006] [cursor=pointer]
+                  - generic [ref=e2007]:
+                    - generic [ref=e2008]:
+                      - img "date" [ref=e2009]
+                      - paragraph [ref=e2010]: Oct 14, 2026
+                    - generic [ref=e2011]:
+                      - img "author" [ref=e2012]
+                      - paragraph [ref=e2013]: TestATestA
+                    - generic [ref=e2014]:
+                      - img "frame" [ref=e2015]
+                      - paragraph [ref=e2016]: "0"
+                    - generic [ref=e2017]:
+                      - button "Like this event" [ref=e2018] [cursor=pointer]:
+                        - img "Like" [ref=e2019]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e2020] [cursor=pointer]:
+                        - img "Dislike" [ref=e2021]
+                        - text: "0"
+              - generic [ref=e2024]:
+                - generic [ref=e2025] [cursor=pointer]
+                - img "event" [ref=e2028]
+                - generic [ref=e2029]:
+                  - generic [ref=e2030]:
+                    - list "filter by items" [ref=e2031]:
+                      - listitem [ref=e2032]:
+                        - button "Economic" [ref=e2033] [cursor=pointer]
+                    - generic [ref=e2035]:
+                      - generic [ref=e2037]: Oct 15, 2026
+                      - generic [ref=e2038]: "|"
+                      - generic [ref=e2039]: 6:00 PM
+                    - paragraph [ref=e2042]:
+                      - link "Online" [ref=e2043] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e2044]: Open
+                    - paragraph [ref=e2048]: Test Title Positive 69035235
+                  - generic [ref=e2049]:
+                    - button "More" [ref=e2050] [cursor=pointer]
+                    - button "Join event" [ref=e2051] [cursor=pointer]
+                  - generic [ref=e2052]:
+                    - generic [ref=e2053]:
+                      - img "date" [ref=e2054]
+                      - paragraph [ref=e2055]: Oct 14, 2026
+                    - generic [ref=e2056]:
+                      - img "author" [ref=e2057]
+                      - paragraph [ref=e2058]: TestATestA
+                    - generic [ref=e2059]:
+                      - img "frame" [ref=e2060]
+                      - paragraph [ref=e2061]: "0"
+                    - generic [ref=e2062]:
+                      - button "Like this event" [ref=e2063] [cursor=pointer]:
+                        - img "Like" [ref=e2064]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e2065] [cursor=pointer]:
+                        - img "Dislike" [ref=e2066]
+                        - text: "0"
+              - generic [ref=e2069]:
+                - generic [ref=e2070] [cursor=pointer]
+                - img "event" [ref=e2073]
+                - generic [ref=e2074]:
+                  - generic [ref=e2075]:
+                    - list "filter by items" [ref=e2076]:
+                      - listitem [ref=e2077]:
+                        - button "Economic" [ref=e2078] [cursor=pointer]
+                    - generic [ref=e2080]:
+                      - generic [ref=e2082]: Oct 15, 2026
+                      - generic [ref=e2083]: "|"
+                      - generic [ref=e2084]: 6:00 PM
+                    - paragraph [ref=e2087]:
+                      - link "Online" [ref=e2088] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e2089]: Open
+                    - paragraph [ref=e2093]: Test Title Positive 67960111
+                  - generic [ref=e2094]:
+                    - button "More" [ref=e2095] [cursor=pointer]
+                    - button "Join event" [ref=e2096] [cursor=pointer]
+                  - generic [ref=e2097]:
+                    - generic [ref=e2098]:
+                      - img "date" [ref=e2099]
+                      - paragraph [ref=e2100]: Oct 14, 2026
+                    - generic [ref=e2101]:
+                      - img "author" [ref=e2102]
+                      - paragraph [ref=e2103]: TestATestA
+                    - generic [ref=e2104]:
+                      - img "frame" [ref=e2105]
+                      - paragraph [ref=e2106]: "0"
+                    - generic [ref=e2107]:
+                      - button "Like this event" [ref=e2108] [cursor=pointer]:
+                        - img "Like" [ref=e2109]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e2110] [cursor=pointer]:
+                        - img "Dislike" [ref=e2111]
+                        - text: "0"
+              - generic [ref=e2114]:
+                - generic [ref=e2115] [cursor=pointer]
+                - img "event" [ref=e2118]
+                - generic [ref=e2119]:
+                  - generic [ref=e2120]:
+                    - list "filter by items" [ref=e2121]:
+                      - listitem [ref=e2122]:
+                        - button "Economic" [ref=e2123] [cursor=pointer]
+                    - generic [ref=e2125]:
+                      - generic [ref=e2127]: Oct 15, 2026
+                      - generic [ref=e2128]: "|"
+                      - generic [ref=e2129]: 6:00 PM
+                    - paragraph [ref=e2132]:
+                      - link "Online" [ref=e2133] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e2134]: Open
+                    - paragraph [ref=e2138]: Test Title Positive 67978925
+                  - generic [ref=e2139]:
+                    - button "More" [ref=e2140] [cursor=pointer]
+                    - button "Join event" [ref=e2141] [cursor=pointer]
+                  - generic [ref=e2142]:
+                    - generic [ref=e2143]:
+                      - img "date" [ref=e2144]
+                      - paragraph [ref=e2145]: Oct 14, 2026
+                    - generic [ref=e2146]:
+                      - img "author" [ref=e2147]
+                      - paragraph [ref=e2148]: TestATestA
+                    - generic [ref=e2149]:
+                      - img "frame" [ref=e2150]
+                      - paragraph [ref=e2151]: "0"
+                    - generic [ref=e2152]:
+                      - button "Like this event" [ref=e2153] [cursor=pointer]:
+                        - img "Like" [ref=e2154]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e2155] [cursor=pointer]:
+                        - img "Dislike" [ref=e2156]
+                        - text: "0"
+              - generic [ref=e2159]:
+                - generic [ref=e2160] [cursor=pointer]
+                - img "event" [ref=e2163]
+                - generic [ref=e2164]:
+                  - generic [ref=e2165]:
+                    - list "filter by items" [ref=e2166]:
+                      - listitem [ref=e2167]:
+                        - button "Economic" [ref=e2168] [cursor=pointer]
+                    - generic [ref=e2170]:
+                      - generic [ref=e2172]: Oct 15, 2026
+                      - generic [ref=e2173]: "|"
+                      - generic [ref=e2174]: 6:00 PM
+                    - paragraph [ref=e2177]:
+                      - link "Online" [ref=e2178] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e2179]: Open
+                    - paragraph [ref=e2183]: Test Title Positive 67985154
+                  - generic [ref=e2184]:
+                    - button "More" [ref=e2185] [cursor=pointer]
+                    - button "Join event" [ref=e2186] [cursor=pointer]
+                  - generic [ref=e2187]:
+                    - generic [ref=e2188]:
+                      - img "date" [ref=e2189]
+                      - paragraph [ref=e2190]: Oct 14, 2026
+                    - generic [ref=e2191]:
+                      - img "author" [ref=e2192]
+                      - paragraph [ref=e2193]: TestATestA
+                    - generic [ref=e2194]:
+                      - img "frame" [ref=e2195]
+                      - paragraph [ref=e2196]: "0"
+                    - generic [ref=e2197]:
+                      - button "Like this event" [ref=e2198] [cursor=pointer]:
+                        - img "Like" [ref=e2199]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e2200] [cursor=pointer]:
+                        - img "Dislike" [ref=e2201]
+                        - text: "0"
+              - generic [ref=e2204]:
+                - generic [ref=e2205] [cursor=pointer]
+                - generic [ref=e2207]: "+1"
+                - img "event" [ref=e2212]
+                - generic [ref=e2213]:
+                  - generic [ref=e2214]:
+                    - list "filter by items" [ref=e2215]:
+                      - listitem [ref=e2216]:
+                        - button "Economic" [ref=e2217] [cursor=pointer]
+                    - generic [ref=e2219]:
+                      - generic [ref=e2221]: Oct 15, 2026
+                      - generic [ref=e2222]: "|"
+                      - generic [ref=e2223]: 6:00 PM
+                    - paragraph [ref=e2226]:
+                      - link "Online" [ref=e2227] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e2228]: Open
+                    - paragraph [ref=e2232]: Test Title Positive 67999963
+                  - generic [ref=e2233]:
+                    - button "More" [ref=e2234] [cursor=pointer]
+                    - button "Join event" [ref=e2235] [cursor=pointer]
+                  - generic [ref=e2236]:
+                    - generic [ref=e2237]:
+                      - img "date" [ref=e2238]
+                      - paragraph [ref=e2239]: Oct 14, 2026
+                    - generic [ref=e2240]:
+                      - img "author" [ref=e2241]
+                      - paragraph [ref=e2242]: TestATestA
+                    - generic [ref=e2243]:
+                      - img "frame" [ref=e2244]
+                      - paragraph [ref=e2245]: "0"
+                    - generic [ref=e2246]:
+                      - button "Like this event" [ref=e2247] [cursor=pointer]:
+                        - img "Like" [ref=e2248]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e2249] [cursor=pointer]:
+                        - img "Dislike" [ref=e2250]
+                        - text: "0"
+              - generic [ref=e2253]:
+                - generic [ref=e2254] [cursor=pointer]
+                - img "event" [ref=e2257]
+                - generic [ref=e2258]:
+                  - generic [ref=e2259]:
+                    - list "filter by items" [ref=e2260]:
+                      - listitem [ref=e2261]:
+                        - button "Economic" [ref=e2262] [cursor=pointer]
+                    - generic [ref=e2264]:
+                      - generic [ref=e2266]: Oct 15, 2026
+                      - generic [ref=e2267]: "|"
+                      - generic [ref=e2268]: 6:00 PM
+                    - paragraph [ref=e2271]:
+                      - link "Online" [ref=e2272] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e2273]: Open
+                    - paragraph [ref=e2277]: Test Title Positive 71663756
+                  - generic [ref=e2278]:
+                    - button "More" [ref=e2279] [cursor=pointer]
+                    - button "Join event" [ref=e2280] [cursor=pointer]
+                  - generic [ref=e2281]:
+                    - generic [ref=e2282]:
+                      - img "date" [ref=e2283]
+                      - paragraph [ref=e2284]: Oct 14, 2026
+                    - generic [ref=e2285]:
+                      - img "author" [ref=e2286]
+                      - paragraph [ref=e2287]: TestATestA
+                    - generic [ref=e2288]:
+                      - img "frame" [ref=e2289]
+                      - paragraph [ref=e2290]: "0"
+                    - generic [ref=e2291]:
+                      - button "Like this event" [ref=e2292] [cursor=pointer]:
+                        - img "Like" [ref=e2293]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e2294] [cursor=pointer]:
+                        - img "Dislike" [ref=e2295]
+                        - text: "0"
+              - generic [ref=e2298]:
+                - generic [ref=e2299] [cursor=pointer]
+                - img "event" [ref=e2302]
+                - generic [ref=e2303]:
+                  - generic [ref=e2304]:
+                    - list "filter by items" [ref=e2305]:
+                      - listitem [ref=e2306]:
+                        - button "Economic" [ref=e2307] [cursor=pointer]
+                    - generic [ref=e2309]:
+                      - generic [ref=e2311]: Oct 15, 2026
+                      - generic [ref=e2312]: "|"
+                      - generic [ref=e2313]: 6:00 PM
+                    - paragraph [ref=e2316]:
+                      - link "Online" [ref=e2317] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e2318]: Open
+                    - paragraph [ref=e2322]: Test Title Positive 67987683
+                  - generic [ref=e2323]:
+                    - button "More" [ref=e2324] [cursor=pointer]
+                    - button "Join event" [ref=e2325] [cursor=pointer]
+                  - generic [ref=e2326]:
+                    - generic [ref=e2327]:
+                      - img "date" [ref=e2328]
+                      - paragraph [ref=e2329]: Oct 14, 2026
+                    - generic [ref=e2330]:
+                      - img "author" [ref=e2331]
+                      - paragraph [ref=e2332]: TestATestA
+                    - generic [ref=e2333]:
+                      - img "frame" [ref=e2334]
+                      - paragraph [ref=e2335]: "0"
+                    - generic [ref=e2336]:
+                      - button "Like this event" [ref=e2337] [cursor=pointer]:
+                        - img "Like" [ref=e2338]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e2339] [cursor=pointer]:
+                        - img "Dislike" [ref=e2340]
+                        - text: "0"
+              - generic [ref=e2343]:
+                - generic [ref=e2344] [cursor=pointer]
+                - img "event" [ref=e2347]
+                - generic [ref=e2348]:
+                  - generic [ref=e2349]:
+                    - list "filter by items" [ref=e2350]:
+                      - listitem [ref=e2351]:
+                        - button "Economic" [ref=e2352] [cursor=pointer]
+                    - generic [ref=e2354]:
+                      - generic [ref=e2356]: Oct 15, 2026
+                      - generic [ref=e2357]: "|"
+                      - generic [ref=e2358]: 6:00 PM
+                    - paragraph [ref=e2361]:
+                      - link "Online" [ref=e2362] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e2363]: Open
+                    - paragraph [ref=e2367]: Test Title Positive 68018220
+                  - generic [ref=e2368]:
+                    - button "More" [ref=e2369] [cursor=pointer]
+                    - button "Join event" [ref=e2370] [cursor=pointer]
+                  - generic [ref=e2371]:
+                    - generic [ref=e2372]:
+                      - img "date" [ref=e2373]
+                      - paragraph [ref=e2374]: Oct 14, 2026
+                    - generic [ref=e2375]:
+                      - img "author" [ref=e2376]
+                      - paragraph [ref=e2377]: TestATestA
+                    - generic [ref=e2378]:
+                      - img "frame" [ref=e2379]
+                      - paragraph [ref=e2380]: "0"
+                    - generic [ref=e2381]:
+                      - button "Like this event" [ref=e2382] [cursor=pointer]:
+                        - img "Like" [ref=e2383]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e2384] [cursor=pointer]:
+                        - img "Dislike" [ref=e2385]
+                        - text: "0"
+              - generic [ref=e2388]:
+                - generic [ref=e2389] [cursor=pointer]
+                - img "event" [ref=e2392]
+                - generic [ref=e2393]:
+                  - generic [ref=e2394]:
+                    - list "filter by items" [ref=e2395]:
+                      - listitem [ref=e2396]:
+                        - button "Economic" [ref=e2397] [cursor=pointer]
+                    - generic [ref=e2399]:
+                      - generic [ref=e2401]: Oct 15, 2026
+                      - generic [ref=e2402]: "|"
+                      - generic [ref=e2403]: 6:00 PM
+                    - paragraph [ref=e2406]:
+                      - link "Online" [ref=e2407] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e2408]: Open
+                    - paragraph [ref=e2412]: Test Title Positive 71645874
+                  - generic [ref=e2413]:
+                    - button "More" [ref=e2414] [cursor=pointer]
+                    - button "Join event" [ref=e2415] [cursor=pointer]
+                  - generic [ref=e2416]:
+                    - generic [ref=e2417]:
+                      - img "date" [ref=e2418]
+                      - paragraph [ref=e2419]: Oct 14, 2026
+                    - generic [ref=e2420]:
+                      - img "author" [ref=e2421]
+                      - paragraph [ref=e2422]: TestATestA
+                    - generic [ref=e2423]:
+                      - img "frame" [ref=e2424]
+                      - paragraph [ref=e2425]: "0"
+                    - generic [ref=e2426]:
+                      - button "Like this event" [ref=e2427] [cursor=pointer]:
+                        - img "Like" [ref=e2428]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e2429] [cursor=pointer]:
+                        - img "Dislike" [ref=e2430]
+                        - text: "0"
+              - generic [ref=e2433]:
+                - generic [ref=e2434] [cursor=pointer]
+                - img "event" [ref=e2437]
+                - generic [ref=e2438]:
+                  - generic [ref=e2439]:
+                    - list "filter by items" [ref=e2440]:
+                      - listitem [ref=e2441]:
+                        - button "Economic" [ref=e2442] [cursor=pointer]
+                    - generic [ref=e2444]:
+                      - generic [ref=e2446]: Oct 15, 2026
+                      - generic [ref=e2447]: "|"
+                      - generic [ref=e2448]: 6:00 PM
+                    - paragraph [ref=e2451]:
+                      - link "Online" [ref=e2452] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e2453]: Open
+                    - paragraph [ref=e2457]: Test Title Positive 68052160
+                  - generic [ref=e2458]:
+                    - button "More" [ref=e2459] [cursor=pointer]
+                    - button "Join event" [ref=e2460] [cursor=pointer]
+                  - generic [ref=e2461]:
+                    - generic [ref=e2462]:
+                      - img "date" [ref=e2463]
+                      - paragraph [ref=e2464]: Oct 14, 2026
+                    - generic [ref=e2465]:
+                      - img "author" [ref=e2466]
+                      - paragraph [ref=e2467]: TestATestA
+                    - generic [ref=e2468]:
+                      - img "frame" [ref=e2469]
+                      - paragraph [ref=e2470]: "0"
+                    - generic [ref=e2471]:
+                      - button "Like this event" [ref=e2472] [cursor=pointer]:
+                        - img "Like" [ref=e2473]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e2474] [cursor=pointer]:
+                        - img "Dislike" [ref=e2475]
+                        - text: "0"
+              - generic [ref=e2478]:
+                - generic [ref=e2479] [cursor=pointer]
+                - img "event" [ref=e2482]
+                - generic [ref=e2483]:
+                  - generic [ref=e2484]:
+                    - list "filter by items" [ref=e2485]:
+                      - listitem [ref=e2486]:
+                        - button "Economic" [ref=e2487] [cursor=pointer]
+                    - generic [ref=e2489]:
+                      - generic [ref=e2491]: Oct 15, 2026
+                      - generic [ref=e2492]: "|"
+                      - generic [ref=e2493]: 6:00 PM
+                    - paragraph [ref=e2496]:
+                      - link "Online" [ref=e2497] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e2498]: Open
+                    - paragraph [ref=e2502]: Test Title Positive 69020788
+                  - generic [ref=e2503]:
+                    - button "More" [ref=e2504] [cursor=pointer]
+                    - button "Join event" [ref=e2505] [cursor=pointer]
+                  - generic [ref=e2506]:
+                    - generic [ref=e2507]:
+                      - img "date" [ref=e2508]
+                      - paragraph [ref=e2509]: Oct 14, 2026
+                    - generic [ref=e2510]:
+                      - img "author" [ref=e2511]
+                      - paragraph [ref=e2512]: TestATestA
+                    - generic [ref=e2513]:
+                      - img "frame" [ref=e2514]
+                      - paragraph [ref=e2515]: "0"
+                    - generic [ref=e2516]:
+                      - button "Like this event" [ref=e2517] [cursor=pointer]:
+                        - img "Like" [ref=e2518]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e2519] [cursor=pointer]:
+                        - img "Dislike" [ref=e2520]
+                        - text: "0"
+              - generic [ref=e2523]:
+                - generic [ref=e2524] [cursor=pointer]
+                - img "event" [ref=e2527]
+                - generic [ref=e2528]:
+                  - generic [ref=e2529]:
+                    - list "filter by items" [ref=e2530]:
+                      - listitem [ref=e2531]:
+                        - button "Economic" [ref=e2532] [cursor=pointer]
+                    - generic [ref=e2534]:
+                      - generic [ref=e2536]: Oct 15, 2026
+                      - generic [ref=e2537]: "|"
+                      - generic [ref=e2538]: 6:00 PM
+                    - paragraph [ref=e2541]:
+                      - link "Online" [ref=e2542] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e2543]: Open
+                    - paragraph [ref=e2547]: Test Title Positive 71759068
+                  - generic [ref=e2548]:
+                    - button "More" [ref=e2549] [cursor=pointer]
+                    - button "Join event" [ref=e2550] [cursor=pointer]
+                  - generic [ref=e2551]:
+                    - generic [ref=e2552]:
+                      - img "date" [ref=e2553]
+                      - paragraph [ref=e2554]: Oct 14, 2026
+                    - generic [ref=e2555]:
+                      - img "author" [ref=e2556]
+                      - paragraph [ref=e2557]: TestATestA
+                    - generic [ref=e2558]:
+                      - img "frame" [ref=e2559]
+                      - paragraph [ref=e2560]: "0"
+                    - generic [ref=e2561]:
+                      - button "Like this event" [ref=e2562] [cursor=pointer]:
+                        - img "Like" [ref=e2563]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e2564] [cursor=pointer]:
+                        - img "Dislike" [ref=e2565]
+                        - text: "0"
+              - generic [ref=e2568]:
+                - generic [ref=e2569] [cursor=pointer]
+                - img "event" [ref=e2572]
+                - generic [ref=e2573]:
+                  - generic [ref=e2574]:
+                    - list "filter by items" [ref=e2575]:
+                      - listitem [ref=e2576]:
+                        - button "Economic" [ref=e2577] [cursor=pointer]
+                    - generic [ref=e2579]:
+                      - generic [ref=e2581]: Oct 15, 2026
+                      - generic [ref=e2582]: "|"
+                      - generic [ref=e2583]: 6:00 PM
+                    - paragraph [ref=e2586]:
+                      - link "Online" [ref=e2587] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e2588]: Open
+                    - paragraph [ref=e2592]: Test Title Positive 69040227
+                  - generic [ref=e2593]:
+                    - button "More" [ref=e2594] [cursor=pointer]
+                    - button "Join event" [ref=e2595] [cursor=pointer]
+                  - generic [ref=e2596]:
+                    - generic [ref=e2597]:
+                      - img "date" [ref=e2598]
+                      - paragraph [ref=e2599]: Oct 14, 2026
+                    - generic [ref=e2600]:
+                      - img "author" [ref=e2601]
+                      - paragraph [ref=e2602]: TestATestA
+                    - generic [ref=e2603]:
+                      - img "frame" [ref=e2604]
+                      - paragraph [ref=e2605]: "0"
+                    - generic [ref=e2606]:
+                      - button "Like this event" [ref=e2607] [cursor=pointer]:
+                        - img "Like" [ref=e2608]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e2609] [cursor=pointer]:
+                        - img "Dislike" [ref=e2610]
+                        - text: "0"
+              - generic [ref=e2613]:
+                - generic [ref=e2614] [cursor=pointer]
+                - img "event" [ref=e2617]
+                - generic [ref=e2618]:
+                  - generic [ref=e2619]:
+                    - list "filter by items" [ref=e2620]:
+                      - listitem [ref=e2621]:
+                        - button "Economic" [ref=e2622] [cursor=pointer]
+                    - generic [ref=e2624]:
+                      - generic [ref=e2626]: Oct 15, 2026
+                      - generic [ref=e2627]: "|"
+                      - generic [ref=e2628]: 6:00 PM
+                    - paragraph [ref=e2631]:
+                      - link "Online" [ref=e2632] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e2633]: Open
+                    - paragraph [ref=e2637]: Test Title Positive 69054072
+                  - generic [ref=e2638]:
+                    - button "More" [ref=e2639] [cursor=pointer]
+                    - button "Join event" [ref=e2640] [cursor=pointer]
+                  - generic [ref=e2641]:
+                    - generic [ref=e2642]:
+                      - img "date" [ref=e2643]
+                      - paragraph [ref=e2644]: Oct 14, 2026
+                    - generic [ref=e2645]:
+                      - img "author" [ref=e2646]
+                      - paragraph [ref=e2647]: TestATestA
+                    - generic [ref=e2648]:
+                      - img "frame" [ref=e2649]
+                      - paragraph [ref=e2650]: "0"
+                    - generic [ref=e2651]:
+                      - button "Like this event" [ref=e2652] [cursor=pointer]:
+                        - img "Like" [ref=e2653]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e2654] [cursor=pointer]:
+                        - img "Dislike" [ref=e2655]
+                        - text: "0"
+              - generic [ref=e2658]:
+                - generic [ref=e2659] [cursor=pointer]
+                - img "event" [ref=e2662]
+                - generic [ref=e2663]:
+                  - generic [ref=e2664]:
+                    - list "filter by items" [ref=e2665]:
+                      - listitem [ref=e2666]:
+                        - button "Economic" [ref=e2667] [cursor=pointer]
+                    - generic [ref=e2669]:
+                      - generic [ref=e2671]: Oct 15, 2026
+                      - generic [ref=e2672]: "|"
+                      - generic [ref=e2673]: 6:00 PM
+                    - paragraph [ref=e2676]:
+                      - link "Online" [ref=e2677] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e2678]: Open
+                    - paragraph [ref=e2682]: Test Title Positive 69061202
+                  - generic [ref=e2683]:
+                    - button "More" [ref=e2684] [cursor=pointer]
+                    - button "Join event" [ref=e2685] [cursor=pointer]
+                  - generic [ref=e2686]:
+                    - generic [ref=e2687]:
+                      - img "date" [ref=e2688]
+                      - paragraph [ref=e2689]: Oct 14, 2026
+                    - generic [ref=e2690]:
+                      - img "author" [ref=e2691]
+                      - paragraph [ref=e2692]: TestATestA
+                    - generic [ref=e2693]:
+                      - img "frame" [ref=e2694]
+                      - paragraph [ref=e2695]: "0"
+                    - generic [ref=e2696]:
+                      - button "Like this event" [ref=e2697] [cursor=pointer]:
+                        - img "Like" [ref=e2698]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e2699] [cursor=pointer]:
+                        - img "Dislike" [ref=e2700]
+                        - text: "0"
+              - generic [ref=e2703]:
+                - generic [ref=e2704] [cursor=pointer]
+                - img "event" [ref=e2707]
+                - generic [ref=e2708]:
+                  - generic [ref=e2709]:
+                    - list "filter by items" [ref=e2710]:
+                      - listitem [ref=e2711]:
+                        - button "Economic" [ref=e2712] [cursor=pointer]
+                    - generic [ref=e2714]:
+                      - generic [ref=e2716]: Oct 15, 2026
+                      - generic [ref=e2717]: "|"
+                      - generic [ref=e2718]: 6:00 PM
+                    - paragraph [ref=e2721]:
+                      - link "Online" [ref=e2722] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e2723]: Open
+                    - paragraph [ref=e2727]: Test Title Positive 69073673
+                  - generic [ref=e2728]:
+                    - button "More" [ref=e2729] [cursor=pointer]
+                    - button "Join event" [ref=e2730] [cursor=pointer]
+                  - generic [ref=e2731]:
+                    - generic [ref=e2732]:
+                      - img "date" [ref=e2733]
+                      - paragraph [ref=e2734]: Oct 14, 2026
+                    - generic [ref=e2735]:
+                      - img "author" [ref=e2736]
+                      - paragraph [ref=e2737]: TestATestA
+                    - generic [ref=e2738]:
+                      - img "frame" [ref=e2739]
+                      - paragraph [ref=e2740]: "0"
+                    - generic [ref=e2741]:
+                      - button "Like this event" [ref=e2742] [cursor=pointer]:
+                        - img "Like" [ref=e2743]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e2744] [cursor=pointer]:
+                        - img "Dislike" [ref=e2745]
+                        - text: "0"
+              - generic [ref=e2748]:
+                - generic [ref=e2749] [cursor=pointer]
+                - img "event" [ref=e2752]
+                - generic [ref=e2753]:
+                  - generic [ref=e2754]:
+                    - list "filter by items" [ref=e2755]:
+                      - listitem [ref=e2756]:
+                        - button "Economic" [ref=e2757] [cursor=pointer]
+                    - generic [ref=e2759]:
+                      - generic [ref=e2761]: Oct 15, 2026
+                      - generic [ref=e2762]: "|"
+                      - generic [ref=e2763]: 6:00 PM
+                    - paragraph [ref=e2766]:
+                      - link "Online" [ref=e2767] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e2768]: Open
+                    - paragraph [ref=e2772]: Test Title Positive 69065841
+                  - generic [ref=e2773]:
+                    - button "More" [ref=e2774] [cursor=pointer]
+                    - button "Join event" [ref=e2775] [cursor=pointer]
+                  - generic [ref=e2776]:
+                    - generic [ref=e2777]:
+                      - img "date" [ref=e2778]
+                      - paragraph [ref=e2779]: Oct 14, 2026
+                    - generic [ref=e2780]:
+                      - img "author" [ref=e2781]
+                      - paragraph [ref=e2782]: TestATestA
+                    - generic [ref=e2783]:
+                      - img "frame" [ref=e2784]
+                      - paragraph [ref=e2785]: "0"
+                    - generic [ref=e2786]:
+                      - button "Like this event" [ref=e2787] [cursor=pointer]:
+                        - img "Like" [ref=e2788]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e2789] [cursor=pointer]:
+                        - img "Dislike" [ref=e2790]
+                        - text: "0"
+              - generic [ref=e2793]:
+                - generic [ref=e2794] [cursor=pointer]
+                - img "event" [ref=e2797]
+                - generic [ref=e2798]:
+                  - generic [ref=e2799]:
+                    - list "filter by items" [ref=e2800]:
+                      - listitem [ref=e2801]:
+                        - button "Economic" [ref=e2802] [cursor=pointer]
+                    - generic [ref=e2804]:
+                      - generic [ref=e2806]: Oct 15, 2026
+                      - generic [ref=e2807]: "|"
+                      - generic [ref=e2808]: 6:00 PM
+                    - paragraph [ref=e2811]:
+                      - link "Online" [ref=e2812] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e2813]: Open
+                    - paragraph [ref=e2817]: Test Title Positive 73206417
+                  - generic [ref=e2818]:
+                    - button "More" [ref=e2819] [cursor=pointer]
+                    - button "Join event" [ref=e2820] [cursor=pointer]
+                  - generic [ref=e2821]:
+                    - generic [ref=e2822]:
+                      - img "date" [ref=e2823]
+                      - paragraph [ref=e2824]: Oct 14, 2026
+                    - generic [ref=e2825]:
+                      - img "author" [ref=e2826]
+                      - paragraph [ref=e2827]: TestATestA
+                    - generic [ref=e2828]:
+                      - img "frame" [ref=e2829]
+                      - paragraph [ref=e2830]: "0"
+                    - generic [ref=e2831]:
+                      - button "Like this event" [ref=e2832] [cursor=pointer]:
+                        - img "Like" [ref=e2833]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e2834] [cursor=pointer]:
+                        - img "Dislike" [ref=e2835]
+                        - text: "0"
+              - generic [ref=e2838]:
+                - generic [ref=e2839] [cursor=pointer]
+                - img "event" [ref=e2842]
+                - generic [ref=e2843]:
+                  - generic [ref=e2844]:
+                    - list "filter by items" [ref=e2845]:
+                      - listitem [ref=e2846]:
+                        - button "Economic" [ref=e2847] [cursor=pointer]
+                    - generic [ref=e2849]:
+                      - generic [ref=e2851]: Oct 15, 2026
+                      - generic [ref=e2852]: "|"
+                      - generic [ref=e2853]: 6:00 PM
+                    - paragraph [ref=e2856]:
+                      - link "Online" [ref=e2857] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e2858]: Open
+                    - paragraph [ref=e2862]: Test Title Positive 69094968
+                  - generic [ref=e2863]:
+                    - button "More" [ref=e2864] [cursor=pointer]
+                    - button "Join event" [ref=e2865] [cursor=pointer]
+                  - generic [ref=e2866]:
+                    - generic [ref=e2867]:
+                      - img "date" [ref=e2868]
+                      - paragraph [ref=e2869]: Oct 14, 2026
+                    - generic [ref=e2870]:
+                      - img "author" [ref=e2871]
+                      - paragraph [ref=e2872]: TestATestA
+                    - generic [ref=e2873]:
+                      - img "frame" [ref=e2874]
+                      - paragraph [ref=e2875]: "0"
+                    - generic [ref=e2876]:
+                      - button "Like this event" [ref=e2877] [cursor=pointer]:
+                        - img "Like" [ref=e2878]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e2879] [cursor=pointer]:
+                        - img "Dislike" [ref=e2880]
+                        - text: "0"
+              - generic [ref=e2883]:
+                - generic [ref=e2884] [cursor=pointer]
+                - img "event" [ref=e2887]
+                - generic [ref=e2888]:
+                  - generic [ref=e2889]:
+                    - list "filter by items" [ref=e2890]:
+                      - listitem [ref=e2891]:
+                        - button "Economic" [ref=e2892] [cursor=pointer]
+                    - generic [ref=e2894]:
+                      - generic [ref=e2896]: Oct 15, 2026
+                      - generic [ref=e2897]: "|"
+                      - generic [ref=e2898]: 6:00 PM
+                    - paragraph [ref=e2901]:
+                      - link "Online" [ref=e2902] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e2903]: Open
+                    - paragraph [ref=e2907]: Test Title Positive 69130737
+                  - generic [ref=e2908]:
+                    - button "More" [ref=e2909] [cursor=pointer]
+                    - button "Join event" [ref=e2910] [cursor=pointer]
+                  - generic [ref=e2911]:
+                    - generic [ref=e2912]:
+                      - img "date" [ref=e2913]
+                      - paragraph [ref=e2914]: Oct 14, 2026
+                    - generic [ref=e2915]:
+                      - img "author" [ref=e2916]
+                      - paragraph [ref=e2917]: TestATestA
+                    - generic [ref=e2918]:
+                      - img "frame" [ref=e2919]
+                      - paragraph [ref=e2920]: "0"
+                    - generic [ref=e2921]:
+                      - button "Like this event" [ref=e2922] [cursor=pointer]:
+                        - img "Like" [ref=e2923]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e2924] [cursor=pointer]:
+                        - img "Dislike" [ref=e2925]
+                        - text: "0"
+              - generic [ref=e2928]:
+                - generic [ref=e2929] [cursor=pointer]
+                - img "event" [ref=e2932]
+                - generic [ref=e2933]:
+                  - generic [ref=e2934]:
+                    - list "filter by items" [ref=e2935]:
+                      - listitem [ref=e2936]:
+                        - button "Economic" [ref=e2937] [cursor=pointer]
+                    - generic [ref=e2939]:
+                      - generic [ref=e2941]: Oct 15, 2026
+                      - generic [ref=e2942]: "|"
+                      - generic [ref=e2943]: 6:00 PM
+                    - paragraph [ref=e2946]:
+                      - link "Online" [ref=e2947] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e2948]: Open
+                    - paragraph [ref=e2952]: Test Title Positive 69146842
+                  - generic [ref=e2953]:
+                    - button "More" [ref=e2954] [cursor=pointer]
+                    - button "Join event" [ref=e2955] [cursor=pointer]
+                  - generic [ref=e2956]:
+                    - generic [ref=e2957]:
+                      - img "date" [ref=e2958]
+                      - paragraph [ref=e2959]: Oct 14, 2026
+                    - generic [ref=e2960]:
+                      - img "author" [ref=e2961]
+                      - paragraph [ref=e2962]: TestATestA
+                    - generic [ref=e2963]:
+                      - img "frame" [ref=e2964]
+                      - paragraph [ref=e2965]: "0"
+                    - generic [ref=e2966]:
+                      - button "Like this event" [ref=e2967] [cursor=pointer]:
+                        - img "Like" [ref=e2968]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e2969] [cursor=pointer]:
+                        - img "Dislike" [ref=e2970]
+                        - text: "0"
+              - generic [ref=e2973]:
+                - generic [ref=e2974] [cursor=pointer]
+                - img "event" [ref=e2977]
+                - generic [ref=e2978]:
+                  - generic [ref=e2979]:
+                    - list "filter by items" [ref=e2980]:
+                      - listitem [ref=e2981]:
+                        - button "Economic" [ref=e2982] [cursor=pointer]
+                    - generic [ref=e2984]:
+                      - generic [ref=e2986]: Oct 15, 2026
+                      - generic [ref=e2987]: "|"
+                      - generic [ref=e2988]: 6:00 PM
+                    - paragraph [ref=e2991]:
+                      - link "Online" [ref=e2992] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e2993]: Open
+                    - paragraph [ref=e2997]: Test Title Positive 69155103
+                  - generic [ref=e2998]:
+                    - button "More" [ref=e2999] [cursor=pointer]
+                    - button "Join event" [ref=e3000] [cursor=pointer]
+                  - generic [ref=e3001]:
+                    - generic [ref=e3002]:
+                      - img "date" [ref=e3003]
+                      - paragraph [ref=e3004]: Oct 14, 2026
+                    - generic [ref=e3005]:
+                      - img "author" [ref=e3006]
+                      - paragraph [ref=e3007]: TestATestA
+                    - generic [ref=e3008]:
+                      - img "frame" [ref=e3009]
+                      - paragraph [ref=e3010]: "0"
+                    - generic [ref=e3011]:
+                      - button "Like this event" [ref=e3012] [cursor=pointer]:
+                        - img "Like" [ref=e3013]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e3014] [cursor=pointer]:
+                        - img "Dislike" [ref=e3015]
+                        - text: "0"
+              - generic [ref=e3018]:
+                - generic [ref=e3019] [cursor=pointer]
+                - img "event" [ref=e3022]
+                - generic [ref=e3023]:
+                  - generic [ref=e3024]:
+                    - list "filter by items" [ref=e3025]:
+                      - listitem [ref=e3026]:
+                        - button "Economic" [ref=e3027] [cursor=pointer]
+                    - generic [ref=e3029]:
+                      - generic [ref=e3031]: Oct 15, 2026
+                      - generic [ref=e3032]: "|"
+                      - generic [ref=e3033]: 6:00 PM
+                    - paragraph [ref=e3036]:
+                      - link "Online" [ref=e3037] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e3038]: Open
+                    - paragraph [ref=e3042]: Test Title Positive 69167976
+                  - generic [ref=e3043]:
+                    - button "More" [ref=e3044] [cursor=pointer]
+                    - button "Join event" [ref=e3045] [cursor=pointer]
+                  - generic [ref=e3046]:
+                    - generic [ref=e3047]:
+                      - img "date" [ref=e3048]
+                      - paragraph [ref=e3049]: Oct 14, 2026
+                    - generic [ref=e3050]:
+                      - img "author" [ref=e3051]
+                      - paragraph [ref=e3052]: TestATestA
+                    - generic [ref=e3053]:
+                      - img "frame" [ref=e3054]
+                      - paragraph [ref=e3055]: "0"
+                    - generic [ref=e3056]:
+                      - button "Like this event" [ref=e3057] [cursor=pointer]:
+                        - img "Like" [ref=e3058]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e3059] [cursor=pointer]:
+                        - img "Dislike" [ref=e3060]
+                        - text: "0"
+              - generic [ref=e3063]:
+                - generic [ref=e3064] [cursor=pointer]
+                - img "event" [ref=e3067]
+                - generic [ref=e3068]:
+                  - generic [ref=e3069]:
+                    - list "filter by items" [ref=e3070]:
+                      - listitem [ref=e3071]:
+                        - button "Economic" [ref=e3072] [cursor=pointer]
+                    - generic [ref=e3074]:
+                      - generic [ref=e3076]: Oct 15, 2026
+                      - generic [ref=e3077]: "|"
+                      - generic [ref=e3078]: 6:00 PM
+                    - paragraph [ref=e3081]:
+                      - link "Online" [ref=e3082] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e3083]: Open
+                    - paragraph [ref=e3087]: Test Title Positive 73374144
+                  - generic [ref=e3088]:
+                    - button "More" [ref=e3089] [cursor=pointer]
+                    - button "Join event" [ref=e3090] [cursor=pointer]
+                  - generic [ref=e3091]:
+                    - generic [ref=e3092]:
+                      - img "date" [ref=e3093]
+                      - paragraph [ref=e3094]: Oct 14, 2026
+                    - generic [ref=e3095]:
+                      - img "author" [ref=e3096]
+                      - paragraph [ref=e3097]: TestATestA
+                    - generic [ref=e3098]:
+                      - img "frame" [ref=e3099]
+                      - paragraph [ref=e3100]: "0"
+                    - generic [ref=e3101]:
+                      - button "Like this event" [ref=e3102] [cursor=pointer]:
+                        - img "Like" [ref=e3103]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e3104] [cursor=pointer]:
+                        - img "Dislike" [ref=e3105]
+                        - text: "0"
+              - generic [ref=e3108]:
+                - generic [ref=e3109] [cursor=pointer]
+                - img "event" [ref=e3112]
+                - generic [ref=e3113]:
+                  - generic [ref=e3114]:
+                    - list "filter by items" [ref=e3115]:
+                      - listitem [ref=e3116]:
+                        - button "Economic" [ref=e3117] [cursor=pointer]
+                    - generic [ref=e3119]:
+                      - generic [ref=e3121]: Oct 15, 2026
+                      - generic [ref=e3122]: "|"
+                      - generic [ref=e3123]: 6:00 PM
+                    - paragraph [ref=e3126]:
+                      - link "Online" [ref=e3127] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e3128]: Open
+                    - paragraph [ref=e3132]: Test Title Positive 69189520
+                  - generic [ref=e3133]:
+                    - button "More" [ref=e3134] [cursor=pointer]
+                    - button "Join event" [ref=e3135] [cursor=pointer]
+                  - generic [ref=e3136]:
+                    - generic [ref=e3137]:
+                      - img "date" [ref=e3138]
+                      - paragraph [ref=e3139]: Oct 14, 2026
+                    - generic [ref=e3140]:
+                      - img "author" [ref=e3141]
+                      - paragraph [ref=e3142]: TestATestA
+                    - generic [ref=e3143]:
+                      - img "frame" [ref=e3144]
+                      - paragraph [ref=e3145]: "0"
+                    - generic [ref=e3146]:
+                      - button "Like this event" [ref=e3147] [cursor=pointer]:
+                        - img "Like" [ref=e3148]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e3149] [cursor=pointer]:
+                        - img "Dislike" [ref=e3150]
+                        - text: "0"
+              - generic [ref=e3153]:
+                - generic [ref=e3154] [cursor=pointer]
+                - img "event" [ref=e3157]
+                - generic [ref=e3158]:
+                  - generic [ref=e3159]:
+                    - list "filter by items" [ref=e3160]:
+                      - listitem [ref=e3161]:
+                        - button "Economic" [ref=e3162] [cursor=pointer]
+                    - generic [ref=e3164]:
+                      - generic [ref=e3166]: Oct 15, 2026
+                      - generic [ref=e3167]: "|"
+                      - generic [ref=e3168]: 6:00 PM
+                    - paragraph [ref=e3171]:
+                      - link "Online" [ref=e3172] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e3173]: Open
+                    - paragraph [ref=e3177]: Test Title Positive 69194799
+                  - generic [ref=e3178]:
+                    - button "More" [ref=e3179] [cursor=pointer]
+                    - button "Join event" [ref=e3180] [cursor=pointer]
+                  - generic [ref=e3181]:
+                    - generic [ref=e3182]:
+                      - img "date" [ref=e3183]
+                      - paragraph [ref=e3184]: Oct 14, 2026
+                    - generic [ref=e3185]:
+                      - img "author" [ref=e3186]
+                      - paragraph [ref=e3187]: TestATestA
+                    - generic [ref=e3188]:
+                      - img "frame" [ref=e3189]
+                      - paragraph [ref=e3190]: "0"
+                    - generic [ref=e3191]:
+                      - button "Like this event" [ref=e3192] [cursor=pointer]:
+                        - img "Like" [ref=e3193]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e3194] [cursor=pointer]:
+                        - img "Dislike" [ref=e3195]
+                        - text: "0"
+              - generic [ref=e3198]:
+                - generic [ref=e3199] [cursor=pointer]
+                - img "event" [ref=e3202]
+                - generic [ref=e3203]:
+                  - generic [ref=e3204]:
+                    - list "filter by items" [ref=e3205]:
+                      - listitem [ref=e3206]:
+                        - button "Economic" [ref=e3207] [cursor=pointer]
+                    - generic [ref=e3209]:
+                      - generic [ref=e3211]: Oct 15, 2026
+                      - generic [ref=e3212]: "|"
+                      - generic [ref=e3213]: 6:00 PM
+                    - paragraph [ref=e3216]:
+                      - link "Online" [ref=e3217] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e3218]: Open
+                    - paragraph [ref=e3222]: Test Title Positive 69185215
+                  - generic [ref=e3223]:
+                    - button "More" [ref=e3224] [cursor=pointer]
+                    - button "Join event" [ref=e3225] [cursor=pointer]
+                  - generic [ref=e3226]:
+                    - generic [ref=e3227]:
+                      - img "date" [ref=e3228]
+                      - paragraph [ref=e3229]: Oct 14, 2026
+                    - generic [ref=e3230]:
+                      - img "author" [ref=e3231]
+                      - paragraph [ref=e3232]: TestATestA
+                    - generic [ref=e3233]:
+                      - img "frame" [ref=e3234]
+                      - paragraph [ref=e3235]: "0"
+                    - generic [ref=e3236]:
+                      - button "Like this event" [ref=e3237] [cursor=pointer]:
+                        - img "Like" [ref=e3238]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e3239] [cursor=pointer]:
+                        - img "Dislike" [ref=e3240]
+                        - text: "0"
+              - generic [ref=e3243]:
+                - generic [ref=e3244] [cursor=pointer]
+                - img "event" [ref=e3247]
+                - generic [ref=e3248]:
+                  - generic [ref=e3249]:
+                    - list "filter by items" [ref=e3250]:
+                      - listitem [ref=e3251]:
+                        - button "Economic" [ref=e3252] [cursor=pointer]
+                    - generic [ref=e3254]:
+                      - generic [ref=e3256]: Oct 15, 2026
+                      - generic [ref=e3257]: "|"
+                      - generic [ref=e3258]: 6:00 PM
+                    - paragraph [ref=e3261]:
+                      - link "Online" [ref=e3262] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e3263]: Open
+                    - paragraph [ref=e3267]: Test Title Positive 69216235
+                  - generic [ref=e3268]:
+                    - button "More" [ref=e3269] [cursor=pointer]
+                    - button "Join event" [ref=e3270] [cursor=pointer]
+                  - generic [ref=e3271]:
+                    - generic [ref=e3272]:
+                      - img "date" [ref=e3273]
+                      - paragraph [ref=e3274]: Oct 14, 2026
+                    - generic [ref=e3275]:
+                      - img "author" [ref=e3276]
+                      - paragraph [ref=e3277]: TestATestA
+                    - generic [ref=e3278]:
+                      - img "frame" [ref=e3279]
+                      - paragraph [ref=e3280]: "0"
+                    - generic [ref=e3281]:
+                      - button "Like this event" [ref=e3282] [cursor=pointer]:
+                        - img "Like" [ref=e3283]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e3284] [cursor=pointer]:
+                        - img "Dislike" [ref=e3285]
+                        - text: "0"
+              - generic [ref=e3288]:
+                - generic [ref=e3289] [cursor=pointer]
+                - img "event" [ref=e3292]
+                - generic [ref=e3293]:
+                  - generic [ref=e3294]:
+                    - list "filter by items" [ref=e3295]:
+                      - listitem [ref=e3296]:
+                        - button "Economic" [ref=e3297] [cursor=pointer]
+                    - generic [ref=e3299]:
+                      - generic [ref=e3301]: Oct 15, 2026
+                      - generic [ref=e3302]: "|"
+                      - generic [ref=e3303]: 6:00 PM
+                    - paragraph [ref=e3306]:
+                      - link "Online" [ref=e3307] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e3308]: Open
+                    - paragraph [ref=e3312]: Test Title Positive 69247887
+                  - generic [ref=e3313]:
+                    - button "More" [ref=e3314] [cursor=pointer]
+                    - button "Join event" [ref=e3315] [cursor=pointer]
+                  - generic [ref=e3316]:
+                    - generic [ref=e3317]:
+                      - img "date" [ref=e3318]
+                      - paragraph [ref=e3319]: Oct 14, 2026
+                    - generic [ref=e3320]:
+                      - img "author" [ref=e3321]
+                      - paragraph [ref=e3322]: TestATestA
+                    - generic [ref=e3323]:
+                      - img "frame" [ref=e3324]
+                      - paragraph [ref=e3325]: "0"
+                    - generic [ref=e3326]:
+                      - button "Like this event" [ref=e3327] [cursor=pointer]:
+                        - img "Like" [ref=e3328]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e3329] [cursor=pointer]:
+                        - img "Dislike" [ref=e3330]
+                        - text: "0"
+              - generic [ref=e3333]:
+                - generic [ref=e3334] [cursor=pointer]
+                - img "event" [ref=e3337]
+                - generic [ref=e3338]:
+                  - generic [ref=e3339]:
+                    - list "filter by items" [ref=e3340]:
+                      - listitem [ref=e3341]:
+                        - button "Economic" [ref=e3342] [cursor=pointer]
+                    - generic [ref=e3344]:
+                      - generic [ref=e3346]: Oct 15, 2026
+                      - generic [ref=e3347]: "|"
+                      - generic [ref=e3348]: 6:00 PM
+                    - paragraph [ref=e3351]:
+                      - link "Online" [ref=e3352] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e3353]: Open
+                    - paragraph [ref=e3357]: Test Title Positive 73484765
+                  - generic [ref=e3358]:
+                    - button "More" [ref=e3359] [cursor=pointer]
+                    - button "Join event" [ref=e3360] [cursor=pointer]
+                  - generic [ref=e3361]:
+                    - generic [ref=e3362]:
+                      - img "date" [ref=e3363]
+                      - paragraph [ref=e3364]: Oct 14, 2026
+                    - generic [ref=e3365]:
+                      - img "author" [ref=e3366]
+                      - paragraph [ref=e3367]: TestATestA
+                    - generic [ref=e3368]:
+                      - img "frame" [ref=e3369]
+                      - paragraph [ref=e3370]: "0"
+                    - generic [ref=e3371]:
+                      - button "Like this event" [ref=e3372] [cursor=pointer]:
+                        - img "Like" [ref=e3373]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e3374] [cursor=pointer]:
+                        - img "Dislike" [ref=e3375]
+                        - text: "0"
+              - generic [ref=e3378]:
+                - generic [ref=e3379] [cursor=pointer]
+                - img "event" [ref=e3382]
+                - generic [ref=e3383]:
+                  - generic [ref=e3384]:
+                    - list "filter by items" [ref=e3385]:
+                      - listitem [ref=e3386]:
+                        - button "Economic" [ref=e3387] [cursor=pointer]
+                    - generic [ref=e3389]:
+                      - generic [ref=e3391]: Oct 15, 2026
+                      - generic [ref=e3392]: "|"
+                      - generic [ref=e3393]: 6:00 PM
+                    - paragraph [ref=e3396]:
+                      - link "Online" [ref=e3397] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e3398]: Open
+                    - paragraph [ref=e3402]: Test Title Positive 69035235
+                  - generic [ref=e3403]:
+                    - button "More" [ref=e3404] [cursor=pointer]
+                    - button "Join event" [ref=e3405] [cursor=pointer]
+                  - generic [ref=e3406]:
+                    - generic [ref=e3407]:
+                      - img "date" [ref=e3408]
+                      - paragraph [ref=e3409]: Oct 14, 2026
+                    - generic [ref=e3410]:
+                      - img "author" [ref=e3411]
+                      - paragraph [ref=e3412]: TestATestA
+                    - generic [ref=e3413]:
+                      - img "frame" [ref=e3414]
+                      - paragraph [ref=e3415]: "0"
+                    - generic [ref=e3416]:
+                      - button "Like this event" [ref=e3417] [cursor=pointer]:
+                        - img "Like" [ref=e3418]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e3419] [cursor=pointer]:
+                        - img "Dislike" [ref=e3420]
+                        - text: "0"
+              - generic [ref=e3423]:
+                - generic [ref=e3424] [cursor=pointer]
+                - img "event" [ref=e3427]
+                - generic [ref=e3428]:
+                  - generic [ref=e3429]:
+                    - list "filter by items" [ref=e3430]:
+                      - listitem [ref=e3431]:
+                        - button "Economic" [ref=e3432] [cursor=pointer]
+                    - generic [ref=e3434]:
+                      - generic [ref=e3436]: Oct 15, 2026
+                      - generic [ref=e3437]: "|"
+                      - generic [ref=e3438]: 6:00 PM
+                    - paragraph [ref=e3441]:
+                      - link "Online" [ref=e3442] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e3443]: Open
+                    - paragraph [ref=e3447]: Test Title Positive 69040227
+                  - generic [ref=e3448]:
+                    - button "More" [ref=e3449] [cursor=pointer]
+                    - button "Join event" [ref=e3450] [cursor=pointer]
+                  - generic [ref=e3451]:
+                    - generic [ref=e3452]:
+                      - img "date" [ref=e3453]
+                      - paragraph [ref=e3454]: Oct 14, 2026
+                    - generic [ref=e3455]:
+                      - img "author" [ref=e3456]
+                      - paragraph [ref=e3457]: TestATestA
+                    - generic [ref=e3458]:
+                      - img "frame" [ref=e3459]
+                      - paragraph [ref=e3460]: "0"
+                    - generic [ref=e3461]:
+                      - button "Like this event" [ref=e3462] [cursor=pointer]:
+                        - img "Like" [ref=e3463]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e3464] [cursor=pointer]:
+                        - img "Dislike" [ref=e3465]
+                        - text: "0"
+              - generic [ref=e3468]:
+                - generic [ref=e3469] [cursor=pointer]
+                - img "event" [ref=e3472]
+                - generic [ref=e3473]:
+                  - generic [ref=e3474]:
+                    - list "filter by items" [ref=e3475]:
+                      - listitem [ref=e3476]:
+                        - button "Economic" [ref=e3477] [cursor=pointer]
+                    - generic [ref=e3479]:
+                      - generic [ref=e3481]: Oct 15, 2026
+                      - generic [ref=e3482]: "|"
+                      - generic [ref=e3483]: 6:00 PM
+                    - paragraph [ref=e3486]:
+                      - link "Online" [ref=e3487] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e3488]: Open
+                    - paragraph [ref=e3492]: Test Title Positive 69054072
+                  - generic [ref=e3493]:
+                    - button "More" [ref=e3494] [cursor=pointer]
+                    - button "Join event" [ref=e3495] [cursor=pointer]
+                  - generic [ref=e3496]:
+                    - generic [ref=e3497]:
+                      - img "date" [ref=e3498]
+                      - paragraph [ref=e3499]: Oct 14, 2026
+                    - generic [ref=e3500]:
+                      - img "author" [ref=e3501]
+                      - paragraph [ref=e3502]: TestATestA
+                    - generic [ref=e3503]:
+                      - img "frame" [ref=e3504]
+                      - paragraph [ref=e3505]: "0"
+                    - generic [ref=e3506]:
+                      - button "Like this event" [ref=e3507] [cursor=pointer]:
+                        - img "Like" [ref=e3508]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e3509] [cursor=pointer]:
+                        - img "Dislike" [ref=e3510]
+                        - text: "0"
+              - generic [ref=e3513]:
+                - generic [ref=e3514] [cursor=pointer]
+                - img "event" [ref=e3517]
+                - generic [ref=e3518]:
+                  - generic [ref=e3519]:
+                    - list "filter by items" [ref=e3520]:
+                      - listitem [ref=e3521]:
+                        - button "Economic" [ref=e3522] [cursor=pointer]
+                    - generic [ref=e3524]:
+                      - generic [ref=e3526]: Oct 15, 2026
+                      - generic [ref=e3527]: "|"
+                      - generic [ref=e3528]: 6:00 PM
+                    - paragraph [ref=e3531]:
+                      - link "Online" [ref=e3532] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e3533]: Open
+                    - paragraph [ref=e3537]: Test Title Positive 69061202
+                  - generic [ref=e3538]:
+                    - button "More" [ref=e3539] [cursor=pointer]
+                    - button "Join event" [ref=e3540] [cursor=pointer]
+                  - generic [ref=e3541]:
+                    - generic [ref=e3542]:
+                      - img "date" [ref=e3543]
+                      - paragraph [ref=e3544]: Oct 14, 2026
+                    - generic [ref=e3545]:
+                      - img "author" [ref=e3546]
+                      - paragraph [ref=e3547]: TestATestA
+                    - generic [ref=e3548]:
+                      - img "frame" [ref=e3549]
+                      - paragraph [ref=e3550]: "0"
+                    - generic [ref=e3551]:
+                      - button "Like this event" [ref=e3552] [cursor=pointer]:
+                        - img "Like" [ref=e3553]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e3554] [cursor=pointer]:
+                        - img "Dislike" [ref=e3555]
+                        - text: "0"
+              - generic [ref=e3558]:
+                - generic [ref=e3559] [cursor=pointer]
+                - img "event" [ref=e3562]
+                - generic [ref=e3563]:
+                  - generic [ref=e3564]:
+                    - list "filter by items" [ref=e3565]:
+                      - listitem [ref=e3566]:
+                        - button "Economic" [ref=e3567] [cursor=pointer]
+                    - generic [ref=e3569]:
+                      - generic [ref=e3571]: Oct 15, 2026
+                      - generic [ref=e3572]: "|"
+                      - generic [ref=e3573]: 6:00 PM
+                    - paragraph [ref=e3576]:
+                      - link "Online" [ref=e3577] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e3578]: Open
+                    - paragraph [ref=e3582]: Test Title Positive 69073673
+                  - generic [ref=e3583]:
+                    - button "More" [ref=e3584] [cursor=pointer]
+                    - button "Join event" [ref=e3585] [cursor=pointer]
+                  - generic [ref=e3586]:
+                    - generic [ref=e3587]:
+                      - img "date" [ref=e3588]
+                      - paragraph [ref=e3589]: Oct 14, 2026
+                    - generic [ref=e3590]:
+                      - img "author" [ref=e3591]
+                      - paragraph [ref=e3592]: TestATestA
+                    - generic [ref=e3593]:
+                      - img "frame" [ref=e3594]
+                      - paragraph [ref=e3595]: "0"
+                    - generic [ref=e3596]:
+                      - button "Like this event" [ref=e3597] [cursor=pointer]:
+                        - img "Like" [ref=e3598]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e3599] [cursor=pointer]:
+                        - img "Dislike" [ref=e3600]
+                        - text: "0"
+              - generic [ref=e3603]:
+                - generic [ref=e3604] [cursor=pointer]
+                - img "event" [ref=e3607]
+                - generic [ref=e3608]:
+                  - generic [ref=e3609]:
+                    - list "filter by items" [ref=e3610]:
+                      - listitem [ref=e3611]:
+                        - button "Economic" [ref=e3612] [cursor=pointer]
+                    - generic [ref=e3614]:
+                      - generic [ref=e3616]: Oct 15, 2026
+                      - generic [ref=e3617]: "|"
+                      - generic [ref=e3618]: 6:00 PM
+                    - paragraph [ref=e3621]:
+                      - link "Online" [ref=e3622] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e3623]: Open
+                    - paragraph [ref=e3627]: Test Title Positive 69065841
+                  - generic [ref=e3628]:
+                    - button "More" [ref=e3629] [cursor=pointer]
+                    - button "Join event" [ref=e3630] [cursor=pointer]
+                  - generic [ref=e3631]:
+                    - generic [ref=e3632]:
+                      - img "date" [ref=e3633]
+                      - paragraph [ref=e3634]: Oct 14, 2026
+                    - generic [ref=e3635]:
+                      - img "author" [ref=e3636]
+                      - paragraph [ref=e3637]: TestATestA
+                    - generic [ref=e3638]:
+                      - img "frame" [ref=e3639]
+                      - paragraph [ref=e3640]: "0"
+                    - generic [ref=e3641]:
+                      - button "Like this event" [ref=e3642] [cursor=pointer]:
+                        - img "Like" [ref=e3643]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e3644] [cursor=pointer]:
+                        - img "Dislike" [ref=e3645]
+                        - text: "0"
+              - generic [ref=e3648]:
+                - generic [ref=e3649] [cursor=pointer]
+                - img "event" [ref=e3652]
+                - generic [ref=e3653]:
+                  - generic [ref=e3654]:
+                    - list "filter by items" [ref=e3655]:
+                      - listitem [ref=e3656]:
+                        - button "Economic" [ref=e3657] [cursor=pointer]
+                    - generic [ref=e3659]:
+                      - generic [ref=e3661]: Oct 15, 2026
+                      - generic [ref=e3662]: "|"
+                      - generic [ref=e3663]: 6:00 PM
+                    - paragraph [ref=e3666]:
+                      - link "Online" [ref=e3667] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e3668]: Open
+                    - paragraph [ref=e3672]: Test Title Positive 69094968
+                  - generic [ref=e3673]:
+                    - button "More" [ref=e3674] [cursor=pointer]
+                    - button "Join event" [ref=e3675] [cursor=pointer]
+                  - generic [ref=e3676]:
+                    - generic [ref=e3677]:
+                      - img "date" [ref=e3678]
+                      - paragraph [ref=e3679]: Oct 14, 2026
+                    - generic [ref=e3680]:
+                      - img "author" [ref=e3681]
+                      - paragraph [ref=e3682]: TestATestA
+                    - generic [ref=e3683]:
+                      - img "frame" [ref=e3684]
+                      - paragraph [ref=e3685]: "0"
+                    - generic [ref=e3686]:
+                      - button "Like this event" [ref=e3687] [cursor=pointer]:
+                        - img "Like" [ref=e3688]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e3689] [cursor=pointer]:
+                        - img "Dislike" [ref=e3690]
+                        - text: "0"
+              - generic [ref=e3693]:
+                - generic [ref=e3694] [cursor=pointer]
+                - img "event" [ref=e3697]
+                - generic [ref=e3698]:
+                  - generic [ref=e3699]:
+                    - list "filter by items" [ref=e3700]:
+                      - listitem [ref=e3701]:
+                        - button "Economic" [ref=e3702] [cursor=pointer]
+                    - generic [ref=e3704]:
+                      - generic [ref=e3706]: Oct 15, 2026
+                      - generic [ref=e3707]: "|"
+                      - generic [ref=e3708]: 6:00 PM
+                    - paragraph [ref=e3711]:
+                      - link "Online" [ref=e3712] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e3713]: Open
+                    - paragraph [ref=e3717]: Test Title Positive 69130737
+                  - generic [ref=e3718]:
+                    - button "More" [ref=e3719] [cursor=pointer]
+                    - button "Join event" [ref=e3720] [cursor=pointer]
+                  - generic [ref=e3721]:
+                    - generic [ref=e3722]:
+                      - img "date" [ref=e3723]
+                      - paragraph [ref=e3724]: Oct 14, 2026
+                    - generic [ref=e3725]:
+                      - img "author" [ref=e3726]
+                      - paragraph [ref=e3727]: TestATestA
+                    - generic [ref=e3728]:
+                      - img "frame" [ref=e3729]
+                      - paragraph [ref=e3730]: "0"
+                    - generic [ref=e3731]:
+                      - button "Like this event" [ref=e3732] [cursor=pointer]:
+                        - img "Like" [ref=e3733]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e3734] [cursor=pointer]:
+                        - img "Dislike" [ref=e3735]
+                        - text: "0"
+              - generic [ref=e3738]:
+                - generic [ref=e3739] [cursor=pointer]
+                - img "event" [ref=e3742]
+                - generic [ref=e3743]:
+                  - generic [ref=e3744]:
+                    - list "filter by items" [ref=e3745]:
+                      - listitem [ref=e3746]:
+                        - button "Economic" [ref=e3747] [cursor=pointer]
+                    - generic [ref=e3749]:
+                      - generic [ref=e3751]: Oct 15, 2026
+                      - generic [ref=e3752]: "|"
+                      - generic [ref=e3753]: 6:00 PM
+                    - paragraph [ref=e3756]:
+                      - link "Online" [ref=e3757] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e3758]: Open
+                    - paragraph [ref=e3762]: Test Title Positive 69146842
+                  - generic [ref=e3763]:
+                    - button "More" [ref=e3764] [cursor=pointer]
+                    - button "Join event" [ref=e3765] [cursor=pointer]
+                  - generic [ref=e3766]:
+                    - generic [ref=e3767]:
+                      - img "date" [ref=e3768]
+                      - paragraph [ref=e3769]: Oct 14, 2026
+                    - generic [ref=e3770]:
+                      - img "author" [ref=e3771]
+                      - paragraph [ref=e3772]: TestATestA
+                    - generic [ref=e3773]:
+                      - img "frame" [ref=e3774]
+                      - paragraph [ref=e3775]: "0"
+                    - generic [ref=e3776]:
+                      - button "Like this event" [ref=e3777] [cursor=pointer]:
+                        - img "Like" [ref=e3778]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e3779] [cursor=pointer]:
+                        - img "Dislike" [ref=e3780]
+                        - text: "0"
+              - generic [ref=e3783]:
+                - generic [ref=e3784] [cursor=pointer]
+                - img "event" [ref=e3787]
+                - generic [ref=e3788]:
+                  - generic [ref=e3789]:
+                    - list "filter by items" [ref=e3790]:
+                      - listitem [ref=e3791]:
+                        - button "Economic" [ref=e3792] [cursor=pointer]
+                    - generic [ref=e3794]:
+                      - generic [ref=e3796]: Oct 15, 2026
+                      - generic [ref=e3797]: "|"
+                      - generic [ref=e3798]: 6:00 PM
+                    - paragraph [ref=e3801]:
+                      - link "Online" [ref=e3802] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e3803]: Open
+                    - paragraph [ref=e3807]: Test Title Positive 69155103
+                  - generic [ref=e3808]:
+                    - button "More" [ref=e3809] [cursor=pointer]
+                    - button "Join event" [ref=e3810] [cursor=pointer]
+                  - generic [ref=e3811]:
+                    - generic [ref=e3812]:
+                      - img "date" [ref=e3813]
+                      - paragraph [ref=e3814]: Oct 14, 2026
+                    - generic [ref=e3815]:
+                      - img "author" [ref=e3816]
+                      - paragraph [ref=e3817]: TestATestA
+                    - generic [ref=e3818]:
+                      - img "frame" [ref=e3819]
+                      - paragraph [ref=e3820]: "0"
+                    - generic [ref=e3821]:
+                      - button "Like this event" [ref=e3822] [cursor=pointer]:
+                        - img "Like" [ref=e3823]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e3824] [cursor=pointer]:
+                        - img "Dislike" [ref=e3825]
+                        - text: "0"
+              - generic [ref=e3828]:
+                - generic [ref=e3829] [cursor=pointer]
+                - img "event" [ref=e3832]
+                - generic [ref=e3833]:
+                  - generic [ref=e3834]:
+                    - list "filter by items" [ref=e3835]:
+                      - listitem [ref=e3836]:
+                        - button "Economic" [ref=e3837] [cursor=pointer]
+                    - generic [ref=e3839]:
+                      - generic [ref=e3841]: Oct 15, 2026
+                      - generic [ref=e3842]: "|"
+                      - generic [ref=e3843]: 6:00 PM
+                    - paragraph [ref=e3846]:
+                      - link "Online" [ref=e3847] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e3848]: Open
+                    - paragraph [ref=e3852]: Test Title Positive 69167976
+                  - generic [ref=e3853]:
+                    - button "More" [ref=e3854] [cursor=pointer]
+                    - button "Join event" [ref=e3855] [cursor=pointer]
+                  - generic [ref=e3856]:
+                    - generic [ref=e3857]:
+                      - img "date" [ref=e3858]
+                      - paragraph [ref=e3859]: Oct 14, 2026
+                    - generic [ref=e3860]:
+                      - img "author" [ref=e3861]
+                      - paragraph [ref=e3862]: TestATestA
+                    - generic [ref=e3863]:
+                      - img "frame" [ref=e3864]
+                      - paragraph [ref=e3865]: "0"
+                    - generic [ref=e3866]:
+                      - button "Like this event" [ref=e3867] [cursor=pointer]:
+                        - img "Like" [ref=e3868]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e3869] [cursor=pointer]:
+                        - img "Dislike" [ref=e3870]
+                        - text: "0"
+              - generic [ref=e3873]:
+                - generic [ref=e3874] [cursor=pointer]
+                - img "event" [ref=e3877]
+                - generic [ref=e3878]:
+                  - generic [ref=e3879]:
+                    - list "filter by items" [ref=e3880]:
+                      - listitem [ref=e3881]:
+                        - button "Economic" [ref=e3882] [cursor=pointer]
+                    - generic [ref=e3884]:
+                      - generic [ref=e3886]: Oct 15, 2026
+                      - generic [ref=e3887]: "|"
+                      - generic [ref=e3888]: 6:00 PM
+                    - paragraph [ref=e3891]:
+                      - link "Online" [ref=e3892] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e3893]: Open
+                    - paragraph [ref=e3897]: Test Title Positive 69174058
+                  - generic [ref=e3898]:
+                    - button "More" [ref=e3899] [cursor=pointer]
+                    - button "Join event" [ref=e3900] [cursor=pointer]
+                  - generic [ref=e3901]:
+                    - generic [ref=e3902]:
+                      - img "date" [ref=e3903]
+                      - paragraph [ref=e3904]: Oct 14, 2026
+                    - generic [ref=e3905]:
+                      - img "author" [ref=e3906]
+                      - paragraph [ref=e3907]: TestATestA
+                    - generic [ref=e3908]:
+                      - img "frame" [ref=e3909]
+                      - paragraph [ref=e3910]: "0"
+                    - generic [ref=e3911]:
+                      - button "Like this event" [ref=e3912] [cursor=pointer]:
+                        - img "Like" [ref=e3913]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e3914] [cursor=pointer]:
+                        - img "Dislike" [ref=e3915]
+                        - text: "0"
+              - generic [ref=e3918]:
+                - generic [ref=e3919] [cursor=pointer]
+                - img "event" [ref=e3922]
+                - generic [ref=e3923]:
+                  - generic [ref=e3924]:
+                    - list "filter by items" [ref=e3925]:
+                      - listitem [ref=e3926]:
+                        - button "Economic" [ref=e3927] [cursor=pointer]
+                    - generic [ref=e3929]:
+                      - generic [ref=e3931]: Oct 15, 2026
+                      - generic [ref=e3932]: "|"
+                      - generic [ref=e3933]: 6:00 PM
+                    - paragraph [ref=e3936]:
+                      - link "Online" [ref=e3937] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e3938]: Open
+                    - paragraph [ref=e3942]: Test Title Positive 69189520
+                  - generic [ref=e3943]:
+                    - button "More" [ref=e3944] [cursor=pointer]
+                    - button "Join event" [ref=e3945] [cursor=pointer]
+                  - generic [ref=e3946]:
+                    - generic [ref=e3947]:
+                      - img "date" [ref=e3948]
+                      - paragraph [ref=e3949]: Oct 14, 2026
+                    - generic [ref=e3950]:
+                      - img "author" [ref=e3951]
+                      - paragraph [ref=e3952]: TestATestA
+                    - generic [ref=e3953]:
+                      - img "frame" [ref=e3954]
+                      - paragraph [ref=e3955]: "0"
+                    - generic [ref=e3956]:
+                      - button "Like this event" [ref=e3957] [cursor=pointer]:
+                        - img "Like" [ref=e3958]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e3959] [cursor=pointer]:
+                        - img "Dislike" [ref=e3960]
+                        - text: "0"
+              - generic [ref=e3963]:
+                - generic [ref=e3964] [cursor=pointer]
+                - img "event" [ref=e3967]
+                - generic [ref=e3968]:
+                  - generic [ref=e3969]:
+                    - list "filter by items" [ref=e3970]:
+                      - listitem [ref=e3971]:
+                        - button "Economic" [ref=e3972] [cursor=pointer]
+                    - generic [ref=e3974]:
+                      - generic [ref=e3976]: Oct 15, 2026
+                      - generic [ref=e3977]: "|"
+                      - generic [ref=e3978]: 6:00 PM
+                    - paragraph [ref=e3981]:
+                      - link "Online" [ref=e3982] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e3983]: Open
+                    - paragraph [ref=e3987]: Test Title Positive 69194799
+                  - generic [ref=e3988]:
+                    - button "More" [ref=e3989] [cursor=pointer]
+                    - button "Join event" [ref=e3990] [cursor=pointer]
+                  - generic [ref=e3991]:
+                    - generic [ref=e3992]:
+                      - img "date" [ref=e3993]
+                      - paragraph [ref=e3994]: Oct 14, 2026
+                    - generic [ref=e3995]:
+                      - img "author" [ref=e3996]
+                      - paragraph [ref=e3997]: TestATestA
+                    - generic [ref=e3998]:
+                      - img "frame" [ref=e3999]
+                      - paragraph [ref=e4000]: "0"
+                    - generic [ref=e4001]:
+                      - button "Like this event" [ref=e4002] [cursor=pointer]:
+                        - img "Like" [ref=e4003]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e4004] [cursor=pointer]:
+                        - img "Dislike" [ref=e4005]
+                        - text: "0"
+              - generic [ref=e4008]:
+                - generic [ref=e4009] [cursor=pointer]
+                - img "event" [ref=e4012]
+                - generic [ref=e4013]:
+                  - generic [ref=e4014]:
+                    - list "filter by items" [ref=e4015]:
+                      - listitem [ref=e4016]:
+                        - button "Economic" [ref=e4017] [cursor=pointer]
+                    - generic [ref=e4019]:
+                      - generic [ref=e4021]: Oct 15, 2026
+                      - generic [ref=e4022]: "|"
+                      - generic [ref=e4023]: 6:00 PM
+                    - paragraph [ref=e4026]:
+                      - link "Online" [ref=e4027] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e4028]: Open
+                    - paragraph [ref=e4032]: Test Title Positive 69185215
+                  - generic [ref=e4033]:
+                    - button "More" [ref=e4034] [cursor=pointer]
+                    - button "Join event" [ref=e4035] [cursor=pointer]
+                  - generic [ref=e4036]:
+                    - generic [ref=e4037]:
+                      - img "date" [ref=e4038]
+                      - paragraph [ref=e4039]: Oct 14, 2026
+                    - generic [ref=e4040]:
+                      - img "author" [ref=e4041]
+                      - paragraph [ref=e4042]: TestATestA
+                    - generic [ref=e4043]:
+                      - img "frame" [ref=e4044]
+                      - paragraph [ref=e4045]: "0"
+                    - generic [ref=e4046]:
+                      - button "Like this event" [ref=e4047] [cursor=pointer]:
+                        - img "Like" [ref=e4048]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e4049] [cursor=pointer]:
+                        - img "Dislike" [ref=e4050]
+                        - text: "0"
+              - generic [ref=e4053]:
+                - generic [ref=e4054] [cursor=pointer]
+                - img "event" [ref=e4057]
+                - generic [ref=e4058]:
+                  - generic [ref=e4059]:
+                    - list "filter by items" [ref=e4060]:
+                      - listitem [ref=e4061]:
+                        - button "Economic" [ref=e4062] [cursor=pointer]
+                    - generic [ref=e4064]:
+                      - generic [ref=e4066]: Oct 15, 2026
+                      - generic [ref=e4067]: "|"
+                      - generic [ref=e4068]: 6:00 PM
+                    - paragraph [ref=e4071]:
+                      - link "Online" [ref=e4072] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e4073]: Open
+                    - paragraph [ref=e4077]: Test Title Positive 69216235
+                  - generic [ref=e4078]:
+                    - button "More" [ref=e4079] [cursor=pointer]
+                    - button "Join event" [ref=e4080] [cursor=pointer]
+                  - generic [ref=e4081]:
+                    - generic [ref=e4082]:
+                      - img "date" [ref=e4083]
+                      - paragraph [ref=e4084]: Oct 14, 2026
+                    - generic [ref=e4085]:
+                      - img "author" [ref=e4086]
+                      - paragraph [ref=e4087]: TestATestA
+                    - generic [ref=e4088]:
+                      - img "frame" [ref=e4089]
+                      - paragraph [ref=e4090]: "0"
+                    - generic [ref=e4091]:
+                      - button "Like this event" [ref=e4092] [cursor=pointer]:
+                        - img "Like" [ref=e4093]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e4094] [cursor=pointer]:
+                        - img "Dislike" [ref=e4095]
+                        - text: "0"
+              - generic [ref=e4098]:
+                - generic [ref=e4099] [cursor=pointer]
+                - img "event" [ref=e4102]
+                - generic [ref=e4103]:
+                  - generic [ref=e4104]:
+                    - list "filter by items" [ref=e4105]:
+                      - listitem [ref=e4106]:
+                        - button "Economic" [ref=e4107] [cursor=pointer]
+                    - generic [ref=e4109]:
+                      - generic [ref=e4111]: Oct 15, 2026
+                      - generic [ref=e4112]: "|"
+                      - generic [ref=e4113]: 6:00 PM
+                    - paragraph [ref=e4116]:
+                      - link "Online" [ref=e4117] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e4118]: Open
+                    - paragraph [ref=e4122]: Test Title Positive 69247887
+                  - generic [ref=e4123]:
+                    - button "More" [ref=e4124] [cursor=pointer]
+                    - button "Join event" [ref=e4125] [cursor=pointer]
+                  - generic [ref=e4126]:
+                    - generic [ref=e4127]:
+                      - img "date" [ref=e4128]
+                      - paragraph [ref=e4129]: Oct 14, 2026
+                    - generic [ref=e4130]:
+                      - img "author" [ref=e4131]
+                      - paragraph [ref=e4132]: TestATestA
+                    - generic [ref=e4133]:
+                      - img "frame" [ref=e4134]
+                      - paragraph [ref=e4135]: "0"
+                    - generic [ref=e4136]:
+                      - button "Like this event" [ref=e4137] [cursor=pointer]:
+                        - img "Like" [ref=e4138]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e4139] [cursor=pointer]:
+                        - img "Dislike" [ref=e4140]
+                        - text: "0"
+              - generic [ref=e4143]:
+                - generic [ref=e4144] [cursor=pointer]
+                - img "event" [ref=e4147]
+                - generic [ref=e4148]:
+                  - generic [ref=e4149]:
+                    - list "filter by items" [ref=e4150]:
+                      - listitem [ref=e4151]:
+                        - button "Economic" [ref=e4152] [cursor=pointer]
+                    - generic [ref=e4154]:
+                      - generic [ref=e4156]: Oct 15, 2026
+                      - generic [ref=e4157]: "|"
+                      - generic [ref=e4158]: 6:00 PM
+                    - paragraph [ref=e4161]:
+                      - link "Online" [ref=e4162] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e4163]: Open
+                    - paragraph [ref=e4167]: Test Title Positive 71629362
+                  - generic [ref=e4168]:
+                    - button "More" [ref=e4169] [cursor=pointer]
+                    - button "Join event" [ref=e4170] [cursor=pointer]
+                  - generic [ref=e4171]:
+                    - generic [ref=e4172]:
+                      - img "date" [ref=e4173]
+                      - paragraph [ref=e4174]: Oct 14, 2026
+                    - generic [ref=e4175]:
+                      - img "author" [ref=e4176]
+                      - paragraph [ref=e4177]: TestATestA
+                    - generic [ref=e4178]:
+                      - img "frame" [ref=e4179]
+                      - paragraph [ref=e4180]: "0"
+                    - generic [ref=e4181]:
+                      - button "Like this event" [ref=e4182] [cursor=pointer]:
+                        - img "Like" [ref=e4183]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e4184] [cursor=pointer]:
+                        - img "Dislike" [ref=e4185]
+                        - text: "0"
+              - generic [ref=e4188]:
+                - generic [ref=e4189] [cursor=pointer]
+                - img "event" [ref=e4192]
+                - generic [ref=e4193]:
+                  - generic [ref=e4194]:
+                    - list "filter by items" [ref=e4195]:
+                      - listitem [ref=e4196]:
+                        - button "Economic" [ref=e4197] [cursor=pointer]
+                    - generic [ref=e4199]:
+                      - generic [ref=e4201]: Oct 15, 2026
+                      - generic [ref=e4202]: "|"
+                      - generic [ref=e4203]: 6:00 PM
+                    - paragraph [ref=e4206]:
+                      - link "Online" [ref=e4207] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e4208]: Open
+                    - paragraph [ref=e4212]: Test Title Positive 71645874
+                  - generic [ref=e4213]:
+                    - button "More" [ref=e4214] [cursor=pointer]
+                    - button "Join event" [ref=e4215] [cursor=pointer]
+                  - generic [ref=e4216]:
+                    - generic [ref=e4217]:
+                      - img "date" [ref=e4218]
+                      - paragraph [ref=e4219]: Oct 14, 2026
+                    - generic [ref=e4220]:
+                      - img "author" [ref=e4221]
+                      - paragraph [ref=e4222]: TestATestA
+                    - generic [ref=e4223]:
+                      - img "frame" [ref=e4224]
+                      - paragraph [ref=e4225]: "0"
+                    - generic [ref=e4226]:
+                      - button "Like this event" [ref=e4227] [cursor=pointer]:
+                        - img "Like" [ref=e4228]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e4229] [cursor=pointer]:
+                        - img "Dislike" [ref=e4230]
+                        - text: "0"
+              - generic [ref=e4233]:
+                - generic [ref=e4234] [cursor=pointer]
+                - img "event" [ref=e4237]
+                - generic [ref=e4238]:
+                  - generic [ref=e4239]:
+                    - list "filter by items" [ref=e4240]:
+                      - listitem [ref=e4241]:
+                        - button "Economic" [ref=e4242] [cursor=pointer]
+                    - generic [ref=e4244]:
+                      - generic [ref=e4246]: Oct 15, 2026
+                      - generic [ref=e4247]: "|"
+                      - generic [ref=e4248]: 6:00 PM
+                    - paragraph [ref=e4251]:
+                      - link "Online" [ref=e4252] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e4253]: Open
+                    - paragraph [ref=e4257]: Test Title Positive 71663756
+                  - generic [ref=e4258]:
+                    - button "More" [ref=e4259] [cursor=pointer]
+                    - button "Join event" [ref=e4260] [cursor=pointer]
+                  - generic [ref=e4261]:
+                    - generic [ref=e4262]:
+                      - img "date" [ref=e4263]
+                      - paragraph [ref=e4264]: Oct 14, 2026
+                    - generic [ref=e4265]:
+                      - img "author" [ref=e4266]
+                      - paragraph [ref=e4267]: TestATestA
+                    - generic [ref=e4268]:
+                      - img "frame" [ref=e4269]
+                      - paragraph [ref=e4270]: "0"
+                    - generic [ref=e4271]:
+                      - button "Like this event" [ref=e4272] [cursor=pointer]:
+                        - img "Like" [ref=e4273]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e4274] [cursor=pointer]:
+                        - img "Dislike" [ref=e4275]
+                        - text: "0"
+              - generic [ref=e4278]:
+                - generic [ref=e4279] [cursor=pointer]
+                - img "event" [ref=e4282]
+                - generic [ref=e4283]:
+                  - generic [ref=e4284]:
+                    - list "filter by items" [ref=e4285]:
+                      - listitem [ref=e4286]:
+                        - button "Economic" [ref=e4287] [cursor=pointer]
+                    - generic [ref=e4289]:
+                      - generic [ref=e4291]: Oct 15, 2026
+                      - generic [ref=e4292]: "|"
+                      - generic [ref=e4293]: 6:00 PM
+                    - paragraph [ref=e4296]:
+                      - link "Online" [ref=e4297] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e4298]: Open
+                    - paragraph [ref=e4302]: Test Title Positive 71664715
+                  - generic [ref=e4303]:
+                    - button "More" [ref=e4304] [cursor=pointer]
+                    - button "Join event" [ref=e4305] [cursor=pointer]
+                  - generic [ref=e4306]:
+                    - generic [ref=e4307]:
+                      - img "date" [ref=e4308]
+                      - paragraph [ref=e4309]: Oct 14, 2026
+                    - generic [ref=e4310]:
+                      - img "author" [ref=e4311]
+                      - paragraph [ref=e4312]: TestATestA
+                    - generic [ref=e4313]:
+                      - img "frame" [ref=e4314]
+                      - paragraph [ref=e4315]: "0"
+                    - generic [ref=e4316]:
+                      - button "Like this event" [ref=e4317] [cursor=pointer]:
+                        - img "Like" [ref=e4318]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e4319] [cursor=pointer]:
+                        - img "Dislike" [ref=e4320]
+                        - text: "0"
+              - generic [ref=e4323]:
+                - generic [ref=e4324] [cursor=pointer]
+                - img "event" [ref=e4327]
+                - generic [ref=e4328]:
+                  - generic [ref=e4329]:
+                    - list "filter by items" [ref=e4330]:
+                      - listitem [ref=e4331]:
+                        - button "Economic" [ref=e4332] [cursor=pointer]
+                    - generic [ref=e4334]:
+                      - generic [ref=e4336]: Oct 15, 2026
+                      - generic [ref=e4337]: "|"
+                      - generic [ref=e4338]: 6:00 PM
+                    - paragraph [ref=e4341]:
+                      - link "Online" [ref=e4342] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e4343]: Open
+                    - paragraph [ref=e4347]: Test Title Positive 71684906
+                  - generic [ref=e4348]:
+                    - button "More" [ref=e4349] [cursor=pointer]
+                    - button "Join event" [ref=e4350] [cursor=pointer]
+                  - generic [ref=e4351]:
+                    - generic [ref=e4352]:
+                      - img "date" [ref=e4353]
+                      - paragraph [ref=e4354]: Oct 14, 2026
+                    - generic [ref=e4355]:
+                      - img "author" [ref=e4356]
+                      - paragraph [ref=e4357]: TestATestA
+                    - generic [ref=e4358]:
+                      - img "frame" [ref=e4359]
+                      - paragraph [ref=e4360]: "0"
+                    - generic [ref=e4361]:
+                      - button "Like this event" [ref=e4362] [cursor=pointer]:
+                        - img "Like" [ref=e4363]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e4364] [cursor=pointer]:
+                        - img "Dislike" [ref=e4365]
+                        - text: "0"
+              - generic [ref=e4368]:
+                - generic [ref=e4369] [cursor=pointer]
+                - img "event" [ref=e4372]
+                - generic [ref=e4373]:
+                  - generic [ref=e4374]:
+                    - list "filter by items" [ref=e4375]:
+                      - listitem [ref=e4376]:
+                        - button "Economic" [ref=e4377] [cursor=pointer]
+                    - generic [ref=e4379]:
+                      - generic [ref=e4381]: Oct 15, 2026
+                      - generic [ref=e4382]: "|"
+                      - generic [ref=e4383]: 6:00 PM
+                    - paragraph [ref=e4386]:
+                      - link "Online" [ref=e4387] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e4388]: Open
+                    - paragraph [ref=e4392]: Test Title Positive 71706583
+                  - generic [ref=e4393]:
+                    - button "More" [ref=e4394] [cursor=pointer]
+                    - button "Join event" [ref=e4395] [cursor=pointer]
+                  - generic [ref=e4396]:
+                    - generic [ref=e4397]:
+                      - img "date" [ref=e4398]
+                      - paragraph [ref=e4399]: Oct 14, 2026
+                    - generic [ref=e4400]:
+                      - img "author" [ref=e4401]
+                      - paragraph [ref=e4402]: TestATestA
+                    - generic [ref=e4403]:
+                      - img "frame" [ref=e4404]
+                      - paragraph [ref=e4405]: "0"
+                    - generic [ref=e4406]:
+                      - button "Like this event" [ref=e4407] [cursor=pointer]:
+                        - img "Like" [ref=e4408]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e4409] [cursor=pointer]:
+                        - img "Dislike" [ref=e4410]
+                        - text: "0"
+              - generic [ref=e4413]:
+                - generic [ref=e4414] [cursor=pointer]
+                - img "event" [ref=e4417]
+                - generic [ref=e4418]:
+                  - generic [ref=e4419]:
+                    - list "filter by items" [ref=e4420]:
+                      - listitem [ref=e4421]:
+                        - button "Economic" [ref=e4422] [cursor=pointer]
+                    - generic [ref=e4424]:
+                      - generic [ref=e4426]: Oct 15, 2026
+                      - generic [ref=e4427]: "|"
+                      - generic [ref=e4428]: 6:00 PM
+                    - paragraph [ref=e4431]:
+                      - link "Online" [ref=e4432] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e4433]: Open
+                    - paragraph [ref=e4437]: Test Title Positive 71694606
+                  - generic [ref=e4438]:
+                    - button "More" [ref=e4439] [cursor=pointer]
+                    - button "Join event" [ref=e4440] [cursor=pointer]
+                  - generic [ref=e4441]:
+                    - generic [ref=e4442]:
+                      - img "date" [ref=e4443]
+                      - paragraph [ref=e4444]: Oct 14, 2026
+                    - generic [ref=e4445]:
+                      - img "author" [ref=e4446]
+                      - paragraph [ref=e4447]: TestATestA
+                    - generic [ref=e4448]:
+                      - img "frame" [ref=e4449]
+                      - paragraph [ref=e4450]: "0"
+                    - generic [ref=e4451]:
+                      - button "Like this event" [ref=e4452] [cursor=pointer]:
+                        - img "Like" [ref=e4453]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e4454] [cursor=pointer]:
+                        - img "Dislike" [ref=e4455]
+                        - text: "0"
+              - generic [ref=e4458]:
+                - generic [ref=e4459] [cursor=pointer]
+                - img "event" [ref=e4462]
+                - generic [ref=e4463]:
+                  - generic [ref=e4464]:
+                    - list "filter by items" [ref=e4465]:
+                      - listitem [ref=e4466]:
+                        - button "Economic" [ref=e4467] [cursor=pointer]
+                    - generic [ref=e4469]:
+                      - generic [ref=e4471]: Oct 15, 2026
+                      - generic [ref=e4472]: "|"
+                      - generic [ref=e4473]: 6:00 PM
+                    - paragraph [ref=e4476]:
+                      - link "Online" [ref=e4477] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e4478]: Open
+                    - paragraph [ref=e4482]: Test Title Positive 71727141
+                  - generic [ref=e4483]:
+                    - button "More" [ref=e4484] [cursor=pointer]
+                    - button "Join event" [ref=e4485] [cursor=pointer]
+                  - generic [ref=e4486]:
+                    - generic [ref=e4487]:
+                      - img "date" [ref=e4488]
+                      - paragraph [ref=e4489]: Oct 14, 2026
+                    - generic [ref=e4490]:
+                      - img "author" [ref=e4491]
+                      - paragraph [ref=e4492]: TestATestA
+                    - generic [ref=e4493]:
+                      - img "frame" [ref=e4494]
+                      - paragraph [ref=e4495]: "0"
+                    - generic [ref=e4496]:
+                      - button "Like this event" [ref=e4497] [cursor=pointer]:
+                        - img "Like" [ref=e4498]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e4499] [cursor=pointer]:
+                        - img "Dislike" [ref=e4500]
+                        - text: "0"
+              - generic [ref=e4503]:
+                - generic [ref=e4504] [cursor=pointer]
+                - img "event" [ref=e4507]
+                - generic [ref=e4508]:
+                  - generic [ref=e4509]:
+                    - list "filter by items" [ref=e4510]:
+                      - listitem [ref=e4511]:
+                        - button "Economic" [ref=e4512] [cursor=pointer]
+                    - generic [ref=e4514]:
+                      - generic [ref=e4516]: Oct 15, 2026
+                      - generic [ref=e4517]: "|"
+                      - generic [ref=e4518]: 6:00 PM
+                    - paragraph [ref=e4521]:
+                      - link "Online" [ref=e4522] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e4523]: Open
+                    - paragraph [ref=e4527]: Test Title Positive 71759068
+                  - generic [ref=e4528]:
+                    - button "More" [ref=e4529] [cursor=pointer]
+                    - button "Join event" [ref=e4530] [cursor=pointer]
+                  - generic [ref=e4531]:
+                    - generic [ref=e4532]:
+                      - img "date" [ref=e4533]
+                      - paragraph [ref=e4534]: Oct 14, 2026
+                    - generic [ref=e4535]:
+                      - img "author" [ref=e4536]
+                      - paragraph [ref=e4537]: TestATestA
+                    - generic [ref=e4538]:
+                      - img "frame" [ref=e4539]
+                      - paragraph [ref=e4540]: "0"
+                    - generic [ref=e4541]:
+                      - button "Like this event" [ref=e4542] [cursor=pointer]:
+                        - img "Like" [ref=e4543]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e4544] [cursor=pointer]:
+                        - img "Dislike" [ref=e4545]
+                        - text: "0"
+              - generic [ref=e4548]:
+                - generic [ref=e4549] [cursor=pointer]
+                - img "event" [ref=e4552]
+                - generic [ref=e4553]:
+                  - generic [ref=e4554]:
+                    - list "filter by items" [ref=e4555]:
+                      - listitem [ref=e4556]:
+                        - button "Economic" [ref=e4557] [cursor=pointer]
+                    - generic [ref=e4559]:
+                      - generic [ref=e4561]: Oct 15, 2026
+                      - generic [ref=e4562]: "|"
+                      - generic [ref=e4563]: 6:00 PM
+                    - paragraph [ref=e4566]:
+                      - link "Online" [ref=e4567] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e4568]: Open
+                    - paragraph [ref=e4572]: Test Title Positive 73146952
+                  - generic [ref=e4573]:
+                    - button "More" [ref=e4574] [cursor=pointer]
+                    - button "Join event" [ref=e4575] [cursor=pointer]
+                  - generic [ref=e4576]:
+                    - generic [ref=e4577]:
+                      - img "date" [ref=e4578]
+                      - paragraph [ref=e4579]: Oct 14, 2026
+                    - generic [ref=e4580]:
+                      - img "author" [ref=e4581]
+                      - paragraph [ref=e4582]: TestATestA
+                    - generic [ref=e4583]:
+                      - img "frame" [ref=e4584]
+                      - paragraph [ref=e4585]: "0"
+                    - generic [ref=e4586]:
+                      - button "Like this event" [ref=e4587] [cursor=pointer]:
+                        - img "Like" [ref=e4588]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e4589] [cursor=pointer]:
+                        - img "Dislike" [ref=e4590]
+                        - text: "0"
+              - generic [ref=e4593]:
+                - generic [ref=e4594] [cursor=pointer]
+                - img "event" [ref=e4597]
+                - generic [ref=e4598]:
+                  - generic [ref=e4599]:
+                    - list "filter by items" [ref=e4600]:
+                      - listitem [ref=e4601]:
+                        - button "Economic" [ref=e4602] [cursor=pointer]
+                    - generic [ref=e4604]:
+                      - generic [ref=e4606]: Oct 15, 2026
+                      - generic [ref=e4607]: "|"
+                      - generic [ref=e4608]: 6:00 PM
+                    - paragraph [ref=e4611]:
+                      - link "Online" [ref=e4612] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e4613]: Open
+                    - paragraph [ref=e4617]: Test Title Positive 73163744
+                  - generic [ref=e4618]:
+                    - button "More" [ref=e4619] [cursor=pointer]
+                    - button "Join event" [ref=e4620] [cursor=pointer]
+                  - generic [ref=e4621]:
+                    - generic [ref=e4622]:
+                      - img "date" [ref=e4623]
+                      - paragraph [ref=e4624]: Oct 14, 2026
+                    - generic [ref=e4625]:
+                      - img "author" [ref=e4626]
+                      - paragraph [ref=e4627]: TestATestA
+                    - generic [ref=e4628]:
+                      - img "frame" [ref=e4629]
+                      - paragraph [ref=e4630]: "0"
+                    - generic [ref=e4631]:
+                      - button "Like this event" [ref=e4632] [cursor=pointer]:
+                        - img "Like" [ref=e4633]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e4634] [cursor=pointer]:
+                        - img "Dislike" [ref=e4635]
+                        - text: "0"
+              - generic [ref=e4638]:
+                - generic [ref=e4639] [cursor=pointer]
+                - img "event" [ref=e4642]
+                - generic [ref=e4643]:
+                  - generic [ref=e4644]:
+                    - list "filter by items" [ref=e4645]:
+                      - listitem [ref=e4646]:
+                        - button "Economic" [ref=e4647] [cursor=pointer]
+                    - generic [ref=e4649]:
+                      - generic [ref=e4651]: Oct 15, 2026
+                      - generic [ref=e4652]: "|"
+                      - generic [ref=e4653]: 6:00 PM
+                    - paragraph [ref=e4656]:
+                      - link "Online" [ref=e4657] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e4658]: Open
+                    - paragraph [ref=e4662]: Test Title Positive 73166174
+                  - generic [ref=e4663]:
+                    - button "More" [ref=e4664] [cursor=pointer]
+                    - button "Join event" [ref=e4665] [cursor=pointer]
+                  - generic [ref=e4666]:
+                    - generic [ref=e4667]:
+                      - img "date" [ref=e4668]
+                      - paragraph [ref=e4669]: Oct 14, 2026
+                    - generic [ref=e4670]:
+                      - img "author" [ref=e4671]
+                      - paragraph [ref=e4672]: TestATestA
+                    - generic [ref=e4673]:
+                      - img "frame" [ref=e4674]
+                      - paragraph [ref=e4675]: "0"
+                    - generic [ref=e4676]:
+                      - button "Like this event" [ref=e4677] [cursor=pointer]:
+                        - img "Like" [ref=e4678]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e4679] [cursor=pointer]:
+                        - img "Dislike" [ref=e4680]
+                        - text: "0"
+              - generic [ref=e4683]:
+                - generic [ref=e4684] [cursor=pointer]
+                - img "event" [ref=e4687]
+                - generic [ref=e4688]:
+                  - generic [ref=e4689]:
+                    - list "filter by items" [ref=e4690]:
+                      - listitem [ref=e4691]:
+                        - button "Economic" [ref=e4692] [cursor=pointer]
+                    - generic [ref=e4694]:
+                      - generic [ref=e4696]: Oct 15, 2026
+                      - generic [ref=e4697]: "|"
+                      - generic [ref=e4698]: 6:00 PM
+                    - paragraph [ref=e4701]:
+                      - link "Online" [ref=e4702] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e4703]: Open
+                    - paragraph [ref=e4707]: Test Title Positive 73182601
+                  - generic [ref=e4708]:
+                    - button "More" [ref=e4709] [cursor=pointer]
+                    - button "Join event" [ref=e4710] [cursor=pointer]
+                  - generic [ref=e4711]:
+                    - generic [ref=e4712]:
+                      - img "date" [ref=e4713]
+                      - paragraph [ref=e4714]: Oct 14, 2026
+                    - generic [ref=e4715]:
+                      - img "author" [ref=e4716]
+                      - paragraph [ref=e4717]: TestATestA
+                    - generic [ref=e4718]:
+                      - img "frame" [ref=e4719]
+                      - paragraph [ref=e4720]: "0"
+                    - generic [ref=e4721]:
+                      - button "Like this event" [ref=e4722] [cursor=pointer]:
+                        - img "Like" [ref=e4723]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e4724] [cursor=pointer]:
+                        - img "Dislike" [ref=e4725]
+                        - text: "0"
+              - generic [ref=e4728]:
+                - generic [ref=e4729] [cursor=pointer]
+                - img "event" [ref=e4732]
+                - generic [ref=e4733]:
+                  - generic [ref=e4734]:
+                    - list "filter by items" [ref=e4735]:
+                      - listitem [ref=e4736]:
+                        - button "Economic" [ref=e4737] [cursor=pointer]
+                    - generic [ref=e4739]:
+                      - generic [ref=e4741]: Oct 15, 2026
+                      - generic [ref=e4742]: "|"
+                      - generic [ref=e4743]: 6:00 PM
+                    - paragraph [ref=e4746]:
+                      - link "Online" [ref=e4747] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e4748]: Open
+                    - paragraph [ref=e4752]: Test Title Positive 73185551
+                  - generic [ref=e4753]:
+                    - button "More" [ref=e4754] [cursor=pointer]
+                    - button "Join event" [ref=e4755] [cursor=pointer]
+                  - generic [ref=e4756]:
+                    - generic [ref=e4757]:
+                      - img "date" [ref=e4758]
+                      - paragraph [ref=e4759]: Oct 14, 2026
+                    - generic [ref=e4760]:
+                      - img "author" [ref=e4761]
+                      - paragraph [ref=e4762]: TestATestA
+                    - generic [ref=e4763]:
+                      - img "frame" [ref=e4764]
+                      - paragraph [ref=e4765]: "0"
+                    - generic [ref=e4766]:
+                      - button "Like this event" [ref=e4767] [cursor=pointer]:
+                        - img "Like" [ref=e4768]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e4769] [cursor=pointer]:
+                        - img "Dislike" [ref=e4770]
+                        - text: "0"
+              - generic [ref=e4773]:
+                - generic [ref=e4774] [cursor=pointer]
+                - img "event" [ref=e4777]
+                - generic [ref=e4778]:
+                  - generic [ref=e4779]:
+                    - list "filter by items" [ref=e4780]:
+                      - listitem [ref=e4781]:
+                        - button "Economic" [ref=e4782] [cursor=pointer]
+                    - generic [ref=e4784]:
+                      - generic [ref=e4786]: Oct 15, 2026
+                      - generic [ref=e4787]: "|"
+                      - generic [ref=e4788]: 6:00 PM
+                    - paragraph [ref=e4791]:
+                      - link "Online" [ref=e4792] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e4793]: Open
+                    - paragraph [ref=e4797]: Test Title Positive 73206417
+                  - generic [ref=e4798]:
+                    - button "More" [ref=e4799] [cursor=pointer]
+                    - button "Join event" [ref=e4800] [cursor=pointer]
+                  - generic [ref=e4801]:
+                    - generic [ref=e4802]:
+                      - img "date" [ref=e4803]
+                      - paragraph [ref=e4804]: Oct 14, 2026
+                    - generic [ref=e4805]:
+                      - img "author" [ref=e4806]
+                      - paragraph [ref=e4807]: TestATestA
+                    - generic [ref=e4808]:
+                      - img "frame" [ref=e4809]
+                      - paragraph [ref=e4810]: "0"
+                    - generic [ref=e4811]:
+                      - button "Like this event" [ref=e4812] [cursor=pointer]:
+                        - img "Like" [ref=e4813]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e4814] [cursor=pointer]:
+                        - img "Dislike" [ref=e4815]
+                        - text: "0"
+              - generic [ref=e4818]:
+                - generic [ref=e4819] [cursor=pointer]
+                - img "event" [ref=e4822]
+                - generic [ref=e4823]:
+                  - generic [ref=e4824]:
+                    - list "filter by items" [ref=e4825]:
+                      - listitem [ref=e4826]:
+                        - button "Economic" [ref=e4827] [cursor=pointer]
+                    - generic [ref=e4829]:
+                      - generic [ref=e4831]: Oct 15, 2026
+                      - generic [ref=e4832]: "|"
+                      - generic [ref=e4833]: 6:00 PM
+                    - paragraph [ref=e4836]:
+                      - link "Online" [ref=e4837] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e4838]: Open
+                    - paragraph [ref=e4842]: Test Title Positive 73197038
+                  - generic [ref=e4843]:
+                    - button "More" [ref=e4844] [cursor=pointer]
+                    - button "Join event" [ref=e4845] [cursor=pointer]
+                  - generic [ref=e4846]:
+                    - generic [ref=e4847]:
+                      - img "date" [ref=e4848]
+                      - paragraph [ref=e4849]: Oct 14, 2026
+                    - generic [ref=e4850]:
+                      - img "author" [ref=e4851]
+                      - paragraph [ref=e4852]: TestATestA
+                    - generic [ref=e4853]:
+                      - img "frame" [ref=e4854]
+                      - paragraph [ref=e4855]: "0"
+                    - generic [ref=e4856]:
+                      - button "Like this event" [ref=e4857] [cursor=pointer]:
+                        - img "Like" [ref=e4858]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e4859] [cursor=pointer]:
+                        - img "Dislike" [ref=e4860]
+                        - text: "0"
+              - generic [ref=e4863]:
+                - generic [ref=e4864] [cursor=pointer]
+                - img "event" [ref=e4867]
+                - generic [ref=e4868]:
+                  - generic [ref=e4869]:
+                    - list "filter by items" [ref=e4870]:
+                      - listitem [ref=e4871]:
+                        - button "Economic" [ref=e4872] [cursor=pointer]
+                    - generic [ref=e4874]:
+                      - generic [ref=e4876]: Oct 15, 2026
+                      - generic [ref=e4877]: "|"
+                      - generic [ref=e4878]: 6:00 PM
+                    - paragraph [ref=e4881]:
+                      - link "Online" [ref=e4882] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e4883]: Open
+                    - paragraph [ref=e4887]: Test Title Positive 73227248
+                  - generic [ref=e4888]:
+                    - button "More" [ref=e4889] [cursor=pointer]
+                    - button "Join event" [ref=e4890] [cursor=pointer]
+                  - generic [ref=e4891]:
+                    - generic [ref=e4892]:
+                      - img "date" [ref=e4893]
+                      - paragraph [ref=e4894]: Oct 14, 2026
+                    - generic [ref=e4895]:
+                      - img "author" [ref=e4896]
+                      - paragraph [ref=e4897]: TestATestA
+                    - generic [ref=e4898]:
+                      - img "frame" [ref=e4899]
+                      - paragraph [ref=e4900]: "0"
+                    - generic [ref=e4901]:
+                      - button "Like this event" [ref=e4902] [cursor=pointer]:
+                        - img "Like" [ref=e4903]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e4904] [cursor=pointer]:
+                        - img "Dislike" [ref=e4905]
+                        - text: "0"
+              - generic [ref=e4908]:
+                - generic [ref=e4909] [cursor=pointer]
+                - img "event" [ref=e4912]
+                - generic [ref=e4913]:
+                  - generic [ref=e4914]:
+                    - list "filter by items" [ref=e4915]:
+                      - listitem [ref=e4916]:
+                        - button "Economic" [ref=e4917] [cursor=pointer]
+                    - generic [ref=e4919]:
+                      - generic [ref=e4921]: Oct 15, 2026
+                      - generic [ref=e4922]: "|"
+                      - generic [ref=e4923]: 3:00 PM
+                    - paragraph [ref=e4926]:
+                      - link "Online" [ref=e4927] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e4928]: Open
+                    - paragraph [ref=e4932]: Test Title Positive 60494593
+                  - generic [ref=e4933]:
+                    - button "More" [ref=e4934] [cursor=pointer]
+                    - button "Join event" [ref=e4935] [cursor=pointer]
+                  - generic [ref=e4936]:
+                    - generic [ref=e4937]:
+                      - img "date" [ref=e4938]
+                      - paragraph [ref=e4939]: Oct 14, 2026
+                    - generic [ref=e4940]:
+                      - img "author" [ref=e4941]
+                      - paragraph [ref=e4942]: AnanasTest
+                    - generic [ref=e4943]:
+                      - img "frame" [ref=e4944]
+                      - paragraph [ref=e4945]: "0"
+                    - generic [ref=e4946]:
+                      - button "Like this event" [ref=e4947] [cursor=pointer]:
+                        - img "Like" [ref=e4948]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e4949] [cursor=pointer]:
+                        - img "Dislike" [ref=e4950]
+                        - text: "0"
+              - generic [ref=e4953]:
+                - generic [ref=e4954] [cursor=pointer]
+                - img "event" [ref=e4957]
+                - generic [ref=e4958]:
+                  - generic [ref=e4959]:
+                    - list "filter by items" [ref=e4960]:
+                      - listitem [ref=e4961]:
+                        - button "Economic" [ref=e4962] [cursor=pointer]
+                    - generic [ref=e4964]:
+                      - generic [ref=e4966]: Oct 15, 2026
+                      - generic [ref=e4967]: "|"
+                      - generic [ref=e4968]: 3:00 PM
+                    - paragraph [ref=e4971]:
+                      - link "Online" [ref=e4972] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e4973]: Open
+                    - paragraph [ref=e4977]: Test Title Positive 61245179
+                  - generic [ref=e4978]:
+                    - button "More" [ref=e4979] [cursor=pointer]
+                    - button "Join event" [ref=e4980] [cursor=pointer]
+                  - generic [ref=e4981]:
+                    - generic [ref=e4982]:
+                      - img "date" [ref=e4983]
+                      - paragraph [ref=e4984]: Oct 14, 2026
+                    - generic [ref=e4985]:
+                      - img "author" [ref=e4986]
+                      - paragraph [ref=e4987]: AnanasTest
+                    - generic [ref=e4988]:
+                      - img "frame" [ref=e4989]
+                      - paragraph [ref=e4990]: "0"
+                    - generic [ref=e4991]:
+                      - button "Like this event" [ref=e4992] [cursor=pointer]:
+                        - img "Like" [ref=e4993]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e4994] [cursor=pointer]:
+                        - img "Dislike" [ref=e4995]
+                        - text: "0"
+              - generic [ref=e4998]:
+                - generic [ref=e4999] [cursor=pointer]
+                - img "event" [ref=e5002]
+                - generic [ref=e5003]:
+                  - generic [ref=e5004]:
+                    - list "filter by items" [ref=e5005]:
+                      - listitem [ref=e5006]:
+                        - button "Economic" [ref=e5007] [cursor=pointer]
+                    - generic [ref=e5009]:
+                      - generic [ref=e5011]: Oct 15, 2026
+                      - generic [ref=e5012]: "|"
+                      - generic [ref=e5013]: 3:00 PM
+                    - paragraph [ref=e5016]:
+                      - link "Online" [ref=e5017] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e5018]: Open
+                    - paragraph [ref=e5022]: Test Title Positive 61259489
+                  - generic [ref=e5023]:
+                    - button "More" [ref=e5024] [cursor=pointer]
+                    - button "Join event" [ref=e5025] [cursor=pointer]
+                  - generic [ref=e5026]:
+                    - generic [ref=e5027]:
+                      - img "date" [ref=e5028]
+                      - paragraph [ref=e5029]: Oct 14, 2026
+                    - generic [ref=e5030]:
+                      - img "author" [ref=e5031]
+                      - paragraph [ref=e5032]: AnanasTest
+                    - generic [ref=e5033]:
+                      - img "frame" [ref=e5034]
+                      - paragraph [ref=e5035]: "0"
+                    - generic [ref=e5036]:
+                      - button "Like this event" [ref=e5037] [cursor=pointer]:
+                        - img "Like" [ref=e5038]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e5039] [cursor=pointer]:
+                        - img "Dislike" [ref=e5040]
+                        - text: "0"
+              - generic [ref=e5043]:
+                - generic [ref=e5044] [cursor=pointer]
+                - img "event" [ref=e5047]
+                - generic [ref=e5048]:
+                  - generic [ref=e5049]:
+                    - list "filter by items" [ref=e5050]:
+                      - listitem [ref=e5051]:
+                        - button "Economic" [ref=e5052] [cursor=pointer]
+                    - generic [ref=e5054]:
+                      - generic [ref=e5056]: Oct 15, 2026
+                      - generic [ref=e5057]: "|"
+                      - generic [ref=e5058]: 3:00 PM
+                    - paragraph [ref=e5061]:
+                      - link "Online" [ref=e5062] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e5063]: Open
+                    - paragraph [ref=e5067]: Test Title Positive 61488626
+                  - generic [ref=e5068]:
+                    - button "More" [ref=e5069] [cursor=pointer]
+                    - button "Join event" [ref=e5070] [cursor=pointer]
+                  - generic [ref=e5071]:
+                    - generic [ref=e5072]:
+                      - img "date" [ref=e5073]
+                      - paragraph [ref=e5074]: Oct 14, 2026
+                    - generic [ref=e5075]:
+                      - img "author" [ref=e5076]
+                      - paragraph [ref=e5077]: AnanasTest
+                    - generic [ref=e5078]:
+                      - img "frame" [ref=e5079]
+                      - paragraph [ref=e5080]: "0"
+                    - generic [ref=e5081]:
+                      - button "Like this event" [ref=e5082] [cursor=pointer]:
+                        - img "Like" [ref=e5083]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e5084] [cursor=pointer]:
+                        - img "Dislike" [ref=e5085]
+                        - text: "0"
+              - generic [ref=e5088]:
+                - generic [ref=e5089] [cursor=pointer]
+                - img "event" [ref=e5092]
+                - generic [ref=e5093]:
+                  - generic [ref=e5094]:
+                    - list "filter by items" [ref=e5095]:
+                      - listitem [ref=e5096]:
+                        - button "Economic" [ref=e5097] [cursor=pointer]
+                    - generic [ref=e5099]:
+                      - generic [ref=e5101]: Oct 15, 2026
+                      - generic [ref=e5102]: "|"
+                      - generic [ref=e5103]: 3:00 PM
+                    - paragraph [ref=e5106]:
+                      - link "Online" [ref=e5107] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e5108]: Open
+                    - paragraph [ref=e5112]: Test Title Positive 61525592
+                  - generic [ref=e5113]:
+                    - button "More" [ref=e5114] [cursor=pointer]
+                    - button "Join event" [ref=e5115] [cursor=pointer]
+                  - generic [ref=e5116]:
+                    - generic [ref=e5117]:
+                      - img "date" [ref=e5118]
+                      - paragraph [ref=e5119]: Oct 14, 2026
+                    - generic [ref=e5120]:
+                      - img "author" [ref=e5121]
+                      - paragraph [ref=e5122]: AnanasTest
+                    - generic [ref=e5123]:
+                      - img "frame" [ref=e5124]
+                      - paragraph [ref=e5125]: "0"
+                    - generic [ref=e5126]:
+                      - button "Like this event" [ref=e5127] [cursor=pointer]:
+                        - img "Like" [ref=e5128]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e5129] [cursor=pointer]:
+                        - img "Dislike" [ref=e5130]
+                        - text: "0"
+              - generic [ref=e5133]:
+                - generic [ref=e5134] [cursor=pointer]
+                - img "event" [ref=e5137]
+                - generic [ref=e5138]:
+                  - generic [ref=e5139]:
+                    - list "filter by items" [ref=e5140]:
+                      - listitem [ref=e5141]:
+                        - button "Economic" [ref=e5142] [cursor=pointer]
+                    - generic [ref=e5144]:
+                      - generic [ref=e5146]: Oct 15, 2026
+                      - generic [ref=e5147]: "|"
+                      - generic [ref=e5148]: 3:00 PM
+                    - paragraph [ref=e5151]:
+                      - link "Online" [ref=e5152] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e5153]: Open
+                    - paragraph [ref=e5157]: Test Title Positive 61578952
+                  - generic [ref=e5158]:
+                    - button "More" [ref=e5159] [cursor=pointer]
+                    - button "Join event" [ref=e5160] [cursor=pointer]
+                  - generic [ref=e5161]:
+                    - generic [ref=e5162]:
+                      - img "date" [ref=e5163]
+                      - paragraph [ref=e5164]: Oct 14, 2026
+                    - generic [ref=e5165]:
+                      - img "author" [ref=e5166]
+                      - paragraph [ref=e5167]: AnanasTest
+                    - generic [ref=e5168]:
+                      - img "frame" [ref=e5169]
+                      - paragraph [ref=e5170]: "0"
+                    - generic [ref=e5171]:
+                      - button "Like this event" [ref=e5172] [cursor=pointer]:
+                        - img "Like" [ref=e5173]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e5174] [cursor=pointer]:
+                        - img "Dislike" [ref=e5175]
+                        - text: "0"
+              - generic [ref=e5178]:
+                - generic [ref=e5179] [cursor=pointer]
+                - img "event" [ref=e5182]
+                - generic [ref=e5183]:
+                  - generic [ref=e5184]:
+                    - list "filter by items" [ref=e5185]:
+                      - listitem [ref=e5186]:
+                        - button "Economic" [ref=e5187] [cursor=pointer]
+                    - generic [ref=e5189]:
+                      - generic [ref=e5191]: Oct 15, 2026
+                      - generic [ref=e5192]: "|"
+                      - generic [ref=e5193]: 3:00 PM
+                    - paragraph [ref=e5196]:
+                      - link "Online" [ref=e5197] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e5198]: Open
+                    - paragraph [ref=e5202]: Test Title Positive 62241999
+                  - generic [ref=e5203]:
+                    - button "More" [ref=e5204] [cursor=pointer]
+                    - button "Join event" [ref=e5205] [cursor=pointer]
+                  - generic [ref=e5206]:
+                    - generic [ref=e5207]:
+                      - img "date" [ref=e5208]
+                      - paragraph [ref=e5209]: Oct 14, 2026
+                    - generic [ref=e5210]:
+                      - img "author" [ref=e5211]
+                      - paragraph [ref=e5212]: AnanasTest
+                    - generic [ref=e5213]:
+                      - img "frame" [ref=e5214]
+                      - paragraph [ref=e5215]: "0"
+                    - generic [ref=e5216]:
+                      - button "Like this event" [ref=e5217] [cursor=pointer]:
+                        - img "Like" [ref=e5218]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e5219] [cursor=pointer]:
+                        - img "Dislike" [ref=e5220]
+                        - text: "0"
+              - generic [ref=e5223]:
+                - generic [ref=e5224] [cursor=pointer]
+                - img "event" [ref=e5227]
+                - generic [ref=e5228]:
+                  - generic [ref=e5229]:
+                    - list "filter by items" [ref=e5230]:
+                      - listitem [ref=e5231]:
+                        - button "Economic" [ref=e5232] [cursor=pointer]
+                    - generic [ref=e5234]:
+                      - generic [ref=e5236]: Oct 15, 2026
+                      - generic [ref=e5237]: "|"
+                      - generic [ref=e5238]: 3:00 PM
+                    - paragraph [ref=e5241]:
+                      - link "Online" [ref=e5242] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e5243]: Open
+                    - paragraph [ref=e5247]: Test Title Positive 62277384
+                  - generic [ref=e5248]:
+                    - button "More" [ref=e5249] [cursor=pointer]
+                    - button "Join event" [ref=e5250] [cursor=pointer]
+                  - generic [ref=e5251]:
+                    - generic [ref=e5252]:
+                      - img "date" [ref=e5253]
+                      - paragraph [ref=e5254]: Oct 14, 2026
+                    - generic [ref=e5255]:
+                      - img "author" [ref=e5256]
+                      - paragraph [ref=e5257]: AnanasTest
+                    - generic [ref=e5258]:
+                      - img "frame" [ref=e5259]
+                      - paragraph [ref=e5260]: "0"
+                    - generic [ref=e5261]:
+                      - button "Like this event" [ref=e5262] [cursor=pointer]:
+                        - img "Like" [ref=e5263]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e5264] [cursor=pointer]:
+                        - img "Dislike" [ref=e5265]
+                        - text: "0"
+              - generic [ref=e5268]:
+                - generic [ref=e5269] [cursor=pointer]
+                - img "event" [ref=e5272]
+                - generic [ref=e5273]:
+                  - generic [ref=e5274]:
+                    - list "filter by items" [ref=e5275]:
+                      - listitem [ref=e5276]:
+                        - button "Economic" [ref=e5277] [cursor=pointer]
+                    - generic [ref=e5279]:
+                      - generic [ref=e5281]: Oct 15, 2026
+                      - generic [ref=e5282]: "|"
+                      - generic [ref=e5283]: 3:00 PM
+                    - paragraph [ref=e5286]:
+                      - link "Online" [ref=e5287] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e5288]: Open
+                    - paragraph [ref=e5292]: Test Title Positive 62322461
+                  - generic [ref=e5293]:
+                    - button "More" [ref=e5294] [cursor=pointer]
+                    - button "Join event" [ref=e5295] [cursor=pointer]
+                  - generic [ref=e5296]:
+                    - generic [ref=e5297]:
+                      - img "date" [ref=e5298]
+                      - paragraph [ref=e5299]: Oct 14, 2026
+                    - generic [ref=e5300]:
+                      - img "author" [ref=e5301]
+                      - paragraph [ref=e5302]: AnanasTest
+                    - generic [ref=e5303]:
+                      - img "frame" [ref=e5304]
+                      - paragraph [ref=e5305]: "0"
+                    - generic [ref=e5306]:
+                      - button "Like this event" [ref=e5307] [cursor=pointer]:
+                        - img "Like" [ref=e5308]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e5309] [cursor=pointer]:
+                        - img "Dislike" [ref=e5310]
+                        - text: "0"
+              - generic [ref=e5313]:
+                - generic [ref=e5314] [cursor=pointer]
+                - img "event" [ref=e5317]
+                - generic [ref=e5318]:
+                  - generic [ref=e5319]:
+                    - list "filter by items" [ref=e5320]:
+                      - listitem [ref=e5321]:
+                        - button "Economic" [ref=e5322] [cursor=pointer]
+                    - generic [ref=e5324]:
+                      - generic [ref=e5326]: Oct 15, 2026
+                      - generic [ref=e5327]: "|"
+                      - generic [ref=e5328]: 3:00 PM
+                    - paragraph [ref=e5331]:
+                      - link "Online" [ref=e5332] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e5333]: Open
+                    - paragraph [ref=e5337]: Test Title Positive 60586277
+                  - generic [ref=e5338]:
+                    - button "More" [ref=e5339] [cursor=pointer]
+                    - button "Join event" [ref=e5340] [cursor=pointer]
+                  - generic [ref=e5341]:
+                    - generic [ref=e5342]:
+                      - img "date" [ref=e5343]
+                      - paragraph [ref=e5344]: Oct 14, 2026
+                    - generic [ref=e5345]:
+                      - img "author" [ref=e5346]
+                      - paragraph [ref=e5347]: AnanasTest
+                    - generic [ref=e5348]:
+                      - img "frame" [ref=e5349]
+                      - paragraph [ref=e5350]: "0"
+                    - generic [ref=e5351]:
+                      - button "Like this event" [ref=e5352] [cursor=pointer]:
+                        - img "Like" [ref=e5353]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e5354] [cursor=pointer]:
+                        - img "Dislike" [ref=e5355]
+                        - text: "0"
+              - generic [ref=e5358]:
+                - generic [ref=e5359] [cursor=pointer]
+                - img "event" [ref=e5362]
+                - generic [ref=e5363]:
+                  - generic [ref=e5364]:
+                    - list "filter by items" [ref=e5365]:
+                      - listitem [ref=e5366]:
+                        - button "Economic" [ref=e5367] [cursor=pointer]
+                    - generic [ref=e5369]:
+                      - generic [ref=e5371]: Oct 15, 2026
+                      - generic [ref=e5372]: "|"
+                      - generic [ref=e5373]: 3:00 PM
+                    - paragraph [ref=e5376]:
+                      - link "Online" [ref=e5377] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e5378]: Open
+                    - paragraph [ref=e5382]: Test Title Positive 78240924
+                  - generic [ref=e5383]:
+                    - button "More" [ref=e5384] [cursor=pointer]
+                    - button "Join event" [ref=e5385] [cursor=pointer]
+                  - generic [ref=e5386]:
+                    - generic [ref=e5387]:
+                      - img "date" [ref=e5388]
+                      - paragraph [ref=e5389]: Oct 14, 2026
+                    - generic [ref=e5390]:
+                      - img "author" [ref=e5391]
+                      - paragraph [ref=e5392]: AnanasTest
+                    - generic [ref=e5393]:
+                      - img "frame" [ref=e5394]
+                      - paragraph [ref=e5395]: "0"
+                    - generic [ref=e5396]:
+                      - button "Like this event" [ref=e5397] [cursor=pointer]:
+                        - img "Like" [ref=e5398]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e5399] [cursor=pointer]:
+                        - img "Dislike" [ref=e5400]
+                        - text: "0"
+              - generic [ref=e5403]:
+                - generic [ref=e5404] [cursor=pointer]
+                - img "event" [ref=e5407]
+                - generic [ref=e5408]:
+                  - generic [ref=e5409]:
+                    - list "filter by items" [ref=e5410]:
+                      - listitem [ref=e5411]:
+                        - button "Economic" [ref=e5412] [cursor=pointer]
+                    - generic [ref=e5414]:
+                      - generic [ref=e5416]: Oct 15, 2026
+                      - generic [ref=e5417]: "|"
+                      - generic [ref=e5418]: 3:00 PM
+                    - paragraph [ref=e5421]:
+                      - link "Online" [ref=e5422] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e5423]: Open
+                    - paragraph [ref=e5427]: Test Title Positive 78192924
+                  - generic [ref=e5428]:
+                    - button "More" [ref=e5429] [cursor=pointer]
+                    - button "Join event" [ref=e5430] [cursor=pointer]
+                  - generic [ref=e5431]:
+                    - generic [ref=e5432]:
+                      - img "date" [ref=e5433]
+                      - paragraph [ref=e5434]: Oct 14, 2026
+                    - generic [ref=e5435]:
+                      - img "author" [ref=e5436]
+                      - paragraph [ref=e5437]: AnanasTest
+                    - generic [ref=e5438]:
+                      - img "frame" [ref=e5439]
+                      - paragraph [ref=e5440]: "0"
+                    - generic [ref=e5441]:
+                      - button "Like this event" [ref=e5442] [cursor=pointer]:
+                        - img "Like" [ref=e5443]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e5444] [cursor=pointer]:
+                        - img "Dislike" [ref=e5445]
+                        - text: "0"
+              - generic [ref=e5448]:
+                - generic [ref=e5449] [cursor=pointer]
+                - img "event" [ref=e5452]
+                - generic [ref=e5453]:
+                  - generic [ref=e5454]:
+                    - list "filter by items" [ref=e5455]:
+                      - listitem [ref=e5456]:
+                        - button "Economic" [ref=e5457] [cursor=pointer]
+                    - generic [ref=e5459]:
+                      - generic [ref=e5461]: Oct 15, 2026
+                      - generic [ref=e5462]: "|"
+                      - generic [ref=e5463]: 3:00 PM
+                    - paragraph [ref=e5466]:
+                      - link "Online" [ref=e5467] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e5468]: Open
+                    - paragraph [ref=e5472]: Test Title Positive 78286306
+                  - generic [ref=e5473]:
+                    - button "More" [ref=e5474] [cursor=pointer]
+                    - button "Join event" [ref=e5475] [cursor=pointer]
+                  - generic [ref=e5476]:
+                    - generic [ref=e5477]:
+                      - img "date" [ref=e5478]
+                      - paragraph [ref=e5479]: Oct 14, 2026
+                    - generic [ref=e5480]:
+                      - img "author" [ref=e5481]
+                      - paragraph [ref=e5482]: AnanasTest
+                    - generic [ref=e5483]:
+                      - img "frame" [ref=e5484]
+                      - paragraph [ref=e5485]: "0"
+                    - generic [ref=e5486]:
+                      - button "Like this event" [ref=e5487] [cursor=pointer]:
+                        - img "Like" [ref=e5488]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e5489] [cursor=pointer]:
+                        - img "Dislike" [ref=e5490]
+                        - text: "0"
+              - generic [ref=e5493]:
+                - generic [ref=e5494] [cursor=pointer]
+                - img "event" [ref=e5497]
+                - generic [ref=e5498]:
+                  - generic [ref=e5499]:
+                    - list "filter by items" [ref=e5500]:
+                      - listitem [ref=e5501]:
+                        - button "Economic" [ref=e5502] [cursor=pointer]
+                    - generic [ref=e5504]:
+                      - generic [ref=e5506]: Oct 15, 2026
+                      - generic [ref=e5507]: "|"
+                      - generic [ref=e5508]: 3:00 PM
+                    - paragraph [ref=e5511]:
+                      - link "Online" [ref=e5512] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e5513]: Open
+                    - paragraph [ref=e5517]: Test Title Positive 78710245
+                  - generic [ref=e5518]:
+                    - button "More" [ref=e5519] [cursor=pointer]
+                    - button "Join event" [ref=e5520] [cursor=pointer]
+                  - generic [ref=e5521]:
+                    - generic [ref=e5522]:
+                      - img "date" [ref=e5523]
+                      - paragraph [ref=e5524]: Oct 14, 2026
+                    - generic [ref=e5525]:
+                      - img "author" [ref=e5526]
+                      - paragraph [ref=e5527]: AnanasTest
+                    - generic [ref=e5528]:
+                      - img "frame" [ref=e5529]
+                      - paragraph [ref=e5530]: "0"
+                    - generic [ref=e5531]:
+                      - button "Like this event" [ref=e5532] [cursor=pointer]:
+                        - img "Like" [ref=e5533]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e5534] [cursor=pointer]:
+                        - img "Dislike" [ref=e5535]
+                        - text: "0"
+              - generic [ref=e5538]:
+                - generic [ref=e5539] [cursor=pointer]
+                - img "event" [ref=e5542]
+                - generic [ref=e5543]:
+                  - generic [ref=e5544]:
+                    - list "filter by items" [ref=e5545]:
+                      - listitem [ref=e5546]:
+                        - button "Economic" [ref=e5547] [cursor=pointer]
+                    - generic [ref=e5549]:
+                      - generic [ref=e5551]: Oct 15, 2026
+                      - generic [ref=e5552]: "|"
+                      - generic [ref=e5553]: 3:00 PM
+                    - paragraph [ref=e5556]:
+                      - link "Online" [ref=e5557] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e5558]: Open
+                    - paragraph [ref=e5562]: Test Title Positive 78764383
+                  - generic [ref=e5563]:
+                    - button "More" [ref=e5564] [cursor=pointer]
+                    - button "Join event" [ref=e5565] [cursor=pointer]
+                  - generic [ref=e5566]:
+                    - generic [ref=e5567]:
+                      - img "date" [ref=e5568]
+                      - paragraph [ref=e5569]: Oct 14, 2026
+                    - generic [ref=e5570]:
+                      - img "author" [ref=e5571]
+                      - paragraph [ref=e5572]: AnanasTest
+                    - generic [ref=e5573]:
+                      - img "frame" [ref=e5574]
+                      - paragraph [ref=e5575]: "0"
+                    - generic [ref=e5576]:
+                      - button "Like this event" [ref=e5577] [cursor=pointer]:
+                        - img "Like" [ref=e5578]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e5579] [cursor=pointer]:
+                        - img "Dislike" [ref=e5580]
+                        - text: "0"
+              - generic [ref=e5583]:
+                - generic [ref=e5584] [cursor=pointer]
+                - img "event" [ref=e5587]
+                - generic [ref=e5588]:
+                  - generic [ref=e5589]:
+                    - list "filter by items" [ref=e5590]:
+                      - listitem [ref=e5591]:
+                        - button "Economic" [ref=e5592] [cursor=pointer]
+                    - generic [ref=e5594]:
+                      - generic [ref=e5596]: Oct 15, 2026
+                      - generic [ref=e5597]: "|"
+                      - generic [ref=e5598]: 3:00 PM
+                    - paragraph [ref=e5601]:
+                      - link "Online" [ref=e5602] [cursor=pointer]:
+                        - /url: https://example.com/test-link
+                    - generic [ref=e5603]: Open
+                    - paragraph [ref=e5607]: Test Title Positive 60472179
+                  - generic [ref=e5608]:
+                    - button "More" [ref=e5609] [cursor=pointer]
+                    - button "Join event" [ref=e5610] [cursor=pointer]
+                  - generic [ref=e5611]:
+                    - generic [ref=e5612]:
+                      - img "date" [ref=e5613]
+                      - paragraph [ref=e5614]: Oct 14, 2026
+                    - generic [ref=e5615]:
+                      - img "author" [ref=e5616]
+                      - paragraph [ref=e5617]: AnanasTest
+                    - generic [ref=e5618]:
+                      - img "frame" [ref=e5619]
+                      - paragraph [ref=e5620]: "0"
+                    - generic [ref=e5621]:
+                      - button "Like this event" [ref=e5622] [cursor=pointer]:
+                        - img "Like" [ref=e5623]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e5624] [cursor=pointer]:
+                        - img "Dislike" [ref=e5625]
+                        - text: "0"
+              - generic [ref=e5628]:
+                - generic [ref=e5629] [cursor=pointer]
+                - img "event" [ref=e5632]
+                - generic [ref=e5633]:
+                  - generic [ref=e5634]:
+                    - list "filter by items" [ref=e5635]:
+                      - listitem [ref=e5636]:
+                        - button "Economic" [ref=e5637] [cursor=pointer]
+                    - generic [ref=e5639]:
+                      - generic [ref=e5641]: Oct 15, 2026
+                      - generic [ref=e5642]: "|"
+                      - generic [ref=e5643]: 10:00 AM
+                    - paragraph [ref=e5646]:
+                      - link "Online" [ref=e5647] [cursor=pointer]:
+                        - /url: https://www.greencity.cx.ua/#/greenCity/events/create-update-event
+                    - generic [ref=e5648]: Open
+                    - paragraph [ref=e5652]: New Automation Event 2026!
+                  - generic [ref=e5653]:
+                    - button "More" [ref=e5654] [cursor=pointer]
+                    - button "Join event" [ref=e5655] [cursor=pointer]
+                  - generic [ref=e5656]:
+                    - generic [ref=e5657]:
+                      - img "date" [ref=e5658]
+                      - paragraph [ref=e5659]: Oct 14, 2026
+                    - generic [ref=e5660]:
+                      - img "author" [ref=e5661]
+                      - paragraph [ref=e5662]: Світлана Ковальова
+                    - generic [ref=e5663]:
+                      - img "frame" [ref=e5664]
+                      - paragraph [ref=e5665]: "0"
+                    - generic [ref=e5666]:
+                      - button "Like this event" [ref=e5667] [cursor=pointer]:
+                        - img "Like" [ref=e5668]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e5669] [cursor=pointer]:
+                        - img "Dislike" [ref=e5670]
+                        - text: "0"
+              - generic [ref=e5673]:
+                - generic [ref=e5674] [cursor=pointer]
+                - generic [ref=e5676]: "+1"
+                - img "event" [ref=e5681]
+                - generic [ref=e5682]:
+                  - generic [ref=e5683]:
+                    - list "filter by items" [ref=e5684]:
+                      - listitem [ref=e5685]:
+                        - button "Social" [ref=e5686] [cursor=pointer]
+                    - generic [ref=e5688]:
+                      - generic [ref=e5690]: May 10, 2030
+                      - generic [ref=e5691]: "|"
+                      - generic [ref=e5692]: 10:00 AM
+                    - paragraph [ref=e5695]: office 113, st. Svetlitsky 35
+                    - generic [ref=e5696]: Open
+                    - paragraph [ref=e5700]: Community Cleanup Saturday
+                  - generic [ref=e5701]:
+                    - button "More" [ref=e5702] [cursor=pointer]
+                    - button "Join event" [ref=e5703] [cursor=pointer]
+                  - generic [ref=e5704]:
+                    - generic [ref=e5705]:
+                      - img "date" [ref=e5706]
+                      - paragraph [ref=e5707]: Apr 16, 2026
+                    - generic [ref=e5708]:
+                      - img "author" [ref=e5709]
+                      - paragraph [ref=e5710]: Olha Shutylieva
+                    - generic [ref=e5711]:
+                      - img "frame" [ref=e5712]
+                      - paragraph [ref=e5713]: "14"
+                    - generic [ref=e5714]:
+                      - button "Like this event" [ref=e5715] [cursor=pointer]:
+                        - img "Like" [ref=e5716]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e5717] [cursor=pointer]:
+                        - img "Dislike" [ref=e5718]
+                        - text: "0"
+              - generic [ref=e5721]:
+                - generic [ref=e5722] [cursor=pointer]
+                - generic [ref=e5724]: "+3"
+                - img "event" [ref=e5730]
+                - generic [ref=e5731]:
+                  - generic [ref=e5732]:
+                    - list "filter by items" [ref=e5733]:
+                      - listitem [ref=e5734]:
+                        - button "Social" [ref=e5735] [cursor=pointer]
+                    - generic [ref=e5737]:
+                      - generic [ref=e5739]: May 10, 2030
+                      - generic [ref=e5740]: "|"
+                      - generic [ref=e5741]: 10:00 AM
+                    - paragraph [ref=e5744]: office 113, st. Svetlitsky 35
+                    - generic [ref=e5745]: Open
+                    - paragraph [ref=e5749]: Community Cleanup Saturday
+                  - generic [ref=e5750]:
+                    - button "More" [ref=e5751] [cursor=pointer]
+                    - button "Join event" [ref=e5752] [cursor=pointer]
+                  - generic [ref=e5753]:
+                    - generic [ref=e5754]:
+                      - img "date" [ref=e5755]
+                      - paragraph [ref=e5756]: Apr 16, 2026
+                    - generic [ref=e5757]:
+                      - img "author" [ref=e5758]
+                      - paragraph [ref=e5759]: Olha Shutylieva
+                    - generic [ref=e5760]:
+                      - img "frame" [ref=e5761]
+                      - paragraph [ref=e5762]: "0"
+                    - generic [ref=e5763]:
+                      - button "Like this event" [ref=e5764] [cursor=pointer]:
+                        - img "Like" [ref=e5765]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e5766] [cursor=pointer]:
+                        - img "Dislike" [ref=e5767]
+                        - text: "0"
+              - generic [ref=e5770]:
+                - generic [ref=e5771] [cursor=pointer]
+                - generic [ref=e5773]: "+1"
+                - img "event" [ref=e5778]
+                - generic [ref=e5779]:
+                  - generic [ref=e5780]:
+                    - list "filter by items" [ref=e5781]:
+                      - listitem [ref=e5782]:
+                        - button "Social" [ref=e5783] [cursor=pointer]
+                    - generic [ref=e5785]:
+                      - generic [ref=e5787]: May 10, 2030
+                      - generic [ref=e5788]: "|"
+                      - generic [ref=e5789]: 10:00 AM
+                    - paragraph [ref=e5792]: office 113, st. Svetlitsky 35
+                    - generic [ref=e5793]: Open
+                    - paragraph [ref=e5797]: Community Cleanup Saturday
+                  - generic [ref=e5798]:
+                    - button "More" [ref=e5799] [cursor=pointer]
+                    - button "Join event" [ref=e5800] [cursor=pointer]
+                  - generic [ref=e5801]:
+                    - generic [ref=e5802]:
+                      - img "date" [ref=e5803]
+                      - paragraph [ref=e5804]: Apr 16, 2026
+                    - generic [ref=e5805]:
+                      - img "author" [ref=e5806]
+                      - paragraph [ref=e5807]: Olha Shutylieva
+                    - generic [ref=e5808]:
+                      - img "frame" [ref=e5809]
+                      - paragraph [ref=e5810]: "0"
+                    - generic [ref=e5811]:
+                      - button "Like this event" [ref=e5812] [cursor=pointer]:
+                        - img "Like" [ref=e5813]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e5814] [cursor=pointer]:
+                        - img "Dislike" [ref=e5815]
+                        - text: "0"
+              - generic [ref=e5818]:
+                - generic [ref=e5819] [cursor=pointer]
+                - generic [ref=e5821]: "+1"
+                - img "event" [ref=e5826]
+                - generic [ref=e5827]:
+                  - generic [ref=e5828]:
+                    - list "filter by items" [ref=e5829]:
+                      - listitem [ref=e5830]:
+                        - button "Social" [ref=e5831] [cursor=pointer]
+                    - generic [ref=e5833]:
+                      - generic [ref=e5835]: May 10, 2030
+                      - generic [ref=e5836]: "|"
+                      - generic [ref=e5837]: 10:00 AM
+                    - paragraph [ref=e5840]: office 113, st. Svetlitsky 35
+                    - generic [ref=e5841]: Open
+                    - paragraph [ref=e5845]: Community Cleanup Saturday
+                  - generic [ref=e5846]:
+                    - button "More" [ref=e5847] [cursor=pointer]
+                    - button "Join event" [ref=e5848] [cursor=pointer]
+                  - generic [ref=e5849]:
+                    - generic [ref=e5850]:
+                      - img "date" [ref=e5851]
+                      - paragraph [ref=e5852]: Apr 16, 2026
+                    - generic [ref=e5853]:
+                      - img "author" [ref=e5854]
+                      - paragraph [ref=e5855]: Olha Shutylieva
+                    - generic [ref=e5856]:
+                      - img "frame" [ref=e5857]
+                      - paragraph [ref=e5858]: "0"
+                    - generic [ref=e5859]:
+                      - button "Like this event" [ref=e5860] [cursor=pointer]:
+                        - img "Like" [ref=e5861]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e5862] [cursor=pointer]:
+                        - img "Dislike" [ref=e5863]
+                        - text: "0"
+              - generic [ref=e5866]:
+                - generic [ref=e5867] [cursor=pointer]
+                - generic [ref=e5869]: "+1"
+                - img "event" [ref=e5874]
+                - generic [ref=e5875]:
+                  - generic [ref=e5876]:
+                    - list "filter by items" [ref=e5877]:
+                      - listitem [ref=e5878]:
+                        - button "Social" [ref=e5879] [cursor=pointer]
+                    - generic [ref=e5881]:
+                      - generic [ref=e5883]: May 10, 2030
+                      - generic [ref=e5884]: "|"
+                      - generic [ref=e5885]: 10:00 AM
+                    - paragraph [ref=e5888]: office 113, st. Svetlitsky 35
+                    - generic [ref=e5889]: Open
+                    - paragraph [ref=e5893]: Community Cleanup Saturday
+                  - generic [ref=e5894]:
+                    - button "More" [ref=e5895] [cursor=pointer]
+                    - button "Join event" [ref=e5896] [cursor=pointer]
+                  - generic [ref=e5897]:
+                    - generic [ref=e5898]:
+                      - img "date" [ref=e5899]
+                      - paragraph [ref=e5900]: Apr 16, 2026
+                    - generic [ref=e5901]:
+                      - img "author" [ref=e5902]
+                      - paragraph [ref=e5903]: Olha Shutylieva
+                    - generic [ref=e5904]:
+                      - img "frame" [ref=e5905]
+                      - paragraph [ref=e5906]: "0"
+                    - generic [ref=e5907]:
+                      - button "Like this event" [ref=e5908] [cursor=pointer]:
+                        - img "Like" [ref=e5909]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e5910] [cursor=pointer]:
+                        - img "Dislike" [ref=e5911]
+                        - text: "0"
+              - generic [ref=e5914]:
+                - generic [ref=e5915] [cursor=pointer]
+                - generic [ref=e5917]: "+1"
+                - img "event" [ref=e5922]
+                - generic [ref=e5923]:
+                  - generic [ref=e5924]:
+                    - list "filter by items" [ref=e5925]:
+                      - listitem [ref=e5926]:
+                        - button "Social" [ref=e5927] [cursor=pointer]
+                    - generic [ref=e5929]:
+                      - generic [ref=e5931]: May 10, 2030
+                      - generic [ref=e5932]: "|"
+                      - generic [ref=e5933]: 10:00 AM
+                    - paragraph [ref=e5936]: office 113, st. Svetlitsky 35
+                    - generic [ref=e5937]: Open
+                    - paragraph [ref=e5941]: Community Cleanup Saturday
+                  - generic [ref=e5942]:
+                    - button "More" [ref=e5943] [cursor=pointer]
+                    - button "Join event" [ref=e5944] [cursor=pointer]
+                  - generic [ref=e5945]:
+                    - generic [ref=e5946]:
+                      - img "date" [ref=e5947]
+                      - paragraph [ref=e5948]: Apr 16, 2026
+                    - generic [ref=e5949]:
+                      - img "author" [ref=e5950]
+                      - paragraph [ref=e5951]: Olha Shutylieva
+                    - generic [ref=e5952]:
+                      - img "frame" [ref=e5953]
+                      - paragraph [ref=e5954]: "0"
+                    - generic [ref=e5955]:
+                      - button "Like this event" [ref=e5956] [cursor=pointer]:
+                        - img "Like" [ref=e5957]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e5958] [cursor=pointer]:
+                        - img "Dislike" [ref=e5959]
+                        - text: "0"
+              - generic [ref=e5962]:
+                - generic [ref=e5963] [cursor=pointer]
+                - generic [ref=e5965]: "+1"
+                - img "event" [ref=e5970]
+                - generic [ref=e5971]:
+                  - generic [ref=e5972]:
+                    - list "filter by items" [ref=e5973]:
+                      - listitem [ref=e5974]:
+                        - button "Social" [ref=e5975] [cursor=pointer]
+                    - generic [ref=e5977]:
+                      - generic [ref=e5979]: May 10, 2030
+                      - generic [ref=e5980]: "|"
+                      - generic [ref=e5981]: 10:00 AM
+                    - paragraph [ref=e5984]: office 113, st. Svetlitsky 35
+                    - generic [ref=e5985]: Open
+                    - paragraph [ref=e5989]: Community Cleanup Saturday
+                  - generic [ref=e5990]:
+                    - button "More" [ref=e5991] [cursor=pointer]
+                    - button "Join event" [ref=e5992] [cursor=pointer]
+                  - generic [ref=e5993]:
+                    - generic [ref=e5994]:
+                      - img "date" [ref=e5995]
+                      - paragraph [ref=e5996]: Apr 16, 2026
+                    - generic [ref=e5997]:
+                      - img "author" [ref=e5998]
+                      - paragraph [ref=e5999]: Olha Shutylieva
+                    - generic [ref=e6000]:
+                      - img "frame" [ref=e6001]
+                      - paragraph [ref=e6002]: "0"
+                    - generic [ref=e6003]:
+                      - button "Like this event" [ref=e6004] [cursor=pointer]:
+                        - img "Like" [ref=e6005]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e6006] [cursor=pointer]:
+                        - img "Dislike" [ref=e6007]
+                        - text: "0"
+              - generic [ref=e6010]:
+                - generic [ref=e6011] [cursor=pointer]
+                - generic [ref=e6013]: "+1"
+                - img "event" [ref=e6018]
+                - generic [ref=e6019]:
+                  - generic [ref=e6020]:
+                    - list "filter by items" [ref=e6021]:
+                      - listitem [ref=e6022]:
+                        - button "Social" [ref=e6023] [cursor=pointer]
+                    - generic [ref=e6025]:
+                      - generic [ref=e6027]: May 10, 2030
+                      - generic [ref=e6028]: "|"
+                      - generic [ref=e6029]: 10:00 AM
+                    - paragraph [ref=e6032]: office 113, st. Svetlitsky 35
+                    - generic [ref=e6033]: Open
+                    - paragraph [ref=e6037]: Community Cleanup Saturday
+                  - generic [ref=e6038]:
+                    - button "More" [ref=e6039] [cursor=pointer]
+                    - button "Join event" [ref=e6040] [cursor=pointer]
+                  - generic [ref=e6041]:
+                    - generic [ref=e6042]:
+                      - img "date" [ref=e6043]
+                      - paragraph [ref=e6044]: Apr 16, 2026
+                    - generic [ref=e6045]:
+                      - img "author" [ref=e6046]
+                      - paragraph [ref=e6047]: Olha Shutylieva
+                    - generic [ref=e6048]:
+                      - img "frame" [ref=e6049]
+                      - paragraph [ref=e6050]: "0"
+                    - generic [ref=e6051]:
+                      - button "Like this event" [ref=e6052] [cursor=pointer]:
+                        - img "Like" [ref=e6053]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e6054] [cursor=pointer]:
+                        - img "Dislike" [ref=e6055]
+                        - text: "0"
+              - generic [ref=e6058]:
+                - generic [ref=e6059] [cursor=pointer]
+                - generic [ref=e6061]: "+1"
+                - img "event" [ref=e6066]
+                - generic [ref=e6067]:
+                  - generic [ref=e6068]:
+                    - list "filter by items" [ref=e6069]:
+                      - listitem [ref=e6070]:
+                        - button "Social" [ref=e6071] [cursor=pointer]
+                    - generic [ref=e6073]:
+                      - generic [ref=e6075]: May 10, 2030
+                      - generic [ref=e6076]: "|"
+                      - generic [ref=e6077]: 10:00 AM
+                    - paragraph [ref=e6080]: office 113, st. Svetlitsky 35
+                    - generic [ref=e6081]: Open
+                    - paragraph [ref=e6085]: Community Cleanup Saturday
+                  - generic [ref=e6086]:
+                    - button "More" [ref=e6087] [cursor=pointer]
+                    - button "Join event" [ref=e6088] [cursor=pointer]
+                  - generic [ref=e6089]:
+                    - generic [ref=e6090]:
+                      - img "date" [ref=e6091]
+                      - paragraph [ref=e6092]: Apr 16, 2026
+                    - generic [ref=e6093]:
+                      - img "author" [ref=e6094]
+                      - paragraph [ref=e6095]: Olha Shutylieva
+                    - generic [ref=e6096]:
+                      - img "frame" [ref=e6097]
+                      - paragraph [ref=e6098]: "0"
+                    - generic [ref=e6099]:
+                      - button "Like this event" [ref=e6100] [cursor=pointer]:
+                        - img "Like" [ref=e6101]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e6102] [cursor=pointer]:
+                        - img "Dislike" [ref=e6103]
+                        - text: "0"
+              - generic [ref=e6106]:
+                - generic [ref=e6107] [cursor=pointer]
+                - img "event" [ref=e6110]
+                - generic [ref=e6111]:
+                  - generic [ref=e6112]:
+                    - list "filter by items" [ref=e6113]:
+                      - listitem [ref=e6114]:
+                        - button "Social" [ref=e6115] [cursor=pointer]
+                    - generic [ref=e6117]:
+                      - generic [ref=e6119]: May 10, 2030
+                      - generic [ref=e6120]: "|"
+                      - generic [ref=e6121]: 10:00 AM
+                    - paragraph [ref=e6124]: office 113, st. Svetlitsky 35
+                    - generic [ref=e6125]: Closed
+                    - paragraph [ref=e6129]: Community Cleanup Saturday new
+                  - generic [ref=e6130]:
+                    - button "More" [ref=e6131] [cursor=pointer]
+                    - button "Join event" [ref=e6132] [cursor=pointer]
+                  - generic [ref=e6133]:
+                    - generic [ref=e6134]:
+                      - img "date" [ref=e6135]
+                      - paragraph [ref=e6136]: Apr 09, 2026
+                    - generic [ref=e6137]:
+                      - img "author" [ref=e6138]
+                      - paragraph [ref=e6139]: Olha Shutylieva
+                    - generic [ref=e6140]:
+                      - img "frame" [ref=e6141]
+                      - paragraph [ref=e6142]: "0"
+                    - generic [ref=e6143]:
+                      - button "Like this event" [ref=e6144] [cursor=pointer]:
+                        - img "Like" [ref=e6145]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e6146] [cursor=pointer]:
+                        - img "Dislike" [ref=e6147]
+                        - text: "0"
+              - generic [ref=e6150]:
+                - generic [ref=e6151] [cursor=pointer]
+                - img "event" [ref=e6154]
+                - generic [ref=e6155]:
+                  - generic [ref=e6156]:
+                    - list "filter by items" [ref=e6157]:
+                      - listitem [ref=e6158]:
+                        - button "Social" [ref=e6159] [cursor=pointer]
+                    - generic [ref=e6161]:
+                      - generic [ref=e6163]: May 10, 2030
+                      - generic [ref=e6164]: "|"
+                      - generic [ref=e6165]: 10:00 AM
+                    - paragraph [ref=e6168]: office 113, st. Svetlitsky 35
+                    - generic [ref=e6169]: Closed
+                    - paragraph [ref=e6173]: Community Cleanup Saturday
+                  - generic [ref=e6174]:
+                    - button "More" [ref=e6175] [cursor=pointer]
+                    - button "Join event" [ref=e6176] [cursor=pointer]
+                  - generic [ref=e6177]:
+                    - generic [ref=e6178]:
+                      - img "date" [ref=e6179]
+                      - paragraph [ref=e6180]: Apr 09, 2026
+                    - generic [ref=e6181]:
+                      - img "author" [ref=e6182]
+                      - paragraph [ref=e6183]: Olha Shutylieva
+                    - generic [ref=e6184]:
+                      - img "frame" [ref=e6185]
+                      - paragraph [ref=e6186]: "1"
+                    - generic [ref=e6187]:
+                      - button "Like this event" [ref=e6188] [cursor=pointer]:
+                        - img "Like" [ref=e6189]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e6190] [cursor=pointer]:
+                        - img "Dislike" [ref=e6191]
+                        - text: "0"
+              - generic [ref=e6194]:
+                - generic [ref=e6195] [cursor=pointer]
+                - img "event" [ref=e6198]
+                - generic [ref=e6199]:
+                  - generic [ref=e6200]:
+                    - list "filter by items" [ref=e6201]:
+                      - listitem [ref=e6202]:
+                        - button "Social" [ref=e6203] [cursor=pointer]
+                    - generic [ref=e6205]:
+                      - generic [ref=e6207]: May 10, 2030
+                      - generic [ref=e6208]: "|"
+                      - generic [ref=e6209]: 10:00 AM
+                    - paragraph [ref=e6212]: office 113, st. Svetlitsky 35
+                    - generic [ref=e6213]: Closed
+                    - paragraph [ref=e6217]: Community Cleanup Saturday
+                  - generic [ref=e6218]:
+                    - button "More" [ref=e6219] [cursor=pointer]
+                    - button "Join event" [ref=e6220] [cursor=pointer]
+                  - generic [ref=e6221]:
+                    - generic [ref=e6222]:
+                      - img "date" [ref=e6223]
+                      - paragraph [ref=e6224]: Apr 07, 2026
+                    - generic [ref=e6225]:
+                      - img "author" [ref=e6226]
+                      - paragraph [ref=e6227]: Olhen
+                    - generic [ref=e6228]:
+                      - img "frame" [ref=e6229]
+                      - paragraph [ref=e6230]: "1"
+                    - generic [ref=e6231]:
+                      - button "Like this event" [ref=e6232] [cursor=pointer]:
+                        - img "Like" [ref=e6233]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e6234] [cursor=pointer]:
+                        - img "Dislike" [ref=e6235]
+                        - text: "0"
+              - generic [ref=e6238]:
+                - generic [ref=e6239] [cursor=pointer]
+                - img "event" [ref=e6242]
+                - generic [ref=e6243]:
+                  - generic [ref=e6244]:
+                    - list "filter by items" [ref=e6245]:
+                      - listitem [ref=e6246]:
+                        - button "Social" [ref=e6247] [cursor=pointer]
+                    - generic [ref=e6249]:
+                      - generic [ref=e6251]: Jul 14, 2027
+                      - generic [ref=e6252]: "|"
+                      - generic [ref=e6253]: 8:51 PM
+                    - paragraph [ref=e6256]:
+                      - link "Online" [ref=e6257] [cursor=pointer]:
+                        - /url: https://meet.google.com
+                    - generic [ref=e6258]: Open
+                    - paragraph [ref=e6262]: New Event 2026
+                  - generic [ref=e6263]:
+                    - button "More" [ref=e6264] [cursor=pointer]
+                    - button "Join event" [ref=e6265] [cursor=pointer]
+                  - generic [ref=e6266]:
+                    - generic [ref=e6267]:
+                      - img "date" [ref=e6268]
+                      - paragraph [ref=e6269]: Oct 14, 2026
+                    - generic [ref=e6270]:
+                      - img "author" [ref=e6271]
+                      - paragraph [ref=e6272]: TestATestA
+                    - generic [ref=e6273]:
+                      - img "frame" [ref=e6274]
+                      - paragraph [ref=e6275]: "0"
+                    - generic [ref=e6276]:
+                      - button "Like this event" [ref=e6277] [cursor=pointer]:
+                        - img "Like" [ref=e6278]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e6279] [cursor=pointer]:
+                        - img "Dislike" [ref=e6280]
+                        - text: "0"
+              - generic [ref=e6283]:
+                - generic [ref=e6284] [cursor=pointer]
+                - img "event" [ref=e6287]
+                - generic [ref=e6288]:
+                  - generic [ref=e6289]:
+                    - list "filter by items" [ref=e6290]:
+                      - listitem [ref=e6291]:
+                        - button "Social" [ref=e6292] [cursor=pointer]
+                    - generic [ref=e6294]:
+                      - generic [ref=e6296]: Jul 14, 2027
+                      - generic [ref=e6297]: "|"
+                      - generic [ref=e6298]: 8:51 PM
+                    - paragraph [ref=e6301]:
+                      - link "Online" [ref=e6302] [cursor=pointer]:
+                        - /url: https://meet.google.com
+                    - generic [ref=e6303]: Open
+                    - paragraph [ref=e6307]: New Event 2026
+                  - generic [ref=e6308]:
+                    - button "More" [ref=e6309] [cursor=pointer]
+                    - button "Join event" [ref=e6310] [cursor=pointer]
+                  - generic [ref=e6311]:
+                    - generic [ref=e6312]:
+                      - img "date" [ref=e6313]
+                      - paragraph [ref=e6314]: Oct 14, 2026
+                    - generic [ref=e6315]:
+                      - img "author" [ref=e6316]
+                      - paragraph [ref=e6317]: TestATestA
+                    - generic [ref=e6318]:
+                      - img "frame" [ref=e6319]
+                      - paragraph [ref=e6320]: "0"
+                    - generic [ref=e6321]:
+                      - button "Like this event" [ref=e6322] [cursor=pointer]:
+                        - img "Like" [ref=e6323]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e6324] [cursor=pointer]:
+                        - img "Dislike" [ref=e6325]
+                        - text: "0"
+              - generic [ref=e6328]:
+                - generic [ref=e6329] [cursor=pointer]
+                - img "event" [ref=e6332]
+                - generic [ref=e6333]:
+                  - generic [ref=e6334]:
+                    - list "filter by items" [ref=e6335]:
+                      - listitem [ref=e6336]:
+                        - button "Social" [ref=e6337] [cursor=pointer]
+                    - generic [ref=e6339]:
+                      - generic [ref=e6341]: Jul 14, 2027
+                      - generic [ref=e6342]: "|"
+                      - generic [ref=e6343]: 8:51 PM
+                    - paragraph [ref=e6346]:
+                      - link "Online" [ref=e6347] [cursor=pointer]:
+                        - /url: https://meet.google.com
+                    - generic [ref=e6348]: Open
+                    - paragraph [ref=e6352]: New Event 2026
+                  - generic [ref=e6353]:
+                    - button "More" [ref=e6354] [cursor=pointer]
+                    - button "Join event" [ref=e6355] [cursor=pointer]
+                  - generic [ref=e6356]:
+                    - generic [ref=e6357]:
+                      - img "date" [ref=e6358]
+                      - paragraph [ref=e6359]: Oct 14, 2026
+                    - generic [ref=e6360]:
+                      - img "author" [ref=e6361]
+                      - paragraph [ref=e6362]: TestATestA
+                    - generic [ref=e6363]:
+                      - img "frame" [ref=e6364]
+                      - paragraph [ref=e6365]: "0"
+                    - generic [ref=e6366]:
+                      - button "Like this event" [ref=e6367] [cursor=pointer]:
+                        - img "Like" [ref=e6368]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e6369] [cursor=pointer]:
+                        - img "Dislike" [ref=e6370]
+                        - text: "0"
+              - generic [ref=e6373]:
+                - generic [ref=e6374] [cursor=pointer]
+                - img "event" [ref=e6377]
+                - generic [ref=e6378]:
+                  - generic [ref=e6379]:
+                    - list "filter by items" [ref=e6380]:
+                      - listitem [ref=e6381]:
+                        - button "Social" [ref=e6382] [cursor=pointer]
+                    - generic [ref=e6384]:
+                      - generic [ref=e6386]: Jul 14, 2027
+                      - generic [ref=e6387]: "|"
+                      - generic [ref=e6388]: 8:51 PM
+                    - paragraph [ref=e6391]:
+                      - link "Online" [ref=e6392] [cursor=pointer]:
+                        - /url: https://meet.google.com
+                    - generic [ref=e6393]: Open
+                    - paragraph [ref=e6397]: New Event 2026
+                  - generic [ref=e6398]:
+                    - button "More" [ref=e6399] [cursor=pointer]
+                    - button "Join event" [ref=e6400] [cursor=pointer]
+                  - generic [ref=e6401]:
+                    - generic [ref=e6402]:
+                      - img "date" [ref=e6403]
+                      - paragraph [ref=e6404]: Oct 14, 2026
+                    - generic [ref=e6405]:
+                      - img "author" [ref=e6406]
+                      - paragraph [ref=e6407]: TestATestA
+                    - generic [ref=e6408]:
+                      - img "frame" [ref=e6409]
+                      - paragraph [ref=e6410]: "0"
+                    - generic [ref=e6411]:
+                      - button "Like this event" [ref=e6412] [cursor=pointer]:
+                        - img "Like" [ref=e6413]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e6414] [cursor=pointer]:
+                        - img "Dislike" [ref=e6415]
+                        - text: "0"
+              - generic [ref=e6418]:
+                - generic [ref=e6419] [cursor=pointer]
+                - img "event" [ref=e6422]
+                - generic [ref=e6423]:
+                  - generic [ref=e6424]:
+                    - list "filter by items" [ref=e6425]:
+                      - listitem [ref=e6426]:
+                        - button "Social" [ref=e6427] [cursor=pointer]
+                    - generic [ref=e6429]:
+                      - generic [ref=e6431]: Jul 14, 2027
+                      - generic [ref=e6432]: "|"
+                      - generic [ref=e6433]: 8:51 PM
+                    - paragraph [ref=e6436]:
+                      - link "Online" [ref=e6437] [cursor=pointer]:
+                        - /url: https://meet.google.com
+                    - generic [ref=e6438]: Open
+                    - paragraph [ref=e6442]: New Event 2026
+                  - generic [ref=e6443]:
+                    - button "More" [ref=e6444] [cursor=pointer]
+                    - button "Join event" [ref=e6445] [cursor=pointer]
+                  - generic [ref=e6446]:
+                    - generic [ref=e6447]:
+                      - img "date" [ref=e6448]
+                      - paragraph [ref=e6449]: Oct 14, 2026
+                    - generic [ref=e6450]:
+                      - img "author" [ref=e6451]
+                      - paragraph [ref=e6452]: Світлана Ковальова
+                    - generic [ref=e6453]:
+                      - img "frame" [ref=e6454]
+                      - paragraph [ref=e6455]: "0"
+                    - generic [ref=e6456]:
+                      - button "Like this event" [ref=e6457] [cursor=pointer]:
+                        - img "Like" [ref=e6458]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e6459] [cursor=pointer]:
+                        - img "Dislike" [ref=e6460]
+                        - text: "0"
+              - generic [ref=e6463]:
+                - generic [ref=e6464] [cursor=pointer]
+                - img "event" [ref=e6467]
+                - generic [ref=e6468]:
+                  - generic [ref=e6469]:
+                    - list "filter by items" [ref=e6470]:
+                      - listitem [ref=e6471]:
+                        - button "Social" [ref=e6472] [cursor=pointer]
+                    - generic [ref=e6474]:
+                      - generic [ref=e6476]: Jul 14, 2027
+                      - generic [ref=e6477]: "|"
+                      - generic [ref=e6478]: 8:51 PM
+                    - paragraph [ref=e6481]:
+                      - link "Online" [ref=e6482] [cursor=pointer]:
+                        - /url: https://meet.google.com
+                    - generic [ref=e6483]: Open
+                    - paragraph [ref=e6487]: New Event 2026
+                  - generic [ref=e6488]:
+                    - button "More" [ref=e6489] [cursor=pointer]
+                    - button "Join event" [ref=e6490] [cursor=pointer]
+                  - generic [ref=e6491]:
+                    - generic [ref=e6492]:
+                      - img "date" [ref=e6493]
+                      - paragraph [ref=e6494]: Oct 14, 2026
+                    - generic [ref=e6495]:
+                      - img "author" [ref=e6496]
+                      - paragraph [ref=e6497]: TestATestA
+                    - generic [ref=e6498]:
+                      - img "frame" [ref=e6499]
+                      - paragraph [ref=e6500]: "0"
+                    - generic [ref=e6501]:
+                      - button "Like this event" [ref=e6502] [cursor=pointer]:
+                        - img "Like" [ref=e6503]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e6504] [cursor=pointer]:
+                        - img "Dislike" [ref=e6505]
+                        - text: "0"
+              - generic [ref=e6508]:
+                - generic [ref=e6509] [cursor=pointer]
+                - img "event" [ref=e6512]
+                - generic [ref=e6513]:
+                  - generic [ref=e6514]:
+                    - list "filter by items" [ref=e6515]:
+                      - listitem [ref=e6516]:
+                        - button "Social" [ref=e6517] [cursor=pointer]
+                    - generic [ref=e6519]:
+                      - generic [ref=e6521]: Jul 14, 2027
+                      - generic [ref=e6522]: "|"
+                      - generic [ref=e6523]: 8:51 PM
+                    - paragraph [ref=e6526]:
+                      - link "Online" [ref=e6527] [cursor=pointer]:
+                        - /url: https://meet.google.com
+                    - generic [ref=e6528]: Open
+                    - paragraph [ref=e6532]: New Event 2026
+                  - generic [ref=e6533]:
+                    - button "More" [ref=e6534] [cursor=pointer]
+                    - button "Join event" [ref=e6535] [cursor=pointer]
+                  - generic [ref=e6536]:
+                    - generic [ref=e6537]:
+                      - img "date" [ref=e6538]
+                      - paragraph [ref=e6539]: Oct 14, 2026
+                    - generic [ref=e6540]:
+                      - img "author" [ref=e6541]
+                      - paragraph [ref=e6542]: TestATestA
+                    - generic [ref=e6543]:
+                      - img "frame" [ref=e6544]
+                      - paragraph [ref=e6545]: "0"
+                    - generic [ref=e6546]:
+                      - button "Like this event" [ref=e6547] [cursor=pointer]:
+                        - img "Like" [ref=e6548]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e6549] [cursor=pointer]:
+                        - img "Dislike" [ref=e6550]
+                        - text: "0"
+              - generic [ref=e6553]:
+                - generic [ref=e6554] [cursor=pointer]
+                - img "event" [ref=e6557]
+                - generic [ref=e6558]:
+                  - generic [ref=e6559]:
+                    - list "filter by items" [ref=e6560]:
+                      - listitem [ref=e6561]:
+                        - button "Social" [ref=e6562] [cursor=pointer]
+                    - generic [ref=e6564]:
+                      - generic [ref=e6566]: Jul 14, 2027
+                      - generic [ref=e6567]: "|"
+                      - generic [ref=e6568]: 8:51 PM
+                    - paragraph [ref=e6571]:
+                      - link "Online" [ref=e6572] [cursor=pointer]:
+                        - /url: https://meet.google.com
+                    - generic [ref=e6573]: Open
+                    - paragraph [ref=e6577]: New Event 2026
+                  - generic [ref=e6578]:
+                    - button "More" [ref=e6579] [cursor=pointer]
+                    - button "Join event" [ref=e6580] [cursor=pointer]
+                  - generic [ref=e6581]:
+                    - generic [ref=e6582]:
+                      - img "date" [ref=e6583]
+                      - paragraph [ref=e6584]: Oct 14, 2026
+                    - generic [ref=e6585]:
+                      - img "author" [ref=e6586]
+                      - paragraph [ref=e6587]: TestATestA
+                    - generic [ref=e6588]:
+                      - img "frame" [ref=e6589]
+                      - paragraph [ref=e6590]: "0"
+                    - generic [ref=e6591]:
+                      - button "Like this event" [ref=e6592] [cursor=pointer]:
+                        - img "Like" [ref=e6593]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e6594] [cursor=pointer]:
+                        - img "Dislike" [ref=e6595]
+                        - text: "0"
+              - generic [ref=e6598]:
+                - generic [ref=e6599] [cursor=pointer]
+                - img "event" [ref=e6602]
+                - generic [ref=e6603]:
+                  - generic [ref=e6604]:
+                    - list "filter by items" [ref=e6605]:
+                      - listitem [ref=e6606]:
+                        - button "Social" [ref=e6607] [cursor=pointer]
+                    - generic [ref=e6609]:
+                      - generic [ref=e6611]: Jul 14, 2027
+                      - generic [ref=e6612]: "|"
+                      - generic [ref=e6613]: 8:51 PM
+                    - paragraph [ref=e6616]:
+                      - link "Online" [ref=e6617] [cursor=pointer]:
+                        - /url: https://meet.google.com
+                    - generic [ref=e6618]: Open
+                    - paragraph [ref=e6622]: New Event 2026
+                  - generic [ref=e6623]:
+                    - button "More" [ref=e6624] [cursor=pointer]
+                    - button "Join event" [ref=e6625] [cursor=pointer]
+                  - generic [ref=e6626]:
+                    - generic [ref=e6627]:
+                      - img "date" [ref=e6628]
+                      - paragraph [ref=e6629]: Oct 14, 2026
+                    - generic [ref=e6630]:
+                      - img "author" [ref=e6631]
+                      - paragraph [ref=e6632]: TestATestA
+                    - generic [ref=e6633]:
+                      - img "frame" [ref=e6634]
+                      - paragraph [ref=e6635]: "0"
+                    - generic [ref=e6636]:
+                      - button "Like this event" [ref=e6637] [cursor=pointer]:
+                        - img "Like" [ref=e6638]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e6639] [cursor=pointer]:
+                        - img "Dislike" [ref=e6640]
+                        - text: "0"
+              - generic [ref=e6643]:
+                - generic [ref=e6644] [cursor=pointer]
+                - img "event" [ref=e6647]
+                - generic [ref=e6648]:
+                  - generic [ref=e6649]:
+                    - list "filter by items" [ref=e6650]:
+                      - listitem [ref=e6651]:
+                        - button "Social" [ref=e6652] [cursor=pointer]
+                    - generic [ref=e6654]:
+                      - generic [ref=e6656]: Jul 14, 2027
+                      - generic [ref=e6657]: "|"
+                      - generic [ref=e6658]: 8:51 PM
+                    - paragraph [ref=e6661]:
+                      - link "Online" [ref=e6662] [cursor=pointer]:
+                        - /url: https://meet.google.com
+                    - generic [ref=e6663]: Open
+                    - paragraph [ref=e6667]: New Event 2026
+                  - generic [ref=e6668]:
+                    - button "More" [ref=e6669] [cursor=pointer]
+                    - button "Join event" [ref=e6670] [cursor=pointer]
+                  - generic [ref=e6671]:
+                    - generic [ref=e6672]:
+                      - img "date" [ref=e6673]
+                      - paragraph [ref=e6674]: Oct 14, 2026
+                    - generic [ref=e6675]:
+                      - img "author" [ref=e6676]
+                      - paragraph [ref=e6677]: TestATestA
+                    - generic [ref=e6678]:
+                      - img "frame" [ref=e6679]
+                      - paragraph [ref=e6680]: "0"
+                    - generic [ref=e6681]:
+                      - button "Like this event" [ref=e6682] [cursor=pointer]:
+                        - img "Like" [ref=e6683]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e6684] [cursor=pointer]:
+                        - img "Dislike" [ref=e6685]
+                        - text: "0"
+              - generic [ref=e6688]:
+                - generic [ref=e6689] [cursor=pointer]
+                - img "event" [ref=e6692]
+                - generic [ref=e6693]:
+                  - generic [ref=e6694]:
+                    - list "filter by items" [ref=e6695]:
+                      - listitem [ref=e6696]:
+                        - button "Social" [ref=e6697] [cursor=pointer]
+                    - generic [ref=e6699]:
+                      - generic [ref=e6701]: Jul 14, 2027
+                      - generic [ref=e6702]: "|"
+                      - generic [ref=e6703]: 8:51 PM
+                    - paragraph [ref=e6706]:
+                      - link "Online" [ref=e6707] [cursor=pointer]:
+                        - /url: https://meet.google.com
+                    - generic [ref=e6708]: Open
+                    - paragraph [ref=e6712]: Updated Automation Event 2026
+                  - generic [ref=e6713]:
+                    - button "More" [ref=e6714] [cursor=pointer]
+                    - button "Join event" [ref=e6715] [cursor=pointer]
+                  - generic [ref=e6716]:
+                    - generic [ref=e6717]:
+                      - img "date" [ref=e6718]
+                      - paragraph [ref=e6719]: Oct 14, 2026
+                    - generic [ref=e6720]:
+                      - img "author" [ref=e6721]
+                      - paragraph [ref=e6722]: Світлана Ковальова
+                    - generic [ref=e6723]:
+                      - img "frame" [ref=e6724]
+                      - paragraph [ref=e6725]: "0"
+                    - generic [ref=e6726]:
+                      - button "Like this event" [ref=e6727] [cursor=pointer]:
+                        - img "Like" [ref=e6728]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e6729] [cursor=pointer]:
+                        - img "Dislike" [ref=e6730]
+                        - text: "0"
+              - generic [ref=e6733]:
+                - generic [ref=e6734] [cursor=pointer]
+                - img "event" [ref=e6737]
+                - generic [ref=e6738]:
+                  - generic [ref=e6739]:
+                    - list "filter by items" [ref=e6740]:
+                      - listitem [ref=e6741]:
+                        - button "Social" [ref=e6742] [cursor=pointer]
+                    - generic [ref=e6744]:
+                      - generic [ref=e6746]: Jul 14, 2027
+                      - generic [ref=e6747]: "|"
+                      - generic [ref=e6748]: 8:51 PM
+                    - paragraph [ref=e6751]:
+                      - link "Online" [ref=e6752] [cursor=pointer]:
+                        - /url: https://meet.google.com
+                    - generic [ref=e6753]: Open
+                    - paragraph [ref=e6757]: New Event 2026
+                  - generic [ref=e6758]:
+                    - button "More" [ref=e6759] [cursor=pointer]
+                    - button "Join event" [ref=e6760] [cursor=pointer]
+                  - generic [ref=e6761]:
+                    - generic [ref=e6762]:
+                      - img "date" [ref=e6763]
+                      - paragraph [ref=e6764]: Oct 14, 2026
+                    - generic [ref=e6765]:
+                      - img "author" [ref=e6766]
+                      - paragraph [ref=e6767]: TestATestA
+                    - generic [ref=e6768]:
+                      - img "frame" [ref=e6769]
+                      - paragraph [ref=e6770]: "0"
+                    - generic [ref=e6771]:
+                      - button "Like this event" [ref=e6772] [cursor=pointer]:
+                        - img "Like" [ref=e6773]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e6774] [cursor=pointer]:
+                        - img "Dislike" [ref=e6775]
+                        - text: "0"
+              - generic [ref=e6778]:
+                - generic [ref=e6779] [cursor=pointer]
+                - img "event" [ref=e6782]
+                - generic [ref=e6783]:
+                  - generic [ref=e6784]:
+                    - list "filter by items" [ref=e6785]:
+                      - listitem [ref=e6786]:
+                        - button "Social" [ref=e6787] [cursor=pointer]
+                    - generic [ref=e6789]:
+                      - generic [ref=e6791]: Jul 14, 2027
+                      - generic [ref=e6792]: "|"
+                      - generic [ref=e6793]: 8:51 PM
+                    - paragraph [ref=e6796]:
+                      - link "Online" [ref=e6797] [cursor=pointer]:
+                        - /url: https://meet.google.com
+                    - generic [ref=e6798]: Open
+                    - paragraph [ref=e6802]: New Event 2026
+                  - generic [ref=e6803]:
+                    - button "More" [ref=e6804] [cursor=pointer]
+                    - button "Join event" [ref=e6805] [cursor=pointer]
+                  - generic [ref=e6806]:
+                    - generic [ref=e6807]:
+                      - img "date" [ref=e6808]
+                      - paragraph [ref=e6809]: Oct 14, 2026
+                    - generic [ref=e6810]:
+                      - img "author" [ref=e6811]
+                      - paragraph [ref=e6812]: TestATestA
+                    - generic [ref=e6813]:
+                      - img "frame" [ref=e6814]
+                      - paragraph [ref=e6815]: "0"
+                    - generic [ref=e6816]:
+                      - button "Like this event" [ref=e6817] [cursor=pointer]:
+                        - img "Like" [ref=e6818]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e6819] [cursor=pointer]:
+                        - img "Dislike" [ref=e6820]
+                        - text: "0"
+              - generic [ref=e6823]:
+                - generic [ref=e6824] [cursor=pointer]
+                - img "event" [ref=e6827]
+                - generic [ref=e6828]:
+                  - generic [ref=e6829]:
+                    - list "filter by items" [ref=e6830]:
+                      - listitem [ref=e6831]:
+                        - button "Social" [ref=e6832] [cursor=pointer]
+                    - generic [ref=e6834]:
+                      - generic [ref=e6836]: Jul 14, 2027
+                      - generic [ref=e6837]: "|"
+                      - generic [ref=e6838]: 8:51 PM
+                    - paragraph [ref=e6841]:
+                      - link "Online" [ref=e6842] [cursor=pointer]:
+                        - /url: https://meet.google.com
+                    - generic [ref=e6843]: Open
+                    - paragraph [ref=e6847]: New Event 2026
+                  - generic [ref=e6848]:
+                    - button "More" [ref=e6849] [cursor=pointer]
+                    - button "Join event" [ref=e6850] [cursor=pointer]
+                  - generic [ref=e6851]:
+                    - generic [ref=e6852]:
+                      - img "date" [ref=e6853]
+                      - paragraph [ref=e6854]: Oct 14, 2026
+                    - generic [ref=e6855]:
+                      - img "author" [ref=e6856]
+                      - paragraph [ref=e6857]: TestATestA
+                    - generic [ref=e6858]:
+                      - img "frame" [ref=e6859]
+                      - paragraph [ref=e6860]: "0"
+                    - generic [ref=e6861]:
+                      - button "Like this event" [ref=e6862] [cursor=pointer]:
+                        - img "Like" [ref=e6863]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e6864] [cursor=pointer]:
+                        - img "Dislike" [ref=e6865]
+                        - text: "0"
+            - paragraph [ref=e6866]: There are no more events for now
+          - contentinfo [ref=e6868]:
+            - generic [ref=e6869]:
+              - generic [ref=e6870]:
+                - link [ref=e6872] [cursor=pointer]:
+                  - /url: "#/greenCity"
+                  - img "GreenCity home" [ref=e6873]
+                - navigation [ref=e6874]:
+                  - menu [ref=e6875]:
+                    - listitem [ref=e6876]:
+                      - link "Eco news" [ref=e6877] [cursor=pointer]:
+                        - /url: "#/greenCity/news"
+                    - listitem [ref=e6878]:
+                      - link "Events" [ref=e6879] [cursor=pointer]:
+                        - /url: "#/greenCity/events"
+                    - listitem [ref=e6880]:
+                      - link "Places" [ref=e6881] [cursor=pointer]:
+                        - /url: "#/greenCity/places"
+                    - listitem [ref=e6882]:
+                      - link "About Us" [ref=e6883] [cursor=pointer]:
+                        - /url: "#/greenCity/about"
+                    - listitem [ref=e6884]:
+                      - link "My Space" [ref=e6885] [cursor=pointer]:
+                        - /url: "#/greenCity/profile/not_signed-in"
+                    - listitem [ref=e6886]:
+                      - link "UBS Courier" [ref=e6887] [cursor=pointer]:
+                        - /url: "#/ubs"
+                  - menu [ref=e6888]:
+                    - listitem [ref=e6889]:
+                      - paragraph [ref=e6890]: Follow us
+                    - listitem [ref=e6891]:
+                      - link [ref=e6892] [cursor=pointer]:
+                        - /url: "#"
+                        - img "Twitter link" [ref=e6893]
+                      - link [ref=e6894] [cursor=pointer]:
+                        - /url: "#"
+                        - img "LinkedIn link" [ref=e6895]
+                      - link [ref=e6896] [cursor=pointer]:
+                        - /url: "#"
+                        - img "Facebook link" [ref=e6897]
+                      - link [ref=e6898] [cursor=pointer]:
+                        - /url: "#"
+                        - img "Instagram link" [ref=e6899]
+                      - link [ref=e6900] [cursor=pointer]:
+                        - /url: "#"
+                        - img "YouTube link" [ref=e6901]
+              - generic [ref=e6902]: © Copyright 2026. Green City.
+    - button [ref=e6903] [cursor=pointer]:
+      - img "chat" [ref=e6904]
+  - generic [ref=e6905]: Welcome to the search window
+```
+
+# Test source
+
+```ts
+  1  | import { test, expect } from '@/fixtures';
+  2  | import { parseEventDateTime } from '@/helpers';
+  3  | import { EventTimeFilter } from '@/types';
+  4  | 
+  5  | test.describe('TC-28 Verify that a user can filter events by event time', () => {
+  6  |   test('should filter upcoming and past events and restore all events', async ({
+  7  |     page,
+  8  |     eventsPage,
+  9  |   }) => {
+  10 |     await test.step('Open the Events page and record the initial count', async () => {
+  11 |       await eventsPage.navigateToEventsPage();
+  12 |       await eventsPage.waitForEventsPage();
+  13 |     });
+  14 | 
+  15 |     const initialItemsCount = await eventsPage.getItemsFoundCount();
+  16 |     expect(initialItemsCount).toBeGreaterThan(0);
+  17 | 
+  18 |     await test.step('Verify Event time options are available', async () => {
+  19 |       await eventsPage.filters.openTimeFilter();
+  20 | 
+  21 |       for (const filter of [EventTimeFilter.Any, EventTimeFilter.Upcoming, EventTimeFilter.Past]) {
+  22 |         await expect(
+  23 |           page.getByRole('option', { name: eventsPage.i18n.timeOptions[filter], exact: true })
+  24 |         ).toBeVisible();
+  25 |       }
+  26 | 
+  27 |       await eventsPage.filters.closeDropdown();
+  28 |     });
+  29 | 
+  30 |     await test.step('Filter upcoming events and verify their dates', async () => {
+  31 |       await eventsPage.filters.selectTimeFilter(EventTimeFilter.Upcoming);
+  32 | 
+  33 |       const upcomingChip = eventsPage.getActiveFilterChipByTime(EventTimeFilter.Upcoming);
+  34 |       await expect(upcomingChip.chip).toBeVisible();
+  35 | 
+  36 |       await eventsPage.getGridEventCardByIndex(0).waitForVisible();
+  37 |       const upcomingCount = await eventsPage.getItemsFoundCount();
+  38 |       expect(upcomingCount).toBeGreaterThan(0);
+  39 |       await eventsPage.scrollUntilAllEventCardsLoad();
+  40 | 
+  41 |       const now = Date.now();
+  42 |       for (const card of await eventsPage.getAllGridEventCards()) {
+  43 |         const eventDateTime = parseEventDateTime(await card.getDate(), await card.getTime());
+> 44 |         expect(eventDateTime.getTime()).toBeGreaterThan(now);
+     |                                         ^ Error: expect(received).toBeGreaterThan(expected)
+  45 |       }
+  46 |       expect(upcomingCount).toBeLessThanOrEqual(initialItemsCount);
+  47 | 
+  48 |       await upcomingChip.remove();
+  49 |       await expect(upcomingChip.chip).toBeHidden();
+  50 |       await expect.poll(() => eventsPage.getItemsFoundCount()).toBe(initialItemsCount);
+  51 |     });
+  52 | 
+  53 |     await test.step('Filter past events and verify their dates', async () => {
+  54 |       await eventsPage.filters.selectTimeFilter(EventTimeFilter.Past);
+  55 | 
+  56 |       const pastChip = eventsPage.getActiveFilterChipByTime(EventTimeFilter.Past);
+  57 |       await expect(pastChip.chip).toBeVisible();
+  58 | 
+  59 |       await eventsPage.getGridEventCardByIndex(0).waitForVisible();
+  60 |       const pastCount = await eventsPage.getItemsFoundCount();
+  61 |       expect(pastCount).toBeGreaterThan(0);
+  62 |       await eventsPage.scrollUntilAllEventCardsLoad();
+  63 | 
+  64 |       const now = Date.now();
+  65 |       for (const card of await eventsPage.getAllGridEventCards()) {
+  66 |         const eventDateTime = parseEventDateTime(await card.getDate(), await card.getTime());
+  67 |         expect(eventDateTime.getTime()).toBeLessThan(now);
+  68 |       }
+  69 |       expect(pastCount).toBeLessThanOrEqual(initialItemsCount);
+  70 | 
+  71 |       await eventsPage.filters.resetAll();
+  72 |       await expect(pastChip.chip).toBeHidden();
+  73 |       await expect.poll(() => eventsPage.getItemsFoundCount()).toBe(initialItemsCount);
+  74 |     });
+  75 | 
+  76 |     await test.step('Select Any time and verify both time filters are active', async () => {
+  77 |       await eventsPage.filters.selectTimeFilter(EventTimeFilter.Any);
+  78 | 
+  79 |       const upcomingChip = eventsPage.getActiveFilterChipByTime(EventTimeFilter.Upcoming);
+  80 |       const pastChip = eventsPage.getActiveFilterChipByTime(EventTimeFilter.Past);
+  81 |       await expect(upcomingChip.chip).toBeVisible();
+  82 |       await expect(pastChip.chip).toBeVisible();
+  83 |       await expect.poll(() => eventsPage.getItemsFoundCount()).toBe(initialItemsCount);
+  84 |       await eventsPage.getGridEventCardByIndex(0).waitForVisible();
+  85 |       await eventsPage.scrollUntilAllEventCardsLoad();
+  86 | 
+  87 |       await eventsPage.filters.selectTimeFilter(EventTimeFilter.Any);
+  88 |       await expect(upcomingChip.chip).toBeHidden();
+  89 |       await expect(pastChip.chip).toBeHidden();
+  90 |       await expect.poll(() => eventsPage.getItemsFoundCount()).toBe(initialItemsCount);
+  91 |     });
+  92 |   });
+  93 | });
+  94 | 
+```
