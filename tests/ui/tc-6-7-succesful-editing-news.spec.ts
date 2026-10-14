@@ -57,7 +57,9 @@ test.describe('TC-006 Verify successful editing of Eco News title', () => {
       has: authenticatedPage.locator(`a.link[href="#/greenCity/news/${newsId}"]`),
     });
     await expect(updatedArticle).toHaveCount(1);
-    await expect(updatedArticle.getByRole('heading', { name: updatedTitle, exact: true })).toBeVisible();
+    await expect(
+      updatedArticle.getByRole('heading', { name: updatedTitle, exact: true })
+    ).toBeVisible();
     await expect(authenticatedPage).toHaveURL(/\/greenCity\/news/);
   });
 });
@@ -131,7 +133,9 @@ test.describe('TC-007 Verify successful editing of Eco News content and tags', (
       has: authenticatedPage.locator(`a.link[href="#/greenCity/news/${newsId}"]`),
     });
     await expect(updatedArticle).toHaveCount(1);
-    await expect(updatedArticle.getByRole('heading', { name: originalTitle, exact: true })).toBeVisible();
+    await expect(
+      updatedArticle.getByRole('heading', { name: originalTitle, exact: true })
+    ).toBeVisible();
     await updatedArticle.getByRole('heading', { name: originalTitle, exact: true }).click();
     await ecoNewsDetailsPage.waitForDetailsPage();
     await expect(authenticatedPage.locator('.news-text-content')).toContainText(updatedContent);
