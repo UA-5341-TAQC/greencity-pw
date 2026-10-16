@@ -99,11 +99,6 @@ export class EventsPage extends BasePage {
     await this.bookmarkButton.click();
   }
 
-  /** Waits for the bookmark change to be saved */
-  async waitForBookmarkUpdate(): Promise<void> {
-    await this.page.waitForTimeout(3000);
-  }
-
   /** Clicks the "My events" (calendar) icon */
   async clickMyEventsButton(): Promise<void> {
     await this.myEventsButton.click();
@@ -226,6 +221,10 @@ export class EventsPage extends BasePage {
 
   /** Scrolls through the grid until the end-of-list indicator is visible. */
   async scrollUntilAllEventCardsLoad(): Promise<void> {
+    if ((await this.getItemsFoundCount()) === 0) {
+      return;
+    }
+
     while (!(await this.isEndOfEventsListVisible())) {
       const loadedCount = await this.getGridEventCardsCount();
 

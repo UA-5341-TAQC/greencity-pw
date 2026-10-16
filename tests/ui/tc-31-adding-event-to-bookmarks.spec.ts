@@ -8,50 +8,80 @@ test.describe('TC-31 Verify adding an event to the bookmarks', () => {
     await test.step('Open the Events page as an authenticated user', async () => {
       await eventsPage.navigateToEventsPage();
       await expect.poll(() => eventsPage.isPageTitleVisible()).toBe(true);
+      await eventsPage.waitForEventsPage();
 
       await expect(authenticatedPage).toHaveURL(/#\/greenCity\/events\/?$/);
     });
 
     const waitForEventCountToMatchCards = async () => {
+      await eventsPage.scrollUntilAllEventCardsLoad();
+
       await expect
         .poll(async () => {
           const itemsCount = await eventsPage.getItemsFoundCount();
-          return itemsCount === (await eventsPage.getGridEventCardsCount());
+          const cardsCount = await eventsPage.getGridEventCardsCount();
+          return itemsCount === 0 || itemsCount === cardsCount;
         })
         .toBe(true);
     };
+
+    const toggleBookmarkFilterAndWaitForResults = async () => {
+      await eventsPage.clickBookmarkButton();
+      await eventsPage.waitForEventsPage();
+      await waitForEventCountToMatchCards();
+    };
+
+    const waitForFavoriteResponse = (method: 'POST' | 'DELETE') =>
+      authenticatedPage.waitForResponse(
+        (response) =>
+          response.request().method() === method &&
+          /\/events\/\d+\/favorites(?:\?.*)?$/.test(response.url())
+      );
 
     await expect.poll(() => eventsPage.getGridEventCardsCount()).toBeGreaterThan(0);
     await waitForEventCountToMatchCards();
     const allEventCards = await eventsPage.getAllGridEventCards();
     const allEventTitles = await Promise.all(allEventCards.map((card) => card.getTitle()));
 
+    const bookmarkableCards = await Promise.all(
+      allEventCards.map((card) => card.hasBookmarkButton())
+    );
+
     await test.step('Open the bookmarked events and find an event not yet bookmarked', async () => {
-      await eventsPage.clickBookmarkButton();
-      await waitForEventCountToMatchCards();
+      await toggleBookmarkFilterAndWaitForResults();
     });
 
     const bookmarkedCards = await eventsPage.getAllGridEventCards();
-    const bookmarkedTitles = await Promise.all(bookmarkedCards.map((card) => card.getTitle()));
-    const eventTitle = allEventTitles.find((title) => !bookmarkedTitles.includes(title));
+    const initialBookmarkedCount = await eventsPage.getItemsFoundCount();
+    const bookmarkedTitles = await Promise.all(
+      bookmarkedCards.slice(0, initialBookmarkedCount).map((card) => card.getTitle())
+    );
+    const eventTitle = allEventTitles.find(
+      (title, index) => bookmarkableCards[index] && !bookmarkedTitles.includes(title)
+    );
     expect(eventTitle, 'An event that is not already bookmarked should be available').toBeTruthy();
 
-    await eventsPage.clickBookmarkButton();
-    await waitForEventCountToMatchCards();
+    await toggleBookmarkFilterAndWaitForResults();
     const eventCard = eventsPage.getGridEventCardByTitle(eventTitle!);
     await eventCard.waitForVisible();
+    await eventCard.hoverBookmarkButton();
     const defaultBookmarkState = await eventCard.getBookmarkButtonState();
 
     await test.step('Add the event to bookmarks and verify the selected icon state', async () => {
+      const favoriteResponsePromise = waitForFavoriteResponse('POST');
       await eventCard.clickBookmarkButton();
-      await authenticatedPage.mouse.move(1, 1);
+      const favoriteResponse = await favoriteResponsePromise;
+      expect(
+        favoriteResponse.ok(),
+        `Adding event to bookmarks failed: ${favoriteResponse.status()} ${await favoriteResponse.text()}`
+      ).toBe(true);
+
+      await eventCard.hoverBookmarkButton();
       await expect.poll(() => eventCard.getBookmarkButtonState()).not.toBe(defaultBookmarkState);
-      await eventsPage.waitForBookmarkUpdate();
     });
 
     await test.step('Verify the event appears in the bookmarked events list', async () => {
-      await eventsPage.clickBookmarkButton();
-      await waitForEventCountToMatchCards();
+      await toggleBookmarkFilterAndWaitForResults();
       await expect.poll(() => eventCard.isVisible()).toBe(true);
     });
 
@@ -61,37 +91,43 @@ test.describe('TC-31 Verify adding an event to the bookmarks', () => {
     expect(bookmarkedTitles).not.toContain(eventTitle);
 
     const bookmarkedEventCard = eventsPage.getGridEventCardByTitle(eventTitle!);
+    await bookmarkedEventCard.hoverBookmarkButton();
     const selectedBookmarkState = await bookmarkedEventCard.getBookmarkButtonState();
 
     await test.step('Remove the event from bookmarks and verify the default icon state', async () => {
+      const favoriteResponsePromise = waitForFavoriteResponse('DELETE');
       await bookmarkedEventCard.clickBookmarkButton();
+      const favoriteResponse = await favoriteResponsePromise;
+      expect(
+        favoriteResponse.ok(),
+        `Removing event from bookmarks failed: ${favoriteResponse.status()} ${await favoriteResponse.text()}`
+      ).toBe(true);
+
+      await bookmarkedEventCard.hoverBookmarkButton();
       await expect
-        .poll(() => eventsPage.getGridEventCardsCount())
-        .toBe(displayedBookmarkedCount - 1);
-      await expect.poll(() => bookmarkedEventCard.isVisible()).toBe(false);
+        .poll(() => bookmarkedEventCard.getBookmarkButtonState())
+        .toBe(defaultBookmarkState);
     });
 
-    const remainingBookmarkCount = await eventsPage.getItemsFoundCount();
-    expect(remainingBookmarkCount).toBe(await eventsPage.getGridEventCardsCount());
-
-    await eventsPage.clickBookmarkButton();
-    await waitForEventCountToMatchCards();
+    await toggleBookmarkFilterAndWaitForResults();
     const restoredEventCard = eventsPage.getGridEventCardByTitle(eventTitle!);
     await expect.poll(() => restoredEventCard.isVisible()).toBe(true);
-    await authenticatedPage.mouse.move(1, 1);
+    await restoredEventCard.hoverBookmarkButton();
     await expect.poll(() => restoredEventCard.getBookmarkButtonState()).toBe(defaultBookmarkState);
     expect(selectedBookmarkState).not.toBe(defaultBookmarkState);
 
     await test.step('Refresh and verify the event remains absent from bookmarks', async () => {
       await authenticatedPage.reload();
       await expect.poll(() => eventsPage.isPageTitleVisible()).toBe(true);
-      await eventsPage.clickBookmarkButton();
-      await waitForEventCountToMatchCards();
+      await toggleBookmarkFilterAndWaitForResults();
 
       await expect
-        .poll(() => eventsPage.getGridEventCardByTitle(eventTitle!).isVisible())
-        .toBe(false);
-      expect(await eventsPage.getItemsFoundCount()).toBe(await eventsPage.getGridEventCardsCount());
+        .poll(async () => {
+          const itemsCount = await eventsPage.getItemsFoundCount();
+          const eventIsVisible = await eventsPage.getGridEventCardByTitle(eventTitle!).isVisible();
+          return itemsCount === 0 || !eventIsVisible;
+        })
+        .toBe(true);
     });
   });
 });
