@@ -1,0 +1,422 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: ui/tc-16-join-event.spec.ts >> Event Details - Join Event >> TC-16: Verify joining an Event from Event Details
+- Location: tests/ui/tc-16-join-event.spec.ts:5:3
+
+# Error details
+
+```
+TimeoutError: locator.waitFor: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator('div.event-list:not(.list-view) mat-card.event-list-item').filter({ has: getByRole('button', { name: 'Join event', exact: true }) }).first() to be visible
+
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e4]:
+      - link "skip to the main content" [ref=e6] [cursor=pointer]:
+        - /url: .main-content
+      - banner "Welcome to header" [ref=e7]:
+        - generic [ref=e9]:
+          - link [ref=e10] [cursor=pointer]:
+            - /url: "#/greenCity"
+            - link "Image green city logo" [ref=e11]
+          - generic [ref=e12]:
+            - navigation [ref=e13]:
+              - tablist [ref=e14]:
+                - listitem [ref=e15]:
+                  - link "Eco news" [ref=e16] [cursor=pointer]:
+                    - /url: "#/greenCity/news"
+                - listitem [ref=e17]:
+                  - link "Events" [ref=e18] [cursor=pointer]:
+                    - /url: "#/greenCity/events"
+                - listitem [ref=e19]:
+                  - link "Places" [ref=e20] [cursor=pointer]:
+                    - /url: "#/greenCity/places"
+                - listitem [ref=e21]:
+                  - link "About us" [ref=e22] [cursor=pointer]:
+                    - /url: "#/greenCity/about"
+                - listitem [ref=e23]:
+                  - link "My space" [ref=e24] [cursor=pointer]:
+                    - /url: "#/greenCity/profile"
+                - listitem [ref=e25]:
+                  - link "UBS courier" [ref=e26] [cursor=pointer]:
+                    - /url: "#/ubs"
+            - menu [ref=e28]:
+              - listitem "site bookmark" [ref=e29] [cursor=pointer]
+              - listitem "site notification" [ref=e31] [cursor=pointer]:
+                - generic [ref=e33]: 99+
+              - search "site search" [ref=e34] [cursor=pointer]
+              - menu "language switcher" [ref=e36]:
+                - option "english" [ref=e37] [cursor=pointer]:
+                  - generic [aria-hidden] [ref=e38]: En
+              - menu "profile options collapsed" [ref=e40]:
+                - listitem [ref=e41] [cursor=pointer]: TestATestA
+      - generic [ref=e42]:
+        - generic "Tab To Main"
+        - generic [ref=e43]:
+          - generic [ref=e48]:
+            - generic [ref=e49]:
+              - generic [ref=e50]:
+                - paragraph [ref=e51]: Events
+                - generic [ref=e52]:
+                  - generic [ref=e53] [cursor=pointer]
+                  - generic [ref=e55] [cursor=pointer]
+                  - img "my-event" [ref=e58] [cursor=pointer]
+              - button "Create event" [ref=e60] [cursor=pointer]
+            - generic [ref=e61]:
+              - paragraph [ref=e62]: Filter
+              - generic [ref=e63]:
+                - generic [ref=e64] [cursor=pointer]:
+                  - generic [ref=e65]: Event time
+                  - combobox [ref=e66]
+                - generic [ref=e72] [cursor=pointer]:
+                  - generic [ref=e73]: Location
+                  - combobox [ref=e74]
+                - generic [ref=e80] [cursor=pointer]:
+                  - generic [ref=e81]: Status
+                  - combobox [ref=e82]
+                - generic [ref=e88] [cursor=pointer]:
+                  - generic [ref=e89]: Type
+                  - combobox [ref=e90]
+                - generic [ref=e96] [cursor=pointer]: Date range
+                - button "Reset all" [disabled] [ref=e103]
+            - separator [ref=e104]
+            - generic [ref=e105]:
+              - paragraph [ref=e106]: 253 Items found
+              - generic [ref=e108]:
+                - button "table view" [pressed] [ref=e109] [cursor=pointer]:
+                  - emphasis [ref=e110]: 
+                - button "list view" [ref=e111] [cursor=pointer]:
+                  - emphasis [ref=e112]: 
+            - generic [ref=e113]:
+              - generic [ref=e116]:
+                - generic [ref=e119]:
+                  - generic [ref=e120]:
+                    - img "*" [ref=e121]
+                    - img "*" [ref=e122]
+                    - img "*" [ref=e123]
+                  - generic:
+                    - img "*" [ref=e124]
+                    - img "*" [ref=e125]
+                    - img "*" [ref=e126]
+                - img "event" [ref=e128]
+                - generic [ref=e129]:
+                  - generic [ref=e130]:
+                    - list "filter by items" [ref=e131]:
+                      - listitem [ref=e132]:
+                        - button "Social" [ref=e133] [cursor=pointer]
+                    - generic [ref=e135]:
+                      - generic [ref=e137]: Apr 7, 2026
+                      - generic [ref=e138]: "|"
+                      - generic [ref=e139]: 3:30 PM
+                    - paragraph [ref=e142]: L'viv, Tyutyunnykiv Street, 23
+                    - generic [ref=e143]: Open
+                    - paragraph [ref=e147]: TESTEVENT
+                  - button "More" [ref=e149] [cursor=pointer]
+                  - generic [ref=e150]:
+                    - generic [ref=e151]:
+                      - img "date" [ref=e152]
+                      - paragraph [ref=e153]: Apr 07, 2026
+                    - generic [ref=e154]:
+                      - img "author" [ref=e155]
+                      - paragraph [ref=e156]: TestATestA
+                    - generic [ref=e157]:
+                      - img "frame" [ref=e158]
+                      - paragraph [ref=e159]: "0"
+                    - generic [ref=e160]:
+                      - button "Like this event" [ref=e161] [cursor=pointer]:
+                        - img "Like" [ref=e162]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e163] [cursor=pointer]:
+                        - img "Dislike" [ref=e164]
+                        - text: "0"
+              - generic [ref=e167]:
+                - generic [ref=e168] [cursor=pointer]
+                - img "event" [ref=e171]
+                - generic [ref=e172]:
+                  - generic [ref=e173]:
+                    - list "filter by items" [ref=e174]:
+                      - listitem [ref=e175]:
+                        - button "Social" [ref=e176] [cursor=pointer]
+                    - generic [ref=e178]:
+                      - generic [ref=e180]: Jul 14, 2027
+                      - generic [ref=e181]: "|"
+                      - generic [ref=e182]: 8:51 PM
+                    - paragraph [ref=e185]:
+                      - link "Online" [ref=e186] [cursor=pointer]:
+                        - /url: https://meet.google.com
+                    - generic [ref=e187]: Open
+                    - paragraph [ref=e191]: New Event 2026
+                  - generic [ref=e192]:
+                    - button "More" [ref=e193] [cursor=pointer]
+                    - button "Edit event" [ref=e194] [cursor=pointer]
+                  - generic [ref=e195]:
+                    - generic [ref=e196]:
+                      - img "date" [ref=e197]
+                      - paragraph [ref=e198]: Oct 14, 2026
+                    - generic [ref=e199]:
+                      - img "author" [ref=e200]
+                      - paragraph [ref=e201]: TestATestA
+                    - generic [ref=e202]:
+                      - img "frame" [ref=e203]
+                      - paragraph [ref=e204]: "0"
+                    - generic [ref=e205]:
+                      - button "Like this event" [ref=e206] [cursor=pointer]:
+                        - img "Like" [ref=e207]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e208] [cursor=pointer]:
+                        - img "Dislike" [ref=e209]
+                        - text: "0"
+              - generic [ref=e212]:
+                - generic [ref=e213] [cursor=pointer]
+                - img "event" [ref=e216]
+                - generic [ref=e217]:
+                  - generic [ref=e218]:
+                    - list "filter by items" [ref=e219]:
+                      - listitem [ref=e220]:
+                        - button "Social" [ref=e221] [cursor=pointer]
+                    - generic [ref=e223]:
+                      - generic [ref=e225]: Jul 14, 2027
+                      - generic [ref=e226]: "|"
+                      - generic [ref=e227]: 8:51 PM
+                    - paragraph [ref=e230]:
+                      - link "Online" [ref=e231] [cursor=pointer]:
+                        - /url: https://meet.google.com
+                    - generic [ref=e232]: Open
+                    - paragraph [ref=e236]: New Event 2026
+                  - generic [ref=e237]:
+                    - button "More" [ref=e238] [cursor=pointer]
+                    - button "Edit event" [ref=e239] [cursor=pointer]
+                  - generic [ref=e240]:
+                    - generic [ref=e241]:
+                      - img "date" [ref=e242]
+                      - paragraph [ref=e243]: Oct 14, 2026
+                    - generic [ref=e244]:
+                      - img "author" [ref=e245]
+                      - paragraph [ref=e246]: TestATestA
+                    - generic [ref=e247]:
+                      - img "frame" [ref=e248]
+                      - paragraph [ref=e249]: "0"
+                    - generic [ref=e250]:
+                      - button "Like this event" [ref=e251] [cursor=pointer]:
+                        - img "Like" [ref=e252]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e253] [cursor=pointer]:
+                        - img "Dislike" [ref=e254]
+                        - text: "0"
+              - generic [ref=e257]:
+                - generic [ref=e258] [cursor=pointer]
+                - img "event" [ref=e261]
+                - generic [ref=e262]:
+                  - generic [ref=e263]:
+                    - list "filter by items" [ref=e264]:
+                      - listitem [ref=e265]:
+                        - button "Social" [ref=e266] [cursor=pointer]
+                    - generic [ref=e268]:
+                      - generic [ref=e270]: Jul 14, 2027
+                      - generic [ref=e271]: "|"
+                      - generic [ref=e272]: 8:51 PM
+                    - paragraph [ref=e275]:
+                      - link "Online" [ref=e276] [cursor=pointer]:
+                        - /url: https://meet.google.com
+                    - generic [ref=e277]: Open
+                    - paragraph [ref=e281]: New Event 2026
+                  - generic [ref=e282]:
+                    - button "More" [ref=e283] [cursor=pointer]
+                    - button "Edit event" [ref=e284] [cursor=pointer]
+                  - generic [ref=e285]:
+                    - generic [ref=e286]:
+                      - img "date" [ref=e287]
+                      - paragraph [ref=e288]: Oct 14, 2026
+                    - generic [ref=e289]:
+                      - img "author" [ref=e290]
+                      - paragraph [ref=e291]: TestATestA
+                    - generic [ref=e292]:
+                      - img "frame" [ref=e293]
+                      - paragraph [ref=e294]: "0"
+                    - generic [ref=e295]:
+                      - button "Like this event" [ref=e296] [cursor=pointer]:
+                        - img "Like" [ref=e297]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e298] [cursor=pointer]:
+                        - img "Dislike" [ref=e299]
+                        - text: "0"
+              - generic [ref=e302]:
+                - generic [ref=e303] [cursor=pointer]
+                - img "event" [ref=e306]
+                - generic [ref=e307]:
+                  - generic [ref=e308]:
+                    - list "filter by items" [ref=e309]:
+                      - listitem [ref=e310]:
+                        - button "Social" [ref=e311] [cursor=pointer]
+                    - generic [ref=e313]:
+                      - generic [ref=e315]: Jul 14, 2027
+                      - generic [ref=e316]: "|"
+                      - generic [ref=e317]: 8:51 PM
+                    - paragraph [ref=e320]:
+                      - link "Online" [ref=e321] [cursor=pointer]:
+                        - /url: https://meet.google.com
+                    - generic [ref=e322]: Open
+                    - paragraph [ref=e326]: New Event 2026
+                  - generic [ref=e327]:
+                    - button "More" [ref=e328] [cursor=pointer]
+                    - button "Edit event" [ref=e329] [cursor=pointer]
+                  - generic [ref=e330]:
+                    - generic [ref=e331]:
+                      - img "date" [ref=e332]
+                      - paragraph [ref=e333]: Oct 14, 2026
+                    - generic [ref=e334]:
+                      - img "author" [ref=e335]
+                      - paragraph [ref=e336]: TestATestA
+                    - generic [ref=e337]:
+                      - img "frame" [ref=e338]
+                      - paragraph [ref=e339]: "0"
+                    - generic [ref=e340]:
+                      - button "Like this event" [ref=e341] [cursor=pointer]:
+                        - img "Like" [ref=e342]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e343] [cursor=pointer]:
+                        - img "Dislike" [ref=e344]
+                        - text: "0"
+              - generic [ref=e347]:
+                - generic [ref=e348] [cursor=pointer]
+                - img "event" [ref=e351]
+                - generic [ref=e352]:
+                  - generic [ref=e353]:
+                    - list "filter by items" [ref=e354]:
+                      - listitem [ref=e355]:
+                        - button "Social" [ref=e356] [cursor=pointer]
+                    - generic [ref=e358]:
+                      - generic [ref=e360]: Jul 14, 2027
+                      - generic [ref=e361]: "|"
+                      - generic [ref=e362]: 8:51 PM
+                    - paragraph [ref=e365]:
+                      - link "Online" [ref=e366] [cursor=pointer]:
+                        - /url: https://meet.google.com
+                    - generic [ref=e367]: Open
+                    - paragraph [ref=e371]: New Event 2026
+                  - generic [ref=e372]:
+                    - button "More" [ref=e373] [cursor=pointer]
+                    - button "Edit event" [ref=e374] [cursor=pointer]
+                  - generic [ref=e375]:
+                    - generic [ref=e376]:
+                      - img "date" [ref=e377]
+                      - paragraph [ref=e378]: Oct 14, 2026
+                    - generic [ref=e379]:
+                      - img "author" [ref=e380]
+                      - paragraph [ref=e381]: TestATestA
+                    - generic [ref=e382]:
+                      - img "frame" [ref=e383]
+                      - paragraph [ref=e384]: "0"
+                    - generic [ref=e385]:
+                      - button "Like this event" [ref=e386] [cursor=pointer]:
+                        - img "Like" [ref=e387]
+                        - text: "0"
+                      - button "Dislike this event" [ref=e388] [cursor=pointer]:
+                        - img "Dislike" [ref=e389]
+                        - text: "0"
+            - progressbar [ref=e391]
+          - contentinfo [ref=e407]:
+            - generic [ref=e408]:
+              - generic [ref=e409]:
+                - link [ref=e411] [cursor=pointer]:
+                  - /url: "#/greenCity"
+                  - img "GreenCity home" [ref=e412]
+                - navigation [ref=e413]:
+                  - menu [ref=e414]:
+                    - listitem [ref=e415]:
+                      - link "Eco news" [ref=e416] [cursor=pointer]:
+                        - /url: "#/greenCity/news"
+                    - listitem [ref=e417]:
+                      - link "Events" [ref=e418] [cursor=pointer]:
+                        - /url: "#/greenCity/events"
+                    - listitem [ref=e419]:
+                      - link "Places" [ref=e420] [cursor=pointer]:
+                        - /url: "#/greenCity/places"
+                    - listitem [ref=e421]:
+                      - link "About Us" [ref=e422] [cursor=pointer]:
+                        - /url: "#/greenCity/about"
+                    - listitem [ref=e423]:
+                      - link "My Space" [ref=e424] [cursor=pointer]:
+                        - /url: "#/greenCity/profile/1205"
+                    - listitem [ref=e425]:
+                      - link "UBS Courier" [ref=e426] [cursor=pointer]:
+                        - /url: "#/ubs"
+                  - menu [ref=e427]:
+                    - listitem [ref=e428]:
+                      - paragraph [ref=e429]: Follow us
+                    - listitem [ref=e430]:
+                      - link [ref=e431] [cursor=pointer]:
+                        - /url: "#"
+                        - img "Twitter link" [ref=e432]
+                      - link [ref=e433] [cursor=pointer]:
+                        - /url: "#"
+                        - img "LinkedIn link" [ref=e434]
+                      - link [ref=e435] [cursor=pointer]:
+                        - /url: "#"
+                        - img "Facebook link" [ref=e436]
+                      - link [ref=e437] [cursor=pointer]:
+                        - /url: "#"
+                        - img "Instagram link" [ref=e438]
+                      - link [ref=e439] [cursor=pointer]:
+                        - /url: "#"
+                        - img "YouTube link" [ref=e440]
+              - generic [ref=e441]: © Copyright 2026. Green City.
+    - button [ref=e442] [cursor=pointer]:
+      - img "chat" [ref=e443]
+  - generic [ref=e444]: Welcome to the search window
+```
+
+# Test source
+
+```ts
+  1  | import type { Page, Locator } from '@playwright/test';
+  2  | import env from '@/config/env';
+  3  | 
+  4  | export abstract class BaseComponent {
+  5  |   protected page: Page;
+  6  |   protected root: Locator;
+  7  | 
+  8  |   constructor(rootLocator: Locator, page?: Page) {
+  9  |     this.page = page ?? rootLocator.page();
+  10 |     this.root = rootLocator;
+  11 |   }
+  12 | 
+  13 |   async isVisible(): Promise<boolean> {
+  14 |     return await this.root.isVisible();
+  15 |   }
+  16 |   async isHidden(): Promise<boolean> {
+  17 |     return await this.root.isHidden();
+  18 |   }
+  19 |   async isEnabled(): Promise<boolean> {
+  20 |     return await this.root.isEnabled();
+  21 |   }
+  22 |   async isDisabled(): Promise<boolean> {
+  23 |     return !(await this.root.isEnabled());
+  24 |   }
+  25 |   async waitForVisible(timeout: number = env.SHORT_TIMEOUT): Promise<void> {
+> 26 |     await this.root.waitFor({ state: 'visible', timeout });
+     |                     ^ TimeoutError: locator.waitFor: Timeout 5000ms exceeded.
+  27 |   }
+  28 | 
+  29 |   async waitForHidden(timeout: number = env.SHORT_TIMEOUT): Promise<void> {
+  30 |     await this.root.waitFor({ state: 'hidden', timeout });
+  31 |   }
+  32 | 
+  33 |   async click(): Promise<void> {
+  34 |     await this.root.click();
+  35 |   }
+  36 | }
+  37 | 
+```
