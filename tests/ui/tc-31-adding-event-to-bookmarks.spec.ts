@@ -105,9 +105,7 @@ test.describe('TC-31 Verify adding an event to the bookmarks', () => {
       await expect
         .poll(async () => {
           const itemsCount = await eventsPage.getItemsFoundCount();
-          const eventIsVisible = await eventsPage
-            .getGridEventCardByTitle(eventTitle!)
-            .isVisible();
+          const eventIsVisible = await eventsPage.getGridEventCardByTitle(eventTitle!).isVisible();
           return itemsCount === 0 || !eventIsVisible;
         })
         .toBe(true);
