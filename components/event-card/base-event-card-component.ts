@@ -57,6 +57,16 @@ export abstract class BaseEventCardComponent extends BaseComponent {
     await this.bookmarkButton.click();
   }
 
+  async hasBookmarkButton(): Promise<boolean> {
+    return (await this.bookmarkButton.count()) > 0;
+  }
+
+  /** Hovers the card so its bookmark button is rendered */
+  async hoverBookmarkButton(): Promise<void> {
+    await this.root.hover();
+    await this.bookmarkButton.waitFor({ state: 'visible' });
+  }
+
   /** Returns the bookmark button's rendered styles to verify its selected state */
   async getBookmarkButtonState(): Promise<string> {
     return await this.bookmarkButton.evaluate((element) => {
@@ -86,7 +96,7 @@ export abstract class BaseEventCardComponent extends BaseComponent {
 
       return JSON.stringify({
         button: summarize(element),
-        parent: summarize(element.parentElement),
+        flag: summarize(element.querySelector('.flag')),
       });
     });
   }

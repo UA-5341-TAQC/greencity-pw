@@ -226,6 +226,10 @@ export class EventsPage extends BasePage {
 
   /** Scrolls through the grid until the end-of-list indicator is visible. */
   async scrollUntilAllEventCardsLoad(): Promise<void> {
+    if ((await this.getItemsFoundCount()) === 0) {
+      return;
+    }
+
     while (!(await this.isEndOfEventsListVisible())) {
       const loadedCount = await this.getGridEventCardsCount();
 
