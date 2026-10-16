@@ -31,6 +31,13 @@ test.describe('TC-31 Verify adding an event to the bookmarks', () => {
       await waitForEventCountToMatchCards();
     };
 
+    const waitForFavoriteResponse = (method: 'POST' | 'DELETE') =>
+      authenticatedPage.waitForResponse(
+        (response) =>
+          response.request().method() === method &&
+          /\/events\/\d+\/favorites(?:\?.*)?$/.test(response.url())
+      );
+
     await expect.poll(() => eventsPage.getGridEventCardsCount()).toBeGreaterThan(0);
     await waitForEventCountToMatchCards();
     const allEventCards = await eventsPage.getAllGridEventCards();
@@ -61,10 +68,16 @@ test.describe('TC-31 Verify adding an event to the bookmarks', () => {
     const defaultBookmarkState = await eventCard.getBookmarkButtonState();
 
     await test.step('Add the event to bookmarks and verify the selected icon state', async () => {
+      const favoriteResponsePromise = waitForFavoriteResponse('POST');
       await eventCard.clickBookmarkButton();
+      const favoriteResponse = await favoriteResponsePromise;
+      expect(
+        favoriteResponse.ok(),
+        `Adding event to bookmarks failed: ${favoriteResponse.status()} ${await favoriteResponse.text()}`
+      ).toBe(true);
+
       await eventCard.hoverBookmarkButton();
       await expect.poll(() => eventCard.getBookmarkButtonState()).not.toBe(defaultBookmarkState);
-      await eventsPage.waitForBookmarkUpdate();
     });
 
     await test.step('Verify the event appears in the bookmarked events list', async () => {
@@ -82,12 +95,18 @@ test.describe('TC-31 Verify adding an event to the bookmarks', () => {
     const selectedBookmarkState = await bookmarkedEventCard.getBookmarkButtonState();
 
     await test.step('Remove the event from bookmarks and verify the default icon state', async () => {
+      const favoriteResponsePromise = waitForFavoriteResponse('DELETE');
       await bookmarkedEventCard.clickBookmarkButton();
+      const favoriteResponse = await favoriteResponsePromise;
+      expect(
+        favoriteResponse.ok(),
+        `Removing event from bookmarks failed: ${favoriteResponse.status()} ${await favoriteResponse.text()}`
+      ).toBe(true);
+
       await bookmarkedEventCard.hoverBookmarkButton();
       await expect
         .poll(() => bookmarkedEventCard.getBookmarkButtonState())
         .toBe(defaultBookmarkState);
-      await eventsPage.waitForBookmarkUpdate();
     });
 
     await toggleBookmarkFilterAndWaitForResults();
