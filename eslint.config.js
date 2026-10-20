@@ -26,6 +26,10 @@ export default tseslint.config(
     rules: {
       ...playwright.configs['flat/recommended'].rules,
       'playwright/no-focused-test': 'error',
+      'playwright/expect-expect': [
+        'error',
+        { assertFunctionNames: ['expect', 'expectError', 'expectBadRequest', 'readAssignment'] },
+      ],
     },
   },
 
