@@ -1,0 +1,60 @@
+{
+  "createDateTime": "2026-10-20T12:12:27.451793Z",
+  "duration": 14,
+  "habit": {
+    "defaultDuration": 14,
+    "amountAcquiredUsers": 0,
+    "habitTranslation": {
+      "name": "Товари для жіночої гігієни",
+      "description": "Description",
+      "habitItem": "Item",
+      "languageCode": "uk"
+    },
+    "id": 31,
+    "image": "https://csb10032000a548f571.blob.core.windows.net/allfiles/photo_2021-06-01_15-39-56.jpg",
+    "complexity": 2,
+    "tags": [
+      "Багаторазове використання"
+    ],
+    "toDoListItems": [
+      {
+        "id": 16894,
+        "text": "Менструальна чаша / диск",
+        "status": "ACTIVE"
+      },
+      {
+        "id": 16895,
+        "text": "Менструальна білизна",
+        "status": "ACTIVE"
+      },
+      {
+        "id": 16896,
+        "text": "Органічні тампони",
+        "status": "ACTIVE"
+      },
+      {
+        "id": 16897,
+        "text": "Багаторазові прокладки",
+        "status": "ACTIVE"
+      }
+    ],
+    "customToDoListItems": null,
+    "isCustomHabit": null,
+    "usersIdWhoCreatedCustomHabit": null,
+    "habitAssignStatus": null,
+    "isAssigned": null,
+    "isFavorite": null,
+    "likes": 0,
+    "dislikes": 0
+  },
+  "userToDoListItems": null,
+  "habitStatusCalendarDtoList": [],
+  "habitStreak": 0,
+  "id": 3012,
+  "lastEnrollmentDate": "2026-10-20T12:12:27.451795Z",
+  "status": "INPROGRESS",
+  "userId": 1205,
+  "workingDays": 0,
+  "progressNotificationHasDisplayed": false,
+  "friendsIdsTrackingHabit": []
+}

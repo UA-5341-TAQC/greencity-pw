@@ -1,0 +1,15 @@
+{
+  "createDateTime": "2026-10-20T12:13:23.325182Z",
+  "duration": 14,
+  "habit": null,
+  "userToDoListItems": null,
+  "habitStatusCalendarDtoList": [],
+  "habitStreak": 0,
+  "id": 3033,
+  "lastEnrollmentDate": "2026-10-20T12:13:23.449379Z",
+  "status": "INPROGRESS",
+  "userId": 1205,
+  "workingDays": 0,
+  "progressNotificationHasDisplayed": null,
+  "friendsIdsTrackingHabit": null
+}
