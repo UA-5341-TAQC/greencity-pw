@@ -1,0 +1,52 @@
+{
+  "createDateTime": "2026-10-20T11:58:49.381359Z",
+  "duration": 7,
+  "habit": {
+    "defaultDuration": 14,
+    "amountAcquiredUsers": null,
+    "habitTranslation": {
+      "name": "Women's hygiene products",
+      "description": "Description",
+      "habitItem": "Item",
+      "languageCode": "en"
+    },
+    "id": 31,
+    "image": "https://csb10032000a548f571.blob.core.windows.net/allfiles/photo_2021-06-01_15-39-56.jpg",
+    "complexity": 2,
+    "tags": [
+      "Reusable"
+    ],
+    "toDoListItems": [],
+    "customToDoListItems": null,
+    "isCustomHabit": null,
+    "usersIdWhoCreatedCustomHabit": null,
+    "habitAssignStatus": null,
+    "isAssigned": null,
+    "isFavorite": null,
+    "likes": 0,
+    "dislikes": 0
+  },
+  "userToDoListItems": null,
+  "habitStatusCalendarDtoList": [
+    {
+      "enrollDate": "2026-10-16",
+      "id": 147
+    },
+    {
+      "enrollDate": "2026-10-15",
+      "id": 146
+    },
+    {
+      "enrollDate": "2026-10-14",
+      "id": 145
+    }
+  ],
+  "habitStreak": 0,
+  "id": 2960,
+  "lastEnrollmentDate": "2026-10-20T11:58:50.461589218Z",
+  "status": "INPROGRESS",
+  "userId": 1205,
+  "workingDays": 3,
+  "progressNotificationHasDisplayed": null,
+  "friendsIdsTrackingHabit": []
+}

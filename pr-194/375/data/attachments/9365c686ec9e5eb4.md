@@ -1,0 +1,221 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: ui/tc-11-event-details-save.spec.ts >> Event Details Save >> TC-11: verify a registered user can save an event from Event Details
+- Location: tests/ui/tc-11-event-details-save.spec.ts:6:3
+
+# Error details
+
+```
+Error: Could not reset favorite state: 400 {"message":"This event is not in favorites."}
+
+expect(received).toContain(expected) // indexOf
+
+Expected value: 400
+Received array: [200, 204, 404]
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e4]:
+      - link "skip to the main content" [ref=e6] [cursor=pointer]:
+        - /url: .main-content
+      - banner "Welcome to header" [ref=e7]:
+        - generic [ref=e9]:
+          - link [ref=e10] [cursor=pointer]:
+            - /url: "#/greenCity"
+            - link "Image green city logo" [ref=e11]
+          - generic [ref=e12]:
+            - navigation [ref=e13]:
+              - tablist [ref=e14]:
+                - listitem [ref=e15]:
+                  - link "Eco news" [ref=e16] [cursor=pointer]:
+                    - /url: "#/greenCity/news"
+                - listitem [ref=e17]:
+                  - link "Events" [ref=e18] [cursor=pointer]:
+                    - /url: "#/greenCity/events"
+                - listitem [ref=e19]:
+                  - link "Places" [ref=e20] [cursor=pointer]:
+                    - /url: "#/greenCity/places"
+                - listitem [ref=e21]:
+                  - link "About us" [ref=e22] [cursor=pointer]:
+                    - /url: "#/greenCity/about"
+                - listitem [ref=e23]:
+                  - link "My space" [ref=e24] [cursor=pointer]:
+                    - /url: "#/greenCity/profile"
+                - listitem [ref=e25]:
+                  - link "UBS courier" [ref=e26] [cursor=pointer]:
+                    - /url: "#/ubs"
+            - menu [ref=e28]:
+              - listitem "site bookmark" [ref=e29] [cursor=pointer]
+              - listitem "site notification" [ref=e31] [cursor=pointer]:
+                - generic [ref=e33]: 99+
+              - search "site search" [ref=e34] [cursor=pointer]
+              - menu "language switcher" [ref=e36]:
+                - option "english" [ref=e37] [cursor=pointer]:
+                  - generic [aria-hidden] [ref=e38]: En
+              - menu "profile options collapsed" [ref=e40]:
+                - listitem [ref=e41] [cursor=pointer]: TestATestA
+      - generic [ref=e42]:
+        - generic "Tab To Main"
+        - generic [ref=e43]:
+          - main [ref=e45]:
+            - generic [ref=e46]:
+              - generic [ref=e52]:
+                - heading "A new way to cultivate useful habits" [level=1] [ref=e53]
+                - paragraph [ref=e54]: People in Ukraine use an average of 500 disposable bags and 70 paper cups per year. It is as easy as bringing your own eco-bag and cup to save the lives of three dolphins or one turtle and keep the oceans clean for the next generation.
+                - button "Start forming a habit!" [ref=e55] [cursor=pointer]
+              - generic [ref=e58]:
+                - heading "There are 944 of us and today we" [level=2] [ref=e59]
+                - generic [ref=e61]:
+                  - generic [ref=e68]:
+                    - heading "Did not take 0 bags" [level=3] [ref=e69]
+                    - paragraph [ref=e70]: And how many packages did you not take today?
+                    - button "Start forming a habit!" [ref=e71] [cursor=pointer]
+                    - link "you can buy eco-bags here" [ref=e74] [cursor=pointer]:
+                      - /url: "#/places"
+                  - generic [ref=e78]:
+                    - heading "Did not throw away 0 cups" [level=3] [ref=e79]
+                    - paragraph [ref=e80]: And how many cups did you not throw away today?
+                    - button "Start forming a habit!" [ref=e81] [cursor=pointer]
+                    - link "places that make a discount on a drink in your cup" [ref=e84] [cursor=pointer]:
+                      - /url: "#/places"
+              - generic [ref=e88]:
+                - heading "Eco news" [level=2] [ref=e89]
+                - link "link to eco-news page" [ref=e92] [cursor=pointer]:
+                  - /url: "#/greenCity/news"
+                  - text: Read all news
+              - generic [ref=e97]:
+                - img "Scan this QR-code To access the mobile version of the app" [ref=e99]
+                - generic [ref=e100]:
+                  - heading "Receive interesting news" [level=2] [ref=e101]
+                  - paragraph [ref=e102]: Subscribe for our newsletter and always be up to date with news and updates
+                  - generic [ref=e103]:
+                    - textbox "Enter your email" [ref=e104]
+                    - button "Subscribe!" [ref=e105] [cursor=pointer]
+          - contentinfo [ref=e107]:
+            - generic [ref=e108]:
+              - generic [ref=e109]:
+                - link [ref=e111] [cursor=pointer]:
+                  - /url: "#/greenCity"
+                  - img "GreenCity home" [ref=e112]
+                - navigation [ref=e113]:
+                  - menu [ref=e114]:
+                    - listitem [ref=e115]:
+                      - link "Eco news" [ref=e116] [cursor=pointer]:
+                        - /url: "#/greenCity/news"
+                    - listitem [ref=e117]:
+                      - link "Events" [ref=e118] [cursor=pointer]:
+                        - /url: "#/greenCity/events"
+                    - listitem [ref=e119]:
+                      - link "Places" [ref=e120] [cursor=pointer]:
+                        - /url: "#/greenCity/places"
+                    - listitem [ref=e121]:
+                      - link "About Us" [ref=e122] [cursor=pointer]:
+                        - /url: "#/greenCity/about"
+                    - listitem [ref=e123]:
+                      - link "My Space" [ref=e124] [cursor=pointer]:
+                        - /url: "#/greenCity/profile/1205"
+                    - listitem [ref=e125]:
+                      - link "UBS Courier" [ref=e126] [cursor=pointer]:
+                        - /url: "#/ubs"
+                  - menu [ref=e127]:
+                    - listitem [ref=e128]:
+                      - paragraph [ref=e129]: Follow us
+                    - listitem [ref=e130]:
+                      - link [ref=e131] [cursor=pointer]:
+                        - /url: "#"
+                        - img "Twitter link" [ref=e132]
+                      - link [ref=e133] [cursor=pointer]:
+                        - /url: "#"
+                        - img "LinkedIn link" [ref=e134]
+                      - link [ref=e135] [cursor=pointer]:
+                        - /url: "#"
+                        - img "Facebook link" [ref=e136]
+                      - link [ref=e137] [cursor=pointer]:
+                        - /url: "#"
+                        - img "Instagram link" [ref=e138]
+                      - link [ref=e139] [cursor=pointer]:
+                        - /url: "#"
+                        - img "YouTube link" [ref=e140]
+              - generic [ref=e141]: © Copyright 2026. Green City.
+    - button [ref=e142] [cursor=pointer]:
+      - img "chat" [ref=e143]
+  - generic [ref=e144]: Welcome to the search window
+```
+
+# Test source
+
+```ts
+  1  | import { test, expect } from '@/fixtures';
+  2  | import { EventDetailsPage } from '@/pages/event-details-page';
+  3  | import env from '@/config/env';
+  4  | 
+  5  | test.describe('Event Details Save', () => {
+  6  |   test('TC-11: verify a registered user can save an event from Event Details', async ({
+  7  |     authenticatedPage,
+  8  |   }) => {
+  9  |     test.setTimeout(60000);
+  10 |     const eventDetailsPage = new EventDetailsPage(authenticatedPage);
+  11 |     const eventId = 210;
+  12 |     const targetTitle = 'Updated Automation Event 2026';
+  13 | 
+  14 |     // Reset persisted favorite state because the Details button can be stale.
+  15 |     const accessToken = await authenticatedPage.evaluate(() =>
+  16 |       window.localStorage.getItem('accessToken')
+  17 |     );
+  18 |     expect(accessToken, 'Authenticated access token is missing').toBeTruthy();
+  19 |     const resetFavoriteResponse = await authenticatedPage.request.delete(
+  20 |       `${env.API_GREENCITY_BASE_URL}/events/${eventId}/favorites`,
+  21 |       { headers: { Authorization: `Bearer ${accessToken}` } }
+  22 |     );
+  23 |     const resetStatus = resetFavoriteResponse.status();
+  24 |     expect(
+  25 |       [200, 204, 404],
+  26 |       `Could not reset favorite state: ${resetStatus} ${await resetFavoriteResponse.text()}`
+> 27 |     ).toContain(resetStatus);
+     |       ^ Error: Could not reset favorite state: 400 {"message":"This event is not in favorites."}
+  28 | 
+  29 |     await eventDetailsPage.navigateToEventDetails(eventId);
+  30 |     await eventDetailsPage.waitForDetailsPage();
+  31 |     await expect.poll(() => eventDetailsPage.getEventTitle()).toBe(targetTitle);
+  32 | 
+  33 |     const saveButton = authenticatedPage.getByRole('button', {
+  34 |       name: 'Save event',
+  35 |       exact: true,
+  36 |     });
+  37 |     await expect(saveButton).toBeVisible();
+  38 |     await expect(saveButton).toBeEnabled();
+  39 | 
+  40 |     const saveResponsePromise = authenticatedPage.waitForResponse(
+  41 |       (response) =>
+  42 |         response.request().method() === 'POST' &&
+  43 |         response.url().includes(`/events/${eventId}/favorites`),
+  44 |       { timeout: 15000 }
+  45 |     );
+  46 |     await eventDetailsPage.clickSaveEvent();
+  47 |     const saveResponse = await saveResponsePromise;
+  48 |     const saveResponseBody = await saveResponse.text();
+  49 |     expect(
+  50 |       saveResponse.ok(),
+  51 |       `Save API returned ${saveResponse.status()}: ${saveResponseBody}`
+  52 |     ).toBe(true);
+  53 | 
+  54 |     await expect
+  55 |       .poll(() => eventDetailsPage.isEventSaved(), {
+  56 |         timeout: 10000,
+  57 |         message: 'Save event did not change to Unsave event',
+  58 |       })
+  59 |       .toBe(true);
+  60 |   });
+  61 | });
+  62 | 
+```
