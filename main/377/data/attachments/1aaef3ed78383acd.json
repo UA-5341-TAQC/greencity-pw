@@ -1,0 +1,65 @@
+{
+  "createDateTime": "2026-10-23T13:20:25.62479Z",
+  "duration": 14,
+  "habit": {
+    "defaultDuration": 14,
+    "amountAcquiredUsers": null,
+    "habitTranslation": {
+      "name": "Women's hygiene products",
+      "description": "Description",
+      "habitItem": "Item",
+      "languageCode": "en"
+    },
+    "id": 31,
+    "image": "https://csb10032000a548f571.blob.core.windows.net/allfiles/photo_2021-06-01_15-39-56.jpg",
+    "complexity": 2,
+    "tags": [
+      "Reusable"
+    ],
+    "toDoListItems": [
+      {
+        "id": 17135,
+        "text": "Menstrual cup / disk",
+        "status": "ACTIVE"
+      },
+      {
+        "id": 17136,
+        "text": "Reusable period panties",
+        "status": "ACTIVE"
+      },
+      {
+        "id": 17137,
+        "text": "Organic tampons",
+        "status": "ACTIVE"
+      },
+      {
+        "id": 17138,
+        "text": "Reusable period pads",
+        "status": "ACTIVE"
+      }
+    ],
+    "customToDoListItems": null,
+    "isCustomHabit": null,
+    "usersIdWhoCreatedCustomHabit": null,
+    "habitAssignStatus": null,
+    "isAssigned": null,
+    "isFavorite": null,
+    "likes": 0,
+    "dislikes": 0
+  },
+  "userToDoListItems": null,
+  "habitStatusCalendarDtoList": [
+    {
+      "enrollDate": "2026-10-23",
+      "id": 161
+    }
+  ],
+  "habitStreak": 1,
+  "id": 3102,
+  "lastEnrollmentDate": "2026-10-23T13:20:25.781475139Z",
+  "status": "INPROGRESS",
+  "userId": 1205,
+  "workingDays": 1,
+  "progressNotificationHasDisplayed": null,
+  "friendsIdsTrackingHabit": []
+}
