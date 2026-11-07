@@ -55,9 +55,8 @@ export class EcoNewsClient extends BaseApiClient {
     if (params.page !== undefined) queryParams.page = params.page;
     if (params.size !== undefined) queryParams.size = params.size;
 
-    const endpoint = queryParts.length > 0
-      ? `${this.resourceUrl}?${queryParts.join('&')}`
-      : this.resourceUrl;
+    const endpoint =
+      queryParts.length > 0 ? `${this.resourceUrl}?${queryParts.join('&')}` : this.resourceUrl;
 
     return await this.get(endpoint, {
       ...options,
@@ -92,16 +91,12 @@ export class EcoNewsClient extends BaseApiClient {
   ): Promise<APIResponse> {
     return await this.get(`${this.resourceUrl}/count`, {
       ...options,
-      params: authorId !== undefined
-        ? { 'author-id': authorId, ...options?.params }
-        : options?.params,
+      params:
+        authorId !== undefined ? { 'author-id': authorId, ...options?.params } : options?.params,
     });
   }
 
-  public async deleteEcoNews(
-    ecoNewsId: number,
-    options?: ApiRequestOptions
-  ): Promise<APIResponse> {
+  public async deleteEcoNews(ecoNewsId: number, options?: ApiRequestOptions): Promise<APIResponse> {
     return await this.delete(`${this.resourceUrl}/${ecoNewsId}`, options);
   }
 

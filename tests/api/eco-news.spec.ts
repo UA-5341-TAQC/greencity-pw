@@ -212,18 +212,13 @@ test.describe('Eco News Controller API', () => {
   test('POST /eco-news/{ecoNewsId}/favorites - should add eco news to favorites', async () => {
     const ecoNewsId = 13963;
 
-    const beforeResponse = await client.findEcoNews({ favorite: true, page: 0, size: 100 });
-    expect(beforeResponse.status(), 'Favorites list should return 200').toBe(200);
-    const beforePage = (await beforeResponse.json()) as EcoNewsPage;
-    const wasFavorite = beforePage.page.some((item) => item.id === ecoNewsId);
+    await client.removeEcoNewsFromFavorites(ecoNewsId);
 
-    if (!wasFavorite) {
-      const addResponse = await client.addEcoNewsToFavorites(ecoNewsId);
-      expect(
-        addResponse.status(),
-        `Add to favorites should return 200. Response: ${await addResponse.text()}`
-      ).toBe(200);
-    }
+    const addResponse = await client.addEcoNewsToFavorites(ecoNewsId);
+    expect(
+      addResponse.status(),
+      `Add to favorites should return 200. Response: ${await addResponse.text()}`
+    ).toBe(200);
 
     const addedResponse = await client.findEcoNews({ favorite: true, page: 0, size: 100 });
     expect(addedResponse.status(), 'Favorites list after add should return 200').toBe(200);
@@ -233,10 +228,8 @@ test.describe('Eco News Controller API', () => {
     expect(added, 'Eco news should be present in favorites list').toBeDefined();
     expect(added?.favorite, 'Eco news should be marked as favorite').toBe(true);
 
-    if (!wasFavorite) {
-      const removeResponse = await client.removeEcoNewsFromFavorites(ecoNewsId);
-      expect(removeResponse.status(), 'Cleanup remove from favorites should return 200').toBe(200);
-    }
+    const removeResponse = await client.removeEcoNewsFromFavorites(ecoNewsId);
+    expect(removeResponse.status(), 'Cleanup remove from favorites should return 200').toBe(200);
   });
 
   test('POST /eco-news/{ecoNewsId}/favorites - should return 404 for missing eco news', async () => {
@@ -248,18 +241,10 @@ test.describe('Eco News Controller API', () => {
   test('DELETE /eco-news/{ecoNewsId}/favorites - should remove eco news from favorites', async () => {
     const ecoNewsId = 13963;
 
-    const beforeResponse = await client.findEcoNews({ favorite: true, page: 0, size: 100 });
-    expect(beforeResponse.status(), 'Favorites list should return 200').toBe(200);
-    const beforePage = (await beforeResponse.json()) as EcoNewsPage;
-    const wasFavorite = beforePage.page.some((item) => item.id === ecoNewsId);
-
-    if (!wasFavorite) {
-      const addResponse = await client.addEcoNewsToFavorites(ecoNewsId);
-      expect(
-        addResponse.status(),
-        'Eco news should be added before removal with status 200'
-      ).toBe(200);
-    }
+    const addResponse = await client.addEcoNewsToFavorites(ecoNewsId);
+    expect(addResponse.status(), 'Eco news should be added before removal with status 200').toBe(
+      200
+    );
 
     const removeResponse = await client.removeEcoNewsFromFavorites(ecoNewsId);
     expect(removeResponse.status(), 'Remove from favorites status code should be 200').toBe(200);
@@ -272,14 +257,6 @@ test.describe('Eco News Controller API', () => {
       afterPage.page.some((item) => item.id === ecoNewsId),
       'Eco news should be absent from favorites list'
     ).toBe(false);
-
-    if (wasFavorite) {
-      const restoreResponse = await client.addEcoNewsToFavorites(ecoNewsId);
-      expect(
-        restoreResponse.status(),
-        'Favorite state should be restored with status 200'
-      ).toBe(200);
-    }
   });
 
   test('DELETE /eco-news/{ecoNewsId}/favorites - should return 404 for missing eco news', async () => {
@@ -290,7 +267,10 @@ test.describe('Eco News Controller API', () => {
 
   test('GET /eco-news/count - should return published news count for created news author', async () => {
     expect(createdEcoNewsAuthorId, 'Created eco news author ID should be available').toBeDefined();
-    expect(ecoNewsCountBeforeCreation, 'Author count before creation should be available').toBeDefined();
+    expect(
+      ecoNewsCountBeforeCreation,
+      'Author count before creation should be available'
+    ).toBeDefined();
 
     const response = await client.getEcoNewsCount(createdEcoNewsAuthorId);
 

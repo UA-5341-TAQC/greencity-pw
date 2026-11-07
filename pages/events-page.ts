@@ -349,9 +349,7 @@ export class EventsPage extends BasePage {
   /**
    * Returns date and time information for all grid event cards.
    */
-  async getAllGridEventCardDateTimes(): Promise<
-    { title: string; date: string; time: string }[]
-  > {
+  async getAllGridEventCardDateTimes(): Promise<{ title: string; date: string; time: string }[]> {
     const cards = await this.getAllGridEventCards();
 
     return Promise.all(

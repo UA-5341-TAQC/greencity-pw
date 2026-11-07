@@ -8,6 +8,7 @@ test.describe('TC-28 Verify that a user can filter events by event time', () => 
     eventsPage,
   }) => {
     test.setTimeout(90000);
+
     await test.step('Open the Events page and record the initial count', async () => {
       await eventsPage.navigateToEventsPage();
       await eventsPage.waitForEventsPage();
@@ -72,15 +73,9 @@ test.describe('TC-28 Verify that a user can filter events by event time', () => 
 
       // Перевіряємо дату та час кожної події
       for (const [index, event] of eventCards.entries()) {
-        expect(
-          event.date,
-          `Missing date for card ${index + 1}: ${event.title}`
-        ).not.toBe('');
+        expect(event.date, `Missing date for card ${index + 1}: ${event.title}`).not.toBe('');
 
-        expect(
-          event.time,
-          `Missing time for card ${index + 1}: ${event.title}`
-        ).not.toBe('');
+        expect(event.time, `Missing time for card ${index + 1}: ${event.title}`).not.toBe('');
 
         const eventDateTime = parseEventDateTime(event.date, event.time);
 
@@ -95,9 +90,7 @@ test.describe('TC-28 Verify that a user can filter events by event time', () => 
 
       await expect(pastChip.chip).toBeHidden();
 
-      await expect
-        .poll(() => eventsPage.getItemsFoundCount())
-        .toBe(initialItemsCount);
+      await expect.poll(() => eventsPage.getItemsFoundCount()).toBe(initialItemsCount);
     });
 
     await test.step('Select Any time and verify both time filters are active', async () => {
