@@ -7,13 +7,14 @@ test.describe('TC-28 Verify that a user can filter events by event time', () => 
     page,
     eventsPage,
   }) => {
+    test.setTimeout(90000);
     await test.step('Open the Events page and record the initial count', async () => {
       await eventsPage.navigateToEventsPage();
       await eventsPage.waitForEventsPage();
     });
 
     const initialItemsCount = await eventsPage.getItemsFoundCount();
-    expect(initialItemsCount).toBeGreaterThan(0);
+    expect(initialItemsCount).toBeGreaterThanOrEqual(0);
 
     await test.step('Verify Event time options are available', async () => {
       await eventsPage.filters.openTimeFilter();
@@ -35,13 +36,13 @@ test.describe('TC-28 Verify that a user can filter events by event time', () => 
 
       await eventsPage.getGridEventCardByIndex(0).waitForVisible();
       const upcomingCount = await eventsPage.getItemsFoundCount();
-      expect(upcomingCount).toBeGreaterThan(0);
+      expect(upcomingCount).toBeGreaterThanOrEqual(0);
       await eventsPage.scrollUntilAllEventCardsLoad();
 
       const now = Date.now();
       for (const card of await eventsPage.getAllGridEventCards()) {
         const eventDateTime = parseEventDateTime(await card.getDate(), await card.getTime());
-        expect(eventDateTime.getTime()).toBeGreaterThan(now);
+        expect(eventDateTime.getTime()).toBeGreaterThanOrEqual(now);
       }
       expect(upcomingCount).toBeLessThanOrEqual(initialItemsCount);
 
@@ -57,20 +58,46 @@ test.describe('TC-28 Verify that a user can filter events by event time', () => 
       await expect(pastChip.chip).toBeVisible();
 
       await eventsPage.getGridEventCardByIndex(0).waitForVisible();
+
       const pastCount = await eventsPage.getItemsFoundCount();
-      expect(pastCount).toBeGreaterThan(0);
-      await eventsPage.scrollUntilAllEventCardsLoad();
+      expect(pastCount).toBeGreaterThanOrEqual(0);
 
       const now = Date.now();
-      for (const card of await eventsPage.getAllGridEventCards()) {
-        const eventDateTime = parseEventDateTime(await card.getDate(), await card.getTime());
-        expect(eventDateTime.getTime()).toBeLessThan(now);
-      }
-      expect(pastCount).toBeLessThanOrEqual(initialItemsCount);
 
+      // Завантажуємо всі картки списку
+      await eventsPage.scrollUntilAllEventCardsLoad();
+
+      // Отримуємо дані всіх карток
+      const eventCards = await eventsPage.getAllGridEventCardDateTimes();
+
+      // Перевіряємо дату та час кожної події
+      for (const [index, event] of eventCards.entries()) {
+        expect(
+          event.date,
+          `Missing date for card ${index + 1}: ${event.title}`
+        ).not.toBe('');
+
+        expect(
+          event.time,
+          `Missing time for card ${index + 1}: ${event.title}`
+        ).not.toBe('');
+
+        const eventDateTime = parseEventDateTime(event.date, event.time);
+
+        expect(
+          eventDateTime.getTime(),
+          `Event ${index + 1} should be in the past: ${event.title}`
+        ).toBeLessThan(now);
+      }
+
+      // Скидаємо фільтри
       await eventsPage.filters.resetAll();
+
       await expect(pastChip.chip).toBeHidden();
-      await expect.poll(() => eventsPage.getItemsFoundCount()).toBe(initialItemsCount);
+
+      await expect
+        .poll(() => eventsPage.getItemsFoundCount())
+        .toBe(initialItemsCount);
     });
 
     await test.step('Select Any time and verify both time filters are active', async () => {

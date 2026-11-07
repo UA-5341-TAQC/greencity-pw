@@ -346,6 +346,23 @@ export class EventsPage extends BasePage {
     return cards;
   }
 
+  /**
+   * Returns date and time information for all grid event cards.
+   */
+  async getAllGridEventCardDateTimes(): Promise<
+    { title: string; date: string; time: string }[]
+  > {
+    const cards = await this.getAllGridEventCards();
+
+    return Promise.all(
+      cards.map(async (card) => ({
+        title: await card.getTitle(),
+        date: await card.getDate(),
+        time: await card.getTime(),
+      }))
+    );
+  }
+
   /** Returns ListEventCard components for every card on the page */
   async getAllListEventCards(): Promise<ListEventCardComponent[]> {
     const count = await this.getListEventCardsCount();
