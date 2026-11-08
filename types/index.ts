@@ -13,3 +13,5 @@ export * from './own-security.types';
 export * from './temp-mail.types';
 export * from './api.types';
 export * from './api.habit-assign.types';
+export * from './api.search.types';
+export * from './api.reference.types';

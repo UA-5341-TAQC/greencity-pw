@@ -3,3 +3,5 @@ export * from './base-api-client';
 export * from './own-security';
 export * from './event-client';
 export * from './habit-assign-client';
+export * from './search-client';
+export * from './reference-data-client';
