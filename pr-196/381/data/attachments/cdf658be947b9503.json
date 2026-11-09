@@ -1,1 +1,0 @@
-{"message":"JSON parse error: Cannot deserialize value of type `greencity.enums.HabitAssignStatus` from number 42: index value outside legal index range [0..4]"}
