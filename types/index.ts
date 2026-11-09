@@ -15,3 +15,5 @@ export * from './api.types';
 export * from './api.habit-assign.types';
 export * from './api.search.types';
 export * from './api.reference.types';
+export * from './api.eco-news.types';
+export * from './api.language.types';
