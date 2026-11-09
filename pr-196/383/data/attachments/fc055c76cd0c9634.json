@@ -1,0 +1,100 @@
+{
+  "createDateTime": "2026-11-09T07:54:42.573668Z",
+  "duration": 14,
+  "habit": {
+    "defaultDuration": 14,
+    "amountAcquiredUsers": null,
+    "habitTranslation": {
+      "name": "Do not use one-time personal hygiene products",
+      "description": "Description",
+      "habitItem": "Item",
+      "languageCode": "en"
+    },
+    "id": 30,
+    "image": "https://csb10032000a548f571.blob.core.windows.net/allfiles/photo_2021-06-01_15-39-56.jpg",
+    "complexity": 2,
+    "tags": [
+      "Reusable"
+    ],
+    "toDoListItems": [
+      {
+        "id": 17903,
+        "text": "Microfiber face and makeup remover cloth",
+        "status": "ACTIVE"
+      },
+      {
+        "id": 17904,
+        "text": "Reusable cotton rounds",
+        "status": "ACTIVE"
+      },
+      {
+        "id": 17905,
+        "text": "Bamboo cotton swabs",
+        "status": "ACTIVE"
+      },
+      {
+        "id": 17906,
+        "text": "Cotton Handkerchiefs",
+        "status": "ACTIVE"
+      },
+      {
+        "id": 17907,
+        "text": "Natural sea sponge for a shower",
+        "status": "ACTIVE"
+      },
+      {
+        "id": 17908,
+        "text": "Metal razors",
+        "status": "ACTIVE"
+      },
+      {
+        "id": 17909,
+        "text": "Homemade treatments (scrab, face cream..)",
+        "status": "ACTIVE"
+      },
+      {
+        "id": 17910,
+        "text": "Bamboo toothbrush",
+        "status": "ACTIVE"
+      },
+      {
+        "id": 17911,
+        "text": "Toothpaste replacement",
+        "status": "ACTIVE"
+      },
+      {
+        "id": 17912,
+        "text": "Eco floss",
+        "status": "ACTIVE"
+      },
+      {
+        "id": 17913,
+        "text": "Natural deodorant",
+        "status": "ACTIVE"
+      },
+      {
+        "id": 17914,
+        "text": "Essential oils instead of perfumes and frangrances",
+        "status": "ACTIVE"
+      }
+    ],
+    "customToDoListItems": null,
+    "isCustomHabit": null,
+    "usersIdWhoCreatedCustomHabit": null,
+    "habitAssignStatus": null,
+    "isAssigned": null,
+    "isFavorite": null,
+    "likes": 0,
+    "dislikes": 0
+  },
+  "userToDoListItems": null,
+  "habitStatusCalendarDtoList": [],
+  "habitStreak": 0,
+  "id": 3391,
+  "lastEnrollmentDate": "2026-11-09T07:54:42.573745Z",
+  "status": "INPROGRESS",
+  "userId": 1205,
+  "workingDays": 0,
+  "progressNotificationHasDisplayed": null,
+  "friendsIdsTrackingHabit": []
+}

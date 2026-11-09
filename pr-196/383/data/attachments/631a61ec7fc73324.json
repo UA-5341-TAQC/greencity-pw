@@ -1,0 +1,39 @@
+{
+  "createDateTime": "2026-11-09T08:00:27.742259Z",
+  "duration": 7,
+  "habit": {
+    "defaultDuration": 14,
+    "amountAcquiredUsers": 0,
+    "habitTranslation": {
+      "name": "Compost organic waste",
+      "description": "Description",
+      "habitItem": "Item",
+      "languageCode": "en"
+    },
+    "id": 29,
+    "image": "https://csb10032000a548f571.blob.core.windows.net/allfiles/35fd5c8b-9383-425c-8d3d-ad19dc617245picture.jpg",
+    "complexity": 3,
+    "tags": [
+      "Recycling/Waste sorting"
+    ],
+    "toDoListItems": [],
+    "customToDoListItems": null,
+    "isCustomHabit": null,
+    "usersIdWhoCreatedCustomHabit": null,
+    "habitAssignStatus": null,
+    "isAssigned": null,
+    "isFavorite": null,
+    "likes": 0,
+    "dislikes": 0
+  },
+  "userToDoListItems": null,
+  "habitStatusCalendarDtoList": [],
+  "habitStreak": 0,
+  "id": 3510,
+  "lastEnrollmentDate": "2026-11-09T08:00:27.742264Z",
+  "status": "INPROGRESS",
+  "userId": 1205,
+  "workingDays": 0,
+  "progressNotificationHasDisplayed": false,
+  "friendsIdsTrackingHabit": []
+}
